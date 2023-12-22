@@ -79,4 +79,8 @@ fclean:				clean
 
 re:					fclean all
 
+test:
+					make
+					./cub3d map/map.txt
+
 .PHONY:				all clean fclean re clone
