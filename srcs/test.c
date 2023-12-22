@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 14:22:45 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:36:42 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,6 @@ void	update_player_angle(double xpos, double ypos, void *param)
 	newAngle = -atan2(deltaY, deltaX) * 180.0 / M_PI;
 	sensitivity = 3.0;
 	data->player->angle = sensitivity * newAngle;
-	reset(data);
-	calc_view(data);
 }
 #include <limits.h>
 void	draw_player_rays(t_data *data, int num_rays)
@@ -328,7 +326,7 @@ int	main(int argc, char **argv)
 	player = malloc(sizeof(t_player));
 	if (init(data, map, player, argv[1]))
 		return (1);
-	//	mlx_cursor_hook(data->mlx, update_player_angle, data);
+	mlx_cursor_hook(data->mlx, update_player_angle, data);
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
