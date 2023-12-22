@@ -37,6 +37,7 @@ $(NAME): clone		$(INCLUDE) $(OBJS)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME) $(OBJS) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
 					@echo "$(COLOR_CYAN)Kompilierung abgeschlossen: $(NAME)$(COLOR_RESET)"
+					@rm -rf $(OBJS)
 
 %.o: %.c
 					@$(COMPILE) $(FLAGS) -c $< -o $@

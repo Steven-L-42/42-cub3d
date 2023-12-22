@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 14:36:42 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:38:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ void	calc_view(t_data *data)
 	float		linehight;
 	float		linehight1;
 	uint32_t	color;
+	static int	testads = 0;
 
 	j = 0;
 	temp1 = data->player->view_angle / 2;
 	temp2 = -temp1;
 	angle = temp1;
-	static int testads = 0;
 	color = ft_pixel(0, 255, 255, 255);
 	mlx_delete_image(data->mlx, data->image);
-	data->image = mlx_new_image(data->mlx, data->map->width * SIZE, data->map->height * SIZE);
+	data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
+			data->map->height * SIZE);
 	for (float k = temp2; k < temp1; k++)
 	{
 		height = ray_distance(data, k);
@@ -69,7 +70,6 @@ void	calc_view(t_data *data)
 		angle--;
 		j++;
 	}
-
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 }
 
@@ -134,7 +134,7 @@ void	update_player_angle(double xpos, double ypos, void *param)
 	sensitivity = 3.0;
 	data->player->angle = sensitivity * newAngle;
 }
-#include <limits.h>
+
 void	draw_player_rays(t_data *data, int num_rays)
 {
 	uint32_t	color;
@@ -150,9 +150,9 @@ void	draw_player_rays(t_data *data, int num_rays)
 	for (int i = -num_rays / 2; i <= num_rays / 2; i++)
 	{
 		angle_offset = i;
-		end_x = data->player->x * 16 + 8  * cos((data->player->angle
+		end_x = data->player->x * 16 + 8 * cos((data->player->angle
 					+ angle_offset) * PI / 180);
-		end_y = data->player->y * 16 + 8  * sin((data->player->angle
+		end_y = data->player->y * 16 + 8 * sin((data->player->angle
 					+ angle_offset) * PI / 180);
 		for (int j = 0; j < INT_MAX / 2; j++)
 		{
@@ -160,7 +160,6 @@ void	draw_player_rays(t_data *data, int num_rays)
 						+ angle_offset) * PI / 180);
 			y_coord = data->player->y * 16 + 8 + j * sin((data->player->angle
 						+ angle_offset) * PI / 180);
-
 			if (x_coord >= 0 && y_coord >= 0
 				&& x_coord < data->img_player_ray->width
 				&& y_coord < data->img_player_ray->height)
