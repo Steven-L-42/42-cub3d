@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 15:05:06 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:14:59 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	leaks()
+void	leaks(void)
 {
 	system("leaks cub3d");
 }
@@ -29,11 +29,11 @@ void	ft_running(void *param)
 
 int	main(int argc, char **argv)
 {
-	//atexit(leaks);
 	t_map		*map;
 	t_player	*player;
 	t_data		*data;
 
+	// atexit(leaks);
 	data = malloc(sizeof(t_data));
 	map = malloc(sizeof(t_map));
 	player = malloc(sizeof(t_player));

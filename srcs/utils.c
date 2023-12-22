@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 15:04:17 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:15:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	reset(t_data *data)
 		* sizeof(int32_t));
 }
 
-void ft_free2d(char **str)
+void	ft_free2d(char **str)
 {
 	for (int i = 0; str[i] != NULL; i++)
 		free(str[i]);

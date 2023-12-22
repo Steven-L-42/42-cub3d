@@ -64,7 +64,6 @@ remove:				fclean
 						echo "$(LOCAL_DIR) does not exist"; \
 					fi
 
-
 clean:
 					@echo "$(COLOR_RED)Cleanup MiniShell.$(COLOR_RESET)"
 					@rm -f $(OBJS)

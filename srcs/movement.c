@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/22 14:45:09 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:14:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
 	p_y_sin = sin(radianAngle);
 	cellX = (int)data->player->x + distance * p_x_cos;
 	cellY = (int)data->player->y + distance * p_y_sin;
-	if (cellY <= 0 || cellY >= data->map->height - 1 || cellX <= 0
-		|| cellX >= data->map->width - 1)
-		return (1);
-	if (data->map->map[cellY][cellX] == '1')
-		return (1);
-	return (0);
+	if (cellY > 0 || cellY < data->map->height - 1 || cellX > 0
+		|| cellX < data->map->width - 1)
+		if (data->map->map[cellY][cellX] == '0')
+			return (0);
+	return (1);
 }
 
 void	move_player(t_data *data, float speed, int forward)

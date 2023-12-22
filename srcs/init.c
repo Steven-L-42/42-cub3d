@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/22 15:02:15 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:15:09 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	struct_declaration(t_data *data)
 
 int	init(t_data *data, t_map *map, t_player *player, char *input)
 {
-	mlx_texture_t	*text_wall;
-	mlx_texture_t	*text_player;
+	mlx_texture_t *text_wall;
+	mlx_texture_t *text_player;
 
 	get_map(map, input);
 	map->width -= 1;
