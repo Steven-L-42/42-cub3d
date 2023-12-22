@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 14:38:27 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:02:41 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,23 @@ typedef struct s_data
 
 // get_map
 void			get_map(t_map *map, char *input);
+void			draw_minimap(t_data *data);
 
 // utils
 void			ft_free2d(char **str);
 void			ft_exit(t_data *data);
+void			reset(t_data *data);
+int32_t			ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 // get_distance to wall
 float			ray_distance(t_data *data, float angle);
+void			calc_view(t_data *data);
+
+void			update_player_angle(double xpos, double ypos, void *param);
+void			ft_hook(void *param);
+
+void			draw_player_rays(t_data *data, int num_rays);
+
+int				init(t_data *data, t_map *map, t_player *player, char *input);
 
 #endif

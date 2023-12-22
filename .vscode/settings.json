@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"limits.h": "c"
+		"limits.h": "c",
+		"cub3d.h": "c"
 	}
 }
