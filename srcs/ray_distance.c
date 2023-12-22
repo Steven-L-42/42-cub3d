@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:45:14 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 14:38:44 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:45:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,54 @@ float	ray_distance(t_data *data, float angle)
 	calculateDirection(data->player->angle + angle, dir);
 	return (calculateDistanceToWall(data, dir[0], dir[1]));
 }
+
+// t_hit_info	calculateDistanceToWall(t_data *data, float dirX, float dirY)
+// {
+// 	float	stepSize;
+// 	float	currentX;
+// 	float	currentY;
+
+// 	t_hit_info hit_info; // Verwenden Sie t_hit_info anstelle von distance
+// 	stepSize = 0.001;
+// 	currentX = data->player->x;
+// 	currentY = data->player->y;
+// 	while (data->map->map[(int)currentY][(int)currentX] != '1')
+// 	{
+// 		if (data->map->map[(int)currentY][(int)currentX] == '\0'
+// 			|| data->map->map[(int)currentY] == NULL)
+// 		{
+// 			hit_info.distance = -1;
+// 			hit_info.hit_side = 0;
+// 			return (hit_info);
+// 		}
+// 		currentX += stepSize * dirX;
+// 		currentY += stepSize * dirY;
+// 	}
+// 	hit_info.distance = sqrt((currentX - data->player->x) * (currentX
+// 				- data->player->x) + (currentY - data->player->y) * (currentY
+// 				- data->player->y));
+// 	hit_info.hit_side = 1;
+// 		// Setzen Sie hit_side basierend auf der getroffenen Wand
+// 		return (hit_info);
+// }
+
+// void	calculateDirection(float angle, float dir[2])
+// {
+// 	float	radianAngle;
+
+// 	while (angle > 360)
+// 		angle -= 360;
+// 	while (angle < 0)
+// 		angle += 360;
+// 	radianAngle = (angle)*PI / 180.0;
+// 	dir[0] = cos(radianAngle);
+// 	dir[1] = sin(radianAngle);
+// }
+
+// t_hit_info	ray_distance(t_data *data, float angle)
+// {
+// 	float	dir[2];
+
+// 	calculateDirection(data->player->angle + angle, dir);
+// 	return (calculateDistanceToWall(data, dir[0], dir[1]));
+// }

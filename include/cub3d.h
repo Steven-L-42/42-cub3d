@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 15:02:41 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:45:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_map
 	int			width;
 	int			height;
 }				t_map;
+
+typedef struct s_hit_info
+{
+	float		distance;
+	int			hit_side;
+}				t_hit_info;
 
 typedef struct s_data
 {
