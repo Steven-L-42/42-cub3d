@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 19:47:21 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:14:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_data
 	mlx_texture_t	*text_wall;
 	mlx_texture_t	*text_player;
 	mlx_texture_t	*text_wood;
+	char			*wood[64];
+	char			key[64];
+	uint32_t		color[64];
 	int				wall_height;
 }					t_data;
 
@@ -103,6 +106,7 @@ void				ft_free2d(char **str);
 void				ft_exit(t_data *data);
 void				reset(t_data *data);
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int					get_colour_from_pixel(u_int8_t *pixel);
 
 // get_distance to wall
 float				ray_distance(t_data *data, float angle);

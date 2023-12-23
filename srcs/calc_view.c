@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/23 19:51:34 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 21:46:22 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,6 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->k = calc->temp2;
 }
 
-int	get_colour_from_pixel(u_int8_t *pixel)
-{
-	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
-}
-
-static int	calculate_texture_height_pixels(mlx_texture_t *texture, t_data *ray,
-	int draw_height)
-{
-	int		height;
-	float	height_divided;
-
-	if (ray->wall_height > 64)
-		draw_height += (ray->wall_height - 64) / 2;
-	height_divided = texture->height / ray->wall_height;
-	height = floor((height_divided * draw_height)) * texture->width;
-	return (height);
-}
-
-static int	get_texture_pixel_color(mlx_texture_t *texture, t_data *ray,
-	float current_height, int width_pixels)
-{
-	u_int8_t	*pixel;
-	int			pixel_texture_location;
-
-	pixel_texture_location = calculate_texture_height_pixels(texture, ray,
-			current_height);
-	pixel_texture_location += width_pixels;
-	pixel_texture_location *= texture->bytes_per_pixel;
-	pixel = &texture->pixels[pixel_texture_location];
-	return (get_colour_from_pixel(pixel));
-}
-
 // Funktion: calc_helper
 // Zweck: Hilfsfunktion für die Berechnung und Darstellung der Sichtlinien.
 // Parameter:
@@ -83,7 +51,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 {
 	int	tmp;
 	int	y;
-	int		color;
+
 
 	tmp = (data->image->width / data->player->view_angle) * (calc->j + 1);
 	while (calc->i < tmp)
@@ -96,12 +64,37 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		if (calc->line_bottom >= data->image->height)
 			calc->line_bottom = data->image->height;
 		y = (data->image->height / 2) + 1;
-		color = get_texture_pixel_color(data->text_wood, data, y, calc->i);
+
+
+
 		while (--y > calc->line_top)
-			mlx_put_pixel(data->image, calc->i, y, color);
+		{
+			// char c;
+			// if (y/16 < 63 && calc->i/16 < 63)
+			// {
+			// 	//ft_printf("%d %d\n", y / 16, calc->i / 16);
+			// 	c = data->wood[y/16][(int)calc->i /16];
+			// 	int i = 0;
+			// 	uint32_t col;
+			// 	while (c != data->key[i] && i < 9)
+			// 	{
+			// 		//ft_printf("%c = %c\n", c, data->key[i]);
+			// 		if (y > 250)
+			// 			calc->color_side = data->color[i];
+			// 		else
+			// 				calc->color_side = data->color[i + 1];
+			// 			break;
+
+			// 		i++;
+			// 	}
+
+
+			// }
+			mlx_put_pixel(data->image, calc->i, y, calc->color_side);
+		}
 		y = (data->image->height / 2) - 1;
 		while (++y < calc->line_bottom)
-			mlx_put_pixel(data->image, calc->i, y, color);
+			mlx_put_pixel(data->image, calc->i, y, calc->color_side);
 		calc->i++;
 	}
 }
@@ -117,12 +110,13 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
-
+	//int		color;
 	calc_preset(data, &calc);
 	while (calc.k < calc.temp1)
 	{
 		calc.distance = ray_distance(data, calc.k);
 		calc.i = (data->image->width / data->player->view_angle) * calc.j;
+		//color = get_texture_pixel_color(data->text_wood, data, 5, calc.i);
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;
