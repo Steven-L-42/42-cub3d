@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/23 11:47:48 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 19:52:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 {
 	get_map(map, input);
 	map->width -= 1;
-	if (!(data->mlx = mlx_init(map->width * SIZE, map->height * SIZE, "MLX42",
+	if (!(data->mlx = mlx_init(map->width * SIZE, map->height * SIZE, "cub3D",
 				true)))
 	{
 		puts(mlx_strerror(mlx_errno));
@@ -81,14 +81,15 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 		puts(mlx_strerror(mlx_errno));
 		exit(1);
 	}
-
 	data->text_wall = mlx_load_png("textures/wall.png");
 	data->text_player = mlx_load_png("textures/player.png");
+	data->text_wood = mlx_load_png("textures/wood.png");
 	data->img_game_wall = mlx_texture_to_image(data->mlx, data->text_wall);
 	data->img_player = mlx_texture_to_image(data->mlx, data->text_player);
 	data->player = player;
 	data->map = map;
 	struct_declaration(data);
+	data->player->prev_mouseX = 0;
 	get_player_coords(data);
 	reset(data);
 	calc_view(data);

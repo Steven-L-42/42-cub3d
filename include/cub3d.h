@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 11:46:48 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 19:47:21 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ typedef struct s_player
 	float			x;
 	float			y;
 	float			angle;
+	float			prev_angle;
 	float			view_angle;
+	double			prev_time;
+	int				mouse_x;
+	int				mouse_y;
+	float			prev_mouseX;
 }					t_player;
 
 typedef struct s_map
@@ -48,8 +53,8 @@ typedef struct s_calc_view
 	int				angle;
 	float			distance;
 	float			tmp;
-	float			linehight;
-	float			linehight1;
+	float			line_bottom;
+	float			line_top;
 	uint32_t		color_front;
 	uint32_t		color_side;
 	int				is_side;
@@ -82,8 +87,11 @@ typedef struct s_data
 	mlx_image_t		*img_game_wall;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
+	//mlx_image_t		*img_wood;
 	mlx_texture_t	*text_wall;
 	mlx_texture_t	*text_player;
+	mlx_texture_t	*text_wood;
+	int				wall_height;
 }					t_data;
 
 // get_map

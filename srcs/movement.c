@@ -6,55 +6,27 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/23 12:43:56 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 19:06:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-// int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
-// {
-// 	float	p_x_cos;
-// 	float	p_y_sin;
-// 	int		cellX;
-// 	int		cellY;
-
-// 	if (distance > 0)
-// 		distance = 1;
-// 	else
-// 		distance = -1;
-// 	p_x_cos = cos(radianAngle);
-// 	p_y_sin = sin(radianAngle);
-// 	cellX = (int)data->player->x + distance * p_x_cos;
-// 	cellY = (int)data->player->y + distance * p_y_sin;
-// 	if (cellY >= 0 || cellY <= data->map->height || cellX >= 0
-// 		|| cellX <= data->map->width)
-// 		if (data->map->map[cellY][cellX] == '0')
-// 			return (0);
-// 	return (1);
-// }
-#include <stdio.h>
-
 int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
 {
 	float	p_x_cos;
 	float	p_y_sin;
-	float		cellX;
-	float		cellY;
+	float	cellX;
+	float	cellY;
 
 	p_x_cos = cos(radianAngle);
 	p_y_sin = sin(radianAngle);
 	cellX = (data->player->x + distance * p_x_cos);
 	cellY = (data->player->y + distance * p_y_sin);
-
-	//printf("1: Y %f | X %f\n", cellY, cellX);
 	cellY = roundf(cellY);
 	cellX = roundf(cellX);
-	//printf("2: Y %f | X %f\n", cellY, cellX);
-	// if (cellY <= 0 || cellY >= data->map->height - 2 || cellX <= 0 || cellX >= data->map->width - 2)
-	// 	return (1);
-	if (cellY >= 0 && cellY < data->map->height - 2 && cellX >= 0
-		&& cellX < data->map->width - 2)
+	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
+		&& cellX <= data->map->width)
 	{
 		if (data->map->map[(int)cellY][(int)cellX] == '1')
 			return (1);
@@ -68,6 +40,13 @@ void	move_player(t_data *data, float speed, int forward)
 	float	p_x_cos;
 	float	p_y_sin;
 
+	if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE))
+	{
+		if (speed > 0)
+			speed += 0.15f;
+		else
+			speed -= 0.15f;
+	}
 	if (forward == 1)
 		radianAngle = data->player->angle * PI / 180.0;
 	else
@@ -78,30 +57,30 @@ void	move_player(t_data *data, float speed, int forward)
 	p_y_sin = speed * sin(radianAngle);
 	data->player->x += p_x_cos;
 	data->player->y += p_y_sin;
-	//printf("3: Y %f | X %f\n", data->player->y, data->player->x);
 	data->img_player->instances[0].x = data->player->x * 16;
 	data->img_player->instances[0].y = data->player->y * 16;
 }
 
+// Calculate the difference in X position between the current and previous mouse position
+// Use this difference to update the player's angle
+// Update the player's angle
+// Save the current mouse position as the previous mouse position for the next frame
 void	update_player_angle(double xpos, double ypos, void *param)
 {
 	t_data	*data;
 	float	deltaX;
-	float	deltaY;
 	float	newAngle;
 	float	sensitivity;
-	int		mouseX;
-	int		mouseY;
 
 	data = param;
-	mlx_get_mouse_pos(data->mlx, &mouseX, &mouseY);
-	deltaX = mouseX - data->player->x;
-	deltaY = mouseY - data->player->y;
-	newAngle = -atan2(deltaY, deltaX) * 180.0 / M_PI;
-	sensitivity = 3.0;
-	data->player->angle = sensitivity * newAngle;
+	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
+		&data->player->mouse_y);
+	deltaX = data->player->mouse_x - data->player->prev_mouseX;
+	sensitivity = 0.5;
+	newAngle = deltaX * sensitivity;
+	data->player->angle += newAngle;
+	data->player->prev_mouseX = data->player->mouse_x;
 }
-
 void	ft_hook(void *param)
 {
 	t_data	*data;

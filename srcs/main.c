@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 11:29:20 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 18:42:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_running(void *param)
 	data = param;
 	reset(data);
 	calc_view(data);
-	draw_player_rays(data, 90);
+	draw_player_rays(data, 80);
 
 }
 
