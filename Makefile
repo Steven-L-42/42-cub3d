@@ -19,7 +19,7 @@ LOCAL_DIR			=	MLX42
 
 SRCS_F				=	srcs/
 
-SRCS				=	main.c init.c get_map.c utils.c ray_distance.c movement.c minimap.c draw_rays.c calc_view.c
+SRCS				=	main.c init.c get_map.c utils.c ray_distance.c movement.c minimap.c rays.c calc_view.c
 
 OBJS				=	$(addprefix $(SRCS_F),$(SRCS:.c=.o))
 

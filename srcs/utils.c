@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/22 15:15:23 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:12:06 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	reset(t_data *data)
 
 void	ft_free2d(char **str)
 {
-	for (int i = 0; str[i] != NULL; i++)
+	int	i;
+
+	i = -1;
+	while (str[++i] != NULL)
 		free(str[i]);
 	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/22 15:15:09 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/23 11:47:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ void	get_player_coords(t_data *data)
 {
 	int	pixel_x;
 	int	pixel_y;
+	int	i;
+	int	j;
 
 	pixel_x = 0;
 	pixel_y = 0;
-	for (int i = 0; data->map->map[i] != NULL; i++)
+	i = 0;
+	while (data->map->map[i])
 	{
-		for (int j = 0; data->map->map[i][j] != '\0'; j++)
+		j = 0;
+		while (data->map->map[i][j] != '\0')
 		{
 			if (data->map->map[i][j] == 'P')
 			{
@@ -30,9 +34,11 @@ void	get_player_coords(t_data *data)
 				return ;
 			}
 			pixel_x += 1;
+			j++;
 		}
 		pixel_x = 0;
 		pixel_y += 1;
+		i++;
 	}
 }
 
@@ -46,9 +52,6 @@ void	struct_declaration(t_data *data)
 
 int	init(t_data *data, t_map *map, t_player *player, char *input)
 {
-	mlx_texture_t *text_wall;
-	mlx_texture_t *text_player;
-
 	get_map(map, input);
 	map->width -= 1;
 	if (!(data->mlx = mlx_init(map->width * SIZE, map->height * SIZE, "MLX42",
@@ -64,6 +67,13 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 		puts(mlx_strerror(mlx_errno));
 		exit(1);
 	}
+	if (!(data->img_minimap = mlx_new_image(data->mlx, map->width * 16,
+				map->height * 16)))
+	{
+		mlx_close_window(data->mlx);
+		puts(mlx_strerror(mlx_errno));
+		exit(1);
+	}
 	if (!(data->img_player_ray = mlx_new_image(data->mlx, map->width * 16,
 				map->height * 16)))
 	{
@@ -71,10 +81,11 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 		puts(mlx_strerror(mlx_errno));
 		exit(1);
 	}
-	text_wall = mlx_load_png("textures/wall.png");
-	text_player = mlx_load_png("textures/player.png");
-	data->game_wall = mlx_texture_to_image(data->mlx, text_wall);
-	data->img_player = mlx_texture_to_image(data->mlx, text_player);
+
+	data->text_wall = mlx_load_png("textures/wall.png");
+	data->text_player = mlx_load_png("textures/player.png");
+	data->img_game_wall = mlx_texture_to_image(data->mlx, data->text_wall);
+	data->img_player = mlx_texture_to_image(data->mlx, data->text_player);
 	data->player = player;
 	data->map = map;
 	struct_declaration(data);
