@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:45:14 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 18:32:56 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:24:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 float	calculate_distance_to_wall(t_data *data, float dirX, float dirY)
 {
 	float	stepSize;
-	float	distance;
+	double	distance;
 	float	currentX;
 	float	currentY;
 
 	stepSize = 0.001;
 	currentX = data->player->x;
 	currentY = data->player->y;
-	int X = roundf(currentX) + 0.5f;
-	int Y = roundf(currentY) + 0.5f;
+	int X = roundf(currentX);
+	int Y = roundf(currentY);
 	while (data->map->map[Y][X] != '1')
 	{
 		if (data->map->map[Y][X] == '\0'
 			|| data->map->map[Y] == NULL)
-			return (-1);
+			return (1);
 
 		currentX += stepSize * dirX;
 		currentY += stepSize * dirY;
-		X = roundf(currentX) + 0.5f;
-		Y = roundf(currentY) + 0.5f;
+		X = roundf(currentX);
+		Y = roundf(currentY);
 	}
 	distance = sqrt((currentX - data->player->x) * (currentX - data->player->x)
 			+ (currentY - data->player->y) * (currentY - data->player->y));
@@ -53,7 +53,7 @@ void	calculate_direction(float angle, float dir[2])
 	dir[1] = sin(radianAngle);
 }
 
-float	ray_distance(t_data *data, float angle)
+double	ray_distance(t_data *data, float angle)
 {
 	float	dir[2];
 

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/23 21:46:15 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 10:24:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	get_player_coords(t_data *data)
 		{
 			if (data->map->map[i][j] == 'P')
 			{
-				data->player->x = pixel_x + 0.5;
-				data->player->y = pixel_y + 0.5;
+				data->player->x = pixel_x;
+				data->player->y = pixel_y;
 				return ;
 			}
 			pixel_x += 1;
@@ -50,39 +50,24 @@ void	struct_declaration(t_data *data)
 	data->player->view_angle = 80;
 }
 
-#include <stdint.h>
 
-typedef struct
+void hex_to_rgb(char *hex, int *r, int *g, int *b)
 {
-	uint8_t red;
-	uint8_t green;
-	uint8_t blue;
-	uint8_t alpha;
-} RGBA;
-
-
-RGBA hexToRGBA(char *hexString)
-{
-	uint32_t hexValue = atoi(hexString + 1);
-	RGBA result;
-	// Extrahiere die Farbkomponenten
-	result.red = (hexValue >> 24) & 0xFF;
-	result.green = (hexValue >> 16) & 0xFF;
-	result.blue = (hexValue >> 8) & 0xFF;
-	result.alpha = hexValue & 0xFF;
-
-	return result;
+	long int hexValue = strtol(hex, NULL, 16);
+	*r = (hexValue >> 16) & 0xFF;
+	*g = (hexValue >> 8) & 0xFF;
+	*b = hexValue & 0xFF;
 }
 
 void	color_parser(t_data *data)
 {
 	int	y;
 	int	x;
-
+	int r, g, b;
 	y = 0;
 	int	fd = open("textures/colors.col", O_RDONLY);
 
-	char **buffer = ft_calloc(10, sizeof(char *));
+	char **buffer = ft_calloc(100, sizeof(char *));
 	int buf = 0;
 
 	char *line = get_next_line(fd);
@@ -93,30 +78,27 @@ void	color_parser(t_data *data)
 		buf = 0;
 		data->key[keys] = line[i++];
 		i++;
-		buffer[keys] = ft_calloc(10, 1);
-		while (line[i] && line[i] != '\n')
+		buffer[keys] = ft_calloc(100, 1);
+		i++;
+		while (line[i] && line[i] != 'F' && line[i] != '\n')
 			buffer[keys][buf++] = line[i++];
 		buffer[keys][buf++] = '\0';
 		keys++;
 		free(line);
-		if (keys >= 9)
+		if (keys >= 31)
 			break;
 		line = get_next_line(fd);
 	}
-	//ft_printf("%s", buffer);
-	for	(int i = 0; i < 9; i++)
+	for	(int i = 0; i < 31; i++)
 	{
-		buffer[i][7] = '\0';
-		RGBA rgba = hexToRGBA(buffer[i]);
-		data->color[i] = ft_pixel(rgba.red, rgba.green, rgba.blue, 255);
-		ft_printf("%c %s %d\n", data->key[i], buffer[i], data->color[i]);
-		// ft_printf("RGBA %d %d %d\n", rgba.red, rgba.green, rgba.blue);
-
+		hex_to_rgb(buffer[i], &r, &g, &b);
+		data->color[i] = ft_pixel(r, g, b, 255);
+		ft_printf("%c %s %d | RGB %d %d %d\n", data->key[i], buffer[i], data->color[i], r, g, b);
 	}
 	close(fd);
-	fd = open("textures/wood.xpm42", O_RDONLY);
+	fd = open("textures/woodn.xpm42", O_RDONLY);
 	line = get_next_line(fd);
-	while(y < 64)
+	while(y < 1024)
 	{
 		data->wood[y] = line;
 		//ft_printf("%s\n", data->wood[y]);
@@ -124,7 +106,7 @@ void	color_parser(t_data *data)
 		line = get_next_line(fd);
 		y++;
 	}
-
+	close(fd);
 }
 
 int	init(t_data *data, t_map *map, t_player *player, char *input)
@@ -161,10 +143,12 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 	data->text_wall = mlx_load_png("textures/wall.png");
 	data->text_player = mlx_load_png("textures/player.png");
 	data->text_wood = mlx_load_png("textures/wood.png");
+
 	data->img_game_wall = mlx_texture_to_image(data->mlx, data->text_wall);
 	data->img_player = mlx_texture_to_image(data->mlx, data->text_player);
 	data->player = player;
 	data->map = map;
+
 	struct_declaration(data);
 	color_parser(data);
 	data->player->prev_mouseX = 0;

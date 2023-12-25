@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/23 21:46:22 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:51:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 // berechnet die Höhe der Linien, die auf dem Bildschirm dargestellt werden,
 // basierend auf der Entfernung und dem Winkel.
 // Anschließend werden die entsprechenden Pixel im Bildspeicher markiert.
+#include <stdio.h>
+
 void	calc_helper(t_data *data, t_calc_view *calc)
 {
-	int	tmp;
-	int	y;
-
+	double	tmp;
+	int		y;
 
 	tmp = (data->image->width / data->player->view_angle) * (calc->j + 1);
-	while (calc->i < tmp)
+	while (calc->x < tmp)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
 		calc->line_bottom = (data->image->height / 2) + (SIZE * 6 / calc->tmp);
@@ -64,38 +65,13 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		if (calc->line_bottom >= data->image->height)
 			calc->line_bottom = data->image->height;
 		y = (data->image->height / 2) + 1;
-
-
-
 		while (--y > calc->line_top)
-		{
-			// char c;
-			// if (y/16 < 63 && calc->i/16 < 63)
-			// {
-			// 	//ft_printf("%d %d\n", y / 16, calc->i / 16);
-			// 	c = data->wood[y/16][(int)calc->i /16];
-			// 	int i = 0;
-			// 	uint32_t col;
-			// 	while (c != data->key[i] && i < 9)
-			// 	{
-			// 		//ft_printf("%c = %c\n", c, data->key[i]);
-			// 		if (y > 250)
-			// 			calc->color_side = data->color[i];
-			// 		else
-			// 				calc->color_side = data->color[i + 1];
-			// 			break;
-
-			// 		i++;
-			// 	}
-
-
-			// }
-			mlx_put_pixel(data->image, calc->i, y, calc->color_side);
-		}
+			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
 		y = (data->image->height / 2) - 1;
 		while (++y < calc->line_bottom)
-			mlx_put_pixel(data->image, calc->i, y, calc->color_side);
-		calc->i++;
+			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
+		// break ;
+		calc->x++;
 	}
 }
 
@@ -110,13 +86,21 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
-	//int		color;
+	double		height;
+
 	calc_preset(data, &calc);
 	while (calc.k < calc.temp1)
 	{
 		calc.distance = ray_distance(data, calc.k);
-		calc.i = (data->image->width / data->player->view_angle) * calc.j;
-		//color = get_texture_pixel_color(data->text_wood, data, 5, calc.i);
+		calc.x = (data->image->width / data->player->view_angle) * calc.j;
+		height = calc.line_bottom - calc.line_top;
+		if (height < data->ray_y)
+			calc.color_side = ft_pixel(0, 50, 255, 255);
+		else if (height == data->ray_y)
+			calc.color_side = ft_pixel(0, 100, 255, 255);
+		else if (height > data->ray_y)
+			calc.color_side = ft_pixel(0, 150, 255, 255);
+		data->ray_y = height;
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;

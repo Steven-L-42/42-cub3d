@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 21:14:40 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:25:03 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ typedef struct s_calc_view
 	float			temp2;
 	int				j;
 	int				angle;
-	float			distance;
+	double			distance;
 	float			tmp;
-	float			line_bottom;
-	float			line_top;
+	double			line_bottom;
+	double			line_top;
 	uint32_t		color_front;
 	uint32_t		color_side;
 	int				is_side;
 	float			k;
-	float			i;
+	float			x;
 }					t_calc_view;
 
 typedef struct s_draw_rays
@@ -91,10 +91,12 @@ typedef struct s_data
 	mlx_texture_t	*text_wall;
 	mlx_texture_t	*text_player;
 	mlx_texture_t	*text_wood;
-	char			*wood[64];
+	char			*wood[1024];
 	char			key[64];
 	uint32_t		color[64];
 	int				wall_height;
+	float			ray_y;
+	float			ray_x;
 }					t_data;
 
 // get_map
@@ -109,7 +111,7 @@ int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int					get_colour_from_pixel(u_int8_t *pixel);
 
 // get_distance to wall
-float				ray_distance(t_data *data, float angle);
+double				ray_distance(t_data *data, float angle);
 void				calc_view(t_data *data);
 
 void				update_player_angle(double xpos, double ypos, void *param);
