@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/25 11:25:03 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 13:00:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ typedef struct s_data
 	mlx_image_t		*img_game_wall;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
-	//mlx_image_t		*img_wood;
-	mlx_texture_t	*text_wall;
-	mlx_texture_t	*text_player;
+
 	mlx_texture_t	*text_wood;
 	char			*wood[1024];
 	char			key[64];

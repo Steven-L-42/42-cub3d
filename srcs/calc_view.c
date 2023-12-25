@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/25 11:51:36 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 12:52:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 // berechnet die Höhe der Linien, die auf dem Bildschirm dargestellt werden,
 // basierend auf der Entfernung und dem Winkel.
 // Anschließend werden die entsprechenden Pixel im Bildspeicher markiert.
-#include <stdio.h>
-
 void	calc_helper(t_data *data, t_calc_view *calc)
 {
 	double	tmp;
@@ -75,6 +73,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 	}
 }
 
+
 // Funktion: calc_view
 // Zweck: Berechnet und zeichnet die Sichtlinien im Spiel.
 // Parameter:
@@ -93,14 +92,15 @@ void	calc_view(t_data *data)
 	{
 		calc.distance = ray_distance(data, calc.k);
 		calc.x = (data->image->width / data->player->view_angle) * calc.j;
-		height = calc.line_bottom - calc.line_top;
-		if (height < data->ray_y)
-			calc.color_side = ft_pixel(0, 50, 255, 255);
-		else if (height == data->ray_y)
-			calc.color_side = ft_pixel(0, 100, 255, 255);
-		else if (height > data->ray_y)
-			calc.color_side = ft_pixel(0, 150, 255, 255);
-		data->ray_y = height;
+
+		// height = calc.line_bottom - calc.line_top;
+		// if (height < data->ray_y && data->player->angle <= 45)
+		// 	calc.color_side = ft_pixel(0, 50, 255, 255);
+		// else if (height == data->ray_y)
+		// 	calc.color_side = ft_pixel(100, 100, 255, 255);
+		// else if (height > data->ray_y)
+		// 	calc.color_side = ft_pixel(0, 150, 255, 255);
+		// data->ray_y = height;
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;
@@ -150,12 +150,10 @@ void	calc_view(t_data *data)
 // 				linehight = data->image->height;
 // 			for (int32_t y = data->image->height / 2; y < linehight; y++)
 // 			{
-
 // 					mlx_put_pixel(data->image, i, y, color_side);
 // 			}
 // 			for (int32_t y = data->image->height / 2; y > linehight1; y--)
 // 			{
-
 // 					mlx_put_pixel(data->image, i, y, color_side);
 // 			}
 // 			i++;
