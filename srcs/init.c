@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/25 13:00:33 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/25 13:23:25 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,10 @@ int	init(t_data *data, t_map *map, t_player *player, char *input)
 		puts(mlx_strerror(mlx_errno));
 		exit(1);
 	}
-
+	text = mlx_load_png("textures/cross.png");
+	mlx_win_cursor_t *cursor = mlx_create_cursor(text);
+	mlx_delete_texture(text);
+	mlx_set_cursor(data->mlx, cursor);
 	text = mlx_load_png("textures/wall.png");
 	data->img_game_wall = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
