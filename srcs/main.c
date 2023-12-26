@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 18:42:34 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 11:34:30 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,18 @@ void	ft_running(void *param)
 	t_data	*data;
 
 	data = param;
-	reset(data);
+	reset_window(data);
 	calc_view(data);
 	draw_player_rays(data, 80);
-
 }
 
 int	main(int argc, char **argv)
 {
-	t_map		*map;
-	t_player	*player;
-	t_data		*data;
+	t_data	*data;
 
 	// atexit(leaks);
 	data = malloc(sizeof(t_data));
-	map = malloc(sizeof(t_map));
-	player = malloc(sizeof(t_player));
-	if (init(data, map, player, argv[1]))
+	if (init(data, argv[1]))
 		return (1);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
 	mlx_loop_hook(data->mlx, ft_running, data);

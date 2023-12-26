@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/25 13:00:19 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 13:53:05 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_player
 	int				mouse_x;
 	int				mouse_y;
 	float			prev_mouseX;
+	char			start_direction;
 }					t_player;
 
 typedef struct s_map
@@ -49,8 +50,8 @@ typedef struct s_calc_view
 {
 	float			temp1;
 	float			temp2;
-	int				j;
-	int				angle;
+	float				j;
+	float				angle;
 	double			distance;
 	float			tmp;
 	double			line_bottom;
@@ -70,8 +71,7 @@ typedef struct s_draw_rays
 	float			end_y;
 	int				x_coord;
 	int				y_coord;
-	int				i;
-	int				j;
+	float				i;
 }					t_draw_rays;
 
 typedef struct s_data
@@ -85,16 +85,21 @@ typedef struct s_data
 	xpm_t			*texture_player;
 	mlx_image_t		*img_minimap;
 	mlx_image_t		*img_game_wall;
+	mlx_image_t		*img_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
-
+	mlx_image_t		*img_wood;
+	uint32_t		*col_wood;
 	mlx_texture_t	*text_wood;
+	int				wood_size[2];
 	char			*wood[1024];
 	char			key[64];
 	uint32_t		color[64];
 	int				wall_height;
 	float			ray_y;
 	float			ray_x;
+	int				width;
+	int				height;
 }					t_data;
 
 // get_map
@@ -104,9 +109,10 @@ void				draw_minimap(t_data *data);
 // utils
 void				ft_free2d(char **str);
 void				ft_exit(t_data *data);
-void				reset(t_data *data);
+void				reset_window(t_data *data);
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int					get_colour_from_pixel(u_int8_t *pixel);
+void				hex_to_rgb(char *hex, int *r, int *g, int *b);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
@@ -117,7 +123,6 @@ void				ft_hook(void *param);
 
 void				draw_player_rays(t_data *data, int num_rays);
 
-int					init(t_data *data, t_map *map, t_player *player,
-						char *input);
+int					init(t_data *data, char *input);
 
 #endif

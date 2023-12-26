@@ -19,7 +19,7 @@ LOCAL_DIR			=	MLX42
 
 SRCS_F				=	srcs/
 
-SRCS				=	main.c init.c get_map.c utils.c ray_distance.c movement.c minimap.c rays.c calc_view.c
+SRCS				=	main.c init.c get_map.c utils.c calc_distance.c movement.c minimap.c rays.c calc_view.c
 
 OBJS				=	$(addprefix $(SRCS_F),$(SRCS:.c=.o))
 
@@ -83,5 +83,9 @@ re:					fclean all
 test:
 					make
 					./cub3d map/map.txt
+
+test1:
+					make
+					./cub3d map/map1.txt
 
 .PHONY:				all clean fclean re clone

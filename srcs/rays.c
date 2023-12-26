@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/25 09:58:24 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 12:56:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 {
 	ft_memset(data->img_player_ray->pixels, 0, data->img_player_ray->width
 		* data->img_player_ray->height * sizeof(int32_t));
-	ray->color = ft_pixel(0, 255, 128, 255);
+	ray->color = ft_pixel(0, 145, 170, 255);
 	ray->i = -num_rays / 2;
 }
 
@@ -43,13 +43,21 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 // ob die berechneten Koordinaten im gültigen Bereich liegen und ob es
 // Kollisionen mit Wänden gibt. Bei gültigen Koordinaten wird die
 // entsprechende Pixelposition im Bildspeicher markiert.
-void	ray_helper(t_data *data, t_draw_rays *ray)
+void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 {
-	while (ray->j < INT_MAX / 2)
+	int	ray_len;
+	int	ray_max_len;
+
+	ray_len = 0;
+	if (data->img_player_ray->width > data->img_player_ray->height)
+		ray_max_len = data->img_player_ray->width;
+	else
+		ray_max_len = data->img_player_ray->height;
+	while (ray_len < ray_max_len)
 	{
-		ray->x_coord = data->player->x * 16 + 8 + ray->j
+		ray->x_coord = data->player->x * 16 + 8 + ray_len
 			* cos((data->player->angle + ray->angle_offset) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + ray->j
+		ray->y_coord = data->player->y * 16 + 8 + ray_len
 			* sin((data->player->angle + ray->angle_offset) * PI / 180);
 		if (ray->x_coord >= 0 && ray->y_coord >= 0
 			&& ray->x_coord < data->img_player_ray->width
@@ -60,7 +68,7 @@ void	ray_helper(t_data *data, t_draw_rays *ray)
 			mlx_put_pixel(data->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);
 		}
-		ray->j++;
+		ray_len++;
 	}
 }
 
@@ -81,13 +89,8 @@ void	draw_player_rays(t_data *data, int num_rays)
 	while (ray.i <= num_rays / 2)
 	{
 		ray.angle_offset = ray.i;
-		ray.end_x = data->player->x * 16 + 8 * cos((data->player->angle
-					+ ray.angle_offset) * PI / 180);
-		ray.end_y = data->player->y * 16 + 8 * sin((data->player->angle
-					+ ray.angle_offset) * PI / 180);
-		ray.j = 0;
-		ray_helper(data, &ray);
-		ray.i++;
+		ray_helper(data, &ray, num_rays);
+		ray.i += 0.2f;
 	}
 	mlx_image_to_window(data->mlx, data->img_player_ray, 0, 0);
 }

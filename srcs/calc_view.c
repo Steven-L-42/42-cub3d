@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/25 12:52:51 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:12:13 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->temp2 = -calc->temp1;
 	calc->angle = calc->temp1;
 	calc->color_front = ft_pixel(0, 255, 255, 255);
-	calc->color_side = ft_pixel(0, 100, 255, 255);
+	calc->color_side = ft_pixel(0, 100, 200, 255);
 	mlx_delete_image(data->mlx, data->image);
 	data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
 			data->map->height * SIZE);
@@ -49,30 +49,39 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 // Anschließend werden die entsprechenden Pixel im Bildspeicher markiert.
 void	calc_helper(t_data *data, t_calc_view *calc)
 {
-	double	tmp;
+	double	line_width;
 	int		y;
 
-	tmp = (data->image->width / data->player->view_angle) * (calc->j + 1);
-	while (calc->x < tmp)
+	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
+	// line_width = calc->x + 1;
+	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
-		calc->line_bottom = (data->image->height / 2) + (SIZE * 6 / calc->tmp);
-		calc->line_top = (data->image->height / 2) - (SIZE * 6 / calc->tmp);
+		calc->line_bottom = (data->height / 2) + (SIZE * 6 / calc->tmp);
+		calc->line_top = (data->height / 2) - (SIZE * 6 / calc->tmp);
 		if (calc->line_top < 0)
 			calc->line_top = 0;
-		if (calc->line_bottom >= data->image->height)
-			calc->line_bottom = data->image->height;
-		y = (data->image->height / 2) + 1;
+		if (calc->line_bottom >= data->height)
+			calc->line_bottom = data->height;
+		y = (data->height / 2) + 1;
+		// int size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
+		{
+			// int size_y =  y & (data->wood_size[0] - 1);
+			// calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
-		y = (data->image->height / 2) - 1;
+		}
+		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
+		{
+			// int size_y =  y & (data->wood_size[0] - 1);
+			// calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
+		}
 		// break ;
 		calc->x++;
 	}
 }
-
 
 // Funktion: calc_view
 // Zweck: Berechnet und zeichnet die Sichtlinien im Spiel.
@@ -85,22 +94,12 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
-	double		height;
 
 	calc_preset(data, &calc);
 	while (calc.k < calc.temp1)
 	{
 		calc.distance = ray_distance(data, calc.k);
-		calc.x = (data->image->width / data->player->view_angle) * calc.j;
-
-		// height = calc.line_bottom - calc.line_top;
-		// if (height < data->ray_y && data->player->angle <= 45)
-		// 	calc.color_side = ft_pixel(0, 50, 255, 255);
-		// else if (height == data->ray_y)
-		// 	calc.color_side = ft_pixel(100, 100, 255, 255);
-		// else if (height > data->ray_y)
-		// 	calc.color_side = ft_pixel(0, 150, 255, 255);
-		// data->ray_y = height;
+		calc.x = ((data->width / data->player->view_angle) * (calc.j));
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;

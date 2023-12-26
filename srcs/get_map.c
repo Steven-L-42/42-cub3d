@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 11:05:39 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:49:42 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_map_hight(t_map *map, char *input)
 	count = 0;
 	fd = open(input, O_RDONLY);
 	line = get_next_line(fd);
-	map->width = (int)ft_strlen(line);
+	map->width = (int)ft_strlen(line) - 1;
 	while (line != NULL)
 	{
 		free(line);

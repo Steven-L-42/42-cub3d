@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/23 20:56:33 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 11:21:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,17 @@ int	get_colour_from_pixel(u_int8_t *pixel)
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
-void	reset(t_data *data)
+void	hex_to_rgb(char *hex, int *r, int *g, int *b)
+{
+	long int	hexValue;
+
+	hexValue = strtol(hex, NULL, 16);
+	*r = (hexValue >> 16) & 0xFF;
+	*g = (hexValue >> 8) & 0xFF;
+	*b = hexValue & 0xFF;
+}
+
+void	reset_window(t_data *data)
 {
 	ft_memset(data->image->pixels, 0, data->image->width * data->image->height
 		* sizeof(int32_t));
