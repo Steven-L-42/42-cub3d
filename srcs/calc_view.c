@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/26 14:21:17 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:23:16 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 	int		y;
 
 	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
-	//line_width = calc->x + 1;
+	// line_width = calc->x + 1;
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
