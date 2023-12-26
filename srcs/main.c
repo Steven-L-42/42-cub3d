@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/26 14:23:53 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:28:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	atexit(leaks);
+	//atexit(leaks);
 	data = malloc(sizeof(t_data));
 	if (init(data, argv[1]))
 		return (1);
