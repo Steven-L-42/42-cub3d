@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/26 13:53:05 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:21:17 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_map
 
 typedef struct s_calc_view
 {
-	float			temp1;
+	float			max_lines;
 	float			temp2;
 	float				j;
 	float				angle;
@@ -59,7 +59,7 @@ typedef struct s_calc_view
 	uint32_t		color_front;
 	uint32_t		color_side;
 	int				is_side;
-	float			k;
+	float			line;
 	float			x;
 }					t_calc_view;
 

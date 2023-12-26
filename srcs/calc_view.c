@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/26 14:14:26 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/26 14:21:17 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 void	calc_preset(t_data *data, t_calc_view *calc)
 {
 	calc->j = 0;
-	calc->temp1 = data->player->view_angle / 2;
-	calc->temp2 = -calc->temp1;
-	calc->angle = calc->temp1;
+	calc->max_lines = data->player->view_angle / 2;
+	calc->temp2 = -calc->max_lines;
+	calc->angle = calc->max_lines;
 	calc->color_front = ft_pixel(0, 255, 255, 255);
 	calc->color_side = ft_pixel(0, 100, 200, 255);
 	mlx_delete_image(data->mlx, data->image);
 	data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
 			data->map->height * SIZE);
-	calc->k = calc->temp2;
+	calc->line = calc->temp2;
 }
 
 // Funktion: calc_helper
@@ -52,8 +52,8 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 	double	line_width;
 	int		y;
 
-	//line_width = (data->width / data->player->view_angle) * (calc->j + 1);
-	line_width = calc->x + 1;
+	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
+	//line_width = calc->x + 1;
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
@@ -96,14 +96,14 @@ void	calc_view(t_data *data)
 	t_calc_view	calc;
 
 	calc_preset(data, &calc);
-	while (calc.k < calc.temp1)
+	while (calc.line < calc.max_lines)
 	{
-		calc.distance = ray_distance(data, calc.k);
-		//calc.x = ((data->width / data->player->view_angle) * (calc.j));
+		calc.distance = ray_distance(data, calc.line - 1.0f);
+		calc.x = ((data->width / data->player->view_angle) * (calc.j));
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;
-		calc.k++;
+		calc.line++;
 	}
 	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	data->image->instances[0].z = 0;
