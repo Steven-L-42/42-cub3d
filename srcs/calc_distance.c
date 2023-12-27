@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 18:45:14 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 12:28:14 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:38:38 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ float	calculate_distance_to_wall(t_data *data, float dirX, float dirY)
 	currentY = data->player->y;
 	X = roundf(currentX);
 	Y = roundf(currentY);
-	while (data->map->map[Y][X] != '1')
+	while (!ft_is_in_set(data->map->map[Y][X], "159"))
 	{
 		if (!data->map->map[Y][X] || !data->map->map[Y])
 			return (1);
@@ -35,6 +35,11 @@ float	calculate_distance_to_wall(t_data *data, float dirX, float dirY)
 		X = roundf(currentX);
 		Y = roundf(currentY);
 	}
+	if (data->map->map[Y][X] == '5')
+		data->wall_type = 'D';
+	else if (data->map->map[Y][X] == '9')
+		data->wall_type = 'P';
+
 	distance = sqrt((currentX - data->player->x) * (currentX - data->player->x)
 			+ (currentY - data->player->y) * (currentY - data->player->y));
 	return (distance);

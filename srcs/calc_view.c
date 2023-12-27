@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 14:36:10 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:39:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->angle = calc->max_lines;
 	calc->color_ceiling = ft_pixel(135, 206, 235, 255);
 	calc->color_floor = ft_pixel(138, 138, 138, 255);
-	calc->color_wall = ft_pixel(56, 76, 252, 255);
+	calc->color_wall = ft_pixel(56, 76, 200, 255);
+	calc->color_door = ft_pixel(125, 76, 56, 255);
+	calc->color_portal = ft_pixel(56, 125, 125, 255);
 	calc->line = calc->temp2;
 }
 
@@ -67,14 +69,24 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
-			mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
+			if (data->wall_type == 'D')
+				mlx_put_pixel(data->image, calc->x, y, calc->color_door);
+			else if (data->wall_type == 'P')
+				mlx_put_pixel(data->image, calc->x, y, calc->color_portal);
+			else
+				mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
-			mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
+			if (data->wall_type == 'D')
+				mlx_put_pixel(data->image, calc->x, y, calc->color_door);
+			else if (data->wall_type == 'P')
+				mlx_put_pixel(data->image, calc->x, y, calc->color_portal);
+			else
+				mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
 		}
 		int t = -1;
 		while (++t < calc->line_top)
@@ -84,6 +96,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 			mlx_put_pixel(data->image, calc->x, t, calc->color_floor);
 		calc->x++;
 	}
+
 }
 
 // Funktion: calc_view
@@ -101,6 +114,8 @@ void	calc_view(t_data *data)
 	calc_preset(data, &calc);
 	while (calc.line < calc.max_lines)
 	{
+
+		data->wall_type = 'W';
 		calc.distance = ray_distance(data, calc.line - 1.0f);
 		calc.x = ((data->width / data->player->view_angle) * (calc.j));
 		calc_helper(data, &calc);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 14:35:03 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:35:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	init_helper(t_data *data, char *input)
 {
 	data->map = malloc(sizeof(t_map));
+	data->minimap = malloc(sizeof(t_minimap));
 	data->player = malloc(sizeof(t_player));
 	get_map(data->map, input);
 	if (data->map->width * SIZE < 1920)
@@ -44,6 +45,19 @@ static int	init_img(t_data *data)
 	text = mlx_load_png("textures/brick_small.png");
 	data->img_mm_wall = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
+
+	text = mlx_load_png("textures/brick_portal_small.png");
+	data->img_mm_portal = mlx_texture_to_image(data->mlx, text);
+	mlx_delete_texture(text);
+
+	text = mlx_load_png("textures/brick_door_closed_small.png");
+	data->img_mm_door_closed = mlx_texture_to_image(data->mlx, text);
+	mlx_delete_texture(text);
+
+	text = mlx_load_png("textures/brick_door_open_small.png");
+	data->img_mm_door_open = mlx_texture_to_image(data->mlx, text);
+	mlx_delete_texture(text);
+
 	text = mlx_load_png("textures/brick_shadow_small.png");
 	data->img_mm_wall_shadow = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
@@ -55,6 +69,15 @@ static int	init_img(t_data *data)
 	init_img_info(data, text);
 	mlx_delete_texture(text);
 	return (0);
+}
+
+static void	init_minimap(t_data *data)
+{
+	data->minimap->width = data->map->width;
+	data->minimap->height = -1;
+	data->minimap->map = ft_calloc(data->map->height + 1, sizeof(int *));
+	while (++data->minimap->height < data->map->height)
+		data->minimap->map[data->minimap->height] = ft_calloc(data->map->height + 1, sizeof(int));
 }
 
 int	init(t_data *data, char *input)
@@ -73,6 +96,7 @@ int	init(t_data *data, char *input)
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	init_img(data);
+	init_minimap(data);
 	init_coords(data, 0, 0);
 	init_player(data);
 	draw_minimap(data);

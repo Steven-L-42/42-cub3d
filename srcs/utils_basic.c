@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 15:07:27 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 19:30:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,19 @@ void	ft_free2d(char **str)
 	free(str);
 }
 
+int		ft_is_in_set(char c, char *set)
+{
+	int	i;
 
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	ft_exit(t_data *data)
 {

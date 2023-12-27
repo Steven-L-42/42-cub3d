@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 11:56:11 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:46:12 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
 	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
 		&& cellX <= data->map->width)
 	{
-		if (data->map->map[(int)cellY][(int)cellX] == '1')
+		if (ft_is_in_set(data->map->map[(int)cellY][(int)cellX], "159"))
 			return (1);
 	}
 	return (0);
@@ -79,7 +79,53 @@ void	update_player_angle(double xpos, double ypos, void *param)
 	data->player->angle += newAngle;
 	data->player->prev_mouseX = data->player->mouse_x;
 }
-void	ft_hook(void *param)
+
+void	check_for_door_ahead(t_data *data)
+{
+	float	p_x_cos;
+	float	p_y_sin;
+	float	cellX;
+	float	cellY;
+	float	radianAngle;
+
+	radianAngle = data->player->angle * PI / 180.0;
+	p_x_cos = cos(radianAngle);
+	p_y_sin = sin(radianAngle);
+	cellY = roundf(data->player->y + 1 * p_y_sin);
+	cellX = roundf(data->player->x + 1 * p_x_cos);
+	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
+		&& cellX <= data->map->width)
+	{
+		if (data->map->map[(int)cellY][(int)cellX] == '9')
+		{
+			data->player->x = data->map->width - 2;
+			data->player->y = 1;
+			data->img_player->instances[0].x = data->player->x * 16;
+			data->img_player->instances[0].y = data->player->y * 16;
+		}
+		if (data->map->map[(int)cellY][(int)cellX] == '5')
+		{
+			data->map->map[(int)cellY][(int)cellX] = '4';
+			data->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 0;
+		}
+		else if (data->map->map[(int)cellY][(int)cellX] == '4')
+		{
+			data->map->map[(int)cellY][(int)cellX] = '5';
+			data->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 1;
+		}
+	}
+}
+
+void	ft_key_press(mlx_key_data_t keydata, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
+		check_for_door_ahead(data);
+}
+
+void	ft_key_hold(void *param)
 {
 	t_data	*data;
 

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 13:28:36 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:36:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 			&& ray->x_coord < data->img_player_ray->width
 			&& ray->y_coord < data->img_player_ray->height)
 		{
-			if (data->map->map[ray->y_coord / 16][ray->x_coord / 16] == '1')
+			if (ft_is_in_set(data->map->map[ray->y_coord / 16][ray->x_coord / 16], "159"))
 				break ;
 			mlx_put_pixel(data->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 14:32:27 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:39:07 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
+typedef struct s_minimap
+{
+	int				**map;
+	int				width;
+	int				height;
+	int				doors;
+}					t_minimap;
+
 typedef struct s_calc_view
 {
 	float			max_lines;
@@ -59,6 +67,8 @@ typedef struct s_calc_view
 	uint32_t		color_floor;
 	uint32_t		color_ceiling;
 	uint32_t		color_wall;
+	uint32_t		color_door;
+	uint32_t		color_portal;
 	int				is_side;
 	float			line;
 	float			x;
@@ -80,6 +90,7 @@ typedef struct s_data
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	t_map			*map;
+	t_minimap		*minimap;
 	t_player		*player;
 
 	xpm_t			*texture_wall;
@@ -87,6 +98,9 @@ typedef struct s_data
 	mlx_image_t		*img_minimap;
 	mlx_image_t		*img_mm_wall;
 	mlx_image_t		*img_mm_wall_shadow;
+	mlx_image_t		*img_mm_portal;
+	mlx_image_t		*img_mm_door_closed;
+	mlx_image_t		*img_mm_door_open;
 	mlx_image_t		*img_game_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
@@ -102,6 +116,7 @@ typedef struct s_data
 	float			ray_x;
 	int				width;
 	int				height;
+	char			wall_type;
 }					t_data;
 
 // get_map
@@ -119,7 +134,7 @@ void				init_player(t_data *data);
 void				ft_free2d(char **str);
 void				ft_exit(t_data *data);
 void				reset_window(t_data *data);
-
+int					ft_is_in_set(char c, char *set);
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int					get_colour_from_pixel(u_int8_t *pixel);
@@ -131,7 +146,10 @@ double				ray_distance(t_data *data, float angle);
 void				calc_view(t_data *data);
 
 void				update_player_angle(double xpos, double ypos, void *param);
-void				ft_hook(void *param);
+
+// hotkeys
+void				ft_key_hold(void *param);
+void				ft_key_press(mlx_key_data_t keydata, void* param);
 
 void				draw_player_rays(t_data *data, int num_rays);
 
