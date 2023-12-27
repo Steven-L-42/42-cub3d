@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 14:35:10 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:36:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->temp2 = -calc->max_lines;
 	calc->angle = calc->max_lines;
 	calc->color_ceiling = ft_pixel(135, 206, 235, 255);
-	calc->color_floor = ft_pixel(196, 196, 196, 255);
+	calc->color_floor = ft_pixel(138, 138, 138, 255);
 	calc->color_wall = ft_pixel(56, 76, 252, 255);
 	calc->line = calc->temp2;
 }
