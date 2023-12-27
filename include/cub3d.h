@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/26 14:21:17 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:13:55 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_data
 	xpm_t			*texture_player;
 	mlx_image_t		*img_minimap;
 	mlx_image_t		*img_game_wall;
+	mlx_image_t		*img_game_shadow_wall;
 	mlx_image_t		*img_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
@@ -106,13 +107,23 @@ typedef struct s_data
 void				get_map(t_map *map, char *input);
 void				draw_minimap(t_data *data);
 
-// utils
+// init_1
+int					init(t_data *data, char *input);
+
+// init_2
+void				init_coords(t_data *data, int pixel_x, int pixel_y);
+void				init_player(t_data *data);
+
+// utils basic
 void				ft_free2d(char **str);
 void				ft_exit(t_data *data);
 void				reset_window(t_data *data);
+
+// utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int					get_colour_from_pixel(u_int8_t *pixel);
 void				hex_to_rgb(char *hex, int *r, int *g, int *b);
+uint32_t			*get_color(mlx_texture_t *texture);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
@@ -123,6 +134,6 @@ void				ft_hook(void *param);
 
 void				draw_player_rays(t_data *data, int num_rays);
 
-int					init(t_data *data, char *input);
+
 
 #endif

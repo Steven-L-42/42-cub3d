@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/26 10:53:31 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:21:39 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	draw_objects(t_data *data, int is_wall)
 			if (data->map->map[y][x] == '1' && is_wall)
 				mlx_image_to_window(data->mlx, data->img_game_wall, x * 16, y
 					* 16);
+			else if ((data->map->map[y][x] == '0' || data->map->map[y][x] == 'P') && is_wall)
+				mlx_image_to_window(data->mlx, data->img_game_shadow_wall, x * 16, y
+					* 16);
 			else if (data->map->map[y][x] == 'P' && !is_wall)
 				mlx_image_to_window(data->mlx, data->img_player, data->player->x
 					* 16, data->player->y * 16);
@@ -33,6 +36,17 @@ void	draw_objects(t_data *data, int is_wall)
 		}
 		y++;
 	}
+}
+
+void	set_z(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->img_minimap->instances[0].z = 0;
+	while (i < data->img_game_shadow_wall->count)
+		data->img_game_shadow_wall->instances[i++].z = 1;
+	data->img_player->instances[0].z = 2;
 }
 
 void	draw_minimap(t_data *data)
@@ -56,7 +70,9 @@ void	draw_minimap(t_data *data)
 	mlx_image_to_window(data->mlx, data->img_minimap, 0, 0);
 	draw_objects(data, 0);
 	draw_objects(data, 1);
+
 	mlx_image_to_window(data->mlx, data->img_cursor, data->width / 2
 		- (data->img_cursor->width / 2), data->height / 2
 		- (data->img_cursor->height / 2));
+	set_z(data);
 }

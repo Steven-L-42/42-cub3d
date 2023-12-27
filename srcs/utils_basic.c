@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/26 14:28:09 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 11:58:38 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int	get_colour_from_pixel(u_int8_t *pixel)
-{
-	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
-}
-
-void	hex_to_rgb(char *hex, int *r, int *g, int *b)
-{
-	long int	hexValue;
-
-	hexValue = strtol(hex, NULL, 16);
-	*r = (hexValue >> 16) & 0xFF;
-	*g = (hexValue >> 8) & 0xFF;
-	*b = hexValue & 0xFF;
-}
 
 void	reset_window(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/25 13:26:09 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 11:56:11 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
 
 	p_x_cos = cos(radianAngle);
 	p_y_sin = sin(radianAngle);
-	cellX = (data->player->x + distance * p_x_cos);
-	cellY = (data->player->y + distance * p_y_sin);
-	cellY = roundf(cellY);
-	cellX = roundf(cellX);
+	cellY = roundf(data->player->y + distance * p_y_sin);
+	cellX = roundf(data->player->x + distance * p_x_cos);
 	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
 		&& cellX <= data->map->width)
 	{
