@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 13:16:43 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:32:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ typedef struct s_calc_view
 	float			tmp;
 	double			line_bottom;
 	double			line_top;
-	uint32_t		color_front;
-	uint32_t		color_side;
+	uint32_t		color_floor;
+	uint32_t		color_ceiling;
+	uint32_t		color_wall;
 	int				is_side;
 	float			line;
 	float			x;

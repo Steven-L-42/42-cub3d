@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 13:31:43 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:35:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->max_lines = data->player->view_angle / 2;
 	calc->temp2 = -calc->max_lines;
 	calc->angle = calc->max_lines;
-	calc->color_front = ft_pixel(56, 76, 252, 255);
-	calc->color_side = ft_pixel(56, 76, 252, 255);
+	calc->color_ceiling = ft_pixel(135, 206, 235, 255);
+	calc->color_floor = ft_pixel(196, 196, 196, 255);
+	calc->color_wall = ft_pixel(56, 76, 252, 255);
 	calc->line = calc->temp2;
 }
 
@@ -66,16 +67,21 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
-			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
+			mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
-			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
+			mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
 		}
-		// break ;
+		int t = -1;
+		while (++t < calc->line_top)
+			mlx_put_pixel(data->image, calc->x, t, calc->color_ceiling);
+		t = calc->line_bottom - 1;
+		while (++t < data->height)
+			mlx_put_pixel(data->image, calc->x, t, calc->color_floor);
 		calc->x++;
 	}
 }
