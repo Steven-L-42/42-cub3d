@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 13:31:29 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:31:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->angle = calc->max_lines;
 	calc->color_front = ft_pixel(56, 76, 252, 255);
 	calc->color_side = ft_pixel(56, 76, 252, 255);
-	// mlx_delete_image(data->mlx, data->image);
-	// data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
-	// 		data->map->height * SIZE);
 	calc->line = calc->temp2;
 }
 
