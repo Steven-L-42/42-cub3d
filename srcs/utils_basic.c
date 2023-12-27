@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 11:58:38 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:07:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	ft_free2d(char **str)
 void	ft_exit(t_data *data)
 {
 	ft_free2d(data->map->map);
-	mlx_terminate(data->mlx);
 	free(data->player);
 	free(data->map);
 	free(data->col_wood);
 	free(data);
+	mlx_terminate(data->mlx);
 	exit(0);
 }

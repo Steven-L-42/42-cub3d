@@ -34,7 +34,7 @@ else
 endif
 
 all: $(NAME)
-
+#-L/Users/slippert/Documents/LeakSanitizer/ -llsan
 $(NAME): clone		$(INCLUDE) $(OBJS)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME) $(OBJS) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
