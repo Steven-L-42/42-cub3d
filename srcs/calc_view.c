@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 13:29:24 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:31:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->max_lines = data->player->view_angle / 2;
 	calc->temp2 = -calc->max_lines;
 	calc->angle = calc->max_lines;
-	calc->color_front = ft_pixel(0, 255, 255, 255);
-	calc->color_side = ft_pixel(0, 100, 200, 255);
+	calc->color_front = ft_pixel(56, 76, 252, 255);
+	calc->color_side = ft_pixel(56, 76, 252, 255);
 	// mlx_delete_image(data->mlx, data->image);
 	// data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
 	// 		data->map->height * SIZE);
@@ -64,18 +64,18 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		if (calc->line_bottom >= data->height)
 			calc->line_bottom = data->height;
 		y = (data->height / 2) + 1;
-		int size_x = (int)calc->x * 64;
+		// int size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
 		{
-			int size_y =  y & (data->wood_size[0] - 1);
-			calc->color_side = data->col_wood[size_x + size_y];
+			// int size_y =  y & (data->wood_size[0] - 1);
+			// calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
-			int size_y =  y & (data->wood_size[0] - 1);
-			calc->color_side = data->col_wood[size_x + size_y];
+			// int size_y =  y & (data->wood_size[0] - 1);
+			// calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
 		}
 		// break ;
