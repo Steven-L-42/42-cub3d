@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 13:18:57 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:29:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		if (calc->line_bottom >= data->height)
 			calc->line_bottom = data->height;
 		y = (data->height / 2) + 1;
-		// int size_x = (int)calc->x * 64;
+		int size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
 		{
-			// int size_y =  y & (data->wood_size[0] - 1);
-			// calc->color_side = data->col_wood[size_x + size_y];
+			int size_y =  y & (data->wood_size[0] - 1);
+			calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
-			// int size_y =  y & (data->wood_size[0] - 1);
-			// calc->color_side = data->col_wood[size_x + size_y];
+			int size_y =  y & (data->wood_size[0] - 1);
+			calc->color_side = data->col_wood[size_x + size_y];
 			mlx_put_pixel(data->image, calc->x, y, calc->color_side);
 		}
 		// break ;
