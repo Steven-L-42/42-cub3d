@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:35:19 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	init_minimap(t_data *data)
 {
 	data->minimap->width = data->map->width;
 	data->minimap->height = -1;
-	data->minimap->map = ft_calloc(data->map->height + 1, sizeof(int *));
+	data->minimap->doors = ft_calloc(data->map->height + 1, sizeof(int *));
 	while (++data->minimap->height < data->map->height)
-		data->minimap->map[data->minimap->height] = ft_calloc(data->map->height + 1, sizeof(int));
+		data->minimap->doors[data->minimap->height] = ft_calloc(data->map->height + 1, sizeof(int));
 }
 
 int	init(t_data *data, char *input)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:46:12 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ void	check_for_door_ahead(t_data *data)
 		if (data->map->map[(int)cellY][(int)cellX] == '5')
 		{
 			data->map->map[(int)cellY][(int)cellX] = '4';
-			data->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 0;
+			data->img_mm_door_closed->instances[data->minimap->doors[(int)cellY][(int)cellX]].enabled = 0;
 		}
 		else if (data->map->map[(int)cellY][(int)cellX] == '4')
 		{
 			data->map->map[(int)cellY][(int)cellX] = '5';
-			data->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 1;
+			data->img_mm_door_closed->instances[data->minimap->doors[(int)cellY][(int)cellX]].enabled = 1;
 		}
 	}
 }

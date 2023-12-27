@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 18:53:38 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:56:21 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 		return (1);
 	img_to_window(data);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
-
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
 	mlx_key_hook(data->mlx, ft_key_press, data);

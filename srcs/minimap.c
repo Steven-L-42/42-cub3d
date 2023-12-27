@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:35:44 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	draw_objects(t_data *data, int is_wall)
 			{
 				mlx_image_to_window(data->mlx, data->img_mm_door_open, x * 16,
 					y * 16);
-				data->minimap->map[y][x] = mlx_image_to_window(data->mlx, data->img_mm_door_closed, x * 16,
+				data->minimap->doors[y][x] = mlx_image_to_window(data->mlx, data->img_mm_door_closed, x * 16,
 					y * 16);
 			}
 			else if (data->map->map[y][x] == '9' && is_wall)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 20:39:07 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:55:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ typedef struct s_map
 
 typedef struct s_minimap
 {
-	int				**map;
+	int				**doors;
 	int				width;
 	int				height;
-	int				doors;
 }					t_minimap;
 
 typedef struct s_calc_view
