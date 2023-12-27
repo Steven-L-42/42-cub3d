@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/26 12:56:35 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:10:30 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 {
 	ft_memset(data->img_player_ray->pixels, 0, data->img_player_ray->width
 		* data->img_player_ray->height * sizeof(int32_t));
-	ray->color = ft_pixel(0, 145, 170, 255);
+	ray->color = ft_pixel(255, 255, 0, 1);
+	ray->color -= 0x800000;
+
 	ray->i = -num_rays / 2;
 }
 

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 12:13:55 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:55:17 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_calc_view
 {
 	float			max_lines;
 	float			temp2;
-	float				j;
-	float				angle;
+	float			j;
+	float			angle;
 	double			distance;
 	float			tmp;
 	double			line_bottom;
@@ -65,13 +65,13 @@ typedef struct s_calc_view
 
 typedef struct s_draw_rays
 {
-	uint32_t		color;
+	int				color;
 	float			angle_offset;
 	float			end_x;
 	float			end_y;
 	int				x_coord;
 	int				y_coord;
-	float				i;
+	float			i;
 }					t_draw_rays;
 
 typedef struct s_data
@@ -84,12 +84,12 @@ typedef struct s_data
 	xpm_t			*texture_wall;
 	xpm_t			*texture_player;
 	mlx_image_t		*img_minimap;
-	mlx_image_t		*img_game_wall;
-	mlx_image_t		*img_game_shadow_wall;
-	mlx_image_t		*img_cursor;
+	mlx_image_t		*img_mm_wall;
+	mlx_image_t		*img_mm_wall_shadow;
+	mlx_image_t		*img_game_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
-	mlx_image_t		*img_wood;
+	mlx_image_t		*img_game_wall;
 	uint32_t		*col_wood;
 	mlx_texture_t	*text_wood;
 	int				wood_size[2];
@@ -133,7 +133,5 @@ void				update_player_angle(double xpos, double ypos, void *param);
 void				ft_hook(void *param);
 
 void				draw_player_rays(t_data *data, int num_rays);
-
-
 
 #endif

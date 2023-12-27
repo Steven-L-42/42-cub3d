@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 12:14:09 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:23:16 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ static int	init_img(t_data *data)
 	mlx_texture_t	*text;
 
 	text = mlx_load_png("textures/cross.png");
-	data->img_cursor = mlx_texture_to_image(data->mlx, text);
+	data->img_game_cursor = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
 	text = mlx_load_png("textures/brick_small.png");
-	data->img_game_wall = mlx_texture_to_image(data->mlx, text);
+	data->img_mm_wall = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
 	text = mlx_load_png("textures/brick_shadow_small.png");
-	data->img_game_shadow_wall = mlx_texture_to_image(data->mlx, text);
+	data->img_mm_wall_shadow = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
 	text = mlx_load_png("textures/player.png");
 	data->img_player = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
-	text = mlx_load_png("textures/wood.png");
-	data->img_wood = mlx_texture_to_image(data->mlx, text);
+	text = mlx_load_png("textures/brick.png");
+	data->img_game_wall = mlx_texture_to_image(data->mlx, text);
 	init_img_info(data, text);
 	mlx_delete_texture(text);
 	return (0);
