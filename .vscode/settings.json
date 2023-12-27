@@ -7,6 +7,8 @@
 		"string": "c",
 		"string_view": "c",
 		"vector": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"memory": "c",
+		"utility": "c"
 	}
 }

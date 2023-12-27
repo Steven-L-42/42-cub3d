@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/26 14:28:31 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:28:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 void	leaks(void)
 {
 	system("leaks cub3d");
+}
+
+void	img_to_window(t_data *data)
+{
+	mlx_image_to_window(data->mlx, data->img_player_ray, 0, 0);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
+	data->image->instances[0].z = 0;
 }
 
 void	ft_running(void *param)
@@ -35,6 +42,7 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (init(data, argv[1]))
 		return (1);
+	img_to_window(data);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
