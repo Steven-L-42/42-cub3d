@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/28 15:23:38 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:51:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_data
 
 	xpm_t			*texture_wall;
 	xpm_t			*texture_player;
-	mlx_image_t		*img_minimap;
 	mlx_image_t		*img_mm_wall;
 	mlx_image_t		*img_mm_wall_shadow;
 	mlx_image_t		*img_mm_portal;

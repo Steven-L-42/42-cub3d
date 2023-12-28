@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:51:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ int	init(t_data *data, char *input)
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	if (!(data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
 				data->map->height * SIZE)))
-		return (puts(mlx_strerror(mlx_errno)), 1);
-	if (!(data->img_minimap = mlx_new_image(data->mlx, data->map->width * 16,
-				data->map->height * 16)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	if (!(data->img_player_ray = mlx_new_image(data->mlx, data->map->width * 16,
 				data->map->height * 16)))
