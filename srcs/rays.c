@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/28 15:36:51 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:43:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 // und initialisiert den Startwinkel für die Berechnungen.
 void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 {
-	ft_memset(data->img_player_ray->pixels, 0, data->img_player_ray->width
-		* data->img_player_ray->height * sizeof(int32_t));
+	ft_memset(data->img->img_player_ray->pixels, 0, data->img->img_player_ray->width
+		* data->img->img_player_ray->height * sizeof(int32_t));
 	ray->color = ft_pixel(247, 225, 178, 125);
 	ray->i = -num_rays / 2;
 }
@@ -49,10 +49,10 @@ void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 	int	ray_max_len;
 
 	ray_len = 0;
-	if (data->img_player_ray->width > data->img_player_ray->height)
-		ray_max_len = data->img_player_ray->width;
+	if (data->img->img_player_ray->width > data->img->img_player_ray->height)
+		ray_max_len = data->img->img_player_ray->width;
 	else
-		ray_max_len = data->img_player_ray->height;
+		ray_max_len = data->img->img_player_ray->height;
 	while (ray_len < ray_max_len)
 	{
 		ray->x_coord = data->player->x * 16 + 8 + ray_len
@@ -60,12 +60,12 @@ void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 		ray->y_coord = data->player->y * 16 + 8 + ray_len
 			* sin((data->player->angle + ray->angle_offset) * PI / 180);
 		if (ray->x_coord >= 0 && ray->y_coord >= 0
-			&& ray->x_coord < data->img_player_ray->width
-			&& ray->y_coord < data->img_player_ray->height)
+			&& ray->x_coord < data->img->img_player_ray->width
+			&& ray->y_coord < data->img->img_player_ray->height)
 		{
-			if (ft_is_in_set(data->map->map[ray->y_coord / 16][ray->x_coord / 16], "159"))
+			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord / 16], "159"))
 				break ;
-			mlx_put_pixel(data->img_player_ray, ray->x_coord, ray->y_coord,
+			mlx_put_pixel(data->img->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);
 		}
 		ray_len++;
@@ -90,6 +90,6 @@ void	draw_player_rays(t_data *data, int num_rays)
 	{
 		ray.angle_offset = ray.i;
 		ray_helper(data, &ray, num_rays);
-		ray.i += 0.15f;
+		ray.i += 0.1f;
 	}
 }

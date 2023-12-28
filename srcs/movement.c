@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:43:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
 	p_y_sin = sin(radianAngle);
 	cellY = roundf(data->player->y + distance * p_y_sin);
 	cellX = roundf(data->player->x + distance * p_x_cos);
-	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
-		&& cellX <= data->map->width)
+	if (cellY >= 0 && cellY <= data->game->height && cellX >= 0
+		&& cellX <= data->game->width)
 	{
-		if (ft_is_in_set(data->map->map[(int)cellY][(int)cellX], "159"))
+		if (ft_is_in_set(data->game->map[(int)cellY][(int)cellX], "159"))
 			return (1);
 	}
 	return (0);
@@ -55,8 +55,8 @@ void	move_player(t_data *data, float speed, int forward)
 	p_y_sin = speed * sin(radianAngle);
 	data->player->x += p_x_cos;
 	data->player->y += p_y_sin;
-	data->img_player->instances[0].x = data->player->x * 16;
-	data->img_player->instances[0].y = data->player->y * 16;
+	data->img->img_player->instances[0].x = data->player->x * 16;
+	data->img->img_player->instances[0].y = data->player->y * 16;
 }
 
 // Calculate the difference in X position between the current and previous mouse position
@@ -93,25 +93,25 @@ void	check_for_door_ahead(t_data *data)
 	p_y_sin = sin(radianAngle);
 	cellY = roundf(data->player->y + 1 * p_y_sin);
 	cellX = roundf(data->player->x + 1 * p_x_cos);
-	if (cellY >= 0 && cellY <= data->map->height && cellX >= 0
-		&& cellX <= data->map->width)
+	if (cellY >= 0 && cellY <= data->game->height && cellX >= 0
+		&& cellX <= data->game->width)
 	{
-		if (data->map->map[(int)cellY][(int)cellX] == '9')
+		if (data->game->map[(int)cellY][(int)cellX] == '9')
 		{
-			data->player->x = data->map->width - 2;
+			data->player->x = data->game->width - 2;
 			data->player->y = 1;
-			data->img_player->instances[0].x = data->player->x * 16;
-			data->img_player->instances[0].y = data->player->y * 16;
+			data->img->img_player->instances[0].x = data->player->x * 16;
+			data->img->img_player->instances[0].y = data->player->y * 16;
 		}
-		if (data->map->map[(int)cellY][(int)cellX] == '5')
+		if (data->game->map[(int)cellY][(int)cellX] == '5')
 		{
-			data->map->map[(int)cellY][(int)cellX] = '4';
-			data->img_mm_door_closed->instances[data->minimap->doors[(int)cellY][(int)cellX]].enabled = 0;
+			data->game->map[(int)cellY][(int)cellX] = '4';
+			data->img->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 0;
 		}
-		else if (data->map->map[(int)cellY][(int)cellX] == '4')
+		else if (data->game->map[(int)cellY][(int)cellX] == '4')
 		{
-			data->map->map[(int)cellY][(int)cellX] = '5';
-			data->img_mm_door_closed->instances[data->minimap->doors[(int)cellY][(int)cellX]].enabled = 1;
+			data->game->map[(int)cellY][(int)cellX] = '5';
+			data->img->img_mm_door_closed->instances[data->minimap->map[(int)cellY][(int)cellX]].enabled = 1;
 		}
 	}
 }
@@ -131,10 +131,7 @@ void	ft_key_hold(void *param)
 
 	data = param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_delete_image(data->mlx, data->image);
 		ft_exit(data);
-	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		move_player(data, 0.05, 1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))

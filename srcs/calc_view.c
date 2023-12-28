@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/28 09:32:03 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:36:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
 			if (data->wall_type == 'D')
-				mlx_put_pixel(data->image, calc->x, y, calc->color_door);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
 			else if (data->wall_type == 'P')
-				mlx_put_pixel(data->image, calc->x, y, calc->color_portal);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_portal);
 			else
-				mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_wall);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
@@ -82,18 +82,18 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 			// int size_y =  y & (data->wood_size[0] - 1);
 			// calc->color_side = data->col_wood[size_x + size_y];
 			if (data->wall_type == 'D')
-				mlx_put_pixel(data->image, calc->x, y, calc->color_door);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
 			else if (data->wall_type == 'P')
-				mlx_put_pixel(data->image, calc->x, y, calc->color_portal);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_portal);
 			else
-				mlx_put_pixel(data->image, calc->x, y, calc->color_wall);
+				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_wall);
 		}
 		int t = -1;
 		while (++t < calc->line_top)
-			mlx_put_pixel(data->image, calc->x, t, calc->color_ceiling);
+			mlx_put_pixel(data->img->img_game, calc->x, t, calc->color_ceiling);
 		t = calc->line_bottom - 1;
 		while (++t < data->height)
-			mlx_put_pixel(data->image, calc->x, t, calc->color_floor);
+			mlx_put_pixel(data->img->img_game, calc->x, t, calc->color_floor);
 		calc->x++;
 	}
 

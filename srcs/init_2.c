@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 12:01:33 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:43:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	init_coords(t_data *data, int pixel_x, int pixel_y)
 	int	j;
 
 	i = 0;
-	while (data->map->map[i])
+	while (data->game->map[i])
 	{
 		j = 0;
-		while (data->map->map[i][j])
+		while (data->game->map[i][j])
 		{
-			if (data->map->map[i][j] == 'N' || data->map->map[i][j] == 'E'
-				|| data->map->map[i][j] == 'S' || data->map->map[i][j] == 'W')
+			if (data->game->map[i][j] == 'N' || data->game->map[i][j] == 'E'
+				|| data->game->map[i][j] == 'S' || data->game->map[i][j] == 'W')
 			{
-				data->player->start_direction = data->map->map[i][j];
-				data->map->map[i][j] = 'P';
+				data->player->start_direction = data->game->map[i][j];
+				data->game->map[i][j] = 'P';
 				data->player->x = pixel_x;
 				data->player->y = pixel_y;
 				return ;

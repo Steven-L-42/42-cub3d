@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 20:56:21 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:16:25 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	leaks(void)
 	system("leaks cub3d");
 }
 
-void	img_to_window(t_data *data)
+void	ft_img_to_window(t_data *data)
 {
-	mlx_image_to_window(data->mlx, data->img_player_ray, 0, 0);
-	mlx_image_to_window(data->mlx, data->image, 0, 0);
-	data->image->instances[0].z = 0;
+	mlx_image_to_window(data->mlx, data->img->img_player_ray, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
+	data->img->img_game->instances[0].z = 0;
 }
 
 void	ft_running(void *param)
@@ -42,11 +42,11 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (init(data, argv[1]))
 		return (1);
-	img_to_window(data);
+	ft_img_to_window(data);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
 	mlx_key_hook(data->mlx, ft_key_press, data);
 	mlx_loop(data->mlx);
-	ft_exit(data);
+	exit(0);
 }

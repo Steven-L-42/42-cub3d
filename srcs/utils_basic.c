@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 20:54:36 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:45:38 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	reset_window(t_data *data)
 {
-	ft_memset(data->image->pixels, 0, data->image->width * data->image->height
-		* sizeof(int32_t));
+	ft_memset(data->img->img_game->pixels, 0, data->img->img_game->width
+		* data->img->img_game->height * sizeof(int32_t));
 }
 
 void	ft_free2d(char **str)
@@ -38,7 +38,7 @@ void	ft_free2d_int(int **str)
 	free(str);
 }
 
-int		ft_is_in_set(char c, char *set)
+int	ft_is_in_set(char c, char *set)
 {
 	int	i;
 
@@ -54,13 +54,14 @@ int		ft_is_in_set(char c, char *set)
 
 void	ft_exit(t_data *data)
 {
-	ft_free2d(data->map->map);
-	ft_free2d_int(data->minimap->doors);
-	free(data->player);
-	free(data->map);
+	ft_free2d(data->game->map);
+	free(data->game);
+	ft_free2d_int(data->minimap->map);
 	free(data->minimap);
+	free(data->player);
 	free(data->col_wood);
-	free(data);
+	free(data->img);
 	mlx_terminate(data->mlx);
+	free(data);
 	exit(0);
 }
