@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 20:55:20 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:23:38 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_draw_rays
 	int				x_coord;
 	int				y_coord;
 	float			i;
+	int				last_y;
+	int				last_x;
 }					t_draw_rays;
 
 typedef struct s_data

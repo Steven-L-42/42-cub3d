@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/27 20:36:01 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:36:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	draw_player_rays(t_data *data, int num_rays)
 	{
 		ray.angle_offset = ray.i;
 		ray_helper(data, &ray, num_rays);
-		ray.i += 0.2f;
+		ray.i += 0.15f;
 	}
 }
