@@ -6,29 +6,58 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/29 13:16:22 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 21:55:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	check_for_wall_ahead(t_data *data, float distance, float radianAngle)
+int	check_wall_corner_ahead(t_data *data)
+{
+	int	angle;
+	int	x;
+	int	y;
+
+	x = data->player->x + 0.5f;
+	y = data->player->y + 0.5f;
+	angle = (int)data->player->angle;
+	printf("angle %d\n", angle % 360);
+	printf("x %d y %d\n", x, y);
+	if (angle % 360 > 240 && angle % 360 < 360
+		&& ft_is_in_set(data->game->map[y][x + 1], "159")
+		&& ft_is_in_set(data->game->map[y - 1][x], "159"))
+		return (1);
+	// else if (angle % 360 > 90 && angle % 360 < 210
+	// 	&& (ft_is_in_set(data->game->map[cell_y - 1][cell_x], "159")
+	// 	|| ft_is_in_set(data->game->map[cell_y][cell_x + 1], "159")))
+	// 	return (1);
+	// else if ((angle % 360 > 345 && angle % 360 <= 360) || (angle % 360 >= 0
+	//		&& angle % 360 < 105)
+	// 		&& (ft_is_in_set(data->game->map[cell_y][cell_x - 1], "159")
+	// 		|| ft_is_in_set(data->game->map[cell_y - 1][cell_x + 1], "159")))
+	// 	return (1);
+	// else if (angle % 360 > 165 && angle % 360 < 285
+	// 		&& (ft_is_in_set(data->game->map[cell_y][cell_x + 1], "159")
+	// 		|| ft_is_in_set(data->game->map[cell_y + 1][cell_x - 1], "159")))
+	// 	return (1);
+	return (0);
+}
+
+int	check_for_wall_ahead(t_data *data, float distance, float radian_angle)
 {
 	float	p_x_cos;
 	float	p_y_sin;
 	float	cell_x;
 	float	cell_y;
 
-	p_x_cos = cos(radianAngle);
-	p_y_sin = sin(radianAngle);
+	p_x_cos = cos(radian_angle);
+	p_y_sin = sin(radian_angle);
 	cell_y = roundf(data->player->y + distance * p_y_sin);
 	cell_x = roundf(data->player->x + distance * p_x_cos);
-	if (cell_y >= 0 && cell_y <= data->game->height && cell_x >= 0
+	if ((cell_y >= 0 && cell_y <= data->game->height && cell_x >= 0
 		&& cell_x <= data->game->width)
-	{
-		if (ft_is_in_set(data->game->map[(int)cell_y][(int)cell_x], "159"))
-			return (1);
-	}
+		&& ft_is_in_set(data->game->map[(int)cell_y][(int)cell_x], "159"))
+		return (1);
 	return (0);
 }
 
@@ -51,6 +80,8 @@ void	move_player(t_data *data, float speed, int forward)
 		radian_angle = (data->player->angle + 90.0) * PI / 180.0;
 	if (check_for_wall_ahead(data, speed, radian_angle))
 		return ;
+	// if (check_wall_corner_ahead(data))
+	// 	return ;
 	p_x_cos = speed * cos(radian_angle);
 	p_y_sin = speed * sin(radian_angle);
 	data->player->x += p_x_cos;
