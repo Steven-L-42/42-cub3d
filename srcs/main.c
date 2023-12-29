@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 13:44:08 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:52:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
 	mlx_key_hook(data->mlx, ft_key_press, data);
+	ft_printf("%sPlayer Movement:\tWASD\nPlayer Rotation:\tArrow Keys | Mouse\nOpen/Close Door:\tC%s\n", PURPLE, RESET);
+
 	mlx_loop(data->mlx);
 	exit(0);
 }

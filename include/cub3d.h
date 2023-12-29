@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 13:42:32 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:50:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+
+# define PURPLE "\x1B[1;35m"
+# define RESET "\x1B[0m"
 
 # define PI 3.14159265359
 # define SIZE 100
