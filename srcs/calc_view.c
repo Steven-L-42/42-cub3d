@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/28 16:36:15 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:07:21 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->max_lines = data->player->view_angle / 2;
 	calc->temp2 = -calc->max_lines;
 	calc->angle = calc->max_lines;
-	calc->color_ceiling = ft_pixel(135, 206, 235, 255);
-	calc->color_floor = ft_pixel(138, 138, 138, 255);
 	calc->color_wall = ft_pixel(56, 76, 200, 255);
 	calc->color_door = ft_pixel(125, 76, 56, 255);
 	calc->color_portal = ft_pixel(56, 125, 125, 255);
@@ -90,10 +88,10 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		}
 		int t = -1;
 		while (++t < calc->line_top)
-			mlx_put_pixel(data->img->img_game, calc->x, t, calc->color_ceiling);
+			mlx_put_pixel(data->img->img_game, calc->x, t, data->game->color_ceiling);
 		t = calc->line_bottom - 1;
 		while (++t < data->height)
-			mlx_put_pixel(data->img->img_game, calc->x, t, calc->color_floor);
+			mlx_put_pixel(data->img->img_game, calc->x, t, data->game->color_floor);
 		calc->x++;
 	}
 

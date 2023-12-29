@@ -6,11 +6,22 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/28 16:45:38 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 11:43:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	ft_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		write(2, &str[i++], 1);
+	write(2, "\n", 1);
+	return (1);
+}
 
 void	reset_window(t_data *data)
 {

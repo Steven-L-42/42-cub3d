@@ -6,18 +6,19 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/28 16:45:14 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:16:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	init_helper(t_data *data, char *input)
+static int	init_helper(t_data *data, char *input)
 {
 	data->game = malloc(sizeof(t_map));
 	data->minimap = malloc(sizeof(t_minimap));
 	data->player = malloc(sizeof(t_player));
-	get_map(data->game, input);
+	if (get_map(data->game, input))
+		return (1);
 	if (data->game->width * SIZE < 1920)
 		data->width = data->game->width * SIZE;
 	else
@@ -26,6 +27,7 @@ static void	init_helper(t_data *data, char *input)
 		data->height = data->game->height * SIZE;
 	else
 		data->height = 1080;
+	return (0);
 }
 
 static void	init_img_info(t_data *data, mlx_texture_t *text)
@@ -80,7 +82,8 @@ static void	init_minimap(t_data *data)
 int	init(t_data *data, char *input)
 {
 	data->img = malloc(sizeof(t_img));
-	init_helper(data, input);
+	if (init_helper(data, input))
+		return (1);
 	if (!(data->mlx = mlx_init(data->width, data->height, "cub3D", false)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	if (!(data->img->img_game = mlx_new_image(data->mlx, data->game->width

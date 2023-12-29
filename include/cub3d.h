@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/28 16:49:06 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:07:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,28 @@ typedef struct s_player
 	double		prev_time;
 }				t_player;
 
+typedef struct s_rgb
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+}				t_rgb;
+
 typedef struct s_map
 {
 	char		**map;
 	int			width;
 	int			height;
+	int			skip_height;
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+
+	char		*F;
+	char		*C;
+	int			color_floor;
+	int			color_ceiling;
 }				t_map;
 
 typedef struct s_minimap
@@ -112,7 +129,7 @@ typedef struct s_data
 }				t_data;
 
 // get_map
-void			get_map(t_map *map, char *input);
+int				get_map(t_map *map, char *input);
 void			draw_minimap(t_data *data);
 
 // init_1
@@ -122,11 +139,18 @@ int				init(t_data *data, char *input);
 void			init_coords(t_data *data, int pixel_x, int pixel_y);
 void			init_player(t_data *data);
 
+// utils map
+int				get_map_height(char *input);
+int				ft_map_len(char **tmp_map);
+int				ft_str_to_rgb(char *rgb_str, int *color);
+char			*ft_strtok(char *src, char delim);
+
 // utils basic
 void			ft_free2d(char **str);
 void			ft_exit(t_data *data);
 void			reset_window(t_data *data);
 int				ft_is_in_set(char c, char *set);
+int				ft_error(char *str);
 
 // utils color
 int32_t			ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
