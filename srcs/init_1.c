@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/29 13:23:49 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:44:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 static int	init_helper(t_data *data, char *input)
 {
-	data->game = malloc(sizeof(t_map));
-	data->minimap = malloc(sizeof(t_minimap));
-	data->player = malloc(sizeof(t_player));
-	if (get_map(data->game, input))
+	if (get_map(data, input))
 		return (1);
+
+
 	if (data->game->width * SIZE < 1920)
 		data->width = data->game->width * SIZE;
 	else
@@ -27,6 +26,7 @@ static int	init_helper(t_data *data, char *input)
 		data->height = data->game->height * SIZE;
 	else
 		data->height = 1080;
+
 	return (0);
 }
 
@@ -40,7 +40,7 @@ static void	init_img_info(t_data *data, mlx_texture_t *text)
 static int	init_img(t_data *data)
 {
 	mlx_texture_t	*text;
-	printf("%s\n", data->game->NO);
+;
 	text = mlx_load_png("textures/cross.png");
 	data->img->img_game_cursor = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
@@ -84,15 +84,19 @@ int	init(t_data *data, char *input)
 	data->img = malloc(sizeof(t_img));
 	if (init_helper(data, input))
 		return (1);
+
 	if (!(data->mlx = mlx_init(data->width, data->height, "cub3D", false)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
+
 	if (!(data->img->img_game = mlx_new_image(data->mlx, data->game->width
 				* SIZE, data->game->height * SIZE)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	if (!(data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width
 				* 16, data->game->height * 16)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
+
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
+
 	init_img(data);
 	init_minimap(data);
 	init_coords(data, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 13:07:50 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:42:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_rgb
 
 typedef struct s_map
 {
+	char		**tmp_map;
 	char		**map;
 	int			width;
 	int			height;
@@ -129,7 +130,7 @@ typedef struct s_data
 }				t_data;
 
 // get_map
-int				get_map(t_map *map, char *input);
+int				get_map(t_data *data, char *input);
 void			draw_minimap(t_data *data);
 
 // init_1

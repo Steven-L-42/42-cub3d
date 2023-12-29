@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 11:43:19 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:43:56 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_is_in_set(char c, char *set)
 void	ft_exit(t_data *data)
 {
 	ft_free2d(data->game->map);
+	ft_free2d(data->game->tmp_map);
 	free(data->game);
 	ft_free2d_int(data->minimap->map);
 	free(data->minimap);
