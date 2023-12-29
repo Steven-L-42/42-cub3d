@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/29 13:16:45 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:23:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	init_img_info(t_data *data, mlx_texture_t *text)
 static int	init_img(t_data *data)
 {
 	mlx_texture_t	*text;
-
+	printf("%s\n", data->game->NO);
 	text = mlx_load_png("textures/cross.png");
 	data->img->img_game_cursor = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
@@ -62,7 +62,7 @@ static int	init_img(t_data *data)
 	text = mlx_load_png("textures/player.png");
 	data->img->img_player = mlx_texture_to_image(data->mlx, text);
 	mlx_delete_texture(text);
-	text = mlx_load_png("textures/brick.png");
+	text = mlx_load_png(data->game->NO);
 	data->img->img_game_wall = mlx_texture_to_image(data->mlx, text);
 	init_img_info(data, text);
 	mlx_delete_texture(text);

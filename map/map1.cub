@@ -1,16 +1,16 @@
 
-NO textures/Tiles.png
+NO 	  textures/brick.png
 
-SO textures/bluestone.png
+SO 		textures/brick.png
 
-WE textures/green.png
+WE  textures/brick.png
 
-EA textures/black.png
+EA       textures/brick.png
 
 
-F 189,160,69
+F    138  ,   138  ,      138
 
-C 128,128,223
+C 	 135	 ,   206,   235
 
 
 111111111111111111111111111111111111111111
