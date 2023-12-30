@@ -6,11 +6,43 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/28 16:43:44 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:49:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	init_img_two(t_data *data)
+{
+	if (ft_open_image(data, &data->img->img_game_cursor, "textures/cross.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_mm_wall, "textures/brick_small.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_mm_portal, "textures/brick_portal_small.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_mm_door_closed, "textures/brick_door_closed_small.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_mm_door_open, "textures/brick_door_open_small.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_mm_wall_shadow, "textures/brick_shadow_small.png", 0))
+		return (1);
+	if (ft_open_image(data, &data->img->img_player, "textures/player.png", 0))
+		return (1);
+	return (0);
+}
+
+int	init_img_one(t_data *data)
+{
+	if (ft_open_image(data, &data->img->img_NO, data->game->NO, 1))
+		return (1);
+	if (ft_open_image(data, &data->img->img_SO, data->game->SO, 1))
+		return (1);
+	if (ft_open_image(data, &data->img->img_WE, data->game->WE, 1))
+		return (1);
+	if (ft_open_image(data, &data->img->img_EA, data->game->EA, 1))
+		return (1);
+	return (0);
+}
 
 void	init_coords(t_data *data, int pixel_x, int pixel_y)
 {

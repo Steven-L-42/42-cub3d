@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/29 12:07:21 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:42:17 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		while (--y > calc->line_top)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
-			// calc->color_side = data->col_wood[size_x + size_y];
+			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
 				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
 			else if (data->wall_type == 'P')
@@ -78,7 +78,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		while (++y < calc->line_bottom)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
-			// calc->color_side = data->col_wood[size_x + size_y];
+			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
 				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
 			else if (data->wall_type == 'P')

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 13:50:27 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:47:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 
 # define PI 3.14159265359
 # define SIZE 100
+
+typedef struct s_detection
+{
+	int			angle;
+	int			x;
+	int			y;
+}				t_detection;
 
 typedef struct s_player
 {
@@ -114,6 +121,10 @@ typedef struct s_img
 	mlx_image_t	*img_player;
 	mlx_image_t	*img_player_ray;
 	mlx_image_t	*img_game_wall;
+	mlx_image_t	*img_NO;
+	mlx_image_t	*img_SO;
+	mlx_image_t	*img_WE;
+	mlx_image_t	*img_EA;
 }				t_img;
 
 typedef struct s_data
@@ -123,10 +134,11 @@ typedef struct s_data
 	t_map		*game;
 	t_minimap	*minimap;
 	t_player	*player;
+	t_detection	detec;
 
 	char		wall_type;
 	uint32_t	color[64];
-	uint32_t	*col_wood;
+	uint32_t	*col_texture;
 	int			wood_size[2];
 	int			width;
 	int			height;
@@ -142,18 +154,20 @@ int				init(t_data *data, char *input);
 // init_2
 void			init_coords(t_data *data, int pixel_x, int pixel_y);
 void			init_player(t_data *data);
+int				init_img_one(t_data *data);
+int				init_img_two(t_data *data);
 
 // utils map
 int				get_map_height(char *input);
 int				ft_map_len(char **tmp_map);
 int				ft_str_to_rgb(char *rgb_str, int *color);
 char			*ft_strtok(char *src, char delim);
-
+int				ft_open_image(t_data *data, mlx_image_t **img_direction, char *img_path, int need_info);
 // utils basic
 void			ft_free2d(char **str);
+void			ft_free2d_int(int **str);
 void			ft_exit(t_data *data);
-void			reset_window(t_data *data);
-int				ft_is_in_set(char c, char *set);
+int				ft_is_in_set(char c, const char *set);
 int				ft_error(char *str);
 
 // utils color
@@ -175,5 +189,12 @@ void			ft_key_press(mlx_key_data_t keydata, void *param);
 
 // minimap
 void			draw_player_rays(t_data *data, int num_rays);
+
+// wall detection
+void			check_for_door(t_data *data);
+int				check_for_wall(t_data *data, float distance, float radian_angle,
+					const char *set);
+int				check_wall_corner_behind(t_data *data, const char *set);
+int				check_wall_corner_ahead(t_data *data, const char *set);
 
 #endif

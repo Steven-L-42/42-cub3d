@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/29 19:01:03 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:11:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,9 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 {
 	int	ray_len;
-	int	ray_max_len;
 
 	ray_len = 0;
-	if (data->img->img_player_ray->width > data->img->img_player_ray->height)
-		ray_max_len = 75;
-	else
-		ray_max_len = 75;
-	while (ray_len < ray_max_len)
+	while (ray_len < 100)
 	{
 		ray->x_coord = data->player->x * 16 + 8 + ray_len
 			* cos((data->player->angle + ray->angle_offset) * PI / 180);

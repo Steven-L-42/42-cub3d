@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/29 13:19:35 by slippert         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:48:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ char	*ft_strtok(char *src, char delim)
 	char	*result;
 	int		i;
 	int		x;
+	int		max;
 
+	max = ft_strlen(src) + 1;
 	i = 0;
 	x = 0;
-	while (1)
+	while (i < max)
 	{
 		if (src && !src[i] || src[i] == delim)
 		{
@@ -93,3 +95,4 @@ int	ft_str_to_rgb(char *rgb_str, int *color)
 	*color = ft_pixel(rgb.r, rgb.g, rgb.b, 255);
 	return (free(r), free(g), free(b), 1);
 }
+// printf("%d %d %d\n", rgb.r, rgb.g,rgb.b);
