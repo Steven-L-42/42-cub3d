@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/30 13:42:17 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:24:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@
 void	calc_preset(t_data *data, t_calc_view *calc)
 {
 	calc->j = 0;
-	calc->max_lines = data->player->view_angle / 2;
+	calc->max_lines = -(data->player->view_angle / 2);
 	calc->temp2 = -calc->max_lines;
-	calc->angle = calc->max_lines;
+	calc->angle = -calc->max_lines;
 	calc->color_wall = ft_pixel(56, 76, 200, 255);
 	calc->color_door = ft_pixel(125, 76, 56, 255);
 	calc->color_portal = ft_pixel(56, 125, 125, 255);
-	calc->line = calc->temp2;
+	calc->line = calc->max_lines * -1;
+	calc->treshold = (float)6.2f * (data->width / 1920.0);
 }
 
 // Funktion: calc_helper
@@ -51,18 +52,17 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 	int		y;
 
 	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
-	// line_width = calc->x + 1;
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
-		calc->line_bottom = (data->height / 2) + (SIZE * 6 / calc->tmp);
-		calc->line_top = (data->height / 2) - (SIZE * 6 / calc->tmp);
+		calc->line_bottom = (data->height / 2) + (SIZE * calc->treshold / calc->tmp);
+		calc->line_top = (data->height / 2) - (SIZE * calc->treshold / calc->tmp);
 		if (calc->line_top < 0)
 			calc->line_top = 0;
 		if (calc->line_bottom >= data->height)
 			calc->line_bottom = data->height;
 		y = (data->height / 2) + 1;
-		// int size_x = (int)calc->x * 64;
+		//int size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
 		{
 			// int size_y =  y & (data->wood_size[0] - 1);
@@ -108,18 +108,23 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
+	char dir;
+	dir = '\0';
 
 	calc_preset(data, &calc);
-	while (calc.line < calc.max_lines)
+	while (calc.line > calc.max_lines)
 	{
-
 		data->wall_type = 'W';
-		calc.distance = ray_distance(data, calc.line - 1.0f);
+		calc.distance = calc_dist(data, calc.line, &dir);
+		if (dir == 'x')
+			calc.color_wall = ft_pixel(56, 76, 200, 200);
+		else
+			calc.color_wall = ft_pixel(56, 76, 200, 255);
 		calc.x = ((data->width / data->player->view_angle) * (calc.j));
 		calc_helper(data, &calc);
 		calc.angle--;
 		calc.j++;
-		calc.line++;
+		calc.line--;
 	}
 }
 

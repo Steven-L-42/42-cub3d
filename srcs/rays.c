@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/30 13:11:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:16:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 	while (ray_len < 100)
 	{
 		ray->x_coord = data->player->x * 16 + 8 + ray_len
-			* cos((data->player->angle + ray->angle_offset) * PI / 180);
+			* cos((-data->player->angle + ray->angle_offset) * PI / 180);
 		ray->y_coord = data->player->y * 16 + 8 + ray_len
-			* sin((data->player->angle + ray->angle_offset) * PI / 180);
+			* sin((-data->player->angle + ray->angle_offset) * PI / 180);
 		if (ray->x_coord >= 0 && ray->y_coord >= 0
 			&& ray->x_coord < data->img->img_player_ray->width
 			&& ray->y_coord < data->img->img_player_ray->height)

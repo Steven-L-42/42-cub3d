@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/30 13:47:08 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:46:53 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_calc_view
 	float		tmp;
 	float		line;
 	float		x;
+	float		treshold;
 	double		distance;
 	double		line_bottom;
 	double		line_top;
@@ -143,6 +144,8 @@ typedef struct s_data
 	int			width;
 	int			height;
 }				t_data;
+
+float		calc_dist(t_data *data, float angle, char *dir);
 
 // get_map
 int				get_map(t_data *data, char *input);
