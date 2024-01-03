@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 14:59:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:04:41 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ int	check_wall_corner_behind(t_data *data, const char *set)
 	data->detec.x = data->player->x + 0.5f;
 	data->detec.y = data->player->y + 0.5f;
 	data->detec.angle = (int)data->player->angle;
-	if (((data->detec.angle % 360 > -270 && data->detec.angle % 360 < -180)
-		|| (data->detec.angle % 360 > 90 && data->detec.angle % 360 < 180))
+	if (((data->detec.angle % 360 > -90 && data->detec.angle % 360 < 0)
+		|| (data->detec.angle % 360 > 270 && data->detec.angle % 360 < 360))
 		&& ft_is_in_set(data->game->map[data->detec.y][data->detec.x - 1], set)
 		&& ft_is_in_set(data->game->map[data->detec.y - 1][data->detec.x], set))
 		return (1);
-	else if (((data->detec.angle % 360 > 180 && data->detec.angle % 360 < 270)
-		|| (data->detec.angle % 360 > -180 && data->detec.angle % 360 < -90))
+	else if (((data->detec.angle % 360 > 0 && data->detec.angle % 360 < 90)
+		|| (data->detec.angle % 360 > -360 && data->detec.angle % 360 < -270))
 		&& ft_is_in_set(data->game->map[data->detec.y][data->detec.x - 1], set)
 		&& ft_is_in_set(data->game->map[data->detec.y + 1][data->detec.x], set))
 		return (1);
-	else if (((data->detec.angle % 360 > -360 && data->detec.angle % 360 < -270)
-		|| (data->detec.angle % 360 > 0 && data->detec.angle % 360 < 90))
+	else if (((data->detec.angle % 360 > -180 && data->detec.angle % 360 < -90)
+		|| (data->detec.angle % 360 > 180 && data->detec.angle % 360 < 270))
 		&& (ft_is_in_set(data->game->map[data->detec.y][data->detec.x + 1], set)
 		&& ft_is_in_set(data->game->map[data->detec.y - 1][data->detec.x], set)))
 		return (1);
-	else if (((data->detec.angle % 360 > 270 && data->detec.angle % 360 < 360)
-		|| (data->detec.angle % 360 > -90 && data->detec.angle % 360 < 0))
+	else if (((data->detec.angle % 360 > 90 && data->detec.angle % 360 < 180)
+		|| (data->detec.angle % 360 > -270 && data->detec.angle % 360 < -180))
 		&& (ft_is_in_set(data->game->map[data->detec.y][data->detec.x + 1], set)
 		&& ft_is_in_set(data->game->map[data->detec.y + 1][data->detec.x], set)))
 		return (1);

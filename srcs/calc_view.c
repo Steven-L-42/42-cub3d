@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 14:24:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:28:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->color_portal = ft_pixel(56, 125, 125, 255);
 	calc->line = calc->max_lines * -1;
 	calc->treshold = (float)6.2f * (data->width / 1920.0);
+	calc->direction = '\0';
 }
 
 // Funktion: calc_helper
@@ -50,51 +51,63 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 {
 	double	line_width;
 	int		y;
+	int		size_x;
+	int		size_y;
+	int		t;
 
 	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
-		calc->line_bottom = (data->height / 2) + (SIZE * calc->treshold / calc->tmp);
-		calc->line_top = (data->height / 2) - (SIZE * calc->treshold / calc->tmp);
+		calc->line_bottom = (data->height / 2) + (SIZE * calc->treshold
+				/ calc->tmp);
+		calc->line_top = (data->height / 2) - (SIZE * calc->treshold
+				/ calc->tmp);
 		if (calc->line_top < 0)
 			calc->line_top = 0;
 		if (calc->line_bottom >= data->height)
 			calc->line_bottom = data->height;
 		y = (data->height / 2) + 1;
-		//int size_x = (int)calc->x * 64;
+		//size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
 		{
-			// int size_y =  y & (data->wood_size[0] - 1);
+			// size_y = y & (data->wood_size[0] - 1);
 			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_door);
 			else if (data->wall_type == 'P')
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_portal);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_portal);
 			else
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_wall);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_wall);
 		}
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
-			// int size_y =  y & (data->wood_size[0] - 1);
+			// size_y = y & (data->wood_size[0] - 1);
 			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_door);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_door);
 			else if (data->wall_type == 'P')
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_portal);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_portal);
 			else
-				mlx_put_pixel(data->img->img_game, calc->x, y, calc->color_wall);
+				mlx_put_pixel(data->img->img_game, calc->x, y,
+					calc->color_wall);
 		}
-		int t = -1;
+		t = -1;
 		while (++t < calc->line_top)
-			mlx_put_pixel(data->img->img_game, calc->x, t, data->game->color_ceiling);
+			mlx_put_pixel(data->img->img_game, calc->x, t,
+				data->game->color_ceiling);
 		t = calc->line_bottom - 1;
 		while (++t < data->height)
-			mlx_put_pixel(data->img->img_game, calc->x, t, data->game->color_floor);
+			mlx_put_pixel(data->img->img_game, calc->x, t,
+				data->game->color_floor);
 		calc->x++;
 	}
-
 }
 
 // Funktion: calc_view
@@ -105,80 +118,24 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 // Die Funktion initialisiert die notwendigen Werte, iteriert über die
 // Sichtlinien und ruft die Hilfsfunktion calc_helper für jede Sichtlinie auf.
 // Das Ergebnis wird im Fenster angezeigt.
+
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
-	char dir;
-	dir = '\0';
 
 	calc_preset(data, &calc);
 	while (calc.line > calc.max_lines)
 	{
 		data->wall_type = 'W';
-		calc.distance = calc_dist(data, calc.line, &dir);
-		if (dir == 'x')
+		calc.distance = calc_dist(data, calc.line, &calc.direction);
+		if (calc.direction == 'x')
 			calc.color_wall = ft_pixel(56, 76, 200, 200);
 		else
 			calc.color_wall = ft_pixel(56, 76, 200, 255);
 		calc.x = ((data->width / data->player->view_angle) * (calc.j));
 		calc_helper(data, &calc);
-		calc.angle--;
+		calc.angle -= 1;
 		calc.j++;
-		calc.line--;
+		calc.line -= 1;
 	}
 }
-
-// void	calc_view(t_data *data)
-// {
-// 	float		temp1;
-// 	float		temp2;
-// 	int			j;
-// 	int			angle;
-// 	float		distance;
-// 	float		tmp;
-// 	float		linehight;
-// 	float		linehight1;
-// 	uint32_t	color_front;
-// 	uint32_t	color_side;
-// 	int			is_side;
-// 	float		k;
-// 	float		i;
-// 	j = 0;
-// 	temp1 = data->player->view_angle / 2;
-// 	temp2 = -temp1;
-// 	angle = temp1;
-// 	color_front = ft_pixel(0, 255, 255, 255);
-// 	color_side = ft_pixel(0, 100, 255, 255);
-// 	mlx_delete_image(data->mlx, data->image);
-// 	data->image = mlx_new_image(data->mlx, data->map->width * SIZE,
-// 			data->map->height * SIZE);
-// 	k = temp2;
-// 	while (k < temp1)
-// 	{
-// 		distance = ray_distance(data, k);
-// 		i = (data->image->width / data->player->view_angle) * j;
-// 		while (i < (data->image->width / data->player->view_angle) * (j + 1))
-// 		{
-// 			tmp = distance * cos((angle)*PI / 180);
-// 			linehight = (data->image->height / 2) + (SIZE * 3 / tmp);
-// 			linehight1 = (data->image->height / 2) - (SIZE * 3 / tmp);
-// 			if (linehight1 < 0)
-// 				linehight1 = 0;
-// 			if (linehight >= data->image->height)
-// 				linehight = data->image->height;
-// 			for (int32_t y = data->image->height / 2; y < linehight; y++)
-// 			{
-// 					mlx_put_pixel(data->image, i, y, color_side);
-// 			}
-// 			for (int32_t y = data->image->height / 2; y > linehight1; y--)
-// 			{
-// 					mlx_put_pixel(data->image, i, y, color_side);
-// 			}
-// 			i++;
-// 		}
-// 		angle--;
-// 		j++;
-// 		k++;
-// 	}
-// 	mlx_image_to_window(data->mlx, data->image, 0, 0);
-// }

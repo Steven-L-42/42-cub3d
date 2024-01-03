@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/03 13:46:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:21:03 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/srcs/libft.h"
 # include <fcntl.h>
+# include <float.h>
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
@@ -28,176 +29,184 @@
 # define PI 3.14159265359
 # define SIZE 100
 
+# define QUALITY 5
+
 typedef struct s_detection
 {
-	int			angle;
-	int			x;
-	int			y;
-}				t_detection;
+	int				angle;
+	int				x;
+	int				y;
+}					t_detection;
 
 typedef struct s_player
 {
-	char		start_direction;
-	int			mouse_x;
-	int			mouse_y;
-	float		x;
-	float		y;
-	float		angle;
-	float		prev_angle;
-	float		view_angle;
-	float		prev_mouseX;
-	double		prev_time;
-}				t_player;
+	char			start_direction;
+	int				mouse_x;
+	int				mouse_y;
+	float			x;
+	float			y;
+	float			angle;
+	float			prev_angle;
+	float			view_angle;
+	float			prev_mouseX;
+	double			prev_time;
+}					t_player;
 
 typedef struct s_rgb
 {
-	uint32_t	r;
-	uint32_t	g;
-	uint32_t	b;
-}				t_rgb;
+	uint32_t		r;
+	uint32_t		g;
+	uint32_t		b;
+}					t_rgb;
 
 typedef struct s_map
 {
-	char		**tmp_map;
-	char		**map;
-	int			width;
-	int			height;
-	int			skip_height;
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
+	char			**tmp_map;
+	char			**map;
+	int				width;
+	int				height;
+	int				skip_height;
+	char			*NO;
+	char			*SO;
+	char			*WE;
+	char			*EA;
 
-	char		*F;
-	char		*C;
-	int			color_floor;
-	int			color_ceiling;
-}				t_map;
+	char			*F;
+	char			*C;
+	int				color_floor;
+	int				color_ceiling;
+}					t_map;
 
 typedef struct s_minimap
 {
-	int			**map;
-	int			width;
-	int			height;
-}				t_minimap;
+	int				**map;
+	int				width;
+	int				height;
+}					t_minimap;
 
 typedef struct s_calc_view
 {
-	uint32_t	color_floor;
-	uint32_t	color_ceiling;
-	uint32_t	color_wall;
-	uint32_t	color_door;
-	uint32_t	color_portal;
-	float		max_lines;
-	float		temp2;
-	float		j;
-	float		angle;
-	float		tmp;
-	float		line;
-	float		x;
-	float		treshold;
-	double		distance;
-	double		line_bottom;
-	double		line_top;
-}				t_calc_view;
+	char			direction;
+	uint32_t		color_floor;
+	uint32_t		color_ceiling;
+	uint32_t		color_wall;
+	uint32_t		color_door;
+	uint32_t		color_portal;
+	float			max_lines;
+	float			temp2;
+	float			j;
+	float			angle;
+	float			tmp;
+	float			line;
+	float			x;
+	float			treshold;
+	double			distance;
+	double			line_bottom;
+	double			line_top;
+}					t_calc_view;
 
 typedef struct s_draw_rays
 {
-	int			color;
-	int			x_coord;
-	int			y_coord;
-	float		i;
-	float		angle_offset;
-}				t_draw_rays;
+	int				color;
+	int				x_coord;
+	int				y_coord;
+	float			i;
+	float			angle_offset;
+}					t_draw_rays;
 
 typedef struct s_img
 {
-	mlx_image_t	*img_game;
-	mlx_image_t	*img_mm_wall;
-	mlx_image_t	*img_mm_wall_shadow;
-	mlx_image_t	*img_mm_portal;
-	mlx_image_t	*img_mm_door_closed;
-	mlx_image_t	*img_mm_door_open;
-	mlx_image_t	*img_game_cursor;
-	mlx_image_t	*img_player;
-	mlx_image_t	*img_player_ray;
-	mlx_image_t	*img_game_wall;
-	mlx_image_t	*img_NO;
-	mlx_image_t	*img_SO;
-	mlx_image_t	*img_WE;
-	mlx_image_t	*img_EA;
-}				t_img;
+	mlx_image_t		*img_game;
+	mlx_image_t		*img_mm_wall;
+	mlx_image_t		*img_mm_wall_shadow;
+	mlx_image_t		*img_mm_portal;
+	mlx_image_t		*img_mm_door_closed;
+	mlx_image_t		*img_mm_door_open;
+	mlx_image_t		*img_game_cursor;
+	mlx_image_t		*img_player;
+	mlx_image_t		*img_player_ray;
+	mlx_image_t		*img_game_wall;
+	mlx_image_t		*img_NO;
+	mlx_texture_t	*txt_NO;
+	mlx_image_t		*img_SO;
+	mlx_texture_t	*txt_SO;
+	mlx_image_t		*img_WE;
+	mlx_texture_t	*txt_WE;
+	mlx_image_t		*img_EA;
+	mlx_texture_t	*txt_EA;
+}					t_img;
 
 typedef struct s_data
 {
-	mlx_t		*mlx;
-	t_img		*img;
-	t_map		*game;
-	t_minimap	*minimap;
-	t_player	*player;
-	t_detection	detec;
+	mlx_t			*mlx;
+	t_img			*img;
+	t_map			*game;
+	t_minimap		*minimap;
+	t_player		*player;
+	t_detection		detec;
 
-	char		wall_type;
-	uint32_t	color[64];
-	uint32_t	*col_texture;
-	int			wood_size[2];
-	int			width;
-	int			height;
-}				t_data;
+	char			wall_type;
+	uint32_t		color[64];
+	uint32_t		*col_texture;
+	int				wood_size[2];
+	int				width;
+	int				height;
+}					t_data;
 
-float		calc_dist(t_data *data, float angle, char *dir);
+float				calc_dist(t_data *data, float angle, char *dir);
 
 // get_map
-int				get_map(t_data *data, char *input);
-void			draw_minimap(t_data *data);
+int					get_map(t_data *data, char *input);
+void				draw_minimap(t_data *data);
 
 // init_1
-int				init(t_data *data, char *input);
+int					init(t_data *data, char *input);
 
 // init_2
-void			init_coords(t_data *data, int pixel_x, int pixel_y);
-void			init_player(t_data *data);
-int				init_img_one(t_data *data);
-int				init_img_two(t_data *data);
+void				init_coords(t_data *data, int pixel_x, int pixel_y);
+void				init_player(t_data *data);
+int					init_img_one(t_data *data);
+int					init_img_two(t_data *data);
 
 // utils map
-int				get_map_height(char *input);
-int				ft_map_len(char **tmp_map);
-int				ft_str_to_rgb(char *rgb_str, int *color);
-char			*ft_strtok(char *src, char delim);
-int				ft_open_image(t_data *data, mlx_image_t **img_direction, char *img_path, int need_info);
+int					get_map_height(char *input);
+int					ft_map_len(char **tmp_map);
+int					ft_str_to_rgb(char *rgb_str, int *color);
+char				*ft_strtok(char *src, char delim);
+int					ft_open_image(t_data *data, mlx_image_t **img_direction,
+						char *img_path, int need_info);
 // utils basic
-void			ft_free2d(char **str);
-void			ft_free2d_int(int **str);
-void			ft_exit(t_data *data);
-int				ft_is_in_set(char c, const char *set);
-int				ft_error(char *str);
+void				ft_free2d(char **str);
+void				ft_free2d_int(int **str);
+void				ft_exit(t_data *data);
+int					ft_is_in_set(char c, const char *set);
+int					ft_error(char *str);
 
 // utils color
-int32_t			ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-int				get_colour_from_pixel(u_int8_t *pixel);
-void			hex_to_rgb(char *hex, int *r, int *g, int *b);
-uint32_t		*get_color(mlx_texture_t *texture);
+int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int					get_colour_from_pixel(u_int8_t *pixel);
+void				hex_to_rgb(char *hex, int *r, int *g, int *b);
+uint32_t			*get_color(mlx_texture_t *texture);
 
 // get_distance to wall
-double			ray_distance(t_data *data, float angle);
-void			calc_view(t_data *data);
+double				ray_distance(t_data *data, float angle);
+void				calc_view(t_data *data);
 
 // movement
-void			update_player_angle(double xpos, double ypos, void *param);
+void				update_player_angle(double xpos, double ypos, void *param);
 
 // hotkeys
-void			ft_key_hold(void *param);
-void			ft_key_press(mlx_key_data_t keydata, void *param);
+void				ft_key_hold(void *param);
+void				ft_key_press(mlx_key_data_t keydata, void *param);
 
 // minimap
-void			draw_player_rays(t_data *data, int num_rays);
+void				draw_player_rays(t_data *data, int num_rays);
 
 // wall detection
-void			check_for_door(t_data *data);
-int				check_for_wall(t_data *data, float distance, float radian_angle,
-					const char *set);
-int				check_wall_corner_behind(t_data *data, const char *set);
-int				check_wall_corner_ahead(t_data *data, const char *set);
+void				check_for_door(t_data *data);
+int					check_for_wall(t_data *data, float distance,
+						float radian_angle, const char *set);
+int					check_wall_corner_behind(t_data *data, const char *set);
+int					check_wall_corner_ahead(t_data *data, const char *set);
 
 #endif

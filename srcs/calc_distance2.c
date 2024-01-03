@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:39:56 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 14:11:39 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:18:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,44 +24,40 @@
 
 #include "../include/cub3d.h"
 
+// float	get_slope(float angle)
+// {
+// 	float	radianAngle;
+// 	float	dirx;
+// 	float	diry;
+
+// 	while (angle > 360)
+// 		angle -= 360;
+// 	while (angle < 0)
+// 		angle += 360;
+// 	if (angle == 90)
+// 		return (INT32_MAX);
+// 	if (angle == 270)
+// 		return (INT32_MIN);
+// 	radianAngle = (angle)*PI / 180.0;
+// 	dirx = cos(radianAngle);
+// 	diry = sin(radianAngle);
+// 	return (diry / dirx);
+// }
+
 float	get_slope(float angle)
 {
 	float	radianAngle;
-	float	dirx;
-	float	diry;
 
 	while (angle > 360)
 		angle -= 360;
 	while (angle < 0)
 		angle += 360;
 	if (angle == 90)
-		return (INT32_MAX);
+		return (FLT_MAX);
 	if (angle == 270)
-		return (INT32_MIN);
-	radianAngle = (angle)*PI / 180.0;
-	dirx = cos(radianAngle);
-	diry = sin(radianAngle);
-	return (diry / dirx);
-}
-
-int	aufrunden(float num)
-{
-	float	temp;
-
-	if (num >= 0)
-	{
-		temp = num - (int)num;
-		if (temp == 0)
-			return (num);
-		temp = 1 - temp;
-		return (num + temp);
-	}
-	num = fabs(num);
-	temp = num - (int)num;
-	if (temp == 0)
-		return (-num);
-	temp = 1 - temp;
-	return (-(num + temp));
+		return (-FLT_MAX);
+	radianAngle = angle * PI / 180.0;
+	return (tan(radianAngle));
 }
 
 float	startdist(float m, float angle, float *playerx, float *playery,
@@ -163,8 +159,6 @@ float	calc_distance(float angle, float playerx, float playery, t_data *data,
 	tempy = playery;
 	tempx = playerx;
 	last_dist = dist;
-	xmin = false;
-	ymin = false;
 	m = fabs(get_slope(angle));
 	while (!ft_is_in_set(data->game->map[tempy][tempx], "159"))
 	{
@@ -182,15 +176,15 @@ float	calc_distance(float angle, float playerx, float playery, t_data *data,
 		tempx = playerx;
 		if (xmin == true && ymin == true)
 		{
-			tempx = aufrunden(playerx) - 1;
-			tempy = aufrunden(playery) - 1;
+			tempx = ceil(playerx) - 1;
+			tempy = ceil(playery) - 1;
 		}
 		else
 		{
 			if (xmin == true)
-				tempx = aufrunden(playerx) - 1;
+				tempx = ceil(playerx) - 1;
 			if (ymin == true)
-				tempy = aufrunden(playery) - 1;
+				tempy = ceil(playery) - 1;
 		}
 	}
 	if (data->game->map[tempy][tempx] == '5')
@@ -202,9 +196,11 @@ float	calc_distance(float angle, float playerx, float playery, t_data *data,
 
 float	calc_dist(t_data *data, float angle, char *dir)
 {
-	float playerx = data->player->x + 0.5f;
-	float playery = data->player->y + 0.5f;
+	float	playerx;
+	float	playery;
 
+	playerx = data->player->x + 0.5f;
+	playery = data->player->y + 0.5f;
 	angle = data->player->angle + angle;
 	while (angle >= 360)
 		angle -= 360;
