@@ -81,19 +81,19 @@ fclean:				clean
 re:					fclean all
 
 test:
-					make
+					@make
 					./cub3d map/map.cub
 
 test1:
-					make
+					@make
 					./cub3d map/map1.cub
 
 test2:
-					make
+					@make
 					./cub3d map/map2.cub
 
 test3:
-					make
+					@make
 					./cub3d map/test.cub
 
 .PHONY:				all clean fclean re clone
