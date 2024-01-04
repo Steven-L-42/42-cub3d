@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 10:38:13 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:57:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,15 @@ int	main(int argc, char **argv)
 		exit(1);
 	ft_instructions(data);
 	ft_img_to_window(data);
+	write(1, "1\n", 2);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
+	write(1, "2\n", 2);
 	mlx_loop_hook(data->mlx, ft_running, data);
+	write(1, "3\n", 2);
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
+	write(1, "4\n", 2);
 	mlx_key_hook(data->mlx, ft_key_press, data);
+	write(1, "5\n", 2);
 	mlx_loop(data->mlx);
 	exit(0);
 }
