@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 15:24:04 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:05:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ typedef struct s_data
 
 	char			wall_type;
 	uint32_t		color[64];
-	uint32_t		*col_texture;
 	int				wood_size[2];
 	int				width;
 	int				height;
@@ -185,11 +184,14 @@ int					ft_open_image_plus_info(t_data *data,
 						mlx_image_t **img_direction, uint32_t **color,
 						char *img_path);
 // utils basic
-void				ft_free2d(char **str);
-void				ft_free2d_int(int **str);
-void				ft_exit(t_data *data);
 int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
+
+// utils free
+void				free_structs(t_data *data);
+void				ft_free2d_char(char **str);
+void				ft_free2d_int(int **str);
+void				ft_exit(t_data *data);
 
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);

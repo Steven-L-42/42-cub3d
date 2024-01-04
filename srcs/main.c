@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 15:47:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:04:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ void	ft_instructions(t_data *data)
 	ft_printf("Open/Close Door:\tC\n%s", RESET);
 }
 
+int	ft_alloc_structs(t_data *data)
+{
+	data->game = malloc(sizeof(t_map));
+	if (!data->game)
+		return (ft_error("Error: data->game allocation failed!"));
+	data->minimap = malloc(sizeof(t_minimap));
+	if (!data->minimap)
+		return (free(data->game), ft_error("Error: data->minimap allocation failed!"));
+	data->player = malloc(sizeof(t_player));
+	if (!data->player)
+		return (free(data->game), free(data->minimap), ft_error("Error: data->player allocation failed!"));
+	data->img = malloc(sizeof(t_img));
+	if (!data->img)
+		return (free(data->game), free(data->minimap), free(data->player), ft_error("Error: data->img allocation failed!"));
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -38,13 +55,14 @@ int	main(int argc, char **argv)
 	if (argc != 2 || ft_check_extension(*(argv + 1)))
 		exit(1);
 	data = malloc(sizeof(t_data));
-	data->game = malloc(sizeof(t_map));
-	data->minimap = malloc(sizeof(t_minimap));
-	data->player = malloc(sizeof(t_player));
+	if (!data)
+		return (ft_error("Error: data allocation failed!"));
+	if (ft_alloc_structs(data))
+		return (1);
 	if (init(data, argv[1]))
-		return (free(data->player), free(data->minimap), free(data->game),
-			free(data), 1);
+		return (free_structs(data), 1);
 	ft_instructions(data);
+	write(1, "0\n", 2);
 	ft_img_to_window(data);
 	write(1, "1\n", 2);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 15:00:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:51:37 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	init_minimap(t_data *data)
 
 int	init(t_data *data, char *input)
 {
-	data->img = malloc(sizeof(t_img));
 	if (init_helper(data, input))
 		return (1);
 	if (!(data->mlx = mlx_init(data->width, data->height, "cub3D", false)))
