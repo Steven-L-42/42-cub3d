@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/30 13:41:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:35:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	draw_objects(t_data *data, int is_wall)
 
 void	set_z(t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < data->img->img_mm_wall_shadow->count)
@@ -66,8 +66,6 @@ void	set_z(t_data *data)
 
 void	draw_minimap(t_data *data)
 {
-	int	x;
-
 	draw_objects(data, 0);
 	draw_objects(data, 1);
 	mlx_image_to_window(data->mlx, data->img->img_game_cursor, data->width / 2

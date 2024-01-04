@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 14:32:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:35:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	update_player_angle(double xpos, double ypos, void *param)
 	float	new_angle;
 	float	sensitivity;
 
+	xpos = 0;
+	ypos = 0;
 	data = param;
 	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
 		&data->player->mouse_y);

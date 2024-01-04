@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2023/12/30 13:47:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:23:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	init_helper(t_data *data, char *input)
 {
-	if (get_map(data, input))
+	if (init_map(data, input))
 		return (1);
 	if (data->game->width * SIZE < 1920)
 		data->width = data->game->width * SIZE;

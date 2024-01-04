@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 13:16:15 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:36:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 // ob die berechneten Koordinaten im gültigen Bereich liegen und ob es
 // Kollisionen mit Wänden gibt. Bei gültigen Koordinaten wird die
 // entsprechende Pixelposition im Bildspeicher markiert.
-void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
+void	ray_helper(t_data *data, t_draw_rays *ray)
 {
 	int	ray_len;
 
@@ -55,8 +55,8 @@ void	ray_helper(t_data *data, t_draw_rays *ray, int num_rays)
 		ray->y_coord = data->player->y * 16 + 8 + ray_len
 			* sin((-data->player->angle + ray->angle_offset) * PI / 180);
 		if (ray->x_coord >= 0 && ray->y_coord >= 0
-			&& ray->x_coord < data->img->img_player_ray->width
-			&& ray->y_coord < data->img->img_player_ray->height)
+			&& (const uint32_t)ray->x_coord < data->img->img_player_ray->width
+			&& (const uint32_t)ray->y_coord < data->img->img_player_ray->height)
 		{
 			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord / 16], "159"))
 				break ;
@@ -84,7 +84,7 @@ void	draw_player_rays(t_data *data, int num_rays)
 	while (ray.i <= num_rays / 2)
 	{
 		ray.angle_offset = ray.i;
-		ray_helper(data, &ray, num_rays);
+		ray_helper(data, &ray);
 		ray.i += 0.1f;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/30 12:04:17 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:34:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char	**ft_fill_tmp(char **tmp_map, int fd)
 
 static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 {
-	int	found;
 	int	y;
 	int	max_y;
 
@@ -91,7 +90,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 	return (0);
 }
 
-int	get_map(t_data *data, char *input)
+int	init_map(t_data *data, char *input)
 {
 	int		fd;
 

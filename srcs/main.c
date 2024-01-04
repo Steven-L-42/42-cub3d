@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/02 19:51:38 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:38:13 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,6 @@
 void	leaks(void)
 {
 	system("leaks cub3d");
-}
-
-void	ft_img_to_window(t_data *data)
-{
-	mlx_image_to_window(data->mlx, data->img->img_player_ray, 0, 0);
-	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
-	data->img->img_game->instances[0].z = 0;
-}
-
-static void	reset_window(t_data *data)
-{
-	ft_memset(data->img->img_game->pixels, 0, data->img->img_game->width
-		* data->img->img_game->height * sizeof(int32_t));
-}
-
-void	ft_running(void *param)
-{
-	t_data	*data;
-
-	data = param;
-	reset_window(data);
-	calc_view(data);
-	draw_player_rays(data, 80);
 }
 
 void	ft_instructions(t_data *data)
@@ -58,12 +35,14 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	// atexit(leaks);
+	if (argc != 2 || ft_check_extension(*(argv + 1)))
+		exit(1);
 	data = malloc(sizeof(t_data));
 	data->game = malloc(sizeof(t_map));
 	data->minimap = malloc(sizeof(t_minimap));
 	data->player = malloc(sizeof(t_player));
 	if (init(data, argv[1]))
-		return (1);
+		exit(1);
 	ft_instructions(data);
 	ft_img_to_window(data);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/03 17:21:03 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:05:05 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_data
 float				calc_dist(t_data *data, float angle, char *dir);
 
 // get_map
-int					get_map(t_data *data, char *input);
+int					init_map(t_data *data, char *input);
 void				draw_minimap(t_data *data);
 
 // init_1
@@ -167,6 +167,12 @@ void				init_coords(t_data *data, int pixel_x, int pixel_y);
 void				init_player(t_data *data);
 int					init_img_one(t_data *data);
 int					init_img_two(t_data *data);
+
+// utils main
+void				ft_img_to_window(t_data *data);
+void				reset_window(t_data *data);
+void				ft_running(void *param);
+int					ft_check_extension(char *argv);
 
 // utils map
 int					get_map_height(char *input);

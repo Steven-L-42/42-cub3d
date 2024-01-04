@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/30 13:48:45 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:34:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strtok(char *src, char delim)
 	x = 0;
 	while (i < max)
 	{
-		if (src && !src[i] || src[i] == delim)
+		if ((src && !src[i]) || src[i] == delim)
 		{
 			result = ft_calloc(i + 1, 1);
 			while (src[x] && x < i)

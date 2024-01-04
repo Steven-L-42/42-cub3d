@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 17:34:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:44:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 {
 	double	line_width;
 	int		y;
-	int		size_x;
-	int		size_y;
 	int		t;
 
-	line_width = (data->width / data->player->view_angle) * (calc->j + 1);
+	line_width = (data->width / data->player->view_angle) * (calc->j
+			/ (float)QUALITY + 1);
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
@@ -68,11 +67,8 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		if (calc->line_bottom >= data->height)
 			calc->line_bottom = data->height;
 		y = (data->height / 2) + 1;
-		// size_x = (int)calc->x * 64;
 		while (--y > calc->line_top)
 		{
-			// size_y = y & (data->wood_size[0] - 1);
-			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
 				mlx_put_pixel(data->img->img_game, calc->x, y,
 					calc->color_door);
@@ -86,8 +82,6 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 		y = (data->height / 2) - 1;
 		while (++y < calc->line_bottom)
 		{
-			// size_y = y & (data->wood_size[0] - 1);
-			// calc->color_wall = data->col_texture[size_x + size_y];
 			if (data->wall_type == 'D')
 				mlx_put_pixel(data->img->img_game, calc->x, y,
 					calc->color_door);
@@ -118,25 +112,30 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 // Die Funktion initialisiert die notwendigen Werte, iteriert über die
 // Sichtlinien und ruft die Hilfsfunktion calc_helper für jede Sichtlinie auf.
 // Das Ergebnis wird im Fenster angezeigt.
-
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
 
 	calc_preset(data, &calc);
+	
 	while (calc.line > calc.max_lines)
 	{
 		data->wall_type = 'W';
 		calc.distance = calc_dist(data, calc.line, &calc.direction);
-		if (calc.direction == 'x')
-			calc.color_wall = ft_pixel(56, 76, 200, 200);
-		else
-			calc.color_wall = ft_pixel(56, 76, 200, 255);
-		calc.x = ((data->width / data->player->view_angle) * (calc.j));
+		if (calc.direction == 'S')
+			calc.color_wall = ft_pixel(250, 76, 200, 200);
+		else if (calc.direction == 'N')
+			calc.color_wall = ft_pixel(56, 250, 200, 255);
+		else if (calc.direction == 'W')
+			calc.color_wall = ft_pixel(56, 76, 250, 255);
+		else if (calc.direction == 'E')
+			calc.color_wall = ft_pixel(56, 200, 200, 255);
+		calc.x = ((data->width / data->player->view_angle) * (calc.j
+					/ (float)QUALITY));
 		calc_helper(data, &calc);
-		calc.angle -= 1;
+		calc.angle -= 1 / (float)QUALITY;
 		calc.j++;
-		calc.line -= 1;
+		calc.line -= 1 / (float)QUALITY;
 	}
 }
 

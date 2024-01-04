@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:39:56 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/03 17:18:04 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:53:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,6 @@
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-// float	get_slope(float angle)
-// {
-// 	float	radianAngle;
-// 	float	dirx;
-// 	float	diry;
-
-// 	while (angle > 360)
-// 		angle -= 360;
-// 	while (angle < 0)
-// 		angle += 360;
-// 	if (angle == 90)
-// 		return (INT32_MAX);
-// 	if (angle == 270)
-// 		return (INT32_MIN);
-// 	radianAngle = (angle)*PI / 180.0;
-// 	dirx = cos(radianAngle);
-// 	diry = sin(radianAngle);
-// 	return (diry / dirx);
-// }
 
 float	get_slope(float angle)
 {
@@ -112,9 +92,13 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		{
 			*xminus = true;
 			*playerx -= distx / 10;
+			*dir = 'S';
 		}
 		else
+		{
 			*playerx += distx / 10;
+			*dir = 'N';
+		}
 		if (angle >= 0 && angle <= 180)
 		{
 			*yminus = true;
@@ -122,16 +106,19 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		}
 		else
 			*playery += sqrt(pow(tempx, 2) - pow((distx / 10), 2));
-		*dir = 'x';
 		return (tempx);
 	}
 	if (angle >= 0 && angle <= 180)
 	{
 		*yminus = true;
 		*playery -= disty / 10;
+		*dir = 'W';
 	}
 	else
+	{
 		*playery += disty / 10;
+		*dir = 'E';
+	}
 	if (angle >= 90 && angle <= 270)
 	{
 		*xminus = true;
@@ -139,7 +126,7 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 	}
 	else
 		*playerx += sqrt(pow(tempy, 2) - pow((disty / 10), 2));
-	*dir = 'y';
+
 	return (tempy);
 }
 
