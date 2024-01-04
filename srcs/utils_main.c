@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 10:45:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:59:17 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,24 @@
 
 void	ft_img_to_window(t_data *data)
 {
+	int	width;
+	int	height;
+	int	i;
+
+	i = 0;
+	width = data->width / 2 - data->img->img_pistol[0]->width / 2;
+	height = data->height - data->img->img_pistol[0]->height;
 	mlx_image_to_window(data->mlx, data->img->img_player_ray, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_pistol[0], width, height);
+	mlx_image_to_window(data->mlx, data->img->img_pistol[1], width, height);
+	mlx_image_to_window(data->mlx, data->img->img_pistol[2], width, height);
+	mlx_image_to_window(data->mlx, data->img->img_pistol[3], width, height);
+	mlx_image_to_window(data->mlx, data->img->img_pistol[4], width, height);
+	while (i < 4)
+	{
+		data->img->img_pistol[i++]->enabled = false;
+	}
+	data->img->pistol_frame = 0;
 	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
 	data->img->img_game->instances[0].z = 0;
 }

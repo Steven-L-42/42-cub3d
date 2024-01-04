@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 15:01:33 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:17:59 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		{
 			*xminus = true;
 			*playerx -= distx / 10;
-			*dir = 'S';
+			*dir = 'W';
 		}
 		else
 		{
 			*playerx += distx / 10;
-			*dir = 'N';
+			*dir = 'E';
 		}
 		if (angle >= 0 && angle <= 180)
 		{
@@ -100,12 +100,12 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 	{
 		*yminus = true;
 		*playery -= disty / 10;
-		*dir = 'W';
+		*dir = 'N';
 	}
 	else
 	{
 		*playery += disty / 10;
-		*dir = 'E';
+		*dir = 'S';
 	}
 	if (angle >= 90 && angle <= 270)
 	{

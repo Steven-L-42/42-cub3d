@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 15:43:06 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:24:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	calc_helper(t_data *data, t_calc_view *calc)
 	int		t;
 
 	line_width = (data->width / data->player->view_angle) * (calc->j
-			/ (float)QUALITY + 1);
+			/ (float)QUALITY + 0.2f);
 	while (calc->x < line_width)
 	{
 		calc->tmp = calc->distance * cos((calc->angle) * PI / 180);
@@ -121,14 +121,14 @@ void	calc_view(t_data *data)
 	{
 		data->wall_type = 'W';
 		calc.distance = calc_dist(data, calc.line, &calc.direction);
-		if (calc.direction == 'S')
-			calc.color_wall = ft_pixel(250, 76, 200, 200);
-		else if (calc.direction == 'N')
-			calc.color_wall = ft_pixel(56, 250, 200, 255);
-		else if (calc.direction == 'W')
-			calc.color_wall = ft_pixel(56, 76, 250, 255);
+		if (calc.direction == 'N')
+			calc.color_wall = ft_pixel(227, 66, 245, 255);
 		else if (calc.direction == 'E')
-			calc.color_wall = ft_pixel(56, 200, 200, 255);
+			calc.color_wall = ft_pixel(245, 158, 66, 255);
+		else if (calc.direction == 'S')
+			calc.color_wall = ft_pixel(66, 135, 245, 255);
+		else if (calc.direction == 'W')
+			calc.color_wall = ft_pixel(66, 245, 120, 255);
 		calc.x = ((data->width / data->player->view_angle) * (calc.j
 					/ (float)QUALITY));
 		calc_helper(data, &calc);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 16:05:08 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:27:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <stdlib.h>
 
 # define PURPLE "\x1B[1;35m"
+# define GREEN "\x1B[1;32m"
+# define BLUE "\x1B[1;34m"
+# define WHITE "\x1B[1;37m"
 # define RESET "\x1B[0m"
 
 # define PI 3.14159265359
@@ -134,6 +137,9 @@ typedef struct s_img
 	uint32_t		*col_WE;
 	mlx_image_t		*img_EA;
 	uint32_t		*col_EA;
+
+	int				pistol_frame;
+	mlx_image_t		*img_pistol[5];
 }					t_img;
 
 typedef struct s_data
@@ -147,9 +153,10 @@ typedef struct s_data
 
 	char			wall_type;
 	uint32_t		color[64];
-	int				wood_size[2];
+	int				wall_size[2];
 	int				width;
 	int				height;
+	bool			is_shooting;
 }					t_data;
 
 float				calc_dist(t_data *data, float angle, char *dir);
@@ -206,9 +213,11 @@ void				calc_view(t_data *data);
 // movement
 void				update_player_angle(double xpos, double ypos, void *param);
 
+
 // hotkeys
 void				ft_key_hold(void *param);
 void				ft_key_press(mlx_key_data_t keydata, void *param);
+void				ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
 
 // minimap
 void				draw_player_rays(t_data *data, int num_rays);

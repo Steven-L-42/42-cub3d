@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 15:47:26 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:10:11 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	init_img_info(t_data *data, mlx_texture_t *text, uint32_t **color)
 {
 	*color = get_color(text);
-	data->wood_size[0] = text->width;
-	data->wood_size[1] = text->height;
+	data->wall_size[0] = text->width;
+	data->wall_size[1] = text->height;
 }
 
 int	ft_open_image(t_data *data, mlx_image_t **img_direction, char *img_path)

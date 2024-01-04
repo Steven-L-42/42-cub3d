@@ -17,6 +17,7 @@
 		"chrono": "c",
 		"unordered_map": "c",
 		"string.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"stdbool.h": "c"
 	}
 }

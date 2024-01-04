@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 11:35:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:12:59 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	move_player(t_data *data, float speed, int forward, const char *set)
 	float	p_x_cos;
 	float	p_y_sin;
 
-	if (mlx_is_key_down(data->mlx, MLX_KEY_SPACE))
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
 	{
 		if (speed > 0)
 			speed += 0.15f;
@@ -29,9 +29,9 @@ static void	move_player(t_data *data, float speed, int forward, const char *set)
 		radian_angle = data->player->angle * PI / 180.0;
 	else
 		radian_angle = (data->player->angle + 90.0) * PI / 180.0;
-	if (check_for_wall(data, speed, radian_angle, set)
-		|| (speed > 0.0f && check_wall_corner_ahead(data, set))
-		|| (speed < 0.0f && check_wall_corner_behind(data, set)))
+	if (check_for_wall(data, speed, radian_angle, set) || (speed > 0.0f
+			&& check_wall_corner_ahead(data, set)) || (speed < 0.0f
+			&& check_wall_corner_behind(data, set)))
 		return ;
 	p_x_cos = speed * cos(radian_angle);
 	p_y_sin = speed * sin(radian_angle);
@@ -60,7 +60,7 @@ void	update_player_angle(double xpos, double ypos, void *param)
 	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
 		&data->player->mouse_y);
 	delta_x = data->player->mouse_x - data->player->prev_mouseX;
-	sensitivity = 0.5;
+	sensitivity = 0.1;
 	new_angle = delta_x * sensitivity;
 	data->player->angle += -new_angle;
 	data->player->prev_mouseX = data->player->mouse_x;
@@ -71,8 +71,19 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 	t_data	*data;
 
 	data = param;
-	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
+	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 		check_for_door(data);
+	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+		data->is_shooting = true;
+}
+
+void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void* param)
+{
+	t_data	*data;
+
+	data = param;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+		data->is_shooting = true;
 }
 
 void	ft_key_hold(void *param)
