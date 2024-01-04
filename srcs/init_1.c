@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 15:51:37 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:57:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,7 @@ int	init(t_data *data, char *input)
 	init_coords(data, 0, 0);
 	init_player(data);
 	draw_minimap(data);
+
+
 	return (0);
 }
