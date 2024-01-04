@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 15:00:55 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:43:06 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	calc_view(t_data *data)
 	t_calc_view	calc;
 
 	calc_preset(data, &calc);
-
 	while (calc.line > calc.max_lines)
 	{
 		data->wall_type = 'W';

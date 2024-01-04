@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/30 13:19:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:47:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int	ft_is_in_set(char c, const char *set)
 
 void	ft_exit(t_data *data)
 {
+	free(data->img->col_NO);
+	free(data->img->col_SO);
+	free(data->img->col_WE);
+	free(data->img->col_EA);
+
 	ft_free2d(data->game->map);
 	ft_free2d(data->game->tmp_map);
 	free(data->game);

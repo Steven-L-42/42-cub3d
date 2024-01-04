@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 11:05:05 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:24:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct s_img
 	mlx_image_t		*img_player_ray;
 	mlx_image_t		*img_game_wall;
 	mlx_image_t		*img_NO;
-	mlx_texture_t	*txt_NO;
+	uint32_t		*col_NO;
 	mlx_image_t		*img_SO;
-	mlx_texture_t	*txt_SO;
+	uint32_t		*col_SO;
 	mlx_image_t		*img_WE;
-	mlx_texture_t	*txt_WE;
+	uint32_t		*col_WE;
 	mlx_image_t		*img_EA;
-	mlx_texture_t	*txt_EA;
+	uint32_t		*col_EA;
 }					t_img;
 
 typedef struct s_data
@@ -180,7 +180,10 @@ int					ft_map_len(char **tmp_map);
 int					ft_str_to_rgb(char *rgb_str, int *color);
 char				*ft_strtok(char *src, char delim);
 int					ft_open_image(t_data *data, mlx_image_t **img_direction,
-						char *img_path, int need_info);
+						char *img_path);
+int					ft_open_image_plus_info(t_data *data,
+						mlx_image_t **img_direction, uint32_t **color,
+						char *img_path);
 // utils basic
 void				ft_free2d(char **str);
 void				ft_free2d_int(int **str);

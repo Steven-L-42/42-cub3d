@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 14:57:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:47:53 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int argc, char **argv)
 	data->minimap = malloc(sizeof(t_minimap));
 	data->player = malloc(sizeof(t_player));
 	if (init(data, argv[1]))
-		exit(1);
+		return (free(data->player), free(data->minimap), free(data->game),
+			free(data), 1);
 	ft_instructions(data);
 	ft_img_to_window(data);
 	write(1, "1\n", 2);
