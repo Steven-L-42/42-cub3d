@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 16:59:17 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:36:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_img_to_window(t_data *data)
 	mlx_image_to_window(data->mlx, data->img->img_pistol[2], width, height);
 	mlx_image_to_window(data->mlx, data->img->img_pistol[3], width, height);
 	mlx_image_to_window(data->mlx, data->img->img_pistol[4], width, height);
+	mlx_resize_image(data->img->img_pistol[0], 512, 512);
 	while (i < 4)
 	{
 		data->img->img_pistol[i++]->enabled = false;
