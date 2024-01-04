@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 16:05:42 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:07:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 	if (init(data, argv[1]))
 		return (free_structs(data), 1);
 	ft_instructions(data);
-	write(1, "0=\n", 2);
+	write(1, "0\n", 2);
 	ft_img_to_window(data);
 	write(1, "1\n", 2);
 	mlx_cursor_hook(data->mlx, update_player_angle, data);
