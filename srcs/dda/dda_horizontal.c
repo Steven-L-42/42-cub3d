@@ -6,60 +6,60 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:44:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:28:55 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp,
-		t_calc_view *calc, bool new_block)
+void	calc_block_width_helper(t_data *data, t_dda_helper dda_tmp, t_dda *dda,
+		bool new_block)
 {
 	if (new_block == true)
-		calc->width_array[calc_tmp.i] = FLT_MAX;
+		dda->width_array[dda_tmp.i] = FLT_MAX;
 	else
 	{
 		while (new_block == false)
 		{
-			calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction,
+			dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
 					&new_block);
-			calc_tmp.angle -= 1 / calc_tmp.quality;
-			calc_tmp.t++;
-			calc_tmp.line -= 1 / calc_tmp.quality;
+			dda_tmp.angle -= 1 / dda_tmp.quality;
+			dda_tmp.t++;
+			dda_tmp.line -= 1 / dda_tmp.quality;
 		}
 	}
 	if (new_block == true)
-		calc->width_array[calc_tmp.i] = FLT_MAX;
-	calc->width_array[calc_tmp.i] = calc_tmp.t;
-	calc_tmp.i++;
-	calc->width_array[calc_tmp.i] = FLT_MAX;
+		dda->width_array[dda_tmp.i] = FLT_MAX;
+	dda->width_array[dda_tmp.i] = dda_tmp.t;
+	dda_tmp.i++;
+	dda->width_array[dda_tmp.i] = FLT_MAX;
 }
 
-void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
+void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 		float quality)
 {
-	t_calc_helper	calc_tmp;
+	t_dda_helper	dda_tmp;
 
-	calc_tmp.line = calc->line;
-	calc_tmp.maxline = calc->max_lines;
-	calc_tmp.angle = calc->angle;
-	calc_tmp.t = 0;
-	calc_tmp.i = 0;
-	calc_tmp.quality = (float)quality;
-	while (calc_tmp.line > calc_tmp.maxline)
+	dda_tmp.line = dda->line;
+	dda_tmp.maxline = dda->max_lines;
+	dda_tmp.angle = dda->angle;
+	dda_tmp.t = 0;
+	dda_tmp.i = 0;
+	dda_tmp.quality = (float)quality;
+	while (dda_tmp.line > dda_tmp.maxline)
 	{
-		calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction,
+		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
 				&new_block);
 		if (new_block == true)
 		{
-			calc->width_array[calc_tmp.i] = calc_tmp.t;
-			calc_tmp.i++;
+			dda->width_array[dda_tmp.i] = dda_tmp.t;
+			dda_tmp.i++;
 		}
-		calc_tmp.angle -= 1 / (float)quality;
-		calc_tmp.t++;
-		calc_tmp.line -= 1 / (float)quality;
+		dda_tmp.angle -= 1 / (float)quality;
+		dda_tmp.t++;
+		dda_tmp.line -= 1 / (float)quality;
 	}
-	calc_block_width_helper(data, calc_tmp, calc, new_block);
+	calc_block_width_helper(data, dda_tmp, dda, new_block);
 }
 
 // Funktion: calc_preset
@@ -71,19 +71,19 @@ void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
 // Die Funktion setzt verschiedene Werte wie Winkel, Farben und Zählvariablen
 // für die Berechnungen der Sichtlinien. Zudem wird der bestehende Bildspeicher
 // gelöscht und ein neuer Bildspeicher für die Sichtlinien erstellt.
-void	calc_preset(t_data *data, t_calc_view *calc)
+void	calc_preset(t_data *data, t_dda *dda)
 {
-	calc->j = 0;
-	calc->max_lines = -(data->player->view_angle / 2);
-	calc->temp2 = -calc->max_lines;
-	calc->angle = -calc->max_lines;
-	calc->color_wall = ft_pixel(56, 76, 200, 255);
-	calc->color_door = ft_pixel(125, 76, 56, 255);
-	calc->color_portal = ft_pixel(56, 125, 125, 255);
-	calc->line = calc->max_lines * -1;
-	calc->treshold = (float)6.2f * (data->width / 1920.0);
-	calc->direction = '\0';
-	calc->shadow = 11;
+	dda->j = 0;
+	dda->max_lines = -(data->player->view_angle / 2);
+	dda->temp2 = -dda->max_lines;
+	dda->angle = -dda->max_lines;
+	dda->color_wall = ft_pixel(56, 76, 200, 255);
+	dda->color_door = ft_pixel(125, 76, 56, 255);
+	dda->color_portal = ft_pixel(56, 125, 125, 255);
+	dda->line = dda->max_lines * -1;
+	dda->treshold = (float)6.2f * (data->width / 1920.0);
+	dda->direction = '\0';
+	dda->shadow = 11;
 }
 
 // Funktion: calc_view
@@ -96,25 +96,25 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 // Das Ergebnis wird im Fenster angezeigt.
 void	dda_horizontal(t_data *data)
 {
-	t_calc_view	calc;
-	float		quality;
-	float		block_width;
-	bool		new_block;
+	t_dda	dda;
+	float	quality;
+	float	block_width;
+	bool	new_block;
 
-	calc_preset(data, &calc);
+	calc_preset(data, &dda);
 	quality = data->width;
-	quality = QUALITY / (fabs(calc.max_lines) / (quality / 2));
+	quality = QUALITY / (fabs(dda.max_lines) / (quality / 2));
 	new_block = false;
 	reset_map(data);
-	calc_block_width(data, &calc, new_block, quality);
-	calc.direction = '\0';
+	calc_block_width(data, &dda, new_block, quality);
+	dda.direction = '\0';
 	new_block = false;
-	while (calc.line > calc.max_lines)
+	while (dda.line > dda.max_lines)
 	{
-		calc.distance = calc_dist(data, calc.line, &calc.direction, &new_block);
-		dda_vertical(data, &calc, new_block);
-		calc.angle -= 1 / (float)quality;
-		calc.j++;
-		calc.line -= 1 / (float)quality;
+		dda.distance = dda_dist(data, dda.line, &dda.direction, &new_block);
+		dda_vertical(data, &dda, new_block);
+		dda.angle -= 1 / (float)quality;
+		dda.j++;
+		dda.line -= 1 / (float)quality;
 	}
 }

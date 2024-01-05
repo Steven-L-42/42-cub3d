@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:59:21 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:30:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef struct s_player
 	float			prev_mouseX;
 	double			prev_time;
 }					t_player;
+
+typedef struct s_vec2
+{
+	float			x;
+	float			y;
+}					t_vec2;
 
 typedef struct s_rgb
 {
@@ -113,7 +119,19 @@ typedef struct s_calc_view
 	double			line_bottom;
 	double			line_top;
 	float			width_array[100];
-}					t_calc_view;
+}					t_dda;
+
+typedef struct s_dda_dist
+{
+	float			dist;
+	int				tempy;
+	int				tempx;
+	float			last_dist;
+	float			m;
+	char			last_dir;
+	bool			xmin;
+	bool			ymin;
+}					t_dda_dist;
 
 typedef struct s_check_door
 {
@@ -134,7 +152,7 @@ typedef struct s_calc_helper
 	float			dist;
 	int				i;
 	float			quality;
-}					t_calc_helper;
+}					t_dda_helper;
 
 typedef struct s_draw_rays
 {
@@ -194,7 +212,7 @@ typedef struct s_data
 	bool			is_shooting;
 }					t_data;
 
-float				calc_dist(t_data *data, float angle, char *dir,
+float				dda_dist(t_data *data, float angle, char *dir,
 						bool *new_block);
 
 // get_map
@@ -214,7 +232,8 @@ int					init_img_two(t_data *data);
 float				calc_for_x(float big, float small, float block_size);
 double				max(double a, double b);
 void				reset_map(t_data *data);
-float				ft_get_block_width(t_calc_view *calc);
+float				ft_get_block_width(t_dda *calc);
+float				get_slope(float angle);
 
 // utils main
 void				ft_img_to_window(t_data *data);
@@ -246,10 +265,10 @@ void				ft_exit(t_data *data);
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t			**get_color(mlx_texture_t *texture);
-int					ft_text_color(mlx_texture_t *text, t_calc_view *calc,
+int					ft_text_color(mlx_texture_t *text, t_dda *calc,
 						int block_width, int block_height);
-uint32_t			ft_select_color(t_data *data, t_calc_view *calc,
-						int block_height, int block_width);
+uint32_t			ft_select_color(t_data *data, t_dda *calc, int block_height,
+						int block_width);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
@@ -275,6 +294,6 @@ int					check_wall_corner_behind(t_data *data, const char *set);
 int					check_wall_corner_ahead(t_data *data, const char *set);
 
 // calc_view2
-void				dda_vertical(t_data *data, t_calc_view *calc, bool if_true);
+void				dda_vertical(t_data *data, t_dda *calc, bool if_true);
 
 #endif

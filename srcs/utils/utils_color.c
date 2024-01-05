@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:31:05 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int	ft_text_color(mlx_texture_t *text, t_calc_view *calc, int block_width,
+int	ft_text_color(mlx_texture_t *text, t_dda *calc, int block_width,
 		int block_height)
 {
 	int		color;
@@ -34,7 +34,7 @@ int	ft_text_color(mlx_texture_t *text, t_calc_view *calc, int block_width,
 	return (color);
 }
 
-uint32_t	ft_select_color(t_data *data, t_calc_view *calc, int block_height,
+uint32_t	ft_select_color(t_data *data, t_dda *calc, int block_height,
 		int block_width)
 {
 	if (data->wall_type == 'W')

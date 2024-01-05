@@ -6,11 +6,27 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:47:42 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+float	get_slope(float angle)
+{
+	float	radian_angle;
+
+	while (angle > 360)
+		angle -= 360;
+	while (angle < 0)
+		angle += 360;
+	if (angle == 90)
+		return (FLT_MAX);
+	if (angle == 270)
+		return (-FLT_MAX);
+	radian_angle = angle * PI / 180.0;
+	return (tan(radian_angle));
+}
 
 float	calc_for_x(float big, float small, float block_size)
 {
@@ -46,7 +62,7 @@ void	reset_map(t_data *data)
 	}
 }
 
-float	ft_get_block_width(t_calc_view *calc)
+float	ft_get_block_width(t_dda *calc)
 {
 	int	i;
 	int	block_width;

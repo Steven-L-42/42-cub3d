@@ -6,38 +6,22 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:38:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:37:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-float	get_slope(float angle)
-{
-	float	radianAngle;
-
-	while (angle > 360)
-		angle -= 360;
-	while (angle < 0)
-		angle += 360;
-	if (angle == 90)
-		return (FLT_MAX);
-	if (angle == 270)
-		return (-FLT_MAX);
-	radianAngle = angle * PI / 180.0;
-	return (tan(radianAngle));
-}
-
-float	startdist(float m, float angle, float *playerx, float *playery,
-		char *dir, bool *xminus, bool *yminus)
+float	start_dist(float m, float angle, t_vec2 *vec, char *dir, bool *xminus,
+		bool *yminus)
 {
 	float	distx;
 	float	disty;
 	float	tempx;
 	float	tempy;
 
-	disty = 1 - (*playery - (int)*playery);
-	distx = 1 - (*playerx - (int)*playerx);
+	disty = 1 - (vec->y - (int)vec->y);
+	distx = 1 - (vec->x - (int)vec->x);
 	if (angle >= 0 && angle <= 180)
 		disty = 1 - disty;
 	if (disty == 0)
@@ -53,10 +37,10 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		if (angle >= 90 && angle <= 270)
 		{
 			*xminus = true;
-			*playerx -= distx / 10;
+			vec->x -= distx / 10;
 		}
 		else
-			*playerx += distx / 10;
+			vec->x += distx / 10;
 		return (distx / 10);
 	}
 	if (angle == 90 || angle == 270)
@@ -64,10 +48,10 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		if (angle >= 0 && angle <= 180)
 		{
 			*yminus = true;
-			*playery -= disty / 10;
+			vec->y -= disty / 10;
 		}
 		else
-			*playery += disty / 10;
+			vec->y += disty / 10;
 		return (disty / 10);
 	}
 	tempx = (distx * sqrt(1 + pow(m, 2))) / 10;
@@ -79,118 +63,114 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 		if (angle >= 90 && angle <= 270)
 		{
 			*xminus = true;
-			*playerx -= distx / 10;
+			vec->x -= distx / 10;
 			*dir = 'W';
 		}
 		else
 		{
-			*playerx += distx / 10;
+			vec->x += distx / 10;
 			*dir = 'E';
 		}
 		if (angle >= 0 && angle <= 180)
 		{
 			*yminus = true;
-			*playery -= sqrt(pow(tempx, 2) - pow((distx / 10), 2));
+			vec->y -= sqrt(pow(tempx, 2) - pow((distx / 10), 2));
 		}
 		else
-			*playery += sqrt(pow(tempx, 2) - pow((distx / 10), 2));
+			vec->y += sqrt(pow(tempx, 2) - pow((distx / 10), 2));
 		return (tempx);
 	}
 	if (angle >= 0 && angle <= 180)
 	{
 		*yminus = true;
-		*playery -= disty / 10;
+		vec->y -= disty / 10;
 		*dir = 'N';
 	}
 	else
 	{
-		*playery += disty / 10;
+		vec->y += disty / 10;
 		*dir = 'S';
 	}
 	if (angle >= 90 && angle <= 270)
 	{
 		*xminus = true;
-		*playerx -= sqrt(pow(tempy, 2) - pow((disty / 10), 2));
+		vec->x -= sqrt(pow(tempy, 2) - pow((disty / 10), 2));
 	}
 	else
-		*playerx += sqrt(pow(tempy, 2) - pow((disty / 10), 2));
+		vec->x += sqrt(pow(tempy, 2) - pow((disty / 10), 2));
 	return (tempy);
 }
 
-float	calc_distance(float angle, float playerx, float playery, t_data *data,
-		char *dir, bool *new_block)
+float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
+		bool *new_block)
 {
+	t_dda_dist	dst;
 	static char	old_dir;
-	float	dist;
-	int		tempy;
-	int		tempx;
-	float	last_dist;
-	float	m;
-	char	last_dir;
-	bool	xmin;
-	bool	ymin;
 
-	dist = 0;
-	tempy = playery;
-	tempx = playerx;
-	last_dist = dist;
-	m = fabs(get_slope(angle));
-	while (!ft_is_in_set(data->game->map[tempy][tempx], "159") || !ft_is_in_set(data->game->map_copy[tempy][tempx], "159L"))
+	dst.dist = 0;
+	dst.tempy = vec.y;
+	dst.tempx = vec.x;
+	dst.last_dist = dst.dist;
+	dst.m = fabs(get_slope(angle));
+	while (!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159")
+		|| !ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159L"))
 	{
-		ymin = false;
-		xmin = false;
-		tempy = playery;
-		tempx = playerx;
-		last_dist = dist;
-		last_dir = *dir;
-		if ((!data->game->map[tempy] || !data->game->map[tempy][tempx])
-			|| (!data->game->map_copy[tempy] || !data->game->map_copy[tempy][tempx]))
+		dst.ymin = false;
+		dst.xmin = false;
+		dst.tempy = vec.y;
+		dst.tempx = vec.x;
+		dst.last_dist = dst.dist;
+		dst.last_dir = *dir;
+		if ((!data->game->map[dst.tempy]
+				|| !data->game->map[dst.tempy][dst.tempx])
+			|| (!data->game->map_copy[dst.tempy]
+				|| !data->game->map_copy[dst.tempy][dst.tempx]))
 			return (1);
-		dist += fabs(startdist(m, angle, &playerx, &playery, dir, &xmin,
-					&ymin));
-		tempy = playery;
-		tempx = playerx;
-		if (xmin == true && ymin == true)
+		dst.dist += fabs(start_dist(dst.m, angle, &vec, dir, &dst.xmin,
+					&dst.ymin));
+		dst.tempy = vec.y;
+		dst.tempx = vec.x;
+		if (dst.xmin == true && dst.ymin == true)
 		{
-			tempx = ceil(playerx) - 1;
-			tempy = ceil(playery) - 1;
+			dst.tempx = ceil(vec.x) - 1;
+			dst.tempy = ceil(vec.y) - 1;
 		}
 		else
 		{
-			if (xmin == true)
-				tempx = ceil(playerx) - 1;
-			if (ymin == true)
-				tempy = ceil(playery) - 1;
+			if (dst.xmin == true)
+				dst.tempx = ceil(vec.x) - 1;
+			if (dst.ymin == true)
+				dst.tempy = ceil(vec.y) - 1;
 		}
 	}
-	if (data->game->map_copy[tempy][tempx] == 'L')
+	if (data->game->map_copy[dst.tempy][dst.tempx] == 'L')
 		*new_block = false;
-	if (ft_is_in_set(data->game->map_copy[tempy][tempx], "159") || *dir != old_dir)
+	if (ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159")
+		|| *dir != old_dir)
 	{
-		data->game->map_copy[tempy][tempx] = 'L';
+		data->game->map_copy[dst.tempy][dst.tempx] = 'L';
 		*new_block = true;
 	}
-	if (data->game->map[tempy][tempx] == '5')
+	if (data->game->map[dst.tempy][dst.tempx] == '5')
 		data->wall_type = 'D';
-	else if (data->game->map[tempy][tempx] == '9')
+	else if (data->game->map[dst.tempy][dst.tempx] == '9')
 		data->wall_type = 'P';
 	else
 		data->wall_type = 'W';
 	old_dir = *dir;
-	return (fabs(dist));
+	return (fabs(dst.dist));
 }
 
-float	calc_dist(t_data *data, float angle, char *dir, bool *new_block)
+float	dda_dist(t_data *data, float angle, char *dir, bool *new_block)
 {
-	float	playerx;
-	float	playery;
+	t_vec2	vector;
 
-	playerx = data->player->x + 0.5f;
-	playery = data->player->y + 0.5f;
+	vector.x = data->player->x + 0.5f;
+	vector.y = data->player->y + 0.5f;
 	angle = data->player->angle + angle;
 	while (angle >= 360)
 		angle -= 360;
 	while (angle < 0)
 		angle += 360;
-	return (calc_distance(angle, playerx, playery, data, dir, new_block));
+	return (get_distance(angle, vector, data, dir, new_block));
 }
