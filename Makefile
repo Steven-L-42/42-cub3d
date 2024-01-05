@@ -17,8 +17,6 @@ INCLUDE				=	libft/
 REPO_URL			=	https://github.com/codam-coding-college/MLX42.git
 LOCAL_DIR			=	MLX42
 
-SRCS_F				=	srcs/
-
 UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c utils_calc.c utils_image.c
 
 INIT				=	init_1.c init_2.c parse_map.c
@@ -36,7 +34,7 @@ SRCS				=	main.c \
 						$(addprefix movement/, $(MOVEMENT))\
 						$(addprefix dda/, $(DDA))
 
-OBJS				=	$(addprefix $(SRCS_F),$(SRCS:.c=.o))
+OBJS				=	$(addprefix srcs/,$(SRCS:.c=.o))
 
 UNAME_S := $(shell uname -s)
 
