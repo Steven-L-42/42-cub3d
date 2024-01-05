@@ -6,11 +6,11 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 12:51:59 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 // Funktion: ray_preset
 // Zweck: Initialisiert die notwendigen Werte für die Raycasting-Berechnungen.

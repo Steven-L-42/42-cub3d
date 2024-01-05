@@ -6,11 +6,11 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:03:58 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 float	calc_for_x(float big, float small, float block_size)
 {

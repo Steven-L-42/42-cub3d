@@ -6,11 +6,11 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:03:05 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp, t_calc_view *calc, bool new_block)
 {

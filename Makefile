@@ -23,13 +23,18 @@ UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c ut
 
 INIT				=	init_1.c init_2.c parse_map.c
 
-DDA					=	 calc_distance.c calc_view.c calc_view2.c
+DDA					=	calc_distance.c calc_view.c calc_view2.c
 
 MINIMAP				=	minimap.c rays.c
 
 MOVEMENT			=	movement.c wall_detection.c
 
-SRCS				=	main.c $(INIT) $(MINIMAP) $(UTILS) $(MOVEMENT) $(DDA)
+SRCS				=	main.c \
+						$(addprefix init/, $(INIT)) \
+						$(addprefix minimap/, $(MINIMAP)) \
+						$(addprefix utils/, $(UTILS)) \
+						$(addprefix movement/, $(MOVEMENT))\
+						$(addprefix dda/, $(DDA))
 
 OBJS				=	$(addprefix $(SRCS_F),$(SRCS:.c=.o))
 
@@ -92,18 +97,18 @@ re:					fclean all
 
 test:
 					@make
-					./cub3d map/map.cub
+					./cub3d maps/map.cub
 
 test1:
 					@make
-					./cub3d map/map1.cub
+					./cub3d maps/map1.cub
 
 test2:
 					@make
-					./cub3d map/map2.cub
+					./cub3d maps/map2.cub
 
 test3:
 					@make
-					./cub3d map/test.cub
+					./cub3d maps/test.cub
 
 .PHONY:				all clean fclean re clone
