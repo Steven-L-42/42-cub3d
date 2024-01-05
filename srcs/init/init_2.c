@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:40:43 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:47:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	ft_check_all_imgs(t_data *data)
 int	init_img_two(t_data *data)
 {
 	ft_open_image(data, &data->img->img_game_cursor, "textures/cross.png");
-	ft_open_image(data, &data->img->img_mm_wall, "textures/brick_small.png");
+	ft_open_image(data, &data->img->img_mm_wall, "textures/minimap/brick.png");
 	ft_open_image(data, &data->img->img_mm_portal,
-		"textures/brick_portal_small.png");
+		"textures/minimap/brick_portal.png");
 	ft_open_image(data, &data->img->img_mm_door_closed,
-		"textures/brick_door_closed_small.png");
+		"textures/minimap/brick_door_closed.png");
 	ft_open_image(data, &data->img->img_mm_door_open,
-		"textures/brick_door_open_small.png");
+		"textures/minimap/brick_door_open.png");
 	ft_open_image(data, &data->img->img_mm_wall_shadow,
-		"textures/brick_shadow_small.png");
+		"textures/minimap/brick_shadow.png");
 	ft_open_image(data, &data->img->img_player, "textures/player.png");
 	ft_open_image(data, &data->img->img_pistol[0], "textures/weapon/0.png");
 	ft_open_image(data, &data->img->img_pistol[1], "textures/weapon/1.png");

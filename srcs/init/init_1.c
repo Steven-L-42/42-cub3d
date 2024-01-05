@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:52:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ int	init(t_data *data, char *input)
 		return (1);
 	data->mlx = mlx_init(data->width, data->height, "cub3D", false);
 	if (!data->mlx)
-		return (puts(mlx_strerror(mlx_errno)), 1);
+		return (ft_error("Error: mlx_init failed!"));
 	data->img->img_game = mlx_new_image(data->mlx, data->width, data->height);
 	if (!data->img->img_game)
-		return (puts(mlx_strerror(mlx_errno)), 1);
+		return (ft_error("Error: img_game creation failed!"));
 	data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width * 16,
 			data->game->height * 16);
 	if (!data->img->img_player_ray)
-		return (puts(mlx_strerror(mlx_errno)), 1);
+		return (ft_error("Error: img_player_ray creation failed!"));
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (init_img_one(data) || init_img_two(data))
-		return (1);
+		return (ft_error("Error: failed to read .png file!"));
 	init_minimap(data);
 	init_coords(data, 0, 0);
 	init_player(data);
