@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 16:08:06 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:56:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	free_structs(t_data *data)
 
 void	ft_exit(t_data *data)
 {
-	free(data->img->col_NO);
-	free(data->img->col_SO);
-	free(data->img->col_WE);
-	free(data->img->col_EA);
+	mlx_delete_texture(data->img->txt_NO);
+	mlx_delete_texture(data->img->txt_SO);
+	mlx_delete_texture(data->img->txt_EA);
+	mlx_delete_texture(data->img->txt_WE);
 	ft_free2d_char(data->game->map);
 	ft_free2d_char(data->game->tmp_map);
 	ft_free2d_int(data->minimap->map);

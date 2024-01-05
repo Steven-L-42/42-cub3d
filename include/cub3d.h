@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 08:31:40 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 11:59:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_minimap
 typedef struct s_calc_view
 {
 	char			direction;
+	int				shadow;
 	uint32_t		color_floor;
 	uint32_t		color_ceiling;
 	uint32_t		color_wall;
@@ -131,14 +132,18 @@ typedef struct s_img
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
 	mlx_image_t		*img_game_wall;
+
 	mlx_image_t		*img_NO;
-	uint32_t		*col_NO;
+	mlx_texture_t	*txt_NO;
+
 	mlx_image_t		*img_SO;
-	uint32_t		*col_SO;
+	mlx_texture_t	*txt_SO;
+
 	mlx_image_t		*img_WE;
-	uint32_t		*col_WE;
+	mlx_texture_t	*txt_WE;
+
 	mlx_image_t		*img_EA;
-	uint32_t		*col_EA;
+	mlx_texture_t	*txt_EA;
 
 	int				pistol_frame;
 	mlx_image_t		*img_pistol[5];
@@ -161,7 +166,8 @@ typedef struct s_data
 	bool			is_shooting;
 }					t_data;
 
-float				calc_dist(t_data *data, float angle, char *dir, bool *new_block);
+float				calc_dist(t_data *data, float angle, char *dir,
+						bool *new_block);
 
 // get_map
 int					init_map(t_data *data, char *input);
@@ -189,9 +195,10 @@ int					ft_str_to_rgb(char *rgb_str, int *color);
 char				*ft_strtok(char *src, char delim);
 int					ft_open_image(t_data *data, mlx_image_t **img_direction,
 						char *img_path);
-int					ft_open_image_plus_info(t_data *data,
-						mlx_image_t **img_direction, uint32_t **color,
+int					ft_open_image_keep_text(t_data *data,
+						mlx_image_t **img_direction, mlx_texture_t **text,
 						char *img_path);
+
 // utils basic
 int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
@@ -206,7 +213,7 @@ void				ft_exit(t_data *data);
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 int					get_colour_from_pixel(u_int8_t *pixel);
 void				hex_to_rgb(char *hex, int *r, int *g, int *b);
-uint32_t			*get_color(mlx_texture_t *texture);
+uint32_t			**get_color(mlx_texture_t *texture);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
@@ -215,11 +222,11 @@ void				calc_view(t_data *data);
 // movement
 void				update_player_angle(double xpos, double ypos, void *param);
 
-
 // hotkeys
 void				ft_key_hold(void *param);
 void				ft_key_press(mlx_key_data_t keydata, void *param);
-void				ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void				ft_mouse_press(mouse_key_t button, action_t action,
+						modifier_key_t mods, void *param);
 
 // minimap
 void				draw_player_rays(t_data *data, int num_rays);

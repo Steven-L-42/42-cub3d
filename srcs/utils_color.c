@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_col.c                                        :+:      :+:    :+:   */
+/*   utils_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2023/12/27 11:58:11 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:19:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-uint32_t	*get_color(mlx_texture_t *texture)
+uint32_t	**get_color(mlx_texture_t *texture)
 {
 	int				i;
 	unsigned int	pos;
 	uint8_t			rgb[4];
-	uint32_t		*colors;
+	uint32_t		**colors;
 
 	i = 0;
-	colors = malloc(sizeof(uint32_t) * (texture->width + 1) * (texture->height + 1));
+	colors = ft_calloc(sizeof(uint32_t *), texture->height + 1);
 	if (colors == NULL)
 		return (NULL);
 	pos = 0;
-	while (pos < texture->width * texture->height * texture->bytes_per_pixel)
+	while (pos < texture->height * texture->bytes_per_pixel)
 	{
 		rgb[0] = texture->pixels[pos];
 		rgb[1] = texture->pixels[pos + 1];
 		rgb[2] = texture->pixels[pos + 2];
 		rgb[3] = texture->pixels[pos + 3];
-		colors[i] = (rgb[0] << 24) + (rgb[1] << 16) + (rgb[2] << 8) + rgb[3];
+		colors[i] = ft_calloc(5, sizeof(uint32_t));
+		colors[i][0] = rgb[0] << 24;
+		colors[i][1] = rgb[1] << 16;
+		colors[i][2] = rgb[2] << 8;
+		colors[i][3] = rgb[3];
+		//colors[i] = (rgb[0] << 24) + (rgb[1] << 16) + (rgb[2] << 8) + rgb[3];
 		pos += texture->bytes_per_pixel;
 		i++;
 	}

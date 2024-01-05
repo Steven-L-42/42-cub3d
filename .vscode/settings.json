@@ -19,6 +19,21 @@
 		"string.h": "c",
 		"__locale": "c",
 		"stdbool.h": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"__hash_table": "c",
+		"__mutex_base": "c",
+		"__split_buffer": "c",
+		"__threading_support": "c",
+		"__undef_macros": "c",
+		"bit": "c",
+		"cmath": "c",
+		"functional": "c",
+		"memory_resource": "c",
+		"istream": "c",
+		"limits": "c",
+		"locale": "c",
+		"mutex": "c",
+		"ratio": "c",
+		"complex": "c"
 	}
 }

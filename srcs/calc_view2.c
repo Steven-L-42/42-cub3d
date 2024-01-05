@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_view2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 10:31:30 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:00:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,30 @@ float	calc_for_x(float big, float small, float block_size)
 
 	x = fabs(((small) / big) * 64);
 	return (x);
+}
+
+double	max(double a, double b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+int	get_rgba_from_tex(mlx_texture_t *text, t_calc_view *calc, int block_width, int block_height)
+{
+	int				color;
+	const int		pos = (block_height + text->width * block_width)
+		* text->bytes_per_pixel;
+	const double	brightness = max(1.0 - (calc->distance / calc->shadow), 0);
+
+	if (calc->distance  > calc->shadow)
+		return (0x000000ff);
+	color = (int)(text->pixels[pos] * brightness) << 24
+		| (int)(text->pixels[pos + 1] * brightness) << 16
+		| (int)(text->pixels[pos + 2] * brightness) << 8
+		| (int)text->pixels[pos + 3];
+	return (color);
 }
 
 void	draw_line(t_data *data, t_calc_view *calc, bool if_true, int block_width)
@@ -39,10 +63,17 @@ void	draw_line(t_data *data, t_calc_view *calc, bool if_true, int block_width)
 	y = calc->line_top;
 	while (y < calc->line_bottom)
 	{
-		
+
 		block_height = calc_for_x(calc->line_bottom - calc->line_top, y - calc->line_top, BLOCK_PIXEL_SIZE);
-		calc->color_wall = data->img->col_EA[(int)block_width * (int)block_height];
-		
+		if (calc->direction == 'N')
+			calc->color_wall = get_rgba_from_tex(data->img->txt_NO, calc, block_height, block_width);
+		else if (calc->direction == 'E')
+			calc->color_wall = get_rgba_from_tex(data->img->txt_EA, calc, block_height, block_width);
+		else if (calc->direction == 'S')
+			calc->color_wall = get_rgba_from_tex(data->img->txt_SO, calc, block_height, block_width);
+		else if (calc->direction == 'W')
+			calc->color_wall = get_rgba_from_tex(data->img->txt_WE, calc, block_height, block_width);
+
 		// calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height + (int)(1.9 * block_width)));
 		// if ((block_width >= 60 && block_width <= 64) && (block_height >= 60 && block_height <= 64))
 		// 	calc->color_wall = ft_pixel(255, 255, 255, 255);
@@ -69,7 +100,7 @@ void	draw_texture(t_data *data, t_calc_view *calc, bool if_true)
 		i++;
 		if (calc->width_array[i] != (float)0 && calc->width_array[i] < FLT_MAX)
 		{
-			temp = (int)calc_for_x(calc->width_array[i] - calc->width_array[i - 1], 
+			temp = (int)calc_for_x(calc->width_array[i] - calc->width_array[i - 1],
 				calc->j - calc->width_array[i - 1], BLOCK_PIXEL_SIZE);
 		}
 	}

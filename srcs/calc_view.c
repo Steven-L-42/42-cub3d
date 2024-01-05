@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 10:33:43 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 12:00:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->line = calc->max_lines * -1;
 	calc->treshold = (float)6.2f * (data->width / 1920.0);
 	calc->direction = '\0';
+	calc->shadow = 11;
 }
 
 void	reset_map(t_data *data)
@@ -118,7 +119,7 @@ void	calc_view(t_data *data)
 	bool	new_block;
 
 	calc_preset(data, &calc);
-	quality = data->img->img_game->width; // Need to use the width of the screen
+	quality = data->width; // Need to use the width of the screen
 	quality = QUALITY / (fabs(calc.max_lines) / (quality / 2));
 	new_block = false;
 	reset_map(data);

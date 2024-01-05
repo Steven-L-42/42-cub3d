@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 18:07:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:06:33 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int	main(int argc, char **argv)
 		return (ft_error("Error: data allocation failed!"));
 	if (ft_alloc_structs(data))
 		return (1);
-	mlx_set_setting(MLX_FULLSCREEN, true);
+	// mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	//mlx_set_setting(MLX_FULLSCREEN, true);
 	if (init(data, argv[1]))
 		return (free_structs(data), 1);
 	ft_instructions(data);

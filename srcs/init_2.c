@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/04 16:39:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:57:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ int	init_img_two(t_data *data)
 
 int	init_img_one(t_data *data)
 {
-	if (ft_open_image_plus_info(data, &data->img->img_NO, &data->img->col_NO,
+	if (ft_open_image_keep_text(data, &data->img->img_NO, &data->img->txt_NO,
 			data->game->NO))
 		return (1);
-	if (ft_open_image_plus_info(data, &data->img->img_SO, &data->img->col_SO,
+	if (ft_open_image_keep_text(data, &data->img->img_SO, &data->img->txt_SO,
 			data->game->SO))
 		return (1);
-	if (ft_open_image_plus_info(data, &data->img->img_WE, &data->img->col_WE,
+	if (ft_open_image_keep_text(data, &data->img->img_WE, &data->img->txt_WE,
 			data->game->WE))
 		return (1);
-	if (ft_open_image_plus_info(data, &data->img->img_EA, &data->img->col_EA,
+	if (ft_open_image_keep_text(data, &data->img->img_EA, &data->img->txt_EA,
 			data->game->EA))
 		return (1);
 	return (0);
