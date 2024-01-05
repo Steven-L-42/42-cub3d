@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:40:06 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:08:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 		data->game->map[y_game] = ft_calloc(ft_strlen(tmp_map[y_game + 6]) + 1,
 				1);
 		if (!data->game->map[y_game])
-			return (ft_error("Error: data->game->map[y_game] allocation failed!"));
+			return (ft_error("Error: data->game->map[y_game] alloc failed!"));
 		while (tmp_map[y_game + 6][++x])
 			data->game->map[y_game][x] = tmp_map[y_game + 6][x];
 		if (data->game->width < ft_strlen(data->game->map[y_game]))

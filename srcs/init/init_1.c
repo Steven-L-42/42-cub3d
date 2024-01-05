@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:45:19 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:11:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ int	init(t_data *data, char *input)
 {
 	if (init_helper(data, input))
 		return (1);
-	if (!(data->mlx = mlx_init(data->width, data->height, "cub3D", false)))
+	data->mlx = mlx_init(data->width, data->height, "cub3D", false);
+	if (!data->mlx)
 		return (puts(mlx_strerror(mlx_errno)), 1);
-	if (!(data->img->img_game = mlx_new_image(data->mlx, data->width,
-				data->height)))
+	data->img->img_game = mlx_new_image(data->mlx, data->width, data->height);
+	if (!data->img->img_game)
 		return (puts(mlx_strerror(mlx_errno)), 1);
-	if (!(data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width
-				* 16, data->game->height * 16)))
+	data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width * 16,
+			data->game->height * 16);
+	if (!data->img->img_player_ray)
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (init_img_one(data) || init_img_two(data))

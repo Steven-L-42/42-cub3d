@@ -6,11 +6,28 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:07:52 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
+{
+	if (data->game->map[y][x] == '5' && is_wall)
+	{
+		mlx_image_to_window(data->mlx, data->img->img_mm_door_open, x * 16, y
+			* 16);
+		data->minimap->map[y][x] = mlx_image_to_window(data->mlx,
+				data->img->img_mm_door_closed, x * 16, y * 16);
+	}
+	else if (data->game->map[y][x] == '9' && is_wall)
+		mlx_image_to_window(data->mlx, data->img->img_mm_portal, x * 16, y
+			* 16);
+	else if (data->game->map[y][x] == 'P' && !is_wall)
+		mlx_image_to_window(data->mlx, data->img->img_player, data->player->x
+			* 16, data->player->y * 16);
+}
 
 void	draw_objects(t_data *data, int is_wall)
 {
@@ -27,24 +44,13 @@ void	draw_objects(t_data *data, int is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall, x * 16, y
 					* 16);
 			else if ((data->game->map[y][x] == '0'
-					|| data->game->map[y][x] == 'P') && is_wall)
+				|| data->game->map[y][x] == 'P') && is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
 					* 16, y * 16);
-			else if (data->game->map[y][x] == '5' && is_wall)
+			else
 			{
-				mlx_image_to_window(data->mlx, data->img->img_mm_door_open, x
-					* 16, y * 16);
-				data->minimap->map[y][x] = mlx_image_to_window(data->mlx,
-						data->img->img_mm_door_closed, x * 16, y * 16);
+				draw_objects_helper(data, is_wall, y, x);
 			}
-			else if (data->game->map[y][x] == '9' && is_wall)
-			{
-				mlx_image_to_window(data->mlx, data->img->img_mm_portal, x * 16,
-					y * 16);
-			}
-			else if (data->game->map[y][x] == 'P' && !is_wall)
-				mlx_image_to_window(data->mlx, data->img->img_player,
-					data->player->x * 16, data->player->y * 16);
 			x++;
 		}
 		y++;

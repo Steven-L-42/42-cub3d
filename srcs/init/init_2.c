@@ -6,42 +6,49 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:45:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:17:58 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+int	ft_check_all_imgs(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (!data->img->img_player || !data->img->img_game_cursor
+		|| !data->img->img_mm_wall || !data->img->img_mm_portal
+		|| !data->img->img_mm_door_closed || !data->img->img_mm_door_open
+		|| !data->img->img_mm_wall_shadow)
+		return (1);
+	while (i < 5)
+	{
+		if (!data->img->img_pistol[i++])
+			return (1);
+	}
+	return (0);
+}
+
 int	init_img_two(t_data *data)
 {
-	if (ft_open_image(data, &data->img->img_game_cursor, "textures/cross.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_mm_wall,
-			"textures/brick_small.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_mm_portal,
-			"textures/brick_portal_small.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_mm_door_closed,
-			"textures/brick_door_closed_small.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_mm_door_open,
-			"textures/brick_door_open_small.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_mm_wall_shadow,
-			"textures/brick_shadow_small.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_player, "textures/player.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_pistol[0], "textures/pistol/00.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_pistol[1], "textures/pistol/01.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_pistol[2], "textures/pistol/02.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_pistol[3], "textures/pistol/03.png"))
-		return (1);
-	if (ft_open_image(data, &data->img->img_pistol[4], "textures/pistol/04.png"))
+	ft_open_image(data, &data->img->img_game_cursor, "textures/cross.png");
+	ft_open_image(data, &data->img->img_mm_wall, "textures/brick_small.png");
+	ft_open_image(data, &data->img->img_mm_portal,
+		"textures/brick_portal_small.png");
+	ft_open_image(data, &data->img->img_mm_door_closed,
+		"textures/brick_door_closed_small.png");
+	ft_open_image(data, &data->img->img_mm_door_open,
+		"textures/brick_door_open_small.png");
+	ft_open_image(data, &data->img->img_mm_wall_shadow,
+		"textures/brick_shadow_small.png");
+	ft_open_image(data, &data->img->img_player, "textures/player.png");
+	ft_open_image(data, &data->img->img_pistol[0], "textures/pistol/00.png");
+	ft_open_image(data, &data->img->img_pistol[1], "textures/pistol/01.png");
+	ft_open_image(data, &data->img->img_pistol[2], "textures/pistol/02.png");
+	ft_open_image(data, &data->img->img_pistol[3], "textures/pistol/03.png");
+	ft_open_image(data, &data->img->img_pistol[4], "textures/pistol/04.png");
+	if (ft_check_all_imgs(data))
 		return (1);
 	return (0);
 }
@@ -61,7 +68,8 @@ int	init_img_one(t_data *data)
 			data->game->EA))
 		return (1);
 	if (ft_open_image_keep_text(data, &data->img->img_door_closed,
-			&data->img->txt_door_closed, "textures/doors/brick_door_closed.png"))
+			&data->img->txt_door_closed,
+			"textures/doors/brick_door_closed.png"))
 		return (1);
 	return (0);
 }

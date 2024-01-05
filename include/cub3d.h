@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:42:01 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:59:21 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,16 @@ typedef struct s_calc_view
 	float			width_array[100];
 }					t_calc_view;
 
+typedef struct s_check_door
+{
+	int				instance;
+	float			p_x_cos;
+	float			p_y_sin;
+	float			cell_x;
+	float			cell_y;
+	float			radian_angle;
+}					t_check_door;
+
 typedef struct s_calc_helper
 {
 	float			line;
@@ -174,7 +184,7 @@ typedef struct s_data
 	t_map			*game;
 	t_minimap		*minimap;
 	t_player		*player;
-	t_detection		detec;
+	t_detection		detc;
 
 	char			wall_type;
 	uint32_t		color[64];
