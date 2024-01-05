@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:40:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	init_img_two(t_data *data)
 	ft_open_image(data, &data->img->img_mm_wall_shadow,
 		"textures/brick_shadow_small.png");
 	ft_open_image(data, &data->img->img_player, "textures/player.png");
-	ft_open_image(data, &data->img->img_pistol[0], "textures/pistol/00.png");
-	ft_open_image(data, &data->img->img_pistol[1], "textures/pistol/01.png");
-	ft_open_image(data, &data->img->img_pistol[2], "textures/pistol/02.png");
-	ft_open_image(data, &data->img->img_pistol[3], "textures/pistol/03.png");
-	ft_open_image(data, &data->img->img_pistol[4], "textures/pistol/04.png");
+	ft_open_image(data, &data->img->img_pistol[0], "textures/weapon/0.png");
+	ft_open_image(data, &data->img->img_pistol[1], "textures/weapon/1.png");
+	ft_open_image(data, &data->img->img_pistol[2], "textures/weapon/2.png");
+	ft_open_image(data, &data->img->img_pistol[3], "textures/weapon/3.png");
+	ft_open_image(data, &data->img->img_pistol[4], "textures/weapon/4.png");
 	if (ft_check_all_imgs(data))
 		return (1);
 	return (0);
