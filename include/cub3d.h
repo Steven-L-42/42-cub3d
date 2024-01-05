@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 11:59:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:03:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_map
 {
 	char			**tmp_map;
 	char			**map;
+	char			**map_copy;
 	int				width;
 	int				height;
 	int				skip_height;
@@ -111,6 +112,17 @@ typedef struct s_calc_view
 	float			width_array[100];
 }					t_calc_view;
 
+typedef struct s_calc_helper
+{
+	float			line;
+	float			maxline;
+	float			angle;
+	float			t;
+	float			dist;
+	int				i;
+	float			quality;
+}					t_calc_helper;
+
 typedef struct s_draw_rays
 {
 	int				color;
@@ -132,6 +144,9 @@ typedef struct s_img
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
 	mlx_image_t		*img_game_wall;
+
+	mlx_image_t		*img_door_closed;
+	mlx_texture_t	*txt_door_closed;
 
 	mlx_image_t		*img_NO;
 	mlx_texture_t	*txt_NO;
@@ -181,6 +196,13 @@ void				init_coords(t_data *data, int pixel_x, int pixel_y);
 void				init_player(t_data *data);
 int					init_img_one(t_data *data);
 int					init_img_two(t_data *data);
+
+// utils calc
+float				calc_for_x(float big, float small, float block_size);
+double				max(double a, double b);
+void				reset_map(t_data *data);
+int					ft_text_color(mlx_texture_t *text, t_calc_view *calc,
+						int block_width, int block_height);
 
 // utils main
 void				ft_img_to_window(t_data *data);

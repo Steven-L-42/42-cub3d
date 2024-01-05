@@ -34,6 +34,7 @@
 		"locale": "c",
 		"mutex": "c",
 		"ratio": "c",
-		"complex": "c"
+		"complex": "c",
+		"initializer_list": "c"
 	}
 }

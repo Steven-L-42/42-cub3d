@@ -6,11 +6,60 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 12:00:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:03:05 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp, t_calc_view *calc, bool new_block)
+{
+	if (new_block == true)
+		calc->width_array[calc_tmp.i] = FLT_MAX;
+	else
+	{
+		while (new_block == false)
+		{
+			calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction,
+					&new_block);
+			calc_tmp.angle -= 1 / calc_tmp.quality;
+			calc_tmp.t++;
+			calc_tmp.line -= 1 / calc_tmp.quality;
+		}
+	}
+	if (new_block == true)
+		calc->width_array[calc_tmp.i] = FLT_MAX;
+	calc->width_array[calc_tmp.i] = calc_tmp.t;
+	calc_tmp.i++;
+	calc->width_array[calc_tmp.i] = FLT_MAX;
+}
+
+void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
+		float quality)
+{
+	t_calc_helper calc_tmp;
+
+
+	calc_tmp.line = calc->line;
+	calc_tmp.maxline = calc->max_lines;
+	calc_tmp.angle = calc->angle;
+	calc_tmp.t = 0;
+	calc_tmp.i = 0;
+	calc_tmp.quality = (float)quality;
+	while (calc_tmp.line > calc_tmp.maxline)
+	{
+		calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction, &new_block);
+		if (new_block == true)
+		{
+			calc->width_array[calc_tmp.i] = calc_tmp.t;
+			calc_tmp.i++;
+		}
+		calc_tmp.angle -= 1 / (float)quality;
+		calc_tmp.t++;
+		calc_tmp.line -= 1 / (float)quality;
+	}
+	calc_block_width_helper(data, calc_tmp, calc, new_block);
+}
 
 // Funktion: calc_preset
 // Zweck: Initialisiert die notwendigen Werte für die Berechnung der Sichtlinien.
@@ -37,72 +86,6 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 	calc->shadow = 11;
 }
 
-void	reset_map(t_data *data)
-{
-	for (int y = 0; data->game->map[y] != NULL; y++)
-	{
-		for (int x = 0; data->game->map[y][x] != '\0'; x++)
-		{
-			if (data->game->map[y][x] == 'L')
-				data->game->map[y][x] = '1';
-		}
-	}
-}
-
-void	get_calc_color(t_calc_view *calc)
-{
-	if (calc->direction == 'N')
-		calc->color_wall = ft_pixel(227, 66, 245, 255);
-	else if (calc->direction == 'E')
-		calc->color_wall = ft_pixel(245, 158, 66, 255);
-	else if (calc->direction == 'S')
-		calc->color_wall = ft_pixel(66, 135, 245, 255);
-	else if (calc->direction == 'W')
-		calc->color_wall = ft_pixel(66, 245, 120, 255);
-}
-
-void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block, float quality)
-{
-	float	temp_calc_line = calc->line;
-	float	temp_calc_maxline = calc->max_lines;
-	float	temp_calc_angle = calc->angle;
-	float	temp_calc_t = 0;
-	float	dist;
-	int		i = 0;
-
-	while (temp_calc_line > temp_calc_maxline)
-	{
-		data->wall_type = 'W';
-		dist = calc_dist(data, temp_calc_line, &calc->direction, &new_block);
-		if (new_block == true)
-		{
-			calc->width_array[i] = temp_calc_t;
-			i++;
-		}
-		temp_calc_angle -= 1 / (float)quality;
-		temp_calc_t++;
-		temp_calc_line -= 1 / (float)quality;
-	}
-	if (new_block == true)
-		calc->width_array[i] = FLT_MAX;
-	else
-	{
-		while (new_block == false)
-		{
-			data->wall_type = 'W';
-			dist = calc_dist(data, temp_calc_line, &calc->direction, &new_block);
-			temp_calc_angle -= 1 / (float)quality;
-			temp_calc_t++;
-			temp_calc_line -= 1 / (float)quality;
-		}
-	}
-	if (new_block == true)
-		calc->width_array[i] = FLT_MAX;
-	calc->width_array[i] = temp_calc_t;
-		i++;
-	calc->width_array[i] = FLT_MAX;
-}
-
 // Funktion: calc_view
 // Zweck: Berechnet und zeichnet die Sichtlinien im Spiel.
 // Parameter:
@@ -114,9 +97,9 @@ void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block, float qua
 void	calc_view(t_data *data)
 {
 	t_calc_view	calc;
-	float	quality;
-	float	block_width;
-	bool	new_block;
+	float		quality;
+	float		block_width;
+	bool		new_block;
 
 	calc_preset(data, &calc);
 	quality = data->width; // Need to use the width of the screen
@@ -129,21 +112,10 @@ void	calc_view(t_data *data)
 	reset_map(data);
 	while (calc.line > calc.max_lines)
 	{
-		data->wall_type = 'W';
 		calc.distance = calc_dist(data, calc.line, &calc.direction, &new_block);
-		get_calc_color(&calc);
-		if (new_block == false)
-		{
-			draw_texture(data, &calc, new_block);
-		}
-		else
-		{
-			calc.color_wall = ft_pixel(0, 0, 0, 255);
-			draw_texture(data, &calc, new_block);
-		}
+		draw_texture(data, &calc, new_block);
 		calc.angle -= 1 / (float)quality;
 		calc.j++;
 		calc.line -= 1 / (float)quality;
 	}
-	usleep(1000 * 10);
 }

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 11:57:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:22:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int	init_img_one(t_data *data)
 		return (1);
 	if (ft_open_image_keep_text(data, &data->img->img_EA, &data->img->txt_EA,
 			data->game->EA))
+		return (1);
+	if (ft_open_image_keep_text(data, &data->img->img_door_closed, &data->img->txt_door_closed,
+			"textures/doors/brick_door_closed.png"))
 		return (1);
 	return (0);
 }

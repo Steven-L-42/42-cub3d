@@ -6,44 +6,11 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 12:04:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:02:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-float	calc_for_x(float big, float small, float block_size)
-{
-	float	x;
-
-	x = fabs(((small) / big) * 64);
-	return (x);
-}
-
-double	max(double a, double b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
-}
-
-int	ft_text_color(mlx_texture_t *text, t_calc_view *calc, int block_width,
-		int block_height)
-{
-	int		color;
-	int		pos;
-	double	brightness;
-
-	pos = (block_height + text->width * block_width) * text->bytes_per_pixel;
-	brightness = max(1.0 - (calc->distance / calc->shadow), 0);
-	if (calc->distance > calc->shadow)
-		return (0x000000ff);
-	color = (int)(text->pixels[pos] * brightness) << 24 | (int)(text->pixels[pos
-			+ 1] * brightness) << 16 | (int)(text->pixels[pos + 2]
-			* brightness) << 8 | (int)text->pixels[pos + 3];
-	return (color);
-}
 
 void	draw_line(t_data *data, t_calc_view *calc, bool if_true,
 		int block_width)
@@ -69,24 +36,26 @@ void	draw_line(t_data *data, t_calc_view *calc, bool if_true,
 	{
 		block_height = calc_for_x(calc->line_bottom - calc->line_top, y
 				- calc->line_top, BLOCK_PIXEL_SIZE);
-		if (calc->direction == 'N')
-			calc->color_wall = ft_text_color(data->img->txt_NO, calc,
-					block_height, block_width);
-		else if (calc->direction == 'E')
-			calc->color_wall = ft_text_color(data->img->txt_EA, calc,
-					block_height, block_width);
-		else if (calc->direction == 'S')
-			calc->color_wall = ft_text_color(data->img->txt_SO, calc,
-					block_height, block_width);
-		else if (calc->direction == 'W')
-			calc->color_wall = ft_text_color(data->img->txt_WE, calc,
-					block_height, block_width);
-		// // calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height
-		// 			+ (int)(1.9 * block_width)));
-		// 			// if ((block_width >= 60 && block_width <= 64)
-		// 				&& (block_height >= 60
-		// 		&& block_height <= 64))
-		// // 	calc->color_wall = ft_pixel(255, 255, 255, 255);
+		if (data->wall_type == 'W')
+		{
+			if (calc->direction == 'N')
+				calc->color_wall = ft_text_color(data->img->txt_NO, calc,
+						block_height, block_width);
+			else if (calc->direction == 'E')
+				calc->color_wall = ft_text_color(data->img->txt_EA, calc,
+						block_height, block_width);
+			else if (calc->direction == 'S')
+				calc->color_wall = ft_text_color(data->img->txt_SO, calc,
+						block_height, block_width);
+			else if (calc->direction == 'W')
+				calc->color_wall = ft_text_color(data->img->txt_WE, calc,
+						block_height, block_width);
+		}
+		else if (data->wall_type == 'D')
+		{
+			calc->color_wall = ft_text_color(data->img->txt_door_closed, calc,
+						block_height, block_width);
+		}
 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_wall);
 				y++;
 	}

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 11:34:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:37:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,19 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	return (1);
 }
 
+char **ft_copy_original(char **original)
+{
+	char	**copy;
+
+	int	i;
+
+	copy = ft_calloc(1024, sizeof(char *));
+	i = -1;
+	while (original[++i])
+		copy[i] = ft_strdup(original[i]);
+	return (copy);
+}
+
 static int	ft_fill_map(t_data *data, char **tmp_map)
 {
 	int		y_game;
@@ -86,6 +99,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 			data->game->width = ft_strlen(data->game->map[y_game]);
 		y_game++;
 	}
+	data->game->map_copy = ft_copy_original(data->game->map);
 	data->game->height = y_game;
 	return (0);
 }
