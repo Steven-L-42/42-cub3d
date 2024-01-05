@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 04:09:13 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 08:31:40 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define SIZE 100
 
 # define QUALITY 1
-# define BLOCK_PIXEL_SIZE 64
+# define BLOCK_PIXEL_SIZE 256
 
 typedef struct s_detection
 {

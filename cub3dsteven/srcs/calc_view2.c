@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 04:11:08 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 10:31:30 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,13 @@ void	draw_line(t_data *data, t_calc_view *calc, bool if_true, int block_width)
 	y = calc->line_top;
 	while (y < calc->line_bottom)
 	{
+		
 		block_height = calc_for_x(calc->line_bottom - calc->line_top, y - calc->line_top, BLOCK_PIXEL_SIZE);
-		calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height + (int)(1.9 * block_width)));
+		calc->color_wall = data->img->col_EA[(int)block_width * (int)block_height];
+		
+		// calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height + (int)(1.9 * block_width)));
+		// if ((block_width >= 60 && block_width <= 64) && (block_height >= 60 && block_height <= 64))
+		// 	calc->color_wall = ft_pixel(255, 255, 255, 255);
 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_wall);
 		y++;
 	}
@@ -51,26 +56,6 @@ void	draw_line(t_data *data, t_calc_view *calc, bool if_true, int block_width)
 	while (++t < data->height)
 		mlx_put_pixel(data->img->img_game, calc->x, t, data->game->color_floor);
 	temp_if_true = calc->tmp;
-	// while (--y > calc->line_top)
-	// {
-	// 	if (data->wall_type == 'D')
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_door);
-	// 	else if (data->wall_type == 'P')
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_portal);
-	// 	else
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_wall);
-	// }
-	// y = (data->height / 2) - 1;
-	// while (++y < calc->line_bottom)
-	// {
-	// 	if (data->wall_type == 'D')
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_door);
-	// 	else if (data->wall_type == 'P')
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_portal);
-	// 	else
-	// 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_wall);
-	// }
-	
 }
 
 void	draw_texture(t_data *data, t_calc_view *calc, bool if_true)
@@ -79,15 +64,17 @@ void	draw_texture(t_data *data, t_calc_view *calc, bool if_true)
 	float	temp;
 	int	i = 0;
 
-	while (x_dir < QUALITY)
+	while (calc->width_array[i] < calc->j)
 	{
-		while (calc->width_array[i] < calc->j)
-			i++;
+		i++;
 		if (calc->width_array[i] != (float)0 && calc->width_array[i] < FLT_MAX)
 		{
 			temp = (int)calc_for_x(calc->width_array[i] - calc->width_array[i - 1], 
 				calc->j - calc->width_array[i - 1], BLOCK_PIXEL_SIZE);
 		}
+	}
+	while (x_dir < QUALITY)
+	{
 		draw_line(data, calc, if_true, temp);
 		x_dir++;
 		if (x_dir < QUALITY)

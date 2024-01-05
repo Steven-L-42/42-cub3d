@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 03:38:54 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/05 10:33:43 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	calc_view(t_data *data)
 
 	calc_preset(data, &calc);
 	quality = data->img->img_game->width; // Need to use the width of the screen
-	quality = 1 / (fabs(calc.max_lines) / (quality / 2)) / QUALITY;
+	quality = QUALITY / (fabs(calc.max_lines) / (quality / 2));
 	new_block = false;
 	reset_map(data);
 	calc_block_width(data, &calc, new_block, quality);
