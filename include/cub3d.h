@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 17:27:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 04:09:13 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define PI 3.14159265359
 # define SIZE 100
 
-# define QUALITY 5
+# define QUALITY 1
+# define BLOCK_PIXEL_SIZE 64
 
 typedef struct s_detection
 {
@@ -106,6 +107,7 @@ typedef struct s_calc_view
 	double			distance;
 	double			line_bottom;
 	double			line_top;
+	float			width_array[100];
 }					t_calc_view;
 
 typedef struct s_draw_rays
@@ -159,7 +161,7 @@ typedef struct s_data
 	bool			is_shooting;
 }					t_data;
 
-float				calc_dist(t_data *data, float angle, char *dir);
+float				calc_dist(t_data *data, float angle, char *dir, bool *new_block);
 
 // get_map
 int					init_map(t_data *data, char *input);
@@ -228,5 +230,8 @@ int					check_for_wall(t_data *data, float distance,
 						float radian_angle, const char *set);
 int					check_wall_corner_behind(t_data *data, const char *set);
 int					check_wall_corner_ahead(t_data *data, const char *set);
+
+// calc_view2
+void				draw_texture(t_data *data, t_calc_view *calc, bool if_true);
 
 #endif

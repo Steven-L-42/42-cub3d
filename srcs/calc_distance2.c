@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_distance2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/04 16:17:59 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/04 21:47:11 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,9 @@ float	startdist(float m, float angle, float *playerx, float *playery,
 }
 
 float	calc_distance(float angle, float playerx, float playery, t_data *data,
-		char *dir)
+		char *dir, bool *new_block)
 {
+	static char	old_dir;
 	float	dist;
 	int		tempy;
 	int		tempx;
@@ -161,14 +162,22 @@ float	calc_distance(float angle, float playerx, float playery, t_data *data,
 				tempy = ceil(playery) - 1;
 		}
 	}
+	if (data->game->map[tempy][tempx] == 'L')
+		*new_block = false;
+	if (data->game->map[tempy][tempx] == '1' || *dir != old_dir)
+	{
+		data->game->map[tempy][tempx] = 'L';
+		*new_block = true;
+	}
 	if (data->game->map[tempy][tempx] == '5')
 		data->wall_type = 'D';
 	else if (data->game->map[tempy][tempx] == '9')
 		data->wall_type = 'P';
+	old_dir = *dir;
 	return (fabs(dist));
 }
 
-float	calc_dist(t_data *data, float angle, char *dir)
+float	calc_dist(t_data *data, float angle, char *dir, bool *new_block)
 {
 	float	playerx;
 	float	playery;
@@ -180,5 +189,5 @@ float	calc_dist(t_data *data, float angle, char *dir)
 		angle -= 360;
 	while (angle < 0)
 		angle += 360;
-	return (calc_distance(angle, playerx, playery, data, dir));
+	return (calc_distance(angle, playerx, playery, data, dir, new_block));
 }
