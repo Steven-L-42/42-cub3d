@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:58:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ft_pistol_anim(void *param)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
+
 
 	if (argc != 2 || ft_check_extension(*(argv + 1)))
 		exit(1);
