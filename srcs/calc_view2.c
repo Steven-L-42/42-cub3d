@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 12:03:42 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:04:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	draw_line(t_data *data, t_calc_view *calc, bool if_true,
 		else if (calc->direction == 'W')
 			calc->color_wall = ft_text_color(data->img->txt_WE, calc,
 					block_height, block_width);
-		// calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height
-					+ (int)(1.9 * block_width)));
-					// if ((block_width >= 60 && block_width <= 64)
-						&& (block_height >= 60
-				&& block_height <= 64))
-		// 	calc->color_wall = ft_pixel(255, 255, 255, 255);
+		// // calc->color_wall = ft_pixel(0, 180, 255,(int)(1.9 * block_height
+		// 			+ (int)(1.9 * block_width)));
+		// 			// if ((block_width >= 60 && block_width <= 64)
+		// 				&& (block_height >= 60
+		// 		&& block_height <= 64))
+		// // 	calc->color_wall = ft_pixel(255, 255, 255, 255);
 		mlx_put_pixel(data->img->img_game, calc->j, y, calc->color_wall);
 				y++;
 	}
