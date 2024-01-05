@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:54:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_wall(t_data *data, t_dda *dda, int block_width, float y)
 	while (y < dda->line_bottom)
 	{
 		block_height = calc_for_x(dda->line_bottom - dda->line_top, y
-				- dda->line_top, BLOCK_PIXEL_SIZE);
+				- dda->line_top);
 		dda->color_wall = ft_select_color(data, dda, block_height,
 				block_width);
 		mlx_put_pixel(data->img->img_game, dda->j, y, dda->color_wall);
@@ -44,7 +44,6 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true,
 		int block_width)
 {
 	float			y;
-	float			t;
 	static float	temp_if_true;
 
 	dda->tmp = round(dda->distance * cos((dda->angle) * PI / 180) * 1000)

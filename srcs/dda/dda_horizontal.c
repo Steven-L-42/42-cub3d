@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:28:55 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:54:12 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	dda_horizontal(t_data *data)
 {
 	t_dda	dda;
 	float	quality;
-	float	block_width;
 	bool	new_block;
 
 	calc_preset(data, &dda);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:30:40 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:53:13 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int					init_img_one(t_data *data);
 int					init_img_two(t_data *data);
 
 // utils dda
-float				calc_for_x(float big, float small, float block_size);
+float				calc_for_x(float big, float small);
 double				max(double a, double b);
 void				reset_map(t_data *data);
 float				ft_get_block_width(t_dda *calc);

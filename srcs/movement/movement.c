@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:53:58 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 {
 	t_data	*data;
 
+	mods = 0;
 	data = param;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 		data->is_shooting = true;

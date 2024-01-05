@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:53:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float	get_slope(float angle)
 	return (tan(radian_angle));
 }
 
-float	calc_for_x(float big, float small, float block_size)
+float	calc_for_x(float big, float small)
 {
 	float	x;
 
@@ -76,7 +76,7 @@ float	ft_get_block_width(t_dda *calc)
 		{
 			block_width = (int)calc_for_x(calc->width_array[i]
 					- calc->width_array[i - 1], calc->j - calc->width_array[i
-					- 1], BLOCK_PIXEL_SIZE);
+					- 1]);
 		}
 	}
 	return (block_width);
