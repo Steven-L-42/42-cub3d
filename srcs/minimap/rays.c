@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:46:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 // und initialisiert den Startwinkel für die Berechnungen.
 void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 {
-	ft_memset(data->img->img_player_ray->pixels, 0, data->img->img_player_ray->width
-		* data->img->img_player_ray->height * sizeof(int32_t));
+	ft_memset(data->img->img_player_ray->pixels, 0,
+		data->img->img_player_ray->width * data->img->img_player_ray->height
+		* sizeof(int32_t));
 	ray->color = ft_pixel(247, 225, 178, 125);
 	ray->i = -num_rays / 2;
 }
@@ -58,7 +59,8 @@ void	ray_helper(t_data *data, t_draw_rays *ray)
 			&& (const uint32_t)ray->x_coord < data->img->img_player_ray->width
 			&& (const uint32_t)ray->y_coord < data->img->img_player_ray->height)
 		{
-			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord / 16], "159"))
+			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord
+					/ 16], "159"))
 				break ;
 			mlx_put_pixel(data->img->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);
@@ -68,14 +70,13 @@ void	ray_helper(t_data *data, t_draw_rays *ray)
 }
 
 // Funktion: draw_player_rays
-// Zweck: Zeichnet alle Rays vom Spieler aus und zeigt das Ergebnis im Fenster an.
 // Parameter:
 //   - data: Zeiger auf die Datenstruktur, die Informationen zum Spiel enthält.
 //   - num_rays: Die Anzahl der Rays, die gezeichnet werden sollen.
 //
-// Die Funktion iteriert über alle Rays und berechnet deren Positionen und Endpunkte.
+// Die Funktion iteriert über alle Rays und berechnet Positionen/Endpunkte.
 // Für jeden Ray wird dann die Hilfsfunktion ray_helper aufgerufen, die
-// die Berechnungen für einzelne Rays durchführt. Das Ergebnis wird im Fenster angezeigt.
+// die Berechnungen für einzelne Rays durchführt.
 void	draw_player_rays(t_data *data, int num_rays)
 {
 	t_draw_rays	ray;

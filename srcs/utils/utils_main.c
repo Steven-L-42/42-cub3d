@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:48:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_running(void *param)
 
 	data = param;
 	reset_window(data);
-	calc_view(data);
+	dda_horizontal(data);
 	draw_player_rays(data, 80);
 }
 
@@ -63,7 +63,10 @@ int	ft_check_extension(char *argv)
 	while (extension[i])
 	{
 		if (!argv[len] || extension[i] != argv[len])
-			return (ft_error("Error: Map extension incorrect. Expected: (.cub)"));
+		{
+			ft_error("Error: Map extension incorrect. Expected: (.cub)");
+			return (1);
+		}
 		len++;
 		i++;
 	}

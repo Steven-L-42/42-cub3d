@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:03:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:42:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@
 # define BLUE "\x1B[1;34m"
 # define WHITE "\x1B[1;37m"
 # define RESET "\x1B[0m"
-
+# define JSANGER_I "https://profile.intra.42.fr/users/jsanger"
+# define SLIPPERT_I "https://profile.intra.42.fr/users/slippert"
+# define JSANGER_G "https://github.com/Jano844"
+# define SLIPPERT_G "https://github.com/Steven-L-42"
 # define PI 3.14159265359
 # define SIZE 100
 
@@ -197,12 +200,11 @@ void				init_player(t_data *data);
 int					init_img_one(t_data *data);
 int					init_img_two(t_data *data);
 
-// utils calc
+// utils dda
 float				calc_for_x(float big, float small, float block_size);
 double				max(double a, double b);
 void				reset_map(t_data *data);
-int					ft_text_color(mlx_texture_t *text, t_calc_view *calc,
-						int block_width, int block_height);
+float				ft_get_block_width(t_calc_view *calc);
 
 // utils main
 void				ft_img_to_window(t_data *data);
@@ -233,13 +235,15 @@ void				ft_exit(t_data *data);
 
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-int					get_colour_from_pixel(u_int8_t *pixel);
-void				hex_to_rgb(char *hex, int *r, int *g, int *b);
 uint32_t			**get_color(mlx_texture_t *texture);
+int					ft_text_color(mlx_texture_t *text, t_calc_view *calc,
+						int block_width, int block_height);
+uint32_t			ft_select_color(t_data *data, t_calc_view *calc,
+						int block_height, int block_width);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
-void				calc_view(t_data *data);
+void				dda_horizontal(t_data *data);
 
 // movement
 void				update_player_angle(double xpos, double ypos, void *param);
@@ -261,6 +265,6 @@ int					check_wall_corner_behind(t_data *data, const char *set);
 int					check_wall_corner_ahead(t_data *data, const char *set);
 
 // calc_view2
-void				draw_texture(t_data *data, t_calc_view *calc, bool if_true);
+void				dda_vertical(t_data *data, t_calc_view *calc, bool if_true);
 
 #endif

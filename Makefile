@@ -17,11 +17,11 @@ INCLUDE				=	libft/
 REPO_URL			=	https://github.com/codam-coding-college/MLX42.git
 LOCAL_DIR			=	MLX42
 
-UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c utils_calc.c utils_image.c
+UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c utils_dda.c utils_image.c
 
 INIT				=	init_1.c init_2.c parse_map.c
 
-DDA					=	calc_distance.c calc_view.c calc_view2.c
+DDA					=	dda_distance.c dda_horizontal.c dda_vertical.c
 
 MINIMAP				=	minimap.c rays.c
 

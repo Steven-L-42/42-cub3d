@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_view.c                                        :+:      :+:    :+:   */
+/*   dda_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:44:52 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp, t_calc_view *calc, bool new_block)
+void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp,
+		t_calc_view *calc, bool new_block)
 {
 	if (new_block == true)
 		calc->width_array[calc_tmp.i] = FLT_MAX;
@@ -37,8 +38,7 @@ void	calc_block_width_helper(t_data *data, t_calc_helper calc_tmp, t_calc_view *
 void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
 		float quality)
 {
-	t_calc_helper calc_tmp;
-
+	t_calc_helper	calc_tmp;
 
 	calc_tmp.line = calc->line;
 	calc_tmp.maxline = calc->max_lines;
@@ -48,7 +48,8 @@ void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
 	calc_tmp.quality = (float)quality;
 	while (calc_tmp.line > calc_tmp.maxline)
 	{
-		calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction, &new_block);
+		calc_tmp.dist = calc_dist(data, calc_tmp.line, &calc->direction,
+				&new_block);
 		if (new_block == true)
 		{
 			calc->width_array[calc_tmp.i] = calc_tmp.t;
@@ -62,7 +63,6 @@ void	calc_block_width(t_data *data, t_calc_view *calc, bool new_block,
 }
 
 // Funktion: calc_preset
-// Zweck: Initialisiert die notwendigen Werte für die Berechnung der Sichtlinien.
 // Parameter:
 //   - data: Zeiger auf die Datenstruktur, die Informationen zum Spiel enthält.
 //   - calc: Zeiger auf die Struktur,
@@ -94,7 +94,7 @@ void	calc_preset(t_data *data, t_calc_view *calc)
 // Die Funktion initialisiert die notwendigen Werte, iteriert über die
 // Sichtlinien und ruft die Hilfsfunktion calc_helper für jede Sichtlinie auf.
 // Das Ergebnis wird im Fenster angezeigt.
-void	calc_view(t_data *data)
+void	dda_horizontal(t_data *data)
 {
 	t_calc_view	calc;
 	float		quality;
@@ -102,18 +102,17 @@ void	calc_view(t_data *data)
 	bool		new_block;
 
 	calc_preset(data, &calc);
-	quality = data->width; // Need to use the width of the screen
+	quality = data->width;
 	quality = QUALITY / (fabs(calc.max_lines) / (quality / 2));
 	new_block = false;
 	reset_map(data);
 	calc_block_width(data, &calc, new_block, quality);
 	calc.direction = '\0';
 	new_block = false;
-	reset_map(data);
 	while (calc.line > calc.max_lines)
 	{
 		calc.distance = calc_dist(data, calc.line, &calc.direction, &new_block);
-		draw_texture(data, &calc, new_block);
+		dda_vertical(data, &calc, new_block);
 		calc.angle -= 1 / (float)quality;
 		calc.j++;
 		calc.line -= 1 / (float)quality;

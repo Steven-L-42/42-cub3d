@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:37 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:45:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	init_helper(t_data *data, char *input)
 		data->height = data->game->height * SIZE;
 	else
 		data->height = 1080;
-		data->height = 1024;
-		data->width = 1024;
+	data->height = 1024;
+	data->width = 1024;
 	return (0);
 }
 
@@ -45,7 +45,8 @@ int	init(t_data *data, char *input)
 		return (1);
 	if (!(data->mlx = mlx_init(data->width, data->height, "cub3D", false)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
-	if (!(data->img->img_game = mlx_new_image(data->mlx, data->width, data->height)))
+	if (!(data->img->img_game = mlx_new_image(data->mlx, data->width,
+				data->height)))
 		return (puts(mlx_strerror(mlx_errno)), 1);
 	if (!(data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width
 				* 16, data->game->height * 16)))

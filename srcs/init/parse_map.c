@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:40:06 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	return (1);
 }
 
-char **ft_copy_original(char **original)
+char	**ft_copy_original(char **original)
 {
 	char	**copy;
-
-	int	i;
+	int		i;
 
 	copy = ft_calloc(1024, sizeof(char *));
 	i = -1;
@@ -78,9 +77,9 @@ char **ft_copy_original(char **original)
 
 static int	ft_fill_map(t_data *data, char **tmp_map)
 {
-	int		y_game;
-	int		max_y;
-	int		x;
+	int	y_game;
+	int	max_y;
+	int	x;
 
 	max_y = ft_map_len(tmp_map);
 	y_game = 0;
@@ -90,7 +89,8 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 	while (tmp_map && tmp_map[y_game + 6])
 	{
 		x = -1;
-		data->game->map[y_game] = ft_calloc(ft_strlen(tmp_map[y_game + 6]) + 1, 1);
+		data->game->map[y_game] = ft_calloc(ft_strlen(tmp_map[y_game + 6]) + 1,
+				1);
 		if (!data->game->map[y_game])
 			return (ft_error("Error: data->game->map[y_game] allocation failed!"));
 		while (tmp_map[y_game + 6][++x])
@@ -106,7 +106,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 
 int	init_map(t_data *data, char *input)
 {
-	int		fd;
+	int	fd;
 
 	fd = open(input, O_RDONLY);
 	if (!fd)

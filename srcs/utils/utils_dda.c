@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_calc.c                                       :+:      :+:    :+:   */
+/*   utils_dda.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:47:42 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,38 @@ double	max(double a, double b)
 
 void	reset_map(t_data *data)
 {
-	for (int y = 0; data->game->map_copy[y] != NULL; y++)
+	int	y;
+	int	x;
+
+	y = 0;
+	while (data->game->map_copy[y] != NULL)
 	{
-		for (int x = 0; data->game->map_copy[y][x] != '\0'; x++)
+		x = 0;
+		while (data->game->map_copy[y][x] != '\0')
 		{
 			data->game->map_copy[y][x] = data->game->map[y][x];
+			x++;
 		}
+		y++;
 	}
 }
 
-int	ft_text_color(mlx_texture_t *text, t_calc_view *calc, int block_width,
-		int block_height)
+float	ft_get_block_width(t_calc_view *calc)
 {
-	int		color;
-	int		pos;
-	double	brightness;
+	int	i;
+	int	block_width;
 
-	pos = (block_height + text->width * block_width) * text->bytes_per_pixel;
-	brightness = max(1.0 - (calc->distance / calc->shadow), 0);
-	if (calc->distance > calc->shadow)
-		return (0x000000ff);
-	color = (int)(text->pixels[pos] * brightness) << 24 | (int)(text->pixels[pos
-			+ 1] * brightness) << 16 | (int)(text->pixels[pos + 2]
-			* brightness) << 8 | (int)text->pixels[pos + 3];
-	return (color);
+	i = 0;
+	block_width = 0;
+	while (calc->width_array[i] < calc->j)
+	{
+		i++;
+		if (calc->width_array[i] != (float)0 && calc->width_array[i] < FLT_MAX)
+		{
+			block_width = (int)calc_for_x(calc->width_array[i]
+					- calc->width_array[i - 1], calc->j - calc->width_array[i
+					- 1], BLOCK_PIXEL_SIZE);
+		}
+	}
+	return (block_width);
 }

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/05 13:48:41 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,4 @@ int	ft_str_to_rgb(char *rgb_str, int *color)
 	*color = ft_pixel(rgb.r, rgb.g, rgb.b, 255);
 	return (free(r), free(g), free(b), 1);
 }
-// printf("%d %d %d\n", rgb.r, rgb.g,rgb.b);
+
