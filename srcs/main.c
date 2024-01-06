@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:58:40 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 15:49:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data->mlx, ft_key_press, data);
 	mlx_loop_hook(data->mlx, ft_pistol_anim, data);
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
-	write(1, "IN MLX_LOOP\n", 13);
 	mlx_loop(data->mlx);
 	exit(0);
 }

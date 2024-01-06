@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:54:12 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:15:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 	dda_tmp.t = 0;
 	dda_tmp.i = 0;
 	dda_tmp.quality = (float)quality;
+
 	while (dda_tmp.line > dda_tmp.maxline)
 	{
 		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
@@ -80,7 +81,7 @@ void	calc_preset(t_data *data, t_dda *dda)
 	dda->color_wall = ft_pixel(56, 76, 200, 255);
 	dda->color_door = ft_pixel(125, 76, 56, 255);
 	dda->color_portal = ft_pixel(56, 125, 125, 255);
-	dda->line = dda->max_lines * -1;
+	dda->line = -dda->max_lines;
 	dda->treshold = (float)6.2f * (data->width / 1920.0);
 	dda->direction = '\0';
 	dda->shadow = 11;

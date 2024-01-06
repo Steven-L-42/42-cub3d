@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:52:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:43:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int	init(t_data *data, char *input)
 	data->img->img_player_ray = mlx_new_image(data->mlx, data->game->width * 16,
 			data->game->height * 16);
 	if (!data->img->img_player_ray)
+		return (ft_error("Error: img_player_ray creation failed!"));
+	data->img->img_movement_ray = mlx_new_image(data->mlx, data->game->width * 16,
+			data->game->height * 16);
+	if (!data->img->img_movement_ray)
 		return (ft_error("Error: img_player_ray creation failed!"));
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (init_img_one(data) || init_img_two(data))

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:53:13 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:57:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,15 @@ typedef struct s_detection
 	int				y;
 }					t_detection;
 
+typedef struct s_directions
+{
+	int	forward;
+	int sideward;
+}					t_directions;
+
 typedef struct s_player
 {
+	t_directions	dir;
 	char			start_direction;
 	int				mouse_x;
 	int				mouse_y;
@@ -174,6 +181,7 @@ typedef struct s_img
 	mlx_image_t		*img_game_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
+	mlx_image_t		*img_movement_ray;
 	mlx_image_t		*img_game_wall;
 
 	mlx_image_t		*img_door_closed;
@@ -276,6 +284,7 @@ void				dda_horizontal(t_data *data);
 
 // movement
 void				update_player_angle(double xpos, double ypos, void *param);
+int					check_wall_ray(t_data *data);
 
 // hotkeys
 void				ft_key_hold(void *param);

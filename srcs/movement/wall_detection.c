@@ -6,86 +6,101 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:11:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	check_wall_corner_ahead(t_data *data, const char *set)
+void	set_coords(t_data *data, t_draw_rays *ray, int ray_len)
 {
-	data->detc.x = data->player->x + 0.5f;
-	data->detc.y = data->player->y + 0.5f;
-	data->detc.angle = (int)data->player->angle;
-	if (((data->detc.angle % 360 > -270 && data->detc.angle % 360 < -180)
-			|| (data->detc.angle % 360 > 90 && data->detc.angle % 360 < 180))
-		&& ft_is_in_set(data->game->map[data->detc.y][data->detc.x - 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y - 1][data->detc.x], set))
-		return (1);
-	else if (((data->detc.angle % 360 > 180 && data->detc.angle % 360 < 270)
-			|| (data->detc.angle % 360 > -180 && data->detc.angle % 360 < -90))
-		&& ft_is_in_set(data->game->map[data->detc.y][data->detc.x - 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y + 1][data->detc.x], set))
-		return (1);
-	else if (((data->detc.angle % 360 > -360 && data->detc.angle % 360 < -270)
-			|| (data->detc.angle % 360 > 0 && data->detc.angle % 360 < 90))
-		&& (ft_is_in_set(data->game->map[data->detc.y][data->detc.x + 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y - 1][data->detc.x], set)))
-		return (1);
-	else if (((data->detc.angle % 360 > 270 && data->detc.angle % 360 < 360)
-			|| (data->detc.angle % 360 > -90 && data->detc.angle % 360 < 0))
-		&& (ft_is_in_set(data->game->map[data->detc.y][data->detc.x + 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y + 1][data->detc.x], set)))
-		return (1);
+	if (data->player->dir.forward != 0 && data->player->dir.sideward == 0)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + (ray_len * data->player->dir.forward)
+			* cos((-data->player->angle + ray->angle_offset) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + (ray_len * data->player->dir.forward)
+			* sin((-data->player->angle + ray->angle_offset) * PI / 180);
+	}
+	else if (data->player->dir.sideward == -1 && data->player->dir.forward == 1)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + ray_len
+			* cos((-data->player->angle + ray->angle_offset - 45) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + ray_len
+			* sin((-data->player->angle + ray->angle_offset - 45) * PI / 180);
+	}
+	else if (data->player->dir.sideward == 1 && data->player->dir.forward == 1)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + ray_len
+			* cos((-data->player->angle + ray->angle_offset + 45) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + ray_len
+			* sin((-data->player->angle + ray->angle_offset + 45) * PI / 180);
+	}
+	else if (data->player->dir.sideward == -1 && data->player->dir.forward == -1)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + ray_len
+			* cos((-data->player->angle + ray->angle_offset + 45 + 180) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + ray_len
+			* sin((-data->player->angle + ray->angle_offset + 45 + 180) * PI / 180);
+	}
+	else if (data->player->dir.sideward == 1 && data->player->dir.forward == -1)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + ray_len
+			* cos((-data->player->angle + ray->angle_offset - 45 - 180) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + ray_len
+			* sin((-data->player->angle + ray->angle_offset - 45 - 180) * PI / 180);
+	}
+	else if (data->player->dir.sideward != 0 && data->player->dir.forward == 0)
+	{
+		ray->x_coord = data->player->x * 16 + 8 + (ray_len * data->player->dir.sideward)
+			* cos((-data->player->angle + ray->angle_offset + 90) * PI / 180);
+		ray->y_coord = data->player->y * 16 + 8 + (ray_len * data->player->dir.sideward)
+			* sin((-data->player->angle + ray->angle_offset + 90) * PI / 180);
+	}
+}
+
+int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
+{
+	int	ray_len;
+
+	ray_len = 0;
+	while (ray_len < 10)
+	{
+		set_coords(data, ray, ray_len);
+		if (ray->x_coord >= 0 && ray->y_coord >= 0
+			&& (const uint32_t)ray->x_coord < data->img->img_movement_ray->width
+			&& (const uint32_t)ray->y_coord < data->img->img_movement_ray->height)
+		{
+			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord
+					/ 16], "159"))
+				return (1);
+			mlx_put_pixel(data->img->img_movement_ray, ray->x_coord,
+				ray->y_coord, ray->color);
+		}
+		ray_len++;
+	}
 	return (0);
 }
 
-// ft_printf("Angle %d\n", angle % 360);
-// ft_printf("x %d y %d\n\n", x, y);
-int	check_wall_corner_behind(t_data *data, const char *set)
+int	check_wall_ray(t_data *data)
 {
-	data->detc.x = data->player->x + 0.5f;
-	data->detc.y = data->player->y + 0.5f;
-	data->detc.angle = (int)data->player->angle;
-	if (((data->detc.angle % 360 > -90 && data->detc.angle % 360 < 0)
-			|| (data->detc.angle % 360 > 270 && data->detc.angle % 360 < 360))
-		&& ft_is_in_set(data->game->map[data->detc.y][data->detc.x - 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y - 1][data->detc.x], set))
-		return (1);
-	else if (((data->detc.angle % 360 > 0 && data->detc.angle % 360 < 90)
-			|| (data->detc.angle % 360 > -360 && data->detc.angle % 360 < -270))
-		&& ft_is_in_set(data->game->map[data->detc.y][data->detc.x - 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y + 1][data->detc.x], set))
-		return (1);
-	else if (((data->detc.angle % 360 > -180 && data->detc.angle % 360 < -90)
-			|| (data->detc.angle % 360 > 180 && data->detc.angle % 360 < 270))
-		&& (ft_is_in_set(data->game->map[data->detc.y][data->detc.x + 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y - 1][data->detc.x], set)))
-		return (1);
-	else if (((data->detc.angle % 360 > 90 && data->detc.angle % 360 < 180)
-			|| (data->detc.angle % 360 > -270 && data->detc.angle % 360 < -180))
-		&& (ft_is_in_set(data->game->map[data->detc.y][data->detc.x + 1], set)
-		&& ft_is_in_set(data->game->map[data->detc.y + 1][data->detc.x], set)))
-		return (1);
-	return (0);
-}
+	t_draw_rays	ray;
+	int			breite;
+	int			max;
 
-int	check_for_wall(t_data *data, float distance, float radian_angle,
-		const char *set)
-{
-	float	p_x_cos;
-	float	p_y_sin;
-	float	cell_x;
-	float	cell_y;
-
-	p_x_cos = cos(radian_angle);
-	p_y_sin = sin(radian_angle);
-	cell_y = roundf(data->player->y - distance * p_y_sin);
-	cell_x = roundf(data->player->x + distance * p_x_cos);
-	if ((cell_y >= 0 && cell_y <= data->game->height && cell_x >= 0
-			&& cell_x <= data->game->width)
-		&& ft_is_in_set(data->game->map[(int)cell_y][(int)cell_x], set))
-		return (1);
+	breite = 60;
+	ft_memset(data->img->img_movement_ray->pixels, 0,
+		data->img->img_movement_ray->width * data->img->img_movement_ray->height
+		* sizeof(int32_t));
+	ray.color = ft_pixel(255, 0, 0, 125);
+	ray.i = -breite / 2;
+	max = ray.i + 20;
+	while (ray.i <= breite / 2)
+	{
+		ray.angle_offset = ray.i;
+		if (check_wall_ray_helper(data, &ray))
+			return (1);
+		ray.i += 0.1f;
+	}
 	return (0);
 }
 
@@ -99,8 +114,7 @@ int	check_for_door_preset(t_data *data, t_check_door *door)
 	if (door->cell_y >= 0 && door->cell_y <= data->game->height
 		&& door->cell_x >= 0 && door->cell_x <= data->game->width)
 	{
-		door->instance
-			= data->minimap->map[(int)door->cell_y][(int)door->cell_x];
+		door->instance = data->minimap->map[(int)door->cell_y][(int)door->cell_x];
 		return (door->instance);
 	}
 	return (-1);

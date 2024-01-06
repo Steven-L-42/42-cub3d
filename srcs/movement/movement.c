@@ -6,17 +6,19 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:53:58 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:03:41 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void	move_player(t_data *data, float speed, int forward, const char *set)
+static void	move_player(t_data *data, float speed, int forward,
+		const char *set)
 {
 	float	radian_angle;
 	float	p_x_cos;
 	float	p_y_sin;
+	float	dst;
 
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
 	{
@@ -25,13 +27,15 @@ static void	move_player(t_data *data, float speed, int forward, const char *set)
 		else
 			speed -= 0.15f;
 	}
+	if (speed > 0)
+		dst = 0.5f;
+	else
+		dst = -0.5f;
 	if (forward == 1)
 		radian_angle = data->player->angle * PI / 180.0;
 	else
 		radian_angle = (data->player->angle + 90.0) * PI / 180.0;
-	if (check_for_wall(data, speed, radian_angle, set) || (speed > 0.0f
-			&& check_wall_corner_ahead(data, set)) || (speed < 0.0f
-			&& check_wall_corner_behind(data, set)))
+	if (check_wall_ray(data))
 		return ;
 	p_x_cos = speed * cos(radian_angle);
 	p_y_sin = speed * sin(radian_angle);
@@ -90,22 +94,41 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 
 void	ft_key_hold(void *param)
 {
-	t_data		*data;
-	const char	*set = "159";
+	t_data			*data;
+	const char		*set = "159";
+
 
 	data = param;
+	data->player->dir.sideward = 0;
+	data->player->dir.forward = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		ft_exit(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+	{
+		data->player->dir.forward = 1;
 		move_player(data, 0.05, 1, set);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+	{
+		data->player->dir.forward = -1;
 		move_player(data, -0.05, 1, set);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+	{
+
+		data->player->dir.sideward = -1;
 		move_player(data, 0.05, 0, set);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+	{
+
+		data->player->dir.sideward = 1;
 		move_player(data, -0.05, 0, set);
+	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		data->player->angle -= 5;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		data->player->angle += 5;
+	data->player->dir.forward = 0;
+	data->player->dir.sideward = 0;
 }

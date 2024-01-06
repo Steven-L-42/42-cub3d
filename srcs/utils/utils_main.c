@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:44:05 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_img_to_window(t_data *data)
 	data->img->pistol_frame = 0;
 	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
 	data->img->img_game->instances[0].z = 0;
+	mlx_image_to_window(data->mlx, data->img->img_movement_ray, 0, 0);
 }
 
 void	reset_window(t_data *data)
