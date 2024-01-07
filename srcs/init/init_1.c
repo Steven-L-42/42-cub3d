@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 15:32:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:43:39 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,21 @@ static void	init_minimap(t_data *data)
 				+ 1, sizeof(int));
 }
 
-int	init(t_data *data, char *input)
+static void	init_cross_colors(t_data *data)
 {
 	data->cross_index = 0;
-	data->cross_colors[0] = ft_pixel(4, 222, 222, 125);
-	data->cross_colors[1] = ft_pixel(255, 255, 255, 125);
-	data->cross_colors[2] = ft_pixel(0, 183, 255, 125);
-	data->cross_colors[3] = ft_pixel(106, 142, 35, 125);
-	data->cross_colors[4] = ft_pixel(0, 255, 0, 125);
-	data->cross_colors[5] = ft_pixel(255, 217, 0, 125);
-	data->cross_colors[6] = ft_pixel(105, 90, 205, 125);
+	data->cross_colors[0] = ft_pixel(255, 255, 255, 125);
+	data->cross_colors[1] = ft_pixel(4, 222, 222, 125);
+	data->cross_colors[2] = ft_pixel(140, 0, 255, 125);
+	data->cross_colors[3] = ft_pixel(0, 255, 221, 125);
+	data->cross_colors[4] = ft_pixel(0, 119, 255, 125);
+	data->cross_colors[5] = ft_pixel(43, 255, 0, 125);
+	data->cross_colors[6] = ft_pixel(255, 29, 0, 125);
 	data->cross_colors[7] = ft_pixel(255, 99, 71, 125);
-	if (init_helper(data, input))
-		return (1);
+}
+
+static int	init_win_imgs(t_data *data)
+{
 	data->mlx = mlx_init(data->width, data->height, "cub3D", false);
 	if (!data->mlx)
 		return (ft_error("Error: mlx_init failed!"));
@@ -66,12 +68,22 @@ int	init(t_data *data, char *input)
 			* 16, data->game->height * 16);
 	if (!data->img->img_movement_ray)
 		return (ft_error("Error: img_movement_ray creation failed!"));
-	data->img->img_perlin_noise = mlx_new_image(data->mlx, 255, 255);
-	if (!data->img->img_perlin_noise)
-		return (ft_error("Error: img_perlin_noise creation failed!"));
+	data->img->img_crosshair = mlx_new_image(data->mlx, 255, 255);
+	if (!data->img->img_crosshair)
+		return (ft_error("Error: img_crosshair creation failed!"));
+	return (0);
+}
+
+int	init(t_data *data, char *input)
+{
+	if (init_helper(data, input))
+		return (1);
+	if (init_win_imgs(data))
+		return (1);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (init_img_one(data) || init_img_two(data))
 		return (ft_error("Error: failed to read .png file!"));
+	init_cross_colors(data);
 	init_minimap(data);
 	init_coords(data, 0, 0);
 	init_player(data);

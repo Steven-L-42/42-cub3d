@@ -6,18 +6,12 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 15:25:48 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:36:57 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// Calculate the difference in X position between
-// the current and previous mouse position
-// Use this difference to update the player's angle
-// Update the player's angle
-// Save the current mouse position as
-// the previous mouse position for the next frame
 void	ft_player_angle(double xpos, double ypos, void *param)
 {
 	t_data	*data;

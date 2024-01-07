@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 15:12:26 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:38:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_hori(t_data *data, t_crosshair cross)
 		while (cross.j < cross.middle_x + 10)
 		{
 			if (cross.j < cross.middle_x - 3 || cross.j > cross.middle_x + 2)
-				mlx_put_pixel(data->img->img_perlin_noise, cross.j, cross.i,
+				mlx_put_pixel(data->img->img_crosshair, cross.j, cross.i,
 					cross.color);
 			cross.j++;
 		}
@@ -39,7 +39,7 @@ void	draw_verti(t_data *data, t_crosshair cross)
 		while (cross.j < cross.middle_y + 10)
 		{
 			if (cross.j < cross.middle_y - 3 || cross.j > cross.middle_y + 2)
-				mlx_put_pixel(data->img->img_perlin_noise, cross.i, cross.j,
+				mlx_put_pixel(data->img->img_crosshair, cross.i, cross.j,
 					cross.color);
 			cross.j++;
 		}
@@ -58,7 +58,7 @@ void	draw_leftdiagonal(t_data *data, t_crosshair cross)
 		{
 			if (cross.j < cross.tmp_middle_x - 2 || cross.j > cross.tmp_middle_x
 				+ 1)
-				mlx_put_pixel(data->img->img_perlin_noise, cross.j, cross.i,
+				mlx_put_pixel(data->img->img_crosshair, cross.j, cross.i,
 					cross.color);
 			cross.j++;
 		}
@@ -78,7 +78,7 @@ void	draw_rightdiagonal(t_data *data, t_crosshair cross)
 		{
 			if (cross.j < cross.tmp_middle_x - 2 || cross.j > cross.tmp_middle_x
 				+ 1)
-				mlx_put_pixel(data->img->img_perlin_noise, cross.j, cross.i,
+				mlx_put_pixel(data->img->img_crosshair, cross.j, cross.i,
 					cross.color);
 			cross.j++;
 		}
@@ -98,7 +98,7 @@ void	draw_circle(t_data *data, t_crosshair cross)
 		{
 			if (fabs(sqrt(pow(cross.j - cross.middle_x, 2) + pow(cross.i
 							- cross.middle_y, 2)) - cross.radius) < 1.0)
-				mlx_put_pixel(data->img->img_perlin_noise, cross.j, cross.i,
+				mlx_put_pixel(data->img->img_crosshair, cross.j, cross.i,
 					cross.color);
 			cross.j++;
 		}

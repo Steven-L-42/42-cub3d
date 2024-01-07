@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 15:23:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:38:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ typedef struct s_img
 	mlx_image_t		*img_player_ray;
 	mlx_image_t		*img_movement_ray;
 	mlx_image_t		*img_game_wall;
-	mlx_image_t		*img_perlin_noise;
+	mlx_image_t		*img_crosshair;
 
 	mlx_image_t		*img_door_closed;
 	mlx_texture_t	*txt_door_closed;
