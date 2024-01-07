@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:18:59 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:26:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 		data->is_shooting = true;
 }
 
-void	ft_key_hold_helper(t_data *data, const char	*set)
+static void	ft_key_hold_helper(t_data *data, const char	*set)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{

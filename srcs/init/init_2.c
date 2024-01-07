@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:47:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:24:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	ft_check_all_imgs(t_data *data)
+static int	ft_check_all_imgs(t_data *data)
 {
 	int	i;
 

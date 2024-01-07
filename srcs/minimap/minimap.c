@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:25:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
+static void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
 {
 	if (data->game->map[y][x] == '5' && is_wall)
 	{
@@ -29,7 +29,7 @@ void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
 			* 16, data->player->y * 16);
 }
 
-void	draw_objects(t_data *data, int is_wall)
+static void	draw_objects(t_data *data, int is_wall)
 {
 	int	x;
 	int	y;
@@ -57,7 +57,7 @@ void	draw_objects(t_data *data, int is_wall)
 	}
 }
 
-void	set_z(t_data *data)
+static void	set_z(t_data *data)
 {
 	size_t	i;
 

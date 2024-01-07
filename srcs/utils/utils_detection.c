@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   detection_utils.c                                  :+:      :+:    :+:   */
+/*   utils_detection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:15:58 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:28:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	set_coords_helper(t_data *data, t_draw_rays *ray,
+static void	set_coords_helper(t_data *data, t_draw_rays *ray,
 	int ray_len, int increment)
 {
 	if (data->player->dir.sideward != 0 && data->player->dir.forward == 1)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:24:39 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	return (1);
 }
 
-char	**ft_copy_original(char **original)
+static char	**ft_copy_original(char **original)
 {
 	char	**copy;
 	int		i;

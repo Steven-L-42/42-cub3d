@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:18:03 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:26:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
+static int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
 {
 	int	ray_len;
 
@@ -59,7 +59,7 @@ int	check_wall_ray(t_data *data)
 	return (0);
 }
 
-int	check_for_door_preset(t_data *data, t_check_door *door)
+static int	check_for_door_preset(t_data *data, t_check_door *door)
 {
 	door->radian_angle = data->player->angle * PI / 180.0;
 	door->p_x_cos = cos(door->radian_angle);

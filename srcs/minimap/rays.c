@@ -6,31 +6,11 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:23:44 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:26:04 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-// Funktion: ray_preset
-// Zweck: Initialisiert die notwendigen Werte für die Raycasting-Berechnungen.
-// Parameter:
-//   - data: Zeiger auf die Datenstruktur, die Informationen zum Spiel enthält.
-//   - ray: Zeiger auf die Struktur,
-//	die Informationen über die zu zeichnenden Rays enthält.
-//   - num_rays: Die Anzahl der Rays, die gezeichnet werden sollen.
-//
-// Die Funktion setzt den Bildspeicher für Spieler-Rays auf Null,
-// wählt eine Standardfarbe für die Rays
-// und initialisiert den Startwinkel für die Berechnungen.
-void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
-{
-	ft_memset(data->img->img_player_ray->pixels, 0,
-		data->img->img_player_ray->width * data->img->img_player_ray->height
-		* sizeof(int32_t));
-	ray->color = ft_pixel(247, 225, 178, 125);
-	ray->i = -num_rays / 2;
-}
 
 // Funktion: ray_helper
 // Zweck: Hilfsfunktion für die Berechnung und Darstellung einzelner Rays.
@@ -44,7 +24,7 @@ void	ray_preset(t_data *data, t_draw_rays *ray, int num_rays)
 // ob die berechneten Koordinaten im gültigen Bereich liegen und ob es
 // Kollisionen mit Wänden gibt. Bei gültigen Koordinaten wird die
 // entsprechende Pixelposition im Bildspeicher markiert.
-void	ray_helper(t_data *data, t_draw_rays *ray)
+static void	ray_helper(t_data *data, t_draw_rays *ray)
 {
 	int	ray_len;
 
@@ -81,7 +61,11 @@ void	draw_player_rays(t_data *data, int num_rays)
 {
 	t_draw_rays	ray;
 
-	ray_preset(data, &ray, num_rays);
+	ft_memset(data->img->img_player_ray->pixels, 0,
+		data->img->img_player_ray->width * data->img->img_player_ray->height
+		* sizeof(int32_t));
+	ray.color = ft_pixel(247, 225, 178, 125);
+	ray.i = -num_rays / 2;
 	while (ray.i <= num_rays / 2)
 	{
 		ray.angle_offset = ray.i;

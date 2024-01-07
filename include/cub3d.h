@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 10:17:07 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:29:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,8 +273,6 @@ void				ft_exit(t_data *data);
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t			**get_color(mlx_texture_t *texture);
-int					ft_text_color(mlx_texture_t *text, t_dda *calc,
-						int block_width, int block_height);
 uint32_t			ft_select_color(t_data *data, t_dda *calc, int block_height,
 						int block_width);
 // utils detection
