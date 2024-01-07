@@ -2,8 +2,15 @@
 
 ![cub3d](https://github.com/ayogun/42-project-badges/blob/main/badges/cub3dm.png?raw=true)
 
+# version (2024.01.07)
+
+https://github.com/Steven-L-42/42-cub3d/assets/102829233/eb6a074c-a2c5-45fb-9dc6-a5286e316a14
+
+
+# version (2024.01.03)
 
 https://github.com/Steven-L-42/42-cub3d/assets/102829233/4bd74288-0d50-47f0-9cae-4ee1aaacfded
+
 
 ```c
 #include <stdio.h>
