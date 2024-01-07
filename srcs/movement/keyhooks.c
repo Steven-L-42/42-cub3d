@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 11:59:33 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:25:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 		check_for_door(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 		data->is_shooting = true;
+	if (keydata.key == MLX_KEY_PAGE_UP && keydata.action == MLX_PRESS)
+	{
+		data->cross_index++;
+		if (data->cross_index >= 8)
+			data->cross_index = 0;
+		draw_crosshair(data, data->cross_colors[data->cross_index]);
+	}
+	if (keydata.key == MLX_KEY_PAGE_DOWN && keydata.action == MLX_PRESS)
+	{
+		data->cross_index--;
+		if (data->cross_index < 0)
+			data->cross_index = 7;
+		draw_crosshair(data, data->cross_colors[data->cross_index]);
+	}
 }
 
 void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
@@ -59,7 +73,7 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 		data->is_shooting = true;
 }
 
-static void	ft_key_hold_helper(t_data *data, const char	*set)
+static void	ft_key_hold_helper(t_data *data, const char *set)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{

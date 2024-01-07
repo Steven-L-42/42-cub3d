@@ -6,11 +6,30 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/06 16:44:05 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:16:57 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	draw_crosshair(t_data *data, uint32_t color)
+{
+	t_crosshair	cross;
+
+	ft_memset(data->img->img_perlin_noise->pixels, 0,
+		data->img->img_perlin_noise->width * \
+		data->img->img_perlin_noise->height * sizeof(int32_t));
+	cross.middle_x = data->img->img_perlin_noise->width / 2;
+	cross.tmp_middle_x = cross.middle_x;
+	cross.middle_y = data->img->img_perlin_noise->height / 2;
+	cross.color = color;
+	cross.radius = 18;
+	draw_hori(data, cross);
+	draw_verti(data, cross);
+	draw_leftdiagonal(data, cross);
+	draw_rightdiagonal(data, cross);
+	draw_circle(data, cross);
+}
 
 void	ft_img_to_window(t_data *data)
 {
@@ -35,6 +54,10 @@ void	ft_img_to_window(t_data *data)
 	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
 	data->img->img_game->instances[0].z = 0;
 	mlx_image_to_window(data->mlx, data->img->img_movement_ray, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_perlin_noise, data->width / 2
+		- data->img->img_perlin_noise->width / 2, data->height / 2
+		- data->img->img_perlin_noise->height / 2);
+	draw_crosshair(data, ft_pixel(255, 0, 0, 125));
 }
 
 void	reset_window(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 12:26:31 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:23:52 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_detection
 
 typedef struct s_directions
 {
-	int	forward;
-	int sideward;
+	int				forward;
+	int				sideward;
 }					t_directions;
 
 typedef struct s_player
@@ -128,6 +128,17 @@ typedef struct s_calc_view
 	float			width_array[100];
 }					t_dda;
 
+typedef struct s_crosshair
+{
+	int				i;
+	int				j;
+	int				middle_x;
+	int				middle_y;
+	uint32_t		color;
+	int				tmp_middle_x;
+	int				radius;
+}					t_crosshair;
+
 typedef struct s_dda_dist
 {
 	float			dist;
@@ -183,6 +194,7 @@ typedef struct s_img
 	mlx_image_t		*img_player_ray;
 	mlx_image_t		*img_movement_ray;
 	mlx_image_t		*img_game_wall;
+	mlx_image_t		*img_perlin_noise;
 
 	mlx_image_t		*img_door_closed;
 	mlx_texture_t	*txt_door_closed;
@@ -211,7 +223,8 @@ typedef struct s_data
 	t_minimap		*minimap;
 	t_player		*player;
 	t_detection		detc;
-
+	int				cross_index;
+	uint32_t		cross_colors[8];
 	char			wall_type;
 	uint32_t		color[64];
 	int				wall_size[2];
@@ -248,6 +261,7 @@ void				ft_img_to_window(t_data *data);
 void				reset_window(t_data *data);
 void				ft_running(void *param);
 int					ft_check_extension(char *argv);
+void				draw_crosshair(t_data *data, uint32_t color);
 
 // utils map
 int					get_map_height(char *input);
@@ -272,6 +286,13 @@ void				ft_free2d_int(int **str);
 void				ft_exit(t_data *data);
 void				ft_free2d_until(char **str, int max_len);
 
+// utils cross
+void				draw_hori(t_data *data, t_crosshair cross);
+void				draw_verti(t_data *data, t_crosshair cross);
+void				draw_leftdiagonal(t_data *data, t_crosshair cross);
+void				draw_rightdiagonal(t_data *data, t_crosshair cross);
+void				draw_circle(t_data *data, t_crosshair cross);
+
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t			**get_color(mlx_texture_t *texture);
@@ -285,9 +306,9 @@ double				ray_distance(t_data *data, float angle);
 void				dda_horizontal(t_data *data);
 
 // movement
-void				move_player(t_data *data, float speed, int forward, const char *set);
+void				move_player(t_data *data, float speed, int forward,
+						const char *set);
 void				ft_player_angle(double xpos, double ypos, void *param);
-
 
 // hotkeys
 void				ft_key_hold(void *param);

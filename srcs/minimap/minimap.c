@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 12:30:20 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:19:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,5 @@ void	draw_minimap(t_data *data)
 {
 	draw_objects(data, 0);
 	draw_objects(data, 1);
-	mlx_image_to_window(data->mlx, data->img->img_game_cursor, data->width / 2
-		- (data->img->img_game_cursor->width / 2), data->height / 2
-		- (data->img->img_game_cursor->height / 2));
 	set_z(data);
 }

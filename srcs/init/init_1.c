@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 11:30:24 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:26:54 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ static void	init_minimap(t_data *data)
 
 int	init(t_data *data, char *input)
 {
+	data->cross_index = 0;
+	data->cross_colors[0] = ft_pixel(4, 222, 222, 125);
+	data->cross_colors[1] = ft_pixel(255, 255, 255, 125);
+	data->cross_colors[2] = ft_pixel(0, 183, 255, 125);
+	data->cross_colors[3] = ft_pixel(106, 142, 35, 125);
+	data->cross_colors[4] = ft_pixel(0, 255, 0, 125);
+	data->cross_colors[5] = ft_pixel(255, 217, 0, 125);
+	data->cross_colors[6] = ft_pixel(105, 90, 205, 125);
+	data->cross_colors[7] = ft_pixel(255, 0, 0, 125);
 	if (init_helper(data, input))
 		return (1);
 	data->mlx = mlx_init(data->width, data->height, "cub3D", false);
@@ -56,7 +65,10 @@ int	init(t_data *data, char *input)
 	data->img->img_movement_ray = mlx_new_image(data->mlx, data->game->width \
 			* 16, data->game->height * 16);
 	if (!data->img->img_movement_ray)
-		return (ft_error("Error: img_player_ray creation failed!"));
+		return (ft_error("Error: img_movement_ray creation failed!"));
+	data->img->img_perlin_noise = mlx_new_image(data->mlx, 255, 255);
+	if (!data->img->img_perlin_noise)
+		return (ft_error("Error: img_perlin_noise creation failed!"));
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 	if (init_img_one(data) || init_img_two(data))
 		return (ft_error("Error: failed to read .png file!"));

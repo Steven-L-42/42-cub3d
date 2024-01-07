@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 11:38:08 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:49:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ static int	ft_check_all_imgs(t_data *data)
 	int	i;
 
 	i = 0;
-	if (!data->img->img_player || !data->img->img_game_cursor
-		|| !data->img->img_mm_wall || !data->img->img_mm_portal
-		|| !data->img->img_mm_door_closed || !data->img->img_mm_door_open
-		|| !data->img->img_mm_wall_shadow)
+	if (!data->img->img_player || !data->img->img_mm_wall
+		|| !data->img->img_mm_portal || !data->img->img_mm_door_closed
+		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow)
 		return (1);
 	while (i < 5)
 	{
@@ -32,7 +31,6 @@ static int	ft_check_all_imgs(t_data *data)
 
 int	init_img_two(t_data *data)
 {
-	ft_open_image(data, &data->img->img_game_cursor, "textures/cross.png");
 	ft_open_image(data, &data->img->img_mm_wall, "textures/minimap/brick.png");
 	ft_open_image(data, &data->img->img_mm_portal,
 		"textures/minimap/brick_portal.png");
