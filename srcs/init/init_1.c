@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 15:26:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:32:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	init(t_data *data, char *input)
 	data->cross_colors[4] = ft_pixel(0, 255, 0, 125);
 	data->cross_colors[5] = ft_pixel(255, 217, 0, 125);
 	data->cross_colors[6] = ft_pixel(105, 90, 205, 125);
-	data->cross_colors[7] = ft_pixel(255, 0, 0, 125);
+	data->cross_colors[7] = ft_pixel(255, 99, 71, 125);
 	if (init_helper(data, input))
 		return (1);
 	data->mlx = mlx_init(data->width, data->height, "cub3D", false);
