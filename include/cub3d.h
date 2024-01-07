@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 10:29:50 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 12:26:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_map
 	char			*SO;
 	char			*WE;
 	char			*EA;
-
+	char			*DOOR;
 	char			*F;
 	char			*C;
 	int				color_floor;
@@ -263,12 +263,14 @@ int					ft_open_image_keep_text(t_data *data,
 // utils basic
 int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
+int					ft_strlen_until(char *str, int c);
 
 // utils free
 void				free_structs(t_data *data);
 void				ft_free2d_char(char **str);
 void				ft_free2d_int(int **str);
 void				ft_exit(t_data *data);
+void				ft_free2d_until(char **str, int max_len);
 
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);

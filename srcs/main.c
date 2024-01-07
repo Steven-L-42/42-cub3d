@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 10:20:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 12:15:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ void	ft_pistol_anim(void *param)
 	}
 }
 
-// atexit(leaks);
 // mlx_set_setting(MLX_STRETCH_IMAGE, true);
 // mlx_set_setting(MLX_FULLSCREEN, true);
+// atexit(leaks);
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -110,5 +110,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data->mlx, ft_pistol_anim, data);
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
 	mlx_loop(data->mlx);
+	ft_exit(data);
 	exit(0);
 }

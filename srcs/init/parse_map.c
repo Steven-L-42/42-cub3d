@@ -6,24 +6,24 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 10:24:39 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 12:26:13 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static char	**ft_fill_tmp(char **tmp_map, int fd)
+int	ft_fill_tmp(char **tmp_map, int height, int fd)
 {
 	char	*line;
 	int		y;
-	int		x;
+	int		extra;
 
 	y = -1;
+	extra = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		x = 0;
-		if (line && line[x] == '\n')
+		if (line && line[0] == '\n')
 		{
 			free(line);
 			line = get_next_line(fd);
@@ -31,14 +31,13 @@ static char	**ft_fill_tmp(char **tmp_map, int fd)
 		}
 		tmp_map[++y] = ft_calloc(ft_strlen(line) + 1, 1);
 		if (!tmp_map[y])
-			return (ft_error("Error: tmp_map[y] allocation failed!"), NULL);
-		x = -1;
-		while (line[++x] && line[x] != '\n')
-			tmp_map[y][x] = line[x];
+			return (ft_free2d_until(tmp_map, y),
+				ft_error("Error: tmp_map[y] allocation failed!"));
+		ft_strlcpy(tmp_map[y], line, ft_strlen_until(line, '\n') + 1);
 		free(line);
 		line = get_next_line(fd);
 	}
-	return (free(line), tmp_map);
+	return (free(line), 0);
 }
 
 static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
@@ -53,7 +52,9 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	*texture = NULL;
 	while (!*texture && y < max_y)
 	{
-		*texture = ft_strnstr(tmp_map[y], needle, ft_strlen(tmp_map[y]));
+		if (ft_strnstr(tmp_map[y], needle, ft_strlen(tmp_map[y])) != NULL)
+			*texture = ft_strdup(ft_strnstr(tmp_map[y], needle,
+						ft_strlen(tmp_map[y])));
 		y++;
 	}
 	if (!*texture)
@@ -63,12 +64,12 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	return (1);
 }
 
-static char	**ft_copy_original(char **original)
+static char	**ft_copy_original(char **original, int size)
 {
 	char	**copy;
 	int		i;
 
-	copy = ft_calloc(1024, sizeof(char *));
+	copy = ft_calloc(size, sizeof(char *));
 	i = -1;
 	while (original[++i])
 		copy[i] = ft_strdup(original[i]);
@@ -99,7 +100,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 			data->game->width = ft_strlen(data->game->map[y_game]);
 		y_game++;
 	}
-	data->game->map_copy = ft_copy_original(data->game->map);
+	data->game->map_copy = ft_copy_original(data->game->map, max_y + 1);
 	data->game->height = y_game;
 	return (0);
 }
@@ -114,21 +115,21 @@ int	init_map(t_data *data, char *input)
 	data->game->tmp_map = ft_calloc(get_map_height(input) + 1, sizeof(char *));
 	if (!data->game->tmp_map)
 		return (close(fd), ft_error("Error: tmp_map allocation failed!"));
-	data->game->tmp_map = ft_fill_tmp(data->game->tmp_map, fd);
+	ft_fill_tmp(data->game->tmp_map, data->height, fd);
 	if (!data->game->tmp_map)
-		return (1);
+		return (close(fd), 1);
 	if (ft_get_text(data->game->tmp_map, &data->game->NO, "NO")
 		* ft_get_text(data->game->tmp_map, &data->game->SO, "SO")
 		* ft_get_text(data->game->tmp_map, &data->game->WE, "WE")
 		* ft_get_text(data->game->tmp_map, &data->game->EA, "EA")
 		* ft_get_text(data->game->tmp_map, &data->game->F, "F")
 		* ft_get_text(data->game->tmp_map, &data->game->C, "C") == 0)
-		return (ft_error("Error: Texture parsing!"));
+		return (close(fd), ft_error("Error: Texture parsing!"));
 	if (ft_str_to_rgb(data->game->F, &data->game->color_floor)
 		* ft_str_to_rgb(data->game->C, &data->game->color_ceiling) == 0)
-		return (ft_error("Error: Color parsing!"));
+		return (close(fd), ft_error("Error: Color parsing!"));
 	if (ft_fill_map(data, data->game->tmp_map))
-		return (1);
+		return (close(fd), 1);
 	return (close(fd), 0);
 }
 // for (int i = 0; tmp_map[i]; i++)

@@ -2,8 +2,6 @@ NAME				=	cub3d
 
 COMPILE				=	cc
 
-#FLAGS				=	-Wall -Wextra -Werror -g -Ofast
-
 MLX_LINUX_FLAGS		=	-ldl -pthread -lm
 MLX_MAC_FLAGS		=	-framework Cocoa -framework OpenGL -framework IOKit
 MLXINCLUDE			=	MLX42/build/libmlx42.a -Iinclude -lglfw

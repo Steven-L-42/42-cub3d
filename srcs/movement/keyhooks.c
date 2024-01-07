@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:26:27 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 11:59:33 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_key_hold(void *param)
 	data->player->dir.sideward = 0;
 	data->player->dir.forward = 0;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
-		ft_exit(data);
+		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		data->player->dir.forward = 1;

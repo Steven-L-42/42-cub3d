@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:25:31 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 12:30:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ static void	draw_objects(t_data *data, int is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
 					* 16, y * 16);
 			else
-			{
 				draw_objects_helper(data, is_wall, y, x);
-			}
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:24:50 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 11:38:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	init_img_two(t_data *data)
 
 int	init_img_one(t_data *data)
 {
+	const char	*door = "textures/doors/brick_door_closed.png";
+
 	if (ft_open_image_keep_text(data, &data->img->img_NO, &data->img->txt_NO,
 			data->game->NO))
 		return (1);
@@ -68,8 +70,7 @@ int	init_img_one(t_data *data)
 			data->game->EA))
 		return (1);
 	if (ft_open_image_keep_text(data, &data->img->img_door_closed,
-			&data->img->txt_door_closed,
-			"textures/doors/brick_door_closed.png"))
+			&data->img->txt_door_closed, (char *)door))
 		return (1);
 	return (0);
 }
