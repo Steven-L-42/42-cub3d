@@ -17,7 +17,7 @@ INCLUDE				=	libft/
 REPO_URL			=	https://github.com/codam-coding-college/MLX42.git
 LOCAL_DIR			=	MLX42
 
-UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c utils_dda.c utils_image.c
+UTILS				=	utils_main.c  utils_free.c utils_map.c utils_basic.c utils_color.c utils_dda.c utils_image.c utils_detection.c
 
 INIT				=	init_1.c init_2.c parse_map.c
 
@@ -25,7 +25,7 @@ DDA					=	dda_distance.c dda_horizontal.c dda_vertical.c
 
 MINIMAP				=	minimap.c rays.c
 
-MOVEMENT			=	movement.c wall_detection.c
+MOVEMENT			=	keyhooks.c movement.c wall_door_detection.c
 
 SRCS				=	main.c \
 						$(addprefix init/, $(INIT)) \

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/06 15:49:50 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:20:54 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-
 	if (argc != 2 || ft_check_extension(*(argv + 1)))
 		exit(1);
 	data = malloc(sizeof(t_data));
@@ -104,10 +103,10 @@ int	main(int argc, char **argv)
 		return (free_structs(data), 1);
 	ft_instructions(data);
 	ft_img_to_window(data);
-	mlx_cursor_hook(data->mlx, update_player_angle, data);
-	mlx_loop_hook(data->mlx, ft_running, data);
-	mlx_loop_hook(data->mlx, ft_key_hold, data);
+	mlx_cursor_hook(data->mlx, ft_player_angle, data);
 	mlx_key_hook(data->mlx, ft_key_press, data);
+	mlx_loop_hook(data->mlx, ft_key_hold, data);
+	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_pistol_anim, data);
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
 	mlx_loop(data->mlx);

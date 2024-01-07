@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/06 18:57:36 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:17:07 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,14 +277,17 @@ int					ft_text_color(mlx_texture_t *text, t_dda *calc,
 						int block_width, int block_height);
 uint32_t			ft_select_color(t_data *data, t_dda *calc, int block_height,
 						int block_width);
+// utils detection
+void				set_coords(t_data *data, t_draw_rays *ray, int ray_len);
 
 // get_distance to wall
 double				ray_distance(t_data *data, float angle);
 void				dda_horizontal(t_data *data);
 
 // movement
-void				update_player_angle(double xpos, double ypos, void *param);
-int					check_wall_ray(t_data *data);
+void				move_player(t_data *data, float speed, int forward, const char *set);
+void				ft_player_angle(double xpos, double ypos, void *param);
+
 
 // hotkeys
 void				ft_key_hold(void *param);
@@ -297,10 +300,7 @@ void				draw_player_rays(t_data *data, int num_rays);
 
 // wall detection
 void				check_for_door(t_data *data);
-int					check_for_wall(t_data *data, float distance,
-						float radian_angle, const char *set);
-int					check_wall_corner_behind(t_data *data, const char *set);
-int					check_wall_corner_ahead(t_data *data, const char *set);
+int					check_wall_ray(t_data *data);
 
 // calc_view2
 void				dda_vertical(t_data *data, t_dda *calc, bool if_true);

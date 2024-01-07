@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/06 19:15:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:20:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 	dda_tmp.t = 0;
 	dda_tmp.i = 0;
 	dda_tmp.quality = (float)quality;
-
 	while (dda_tmp.line > dda_tmp.maxline)
 	{
 		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,

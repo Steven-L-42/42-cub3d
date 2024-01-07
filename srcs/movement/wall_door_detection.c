@@ -1,62 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wall_detection.c                                   :+:      :+:    :+:   */
+/*   wall_door_detection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/06 19:11:26 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/07 10:18:03 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-void	set_coords(t_data *data, t_draw_rays *ray, int ray_len)
-{
-	if (data->player->dir.forward != 0 && data->player->dir.sideward == 0)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + (ray_len * data->player->dir.forward)
-			* cos((-data->player->angle + ray->angle_offset) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + (ray_len * data->player->dir.forward)
-			* sin((-data->player->angle + ray->angle_offset) * PI / 180);
-	}
-	else if (data->player->dir.sideward == -1 && data->player->dir.forward == 1)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + ray_len
-			* cos((-data->player->angle + ray->angle_offset - 45) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + ray_len
-			* sin((-data->player->angle + ray->angle_offset - 45) * PI / 180);
-	}
-	else if (data->player->dir.sideward == 1 && data->player->dir.forward == 1)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + ray_len
-			* cos((-data->player->angle + ray->angle_offset + 45) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + ray_len
-			* sin((-data->player->angle + ray->angle_offset + 45) * PI / 180);
-	}
-	else if (data->player->dir.sideward == -1 && data->player->dir.forward == -1)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + ray_len
-			* cos((-data->player->angle + ray->angle_offset + 45 + 180) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + ray_len
-			* sin((-data->player->angle + ray->angle_offset + 45 + 180) * PI / 180);
-	}
-	else if (data->player->dir.sideward == 1 && data->player->dir.forward == -1)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + ray_len
-			* cos((-data->player->angle + ray->angle_offset - 45 - 180) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + ray_len
-			* sin((-data->player->angle + ray->angle_offset - 45 - 180) * PI / 180);
-	}
-	else if (data->player->dir.sideward != 0 && data->player->dir.forward == 0)
-	{
-		ray->x_coord = data->player->x * 16 + 8 + (ray_len * data->player->dir.sideward)
-			* cos((-data->player->angle + ray->angle_offset + 90) * PI / 180);
-		ray->y_coord = data->player->y * 16 + 8 + (ray_len * data->player->dir.sideward)
-			* sin((-data->player->angle + ray->angle_offset + 90) * PI / 180);
-	}
-}
 
 int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
 {
@@ -66,9 +20,10 @@ int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
 	while (ray_len < 10)
 	{
 		set_coords(data, ray, ray_len);
-		if (ray->x_coord >= 0 && ray->y_coord >= 0
-			&& (const uint32_t)ray->x_coord < data->img->img_movement_ray->width
-			&& (const uint32_t)ray->y_coord < data->img->img_movement_ray->height)
+		if (ray->x_coord >= 0 && ray->y_coord >= 0 && \
+			(const uint32_t)ray->x_coord < data->img->img_movement_ray->width
+			&& \
+			(const uint32_t)ray->y_coord < data->img->img_movement_ray->height)
 		{
 			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord
 					/ 16], "159"))
@@ -114,7 +69,8 @@ int	check_for_door_preset(t_data *data, t_check_door *door)
 	if (door->cell_y >= 0 && door->cell_y <= data->game->height
 		&& door->cell_x >= 0 && door->cell_x <= data->game->width)
 	{
-		door->instance = data->minimap->map[(int)door->cell_y][(int)door->cell_x];
+		door->instance = \
+		data->minimap->map[(int)door->cell_y][(int)door->cell_x];
 		return (door->instance);
 	}
 	return (-1);
