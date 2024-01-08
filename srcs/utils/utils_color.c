@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 10:27:48 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:28:22 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-static int	ft_text_color(mlx_texture_t *text, t_dda *calc, int block_width,
+static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 		int block_height)
 {
 	int		color;
 	int		pos;
 	double	brightness;
 
-	pos = (block_height + text->width * block_width) * text->bytes_per_pixel;
-	brightness = max(1.0 - (calc->distance / calc->shadow), 0);
-	if (calc->distance > calc->shadow)
-		return (0x000000ff);
+	pos = text->bytes_per_pixel * (block_height + text->width * block_width);
+	brightness = ft_max(1.0 - (dda->distance / dda->shadow), 0);
+	if (dda->distance > dda->shadow)
+		return (255);
 	color = (int)(text->pixels[pos] * brightness) << 24 | (int)(text->pixels[pos
 			+ 1] * brightness) << 16 | (int)(text->pixels[pos + 2]
 			* brightness) << 8 | (int)text->pixels[pos + 3];

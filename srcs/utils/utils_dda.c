@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/05 14:53:35 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 09:44:10 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ float	calc_for_x(float big, float small)
 	return (x);
 }
 
-double	max(double a, double b)
+double	ft_max(double a, double b)
 {
 	if (a > b)
 		return (a);

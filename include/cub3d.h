@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 15:38:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 10:54:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_rgb
 	uint32_t		r;
 	uint32_t		g;
 	uint32_t		b;
+	uint32_t		a;
 }					t_rgb;
 
 typedef struct s_map
@@ -251,7 +252,7 @@ int					init_img_two(t_data *data);
 
 // utils dda
 float				calc_for_x(float big, float small);
-double				max(double a, double b);
+double				ft_max(double a, double b);
 void				reset_map(t_data *data);
 float				ft_get_block_width(t_dda *calc);
 float				get_slope(float angle);
