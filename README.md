@@ -2,6 +2,10 @@
 
 ![cub3d](https://github.com/ayogun/42-project-badges/blob/main/badges/cub3dm.png?raw=true)
 
+# version (2024.01.08)
+
+https://github.com/Steven-L-42/42-cub3d/assets/102829233/9a9279c5-079c-46e1-9933-b8b9a18b1933
+
 # version (2024.01.07)
 
 https://github.com/Steven-L-42/42-cub3d/assets/102829233/6c908f4d-8fc4-47f7-b6bd-5786e662b7b0
