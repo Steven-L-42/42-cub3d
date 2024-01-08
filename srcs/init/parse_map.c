@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 17:47:25 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:51:55 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,20 +124,20 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 // 		is_playable(data, x, y - 1);
 // }
 
-int	ft_check_game_map(t_data *data)
-{
-	int	i;
+// int	ft_check_game_map(t_data *data)
+// {
+// 	int	i;
 
-	data->is_surrounded = false;
-	i = 0;
-	while (data->game->map[i])
-		ft_printf("%s\n", data->game->map[i++]);
-	if (data->is_surrounded == true)
-		printf("Map ist surrounded by Walls\n");
-	else
-		printf("Map ist not surrounded by Walls\n");
-	return (0);
-}
+// 	data->is_surrounded = false;
+// 	i = 0;
+// 	while (data->game->map[i])
+// 		ft_printf("%s\n", data->game->map[i++]);
+// 	if (data->is_surrounded == true)
+// 		printf("Map ist surrounded by Walls\n");
+// 	else
+// 		printf("Map ist not surrounded by Walls\n");
+// 	return (0);
+// }
 
 int	init_map(t_data *data, char *input)
 {
@@ -162,10 +162,12 @@ int	init_map(t_data *data, char *input)
 	if (ft_str_to_rgb(data->game->F, &data->game->col_floor)
 		* ft_str_to_rgb(data->game->C, &data->game->col_ceiling) == 0)
 		return (close(fd), ft_error("Error: Color parsing!"));
-	if (ft_fill_map(data, data->game->tmp_map) || ft_check_game_map(data))
+	if (ft_fill_map(data, data->game->tmp_map))
 		return (close(fd), 1);
 	return (close(fd), 0);
 }
+// if (ft_fill_map(data, data->game->tmp_map) || ft_check_game_map(data))
+// return (close(fd), 1);
 // for (int i = 0; tmp_map[i]; i++)
 // 	printf("%s\n", tmp_map[i]);
 // printf("\n");

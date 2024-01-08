@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 16:22:30 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:06:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_instructions(t_data *data)
 
 	i = 0;
 	write(1, "\n", 1);
-
 	ft_printf("%s\nPlayer Movement:\tW | A | S | D\n", PURPLE);
 	ft_printf("Player Rotation:\tArrow Keys | Mouse\n");
 	ft_printf("Player Run:\t\tLeft Shift\n");
@@ -59,6 +58,7 @@ int	ft_alloc_structs(t_data *data)
 	if (!data->img)
 		return (free_structs(data),
 			ft_error("Error: data->img allocation failed!"));
+	data->player->curr_item = 0;
 	return (0);
 }
 
@@ -70,8 +70,8 @@ void	ft_pistol_anim(void *param)
 	data = (void *)param;
 	if (data->is_shooting == true || data->img->pistol_frame > 0)
 	{
-		data->is_shooting = false;
 		i = 0;
+		data->is_shooting = false;
 		while (i < 5)
 		{
 			if (data->img->pistol_frame == i)

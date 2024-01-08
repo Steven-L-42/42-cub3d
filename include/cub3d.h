@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 16:45:47 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:30:28 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_player
 	float			view_angle;
 	float			prev_mouseX;
 	double			prev_time;
+	int				curr_item;
 }					t_player;
 
 typedef struct s_vec2
@@ -214,6 +215,7 @@ typedef struct s_img
 
 	int				pistol_frame;
 	mlx_image_t		*img_pistol[5];
+	
 }					t_img;
 
 typedef struct s_data
