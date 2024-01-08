@@ -112,4 +112,8 @@ test3:
 					@make
 					./cub3d maps/test.cub
 
+walls:
+					@make
+					./cub3d maps/walls.cub
+
 .PHONY:				all clean fclean re clone

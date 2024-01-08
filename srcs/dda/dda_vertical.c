@@ -6,43 +6,16 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 15:56:47 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:04:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	ft_shadow_coloring(t_data *data, float start, int src_color, bool is_floor)
-{
-	double			brightness;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
-
-	if (!data->is_shooting && ((is_floor && start - 30 < 512) \
-		|| (!is_floor && start + 30 > 512)))
-		return (ft_pixel(0, 0, 0, 255));
-	if (is_floor)
-		brightness = -((float)(512 - start) / 512);
-	else
-		brightness = 1.0f - (float)(start) / 512;
-	if (data->is_shooting)
-		brightness = 1;
-	r = (src_color >> 24) & 0xFF;
-	g = (src_color >> 16) & 0xFF;
-	b = (src_color >> 8) & 0xFF;
-	a = src_color & 0xFF;
-	r = r * brightness;
-	g = g * brightness;
-	b = b * brightness;
-	return ((r << 24) | (g << 16) | (b << 8) | a);
-}
-
 void	draw_floor_ceiling(t_data *data, t_dda *dda)
 {
-	float	start;
-	int		color;
+	float		start;
+	uint32_t	color;
 
 	start = -1;
 	while (++start < dda->line_top)

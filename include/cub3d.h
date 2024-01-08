@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 16:00:22 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:45:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ typedef struct s_data
 	int				width;
 	int				height;
 	bool			is_shooting;
+	bool			is_surrounded;
 }					t_data;
 
 float				dda_dist(t_data *data, float angle, char *dir,
@@ -299,6 +300,8 @@ int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t			**get_color(mlx_texture_t *texture);
 uint32_t			ft_select_color(t_data *data, t_dda *calc, int block_height,
 						int block_width);
+uint32_t			ft_shadow_coloring(t_data *data, float start, int src_color,
+						bool is_floor);
 // utils detection
 void				set_coords(t_data *data, t_draw_rays *ray, int ray_len);
 

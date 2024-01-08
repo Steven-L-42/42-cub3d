@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 15:56:26 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:47:25 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,40 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 	return (0);
 }
 
+// static void	is_playable(t_data *data, int x, int y)
+// {
+// 	if (data->game->map[y][x] == 'P')
+// 		data->is_surrounded = true;
+// 	data->game->map[y][x] = '2';
+// 	if (x + 1 >= 0 && x + 1 < data->game->width
+// 		&& ft_is_in_set(data->game->map[y][x + 1], "1"))
+// 		is_playable(data, x + 1, y);
+// 	if (y + 1 >= 0 && y + 1 < data->game->height
+// 		&& ft_is_in_set(data->game->map[y + 1][x], "1"))
+// 		is_playable(data, x, y + 1);
+// 	if (x - 1 >= 0 && x - 1 < data->game->width
+// 		&& ft_is_in_set(data->game->map[y][x - 1], "1"))
+// 		is_playable(data, x - 1, y);
+// 	if (y - 1 >= 0 && y - 1 < data->game->height
+// 		&& ft_is_in_set(data->game->map[y - 1][x], "1"))
+// 		is_playable(data, x, y - 1);
+// }
+
+int	ft_check_game_map(t_data *data)
+{
+	int	i;
+
+	data->is_surrounded = false;
+	i = 0;
+	while (data->game->map[i])
+		ft_printf("%s\n", data->game->map[i++]);
+	if (data->is_surrounded == true)
+		printf("Map ist surrounded by Walls\n");
+	else
+		printf("Map ist not surrounded by Walls\n");
+	return (0);
+}
+
 int	init_map(t_data *data, char *input)
 {
 	int	fd;
@@ -128,7 +162,7 @@ int	init_map(t_data *data, char *input)
 	if (ft_str_to_rgb(data->game->F, &data->game->col_floor)
 		* ft_str_to_rgb(data->game->C, &data->game->col_ceiling) == 0)
 		return (close(fd), ft_error("Error: Color parsing!"));
-	if (ft_fill_map(data, data->game->tmp_map))
+	if (ft_fill_map(data, data->game->tmp_map) || ft_check_game_map(data))
 		return (close(fd), 1);
 	return (close(fd), 0);
 }
