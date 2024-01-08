@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 12:26:13 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:56:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ int	init_map(t_data *data, char *input)
 		* ft_get_text(data->game->tmp_map, &data->game->F, "F")
 		* ft_get_text(data->game->tmp_map, &data->game->C, "C") == 0)
 		return (close(fd), ft_error("Error: Texture parsing!"));
-	if (ft_str_to_rgb(data->game->F, &data->game->color_floor)
-		* ft_str_to_rgb(data->game->C, &data->game->color_ceiling) == 0)
+	if (ft_str_to_rgb(data->game->F, &data->game->col_floor)
+		* ft_str_to_rgb(data->game->C, &data->game->col_ceiling) == 0)
 		return (close(fd), ft_error("Error: Color parsing!"));
 	if (ft_fill_map(data, data->game->tmp_map))
 		return (close(fd), 1);

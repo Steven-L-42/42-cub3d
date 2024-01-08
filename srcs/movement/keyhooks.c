@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 15:36:57 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:00:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_PAGE_UP && keydata.action == MLX_PRESS)
 	{
 		data->cross_index++;
-		if (data->cross_index >= 8)
+		if (data->cross_index >= 9)
 			data->cross_index = 0;
 		draw_crosshair(data, data->cross_colors[data->cross_index]);
 	}
@@ -51,7 +51,7 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 	{
 		data->cross_index--;
 		if (data->cross_index < 0)
-			data->cross_index = 7;
+			data->cross_index = 8;
 		draw_crosshair(data, data->cross_colors[data->cross_index]);
 	}
 }

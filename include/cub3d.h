@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 10:54:27 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:00:22 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ typedef struct s_map
 	char			*DOOR;
 	char			*F;
 	char			*C;
-	int				color_floor;
-	int				color_ceiling;
+	int				col_floor;
+	int				col_ceiling;
 }					t_map;
 
 typedef struct s_minimap
@@ -110,8 +110,8 @@ typedef struct s_calc_view
 {
 	char			direction;
 	int				shadow;
-	uint32_t		color_floor;
-	uint32_t		color_ceiling;
+	uint32_t		col_floor;
+	uint32_t		col_ceiling;
 	uint32_t		color_wall;
 	uint32_t		color_door;
 	uint32_t		color_portal;
@@ -225,7 +225,7 @@ typedef struct s_data
 	t_player		*player;
 	t_detection		detc;
 	int				cross_index;
-	uint32_t		cross_colors[8];
+	uint32_t		cross_colors[9];
 	char			wall_type;
 	uint32_t		color[64];
 	int				wall_size[2];

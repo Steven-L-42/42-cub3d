@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 11:14:36 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:56:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	ft_shadow_coloring(t_data *data, float t)
+int	ft_shadow_coloring(t_data *data, float start, int src_color, bool is_floor)
 {
 	double			brightness;
 	unsigned char	r;
@@ -20,13 +20,19 @@ int	ft_shadow_coloring(t_data *data, float t)
 	unsigned char	b;
 	unsigned char	a;
 
-	if (t + 25 > 512)
+	if (!data->is_shooting && ((is_floor && start - 30 < 512) \
+		|| (!is_floor && start + 30 > 512)))
 		return (ft_pixel(0, 0, 0, 255));
-	brightness = 1.0f - (float)(t) / 512;
-	r = (data->game->color_ceiling >> 24) & 0xFF;
-	g = (data->game->color_ceiling >> 16) & 0xFF;
-	b = (data->game->color_ceiling >> 8) & 0xFF;
-	a = data->game->color_ceiling & 0xFF;
+	if (is_floor)
+		brightness = -((float)(512 - start) / 512);
+	else
+		brightness = 1.0f - (float)(start) / 512;
+	if (data->is_shooting)
+		brightness = 1;
+	r = (src_color >> 24) & 0xFF;
+	g = (src_color >> 16) & 0xFF;
+	b = (src_color >> 8) & 0xFF;
+	a = src_color & 0xFF;
 	r = r * brightness;
 	g = g * brightness;
 	b = b * brightness;
@@ -35,21 +41,21 @@ int	ft_shadow_coloring(t_data *data, float t)
 
 void	draw_floor_ceiling(t_data *data, t_dda *dda)
 {
-	float	t;
+	float	start;
 	int		color;
 
-	t = -1;
-	while (++t < dda->line_top)
+	start = -1;
+	while (++start < dda->line_top)
 	{
-		if (data->is_shooting)
-			color = ft_pixel(255, 255, 255, 255);
-		else
-			color = ft_shadow_coloring(data, t);
-		mlx_put_pixel(data->img->img_game, dda->j, t, color);
+		color = ft_shadow_coloring(data, start, data->game->col_ceiling, false);
+		mlx_put_pixel(data->img->img_game, dda->j, start, color);
 	}
-	t = dda->line_bottom - 1;
-	while (++t < data->height)
-		mlx_put_pixel(data->img->img_game, dda->x, t, data->game->color_floor);
+	start = dda->line_bottom - 1;
+	while (++start < data->height)
+	{
+		color = ft_shadow_coloring(data, start, data->game->col_floor, true);
+		mlx_put_pixel(data->img->img_game, dda->j, start, color);
+	}
 }
 
 void	draw_wall(t_data *data, t_dda *dda, int block_width, float y)

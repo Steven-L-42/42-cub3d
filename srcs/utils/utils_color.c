@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 10:28:22 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:59:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 
 	pos = text->bytes_per_pixel * (block_height + text->width * block_width);
 	brightness = ft_max(1.0 - (dda->distance / dda->shadow), 0);
+
 	if (dda->distance > dda->shadow)
 		return (255);
 	color = (int)(text->pixels[pos] * brightness) << 24 | (int)(text->pixels[pos
@@ -34,28 +35,30 @@ static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 	return (color);
 }
 
-uint32_t	ft_select_color(t_data *data, t_dda *calc, int block_height,
+uint32_t	ft_select_color(t_data *data, t_dda *dda, int block_height,
 		int block_width)
 {
+	if (data->is_shooting)
+		dda->shadow = 100;
 	if (data->wall_type == 'W')
 	{
-		if (calc->direction == 'N')
-			calc->color_wall = ft_text_color(data->img->txt_NO, calc,
+		if (dda->direction == 'N')
+			dda->color_wall = ft_text_color(data->img->txt_NO, dda,
 					block_height, block_width);
-		else if (calc->direction == 'E')
-			calc->color_wall = ft_text_color(data->img->txt_EA, calc,
+		else if (dda->direction == 'E')
+			dda->color_wall = ft_text_color(data->img->txt_EA, dda,
 					block_height, block_width);
-		else if (calc->direction == 'S')
-			calc->color_wall = ft_text_color(data->img->txt_SO, calc,
+		else if (dda->direction == 'S')
+			dda->color_wall = ft_text_color(data->img->txt_SO, dda,
 					block_height, block_width);
-		else if (calc->direction == 'W')
-			calc->color_wall = ft_text_color(data->img->txt_WE, calc,
+		else if (dda->direction == 'W')
+			dda->color_wall = ft_text_color(data->img->txt_WE, dda,
 					block_height, block_width);
 	}
 	else if (data->wall_type == 'D')
 	{
-		calc->color_wall = ft_text_color(data->img->txt_door_closed, calc,
+		dda->color_wall = ft_text_color(data->img->txt_door_closed, dda,
 				block_height, block_width);
 	}
-	return (calc->color_wall);
+	return (dda->color_wall);
 }

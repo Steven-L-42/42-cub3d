@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 15:43:39 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:00:14 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	init_cross_colors(t_data *data)
 	data->cross_colors[5] = ft_pixel(43, 255, 0, 125);
 	data->cross_colors[6] = ft_pixel(255, 29, 0, 125);
 	data->cross_colors[7] = ft_pixel(255, 99, 71, 125);
+	data->cross_colors[8] = ft_pixel(0, 0, 0, 0);
 }
 
 static int	init_win_imgs(t_data *data)
