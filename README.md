@@ -2,9 +2,10 @@
 
 ![cub3d](https://github.com/ayogun/42-project-badges/blob/main/badges/cub3dm.png?raw=true)
 
-# version (2024.01.09) - Torch and Random Map Generator
+# version (2024.01.09)
+### Weapon | Torch, Crosshair | Shadow | Color-Gradient | Random Map Generator
 
-https://github.com/Steven-L-42/42-cub3d/assets/102829233/96bb6419-d8fc-4945-8098-eba0144b7bd9
+https://github.com/Steven-L-42/42-cub3d/assets/102829233/ea76fc7d-9884-46fe-b70c-7beca2ef5812
 
 
 # version (2024.01.07)
