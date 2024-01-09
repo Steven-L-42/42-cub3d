@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/08 09:44:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:47:53 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ float	calc_for_x(float big, float small)
 
 	x = fabs(((small) / big) * 64);
 	return (x);
-}
-
-double	ft_max(double a, double b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
 }
 
 void	reset_map(t_data *data)

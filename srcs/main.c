@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:43:15 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:53:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (ft_error("Error: data allocation failed!"));
 	if (ft_alloc_structs(data))
-		return (free(data), 1);
+		return (1);
 	if (argc > 2 || (argc == 2 && ft_check_extension(*(argv + 1))))
 		return (free_structs(data), 1);
 	else if (argc == 1)

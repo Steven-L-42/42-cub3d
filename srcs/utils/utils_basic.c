@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 13:28:40 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:24:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	ft_error(char *str)
 		write(2, &str[i++], 1);
 	write(2, "\n", 1);
 	return (1);
+}
+
+int	ft_differ(int a, int b)
+{
+	return (abs(a - b));
 }
 
 int	ft_is_in_set(char c, const char *set)

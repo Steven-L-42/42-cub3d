@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 19:42:58 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:25:59 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	generate_map_preset(t_data *data, int height, int width)
 	int	i;
 	int	j;
 
-	height += 6;
-	data->game->rnd_map = ft_calloc(height + 7, sizeof(char *));
+	data->game->rnd_map = ft_calloc(height + 1, sizeof(char *));
 	i = 0;
 	while (i < height)
 		data->game->rnd_map[i++] = ft_calloc(width + 40, sizeof(char));
@@ -38,6 +37,29 @@ static void	generate_map_helper(t_data *data, int i, int j)
 		data->game->rnd_map[i][j] = '1';
 	else
 		data->game->rnd_map[i][j] = '0';
+}
+
+static void	ft_set_player_pos(t_data *data, int height, int width)
+{
+	char	pos;
+	int		player_height;
+	int		player_width;
+
+	player_height = rand() % ((height - 2) - 7 + 1) + 7;
+	player_width = rand() % ((width - 2) - 1 + 1) + 1;
+	if (player_height > height / 2 && ft_differ(player_height, height
+			/ 2) >= ft_differ(player_width, width / 2))
+		pos = 'N';
+	else if (player_height < height / 2 && ft_differ(player_height, height
+			/ 2) >= ft_differ(player_width, width / 2))
+		pos = 'S';
+	else if (player_width < width / 2 && ft_differ(player_width, width
+			/ 2) >= ft_differ(player_height, height / 2))
+		pos = 'E';
+	else
+		pos = 'W';
+	data->game->rnd_map[player_height][player_width] = pos;
+	data->game->is_random_map = true;
 }
 
 static void	generate_map(t_data *data, int height, int width)
@@ -61,8 +83,7 @@ static void	generate_map(t_data *data, int height, int width)
 		data->game->rnd_map[i][j] = '\0';
 		i++;
 	}
-	data->game->rnd_map[(height + 6) / 2][width / 2] = 'E';
-	data->game->is_random_map = true;
+	ft_set_player_pos(data, height, width);
 }
 
 void	ft_create_random_map(t_data *data, char ***argv)
@@ -81,7 +102,8 @@ void	ft_create_random_map(t_data *data, char ***argv)
 	while (data->game->rnd_map[i])
 	{
 		write(fd, data->game->rnd_map[i], ft_strlen(data->game->rnd_map[i]));
-		write(fd, "\n", 1);
+		if (data->game->rnd_map[i + 1])
+			write(fd, "\n", 1);
 		i++;
 	}
 	close(fd);

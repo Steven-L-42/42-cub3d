@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:31:15 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:24:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,6 @@ int					init_img_two(t_data *data);
 
 // utils dda
 float				calc_for_x(float big, float small);
-double				ft_max(double a, double b);
 void				reset_map(t_data *data);
 float				ft_get_block_width(t_dda *calc);
 float				get_slope(float angle);
@@ -303,7 +302,7 @@ int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
 int					ft_strlen_until(char *str, int c);
 void				ft_change_item(t_data *data);
-;
+int					ft_differ(int a, int b);
 
 // utils free
 void				free_structs(t_data *data);

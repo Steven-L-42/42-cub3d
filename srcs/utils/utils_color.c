@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:04:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:47:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 	double	brightness;
 
 	pos = text->bytes_per_pixel * (block_height + text->width * block_width);
-	brightness = ft_max(1.0 - (dda->distance / dda->shadow), 0);
+	brightness = fmax(1.0 - (dda->distance / dda->shadow), 0);
 	if (dda->distance > dda->shadow)
 		return (255);
 	return (ft_pixel((int)(text->pixels[pos] * brightness), \
