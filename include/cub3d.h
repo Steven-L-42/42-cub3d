@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 20:24:49 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:27:58 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,6 +302,8 @@ int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
 int					ft_strlen_until(char *str, int c);
 void				ft_change_item(t_data *data);
+
+// utils math
 int					ft_differ(int a, int b);
 
 // utils free
