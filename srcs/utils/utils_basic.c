@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 12:26:21 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:28:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,34 @@ int	ft_strlen_until(char *str, int c)
 		count++;
 	}
 	return (count);
+}
+
+void	ft_change_item(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->player->curr_item = ++data->player->curr_item % 2;
+	while (data->player->curr_item == 1 && i < 5)
+		data->img->img_pistol[i++]->enabled = false;
+	while (data->player->curr_item == 0 && i < 6)
+		data->img->img_torch[i++]->enabled = false;
+	if (data->player->curr_item == 1)
+		data->is_torching = true;
+	else
+		data->is_torching = false;
+	i = 0;
+	while (data->player->curr_item == 0 && i < 5)
+	{
+		if (4 == i)
+			data->img->img_pistol[i++]->enabled = true;
+		else
+			data->img->img_pistol[i++]->enabled = false;
+	}
+}
+
+void	reset_window(t_data *data)
+{
+	ft_memset(data->img->img_game->pixels, 0, data->img->img_game->width
+		* data->img->img_game->height * sizeof(int32_t));
 }

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 10:26:50 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:22:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ int	check_wall_ray(t_data *data)
 	int			max;
 
 	breite = 60;
-	ft_memset(data->img->img_movement_ray->pixels, 0,
-		data->img->img_movement_ray->width * data->img->img_movement_ray->height
-		* sizeof(int32_t));
 	ray.color = ft_pixel(255, 0, 0, 125);
 	ray.i = -breite / 2;
 	max = ray.i + 20;

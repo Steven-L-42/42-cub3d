@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 11:43:03 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:29:07 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int					ft_open_image_keep_text(t_data *data,
 int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
 int					ft_strlen_until(char *str, int c);
+void				ft_change_item(t_data *data);;
 
 // utils free
 void				free_structs(t_data *data);
@@ -323,7 +324,7 @@ void				ft_key_hold(void *param);
 void				ft_key_press(mlx_key_data_t keydata, void *param);
 void				ft_mouse_press(mouse_key_t button, action_t action,
 						modifier_key_t mods, void *param);
-void				ft_change_item(t_data *data);
+
 
 // minimap
 void				draw_player_rays(t_data *data, int num_rays);

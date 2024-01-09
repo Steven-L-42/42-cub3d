@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 11:43:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:28:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,6 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void	ft_change_item(t_data *data)
-{
-	int		i;
-
-	i = 0;
-	data->player->curr_item = ++data->player->curr_item % 2;
-	while (data->player->curr_item == 1 && i < 5)
-		data->img->img_pistol[i++]->enabled = false;
-	while (data->player->curr_item == 0 && i < 6)
-		data->img->img_torch[i++]->enabled = false;
-	if (data->player->curr_item == 1)
-		data->is_torching = true;
-	else
-		data->is_torching = false;
-	i = 0;
-	while (data->player->curr_item == 0 && i < 5)
-	{
-		if (4 == i)
-			data->img->img_pistol[i++]->enabled = true;
-		else
-			data->img->img_pistol[i++]->enabled = false;
-	}
-}
-
 void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 		void *param)
 {
@@ -125,6 +101,9 @@ void	ft_key_hold(void *param)
 	data = param;
 	data->player->dir.sideward = 0;
 	data->player->dir.forward = 0;
+	ft_memset(data->img->img_movement_ray->pixels, 0,
+		data->img->img_movement_ray->width * data->img->img_movement_ray->height
+		* sizeof(int32_t));
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))

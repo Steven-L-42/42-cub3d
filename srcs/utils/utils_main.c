@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 11:49:49 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:27:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ void	draw_crosshair(t_data *data, uint32_t color)
 	draw_leftdiagonal(data, cross);
 	draw_rightdiagonal(data, cross);
 	draw_circle(data, cross);
+}
+
+static void	ft_img_to_window_helper(t_data *data)
+{
+	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_movement_ray, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_crosshair, data->width / 2
+		- data->img->img_crosshair->width / 2, data->height / 2
+		- data->img->img_crosshair->height / 2);
+	draw_crosshair(data, data->cross_colors[0]);
+	data->img->pistol_frame = 0;
+	data->img->img_game->instances[0].z = 0;
 }
 
 void	ft_img_to_window(t_data *data)
@@ -55,20 +67,7 @@ void	ft_img_to_window(t_data *data)
 		mlx_image_to_window(data->mlx, data->img->img_torch[i], width, height);
 		data->img->img_torch[i]->enabled = false;
 	}
-	data->img->pistol_frame = 0;
-	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
-	data->img->img_game->instances[0].z = 0;
-	mlx_image_to_window(data->mlx, data->img->img_movement_ray, 0, 0);
-	mlx_image_to_window(data->mlx, data->img->img_crosshair, data->width / 2
-		- data->img->img_crosshair->width / 2, data->height / 2
-		- data->img->img_crosshair->height / 2);
-	draw_crosshair(data, data->cross_colors[0]);
-}
-
-void	reset_window(t_data *data)
-{
-	ft_memset(data->img->img_game->pixels, 0, data->img->img_game->width
-		* data->img->img_game->height * sizeof(int32_t));
+	ft_img_to_window_helper(data);
 }
 
 void	ft_running(void *param)
