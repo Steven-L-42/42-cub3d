@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 13:09:41 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:09:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true, int block_width)
 	float			y;
 	static float	temp_if_true;
 
-	dda->tmp = round(dda->distance * cos((dda->angle) * PI / 90) * 1000)
+	dda->tmp = round(dda->distance * cos((dda->angle) * PI / 180) * 1000)
 		/ 1000;
 	if (if_true == true && temp_if_true < dda->tmp)
 		dda->tmp = temp_if_true;
