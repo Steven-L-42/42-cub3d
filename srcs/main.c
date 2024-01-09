@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 11:43:12 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:38:39 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_instructions(t_data *data)
 
 	i = 0;
 	write(1, "\n", 1);
+	while (data->game->map[i])
+		printf("%s\n", data->game->map[i++]);
 	ft_printf("%s\nPlayer Movement:\tW | A | S | D\n", PURPLE);
 	ft_printf("Player Rotation:\tArrow Keys | Mouse\n");
 	ft_printf("Player Run:\t\tLeft Shift\n");
@@ -62,51 +64,6 @@ int	ft_alloc_structs(t_data *data)
 	return (0);
 }
 
-void	ft_torch_anim(void *param)
-{
-	t_data		*data;
-	int			i;
-	static int	slower = 0;
-
-	data = (void *)param;
-	if (data->player->curr_item == 1 && slower++ > 3)
-	{
-		slower = 0;
-		i = 0;
-		while (i < 6)
-		{
-			if (data->img->torch_frame == i)
-				data->img->img_torch[i++]->enabled = true;
-			else
-				data->img->img_torch[i++]->enabled = false;
-		}
-		data->img->torch_frame++;
-		data->img->torch_frame = data->img->torch_frame % 6;
-	}
-}
-
-void	ft_pistol_anim(void *param)
-{
-	t_data	*data;
-	int		i;
-
-	data = (void *)param;
-	if (data->is_shooting == true || data->img->pistol_frame > 0)
-	{
-		data->is_shooting = false;
-		i = 0;
-		while (i < 5)
-		{
-			if (data->img->pistol_frame == i)
-				data->img->img_pistol[i++]->enabled = true;
-			else
-				data->img->img_pistol[i++]->enabled = false;
-		}
-		data->img->pistol_frame++;
-		data->img->pistol_frame = data->img->pistol_frame % 5;
-	}
-}
-
 // mlx_set_setting(MLX_STRETCH_IMAGE, true);
 // mlx_set_setting(MLX_FULLSCREEN, true);
 // atexit(leaks);
@@ -114,13 +71,15 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc != 2 || ft_check_extension(*(argv + 1)))
-		exit(1);
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (ft_error("Error: data allocation failed!"));
 	if (ft_alloc_structs(data))
-		return (1);
+		return (free(data), 1);
+	if (argc > 2 || (argc == 2 && ft_check_extension(*(argv + 1))))
+		return (free_structs(data), 1);
+	else if (argc == 1)
+		ft_create_random_map(data, &argv);
 	if (init(data, argv[1]))
 		return (free_structs(data), 1);
 	ft_instructions(data);

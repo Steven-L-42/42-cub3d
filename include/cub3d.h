@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 13:29:07 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:37:12 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 
 # define PURPLE "\x1B[1;35m"
 # define GREEN "\x1B[1;32m"
@@ -34,6 +35,13 @@
 # define SLIPPERT_G "https://github.com/Steven-L-42"
 # define PI 3.14159265359
 # define SIZE 100
+
+# define NOD "NO textures/bricks/brick_purple.png\n"
+# define SOD "SO textures/bricks/brick_red.png\n"
+# define WED "WE textures/bricks/brick_orange.png\n"
+# define EAD "EA textures/bricks/brick_green.png\n"
+# define FD "F     225		,   0,   0\n"
+# define CD "C 		135		,   206,   125\n"
 
 # define QUALITY 1
 # define BLOCK_PIXEL_SIZE 256
@@ -84,6 +92,7 @@ typedef struct s_rgb
 typedef struct s_map
 {
 	char			**tmp_map;
+	char			**rnd_map;
 	char			**map;
 	char			**map_copy;
 	int				width;
@@ -269,6 +278,9 @@ void				ft_running(void *param);
 int					ft_check_extension(char *argv);
 void				draw_crosshair(t_data *data, uint32_t color);
 
+// utils random
+void				ft_create_random_map(t_data *data, char ***argv);
+
 // utils map
 int					get_map_height(char *input);
 int					ft_map_len(char **tmp_map);
@@ -284,7 +296,8 @@ int					ft_open_image_keep_text(t_data *data,
 int					ft_is_in_set(char c, const char *set);
 int					ft_error(char *str);
 int					ft_strlen_until(char *str, int c);
-void				ft_change_item(t_data *data);;
+void				ft_change_item(t_data *data);
+;
 
 // utils free
 void				free_structs(t_data *data);
@@ -324,7 +337,9 @@ void				ft_key_hold(void *param);
 void				ft_key_press(mlx_key_data_t keydata, void *param);
 void				ft_mouse_press(mouse_key_t button, action_t action,
 						modifier_key_t mods, void *param);
-
+// animation
+void				ft_torch_anim(void *param);
+void				ft_pistol_anim(void *param);
 
 // minimap
 void				draw_player_rays(t_data *data, int num_rays);
