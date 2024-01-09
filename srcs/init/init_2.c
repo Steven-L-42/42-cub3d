@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 13:27:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:38:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	init_coords(t_data *data, int pixel_x, int pixel_y)
 			if (data->game->map[i][j] == 'N' || data->game->map[i][j] == 'E'
 				|| data->game->map[i][j] == 'S' || data->game->map[i][j] == 'W')
 			{
+				data->game->count_player++;
 				data->player->start_direction = data->game->map[i][j];
 				data->game->map[i][j] = 'P';
 				data->player->x = pixel_x;
 				data->player->y = pixel_y;
-				return ;
 			}
 			pixel_x += 1;
 			j++;

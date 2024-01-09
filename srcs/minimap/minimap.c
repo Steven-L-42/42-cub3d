@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 14:19:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:39:11 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ static void	draw_objects(t_data *data, int is_wall)
 		x = 0;
 		while (data->game->map[y][x])
 		{
-			if (data->game->map[y][x] == '1' && is_wall)
+			if (data->game->map[y][x] && data->game->map[y][x] == '1'
+				&& is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall, x * 16, y
 					* 16);
-			else if ((data->game->map[y][x] == '0'
-				|| data->game->map[y][x] == 'P') && is_wall)
+			else if (data->game->map[y][x] && \
+					(data->game->map[y][x] == '0' || \
+					data->game->map[y][x] == 'P') && is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
 					* 16, y * 16);
 			else

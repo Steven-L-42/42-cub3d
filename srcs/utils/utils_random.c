@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 19:22:14 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:42:58 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	ft_create_random_map(t_data *data, char ***argv)
 	srand(time(NULL));
 	height = (10 + rand() % (20 - 10 + 1)) + 6;
 	width = 10 + rand() % (35 - 10 + 1);
-	printf("height %d : width %d\n", height, width);
 	generate_map(data, height, width);
 	fd = open("random.cub", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	i = 0;

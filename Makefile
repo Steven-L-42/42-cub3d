@@ -98,25 +98,34 @@ re:					fclean all
 leak:
 					@dorker make re
 					dorker valgrind --leak-check=full --track-origins=yes --show-reachable=yes --error-limit=no ./cub3d maps/map.cub
+
+rand:
+					@clear
+					@make
+					./cub3d
+
 test:
 					@clear
 					@make
-					@sleep 1
 					./cub3d maps/map.cub
 
 test1:
+					@clear
 					@make
 					./cub3d maps/map1.cub
 
 test2:
+					@clear
 					@make
 					./cub3d maps/map2.cub
 
 test3:
+					@clear
 					@make
 					./cub3d maps/test.cub
 
 walls:
+					@clear
 					@make
 					./cub3d maps/walls.cub
 

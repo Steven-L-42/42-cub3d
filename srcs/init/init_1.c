@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/08 16:00:14 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:38:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	init_helper(t_data *data, char *input)
 		data->height = 1080;
 	data->height = 1024;
 	data->width = 1024;
+	data->game->count_player = 0;
 	return (0);
 }
 
@@ -65,7 +66,7 @@ static int	init_win_imgs(t_data *data)
 			data->game->height * 16);
 	if (!data->img->img_player_ray)
 		return (ft_error("Error: img_player_ray creation failed!"));
-	data->img->img_movement_ray = mlx_new_image(data->mlx, data->game->width \
+	data->img->img_movement_ray = mlx_new_image(data->mlx, data->game->width
 			* 16, data->game->height * 16);
 	if (!data->img->img_movement_ray)
 		return (ft_error("Error: img_movement_ray creation failed!"));
@@ -87,6 +88,8 @@ int	init(t_data *data, char *input)
 	init_cross_colors(data);
 	init_minimap(data);
 	init_coords(data, 0, 0);
+	if (data->game->count_player != 1)
+		return (ft_error("Error: to few or many players!"));
 	init_player(data);
 	draw_minimap(data);
 	return (0);

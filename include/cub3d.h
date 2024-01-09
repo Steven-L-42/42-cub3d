@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:20:36 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:31:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_map
 	char			*C;
 	int				col_floor;
 	int				col_ceiling;
+	int				count_player;
 	bool			is_random_map;
 }					t_map;
 

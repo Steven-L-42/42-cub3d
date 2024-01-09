@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:13:14 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:43:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_instructions(t_data *data)
 	i = 0;
 	write(1, "\n", 1);
 	while (data->game->map[i])
-		printf("%s\n", data->game->map[i++]);
+		ft_printf("%s\n", data->game->map[i++]);
 	ft_printf("%s\nPlayer Movement:\tW | A | S | D\n", PURPLE);
 	ft_printf("Player Rotation:\tArrow Keys | Mouse\n");
 	ft_printf("Player Run:\t\tLeft Shift\n");
@@ -65,7 +65,7 @@ int	ft_alloc_structs(t_data *data)
 }
 
 // mlx_set_setting(MLX_STRETCH_IMAGE, true);
-// mlx_set_setting(MLX_FULLSCREEN, true);
+// mlx_set_setting(, true);
 // atexit(leaks);
 int	main(int argc, char **argv)
 {
