@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 19:06:43 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:43:12 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,29 @@ int	ft_alloc_structs(t_data *data)
 	return (0);
 }
 
+void	ft_torch_anim(void *param)
+{
+	t_data		*data;
+	int			i;
+	static int	slower = 0;
+
+	data = (void *)param;
+	if (data->player->curr_item == 1 && slower++ > 3)
+	{
+		slower = 0;
+		i = 0;
+		while (i < 6)
+		{
+			if (data->img->torch_frame == i)
+				data->img->img_torch[i++]->enabled = true;
+			else
+				data->img->img_torch[i++]->enabled = false;
+		}
+		data->img->torch_frame++;
+		data->img->torch_frame = data->img->torch_frame % 6;
+	}
+}
+
 void	ft_pistol_anim(void *param)
 {
 	t_data	*data;
@@ -70,8 +93,8 @@ void	ft_pistol_anim(void *param)
 	data = (void *)param;
 	if (data->is_shooting == true || data->img->pistol_frame > 0)
 	{
-		i = 0;
 		data->is_shooting = false;
+		i = 0;
 		while (i < 5)
 		{
 			if (data->img->pistol_frame == i)
@@ -107,6 +130,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_pistol_anim, data);
+	mlx_loop_hook(data->mlx, ft_torch_anim, data);
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
 	mlx_loop(data->mlx);
 	ft_exit(data);

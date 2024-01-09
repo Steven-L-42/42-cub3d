@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 19:30:28 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:43:03 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +213,10 @@ typedef struct s_img
 	mlx_image_t		*img_EA;
 	mlx_texture_t	*txt_EA;
 
+	int				torch_frame;
 	int				pistol_frame;
 	mlx_image_t		*img_pistol[5];
-	
+	mlx_image_t		*img_torch[6];
 }					t_img;
 
 typedef struct s_data
@@ -234,6 +235,7 @@ typedef struct s_data
 	int				width;
 	int				height;
 	bool			is_shooting;
+	bool			is_torching;
 	bool			is_surrounded;
 }					t_data;
 
@@ -321,6 +323,7 @@ void				ft_key_hold(void *param);
 void				ft_key_press(mlx_key_data_t keydata, void *param);
 void				ft_mouse_press(mouse_key_t button, action_t action,
 						modifier_key_t mods, void *param);
+void				ft_change_item(t_data *data);
 
 // minimap
 void				draw_player_rays(t_data *data, int num_rays);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/07 14:49:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:43:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ int	init_img_two(t_data *data)
 	ft_open_image(data, &data->img->img_pistol[2], "textures/weapon/2.png");
 	ft_open_image(data, &data->img->img_pistol[3], "textures/weapon/3.png");
 	ft_open_image(data, &data->img->img_pistol[4], "textures/weapon/4.png");
+
+	ft_open_image(data, &data->img->img_torch[0], "textures/torch/0.png");
+	ft_open_image(data, &data->img->img_torch[1], "textures/torch/1.png");
+	ft_open_image(data, &data->img->img_torch[2], "textures/torch/2.png");
+	ft_open_image(data, &data->img->img_torch[3], "textures/torch/3.png");
+	ft_open_image(data, &data->img->img_torch[4], "textures/torch/4.png");
+	ft_open_image(data, &data->img->img_torch[5], "textures/torch/5.png");
 	if (ft_check_all_imgs(data))
 		return (1);
 	return (0);

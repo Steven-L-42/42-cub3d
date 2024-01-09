@@ -96,6 +96,7 @@ leak:
 					@dorker make re
 					dorker valgrind --leak-check=full --track-origins=yes --show-reachable=yes --error-limit=no ./cub3d maps/map.cub
 test:
+					@clear
 					@make
 					@sleep 1
 					./cub3d maps/map.cub

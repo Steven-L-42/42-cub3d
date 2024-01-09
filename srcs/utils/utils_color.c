@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/08 16:04:20 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:07:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ uint32_t	ft_select_color(t_data *data, t_dda *dda, int block_height,
 {
 	if (data->is_shooting)
 		dda->shadow = 100;
+	else if (data->is_torching)
+		dda->shadow = 11 * 1.75f;
 	if (data->wall_type == 'W')
 	{
 		if (dda->direction == 'N')
