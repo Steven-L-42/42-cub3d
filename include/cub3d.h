@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 15:37:12 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:20:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 # define SOD "SO textures/bricks/brick_red.png\n"
 # define WED "WE textures/bricks/brick_orange.png\n"
 # define EAD "EA textures/bricks/brick_green.png\n"
-# define FD "F     225		,   0,   0\n"
-# define CD "C 		135		,   206,   125\n"
+# define FD "F 225, 0, 0\n"
+# define CD "C 135, 206, 125\n"
 
 # define QUALITY 1
 # define BLOCK_PIXEL_SIZE 256
@@ -81,13 +81,17 @@ typedef struct s_vec2
 	float			y;
 }					t_vec2;
 
-typedef struct s_rgb
+typedef struct s_rgba
 {
-	uint32_t		r;
-	uint32_t		g;
-	uint32_t		b;
-	uint32_t		a;
-}					t_rgb;
+	// uint32_t		r;
+	// uint32_t		g;
+	// uint32_t		b;
+	// uint32_t		a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}					t_rgba;
 
 typedef struct s_map
 {
@@ -107,6 +111,7 @@ typedef struct s_map
 	char			*C;
 	int				col_floor;
 	int				col_ceiling;
+	bool			is_random_map;
 }					t_map;
 
 typedef struct s_minimap
@@ -119,7 +124,7 @@ typedef struct s_minimap
 typedef struct s_calc_view
 {
 	char			direction;
-	int				shadow;
+	float			shadow;
 	uint32_t		col_floor;
 	uint32_t		col_ceiling;
 	uint32_t		color_wall;

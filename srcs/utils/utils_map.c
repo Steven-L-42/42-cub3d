@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:03:48 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:48:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_strtok(char *src, char delim)
 
 int	ft_str_to_rgb(char *rgb_str, int *color)
 {
-	t_rgb	rgb;
+	t_rgba	rgb;
 	char	*r;
 	char	*g;
 	char	*b;

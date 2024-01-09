@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 13:28:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:32:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
 		check_for_door(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	{
+		if (data->is_torching)
+			ft_change_item(data);
 		data->is_shooting = true;
+	}
 	if (keydata.key == MLX_KEY_PAGE_UP && keydata.action == MLX_PRESS)
 	{
 		data->cross_index++;

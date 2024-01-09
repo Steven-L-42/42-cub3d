@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 16:02:57 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:07:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	ft_exit(t_data *data)
 	mlx_delete_texture(data->img->txt_SO);
 	mlx_delete_texture(data->img->txt_EA);
 	mlx_delete_texture(data->img->txt_WE);
-	//ft_free2d_char(data->game->rnd_map);
+	if (data->game->is_random_map)
+		ft_free2d_char(data->game->rnd_map);
 	ft_free2d_char(data->game->tmp_map);
 	ft_free2d_char(data->game->map);
 	ft_free2d_char(data->game->map_copy);
