@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 15:31:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:05:30 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static char	**ft_copy_original(char **original, int size)
 	int		i;
 
 	copy = ft_calloc(size, sizeof(char *));
+	if (!copy)
+		printf("Copy\n");
 	i = -1;
 	while (original[++i])
 		copy[i] = ft_strdup(original[i]);

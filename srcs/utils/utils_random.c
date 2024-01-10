@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_random.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 20:25:59 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:07:22 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ static void	generate_map_preset(t_data *data, int height, int width)
 	int	j;
 
 	data->game->rnd_map = ft_calloc(height + 1, sizeof(char *));
+	if (!data->game->rnd_map)
+		printf("data->game->rnd_map\n");
 	i = 0;
 	while (i < height)
-		data->game->rnd_map[i++] = ft_calloc(width + 40, sizeof(char));
+	{
+		data->game->rnd_map[i] = ft_calloc(width + 40, sizeof(char));
+		if (!data->game->rnd_map[i])
+			printf("data->game->rnd_map[i++]\n");
+		i++;
+	}
 	ft_strlcpy(data->game->rnd_map[0], NOD, ft_strlen(NOD));
 	ft_strlcpy(data->game->rnd_map[1], SOD, ft_strlen(SOD));
 	ft_strlcpy(data->game->rnd_map[2], WED, ft_strlen(WED));

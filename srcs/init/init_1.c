@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 11:53:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:09:53 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,14 @@ static void	init_minimap(t_data *data)
 	data->minimap->width = data->game->width;
 	data->minimap->height = -1;
 	data->minimap->map = ft_calloc(data->game->height + 1, sizeof(int *));
+	if (!data->minimap->map)
+		printf("data->minimap->map\n");
 	while (++data->minimap->height < data->game->height)
-		data->minimap->map[data->minimap->height] = ft_calloc(data->game->height
-				+ 1, sizeof(int));
+	{
+		data->minimap->map[data->minimap->height] = ft_calloc(data->game->height + 1, sizeof(int));
+		if (!data->minimap->map[data->minimap->height])
+			printf("data->minimap->map\n");
+	}
 }
 
 static void	init_cross_colors(t_data *data)

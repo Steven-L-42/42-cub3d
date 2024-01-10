@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 18:48:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:06:13 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*ft_strtok(char *src, char delim)
 		if ((src && !src[i]) || src[i] == delim)
 		{
 			result = ft_calloc(i + 1, 1);
+			if (!result)
+				printf("Copy\n");
 			while (src[x] && x < i)
 			{
 				result[x] = src[x];

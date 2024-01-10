@@ -35,6 +35,7 @@
 		"mutex": "c",
 		"ratio": "c",
 		"complex": "c",
-		"initializer_list": "c"
+		"initializer_list": "c",
+		"__string": "c"
 	}
 }

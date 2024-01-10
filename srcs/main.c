@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:34:57 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 11:53:09 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:09:42 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,16 @@ int	main(int argc, char **argv)
 		exit(1);
 	ft_instructions(data);
 	ft_img_to_window(data);
+	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_cursor_hook(data->mlx, ft_player_angle, data);
 	mlx_key_hook(data->mlx, ft_key_press, data);
 	mlx_loop_hook(data->mlx, ft_key_hold, data);
-	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_loop_hook(data->mlx, ft_pistol_anim, data);
 	mlx_loop_hook(data->mlx, ft_torch_anim, data);
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
 	write(2, "IN MLX LOOP\n", 13);
 	mlx_loop(data->mlx);
+	write(2, "IN MLX LOOP\n", 13);
 	ft_exit(data);
 	exit(0);
 }

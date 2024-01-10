@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_distance.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 12:39:47 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:13:06 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 	dst.tempx = vec.x;
 	dst.last_dist = dst.dist;
 	dst.m = fabs(get_slope(angle));
-	while (!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159B")
-		|| !ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159BL"))
+	while ((data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] && !ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159B"))
+		|| (data->game->map_copy[dst.tempy] && data->game->map_copy[dst.tempy][dst.tempx] && !ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159BL")))
 	{
 		dst.ymin = false;
 		dst.xmin = false;
@@ -150,19 +150,19 @@ float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 				dst.tempy = ceil(vec.y) - 1;
 		}
 	}
-	if (data->game->map_copy[dst.tempy][dst.tempx] == 'L')
+	if (data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] &&data->game->map_copy[dst.tempy][dst.tempx] == 'L')
 		*new_block = false;
-	if (ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159B")
+	if (data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] && ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159B")
 		|| *dir != old_dir)
 	{
 		data->game->map_copy[dst.tempy][dst.tempx] = 'L';
 		*new_block = true;
 	}
-	if (data->game->map[dst.tempy][dst.tempx] == 'B')
+	if (data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] && data->game->map[dst.tempy][dst.tempx] == 'B')
 		data->wall_type = 'B';
-	else if (data->game->map[dst.tempy][dst.tempx] == '5')
+	else if (data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] && data->game->map[dst.tempy][dst.tempx] == '5')
 		data->wall_type = 'D';
-	else if (data->game->map[dst.tempy][dst.tempx] == '9')
+	else if (data->game->map[dst.tempy] && data->game->map[dst.tempy][dst.tempx] && data->game->map[dst.tempy][dst.tempx] == '9')
 		data->wall_type = 'P';
 	else
 		data->wall_type = 'W';
