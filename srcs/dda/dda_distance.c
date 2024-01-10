@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 10:45:06 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:39:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 	dst.tempx = vec.x;
 	dst.last_dist = dst.dist;
 	dst.m = fabs(get_slope(angle));
-	while (!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159")
-		|| !ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159L"))
+	while (!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159B")
+		|| !ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159BL"))
 	{
 		dst.ymin = false;
 		dst.xmin = false;
@@ -150,21 +150,17 @@ float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 				dst.tempy = ceil(vec.y) - 1;
 		}
 	}
-	// if (!check_for_allocated(data->game->map_copy, dst.tempy, dst.tempx))
-	// {
-	// 	data->wall_type = 'W';
-	// 	old_dir = *dir;
-	// 	return (fabs(dst.dist));
-	// }
 	if (data->game->map_copy[dst.tempy][dst.tempx] == 'L')
 		*new_block = false;
-	if (ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159")
+	if (ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159B")
 		|| *dir != old_dir)
 	{
 		data->game->map_copy[dst.tempy][dst.tempx] = 'L';
 		*new_block = true;
 	}
-	if (data->game->map[dst.tempy][dst.tempx] == '5')
+	if (data->game->map[dst.tempy][dst.tempx] == 'B')
+		data->wall_type = 'B';
+	else if (data->game->map[dst.tempy][dst.tempx] == '5')
 		data->wall_type = 'D';
 	else if (data->game->map[dst.tempy][dst.tempx] == '9')
 		data->wall_type = 'P';

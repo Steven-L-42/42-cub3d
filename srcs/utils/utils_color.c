@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 12:02:09 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:09:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,14 @@ uint32_t	ft_select_color(t_data *data, t_dda *dda, int block_height,
 	}
 	return (dda->color_wall);
 }
+// else if (data->wall_type == 'B')
+// 	{
+// 		dda->color_wall = ft_text_color(data->img->txt_BB, dda,
+// 				block_height, block_width);
+// 		uint8_t alpha = (dda->color_wall >> 24) & 0xFF;
+// 		uint8_t red = (dda->color_wall >> 16) & 0xFF;
+// 		uint8_t green = (dda->color_wall >> 8) & 0xFF;
+// 		uint8_t blue = dda->color_wall & 0xFF;
+// 		if (alpha < 10 && red < 10 && green < 10)
+// 			dda->color_wall = ft_pixel(0, 0, 0, 0);
+// 	}

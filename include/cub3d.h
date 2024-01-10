@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 11:28:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:35:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,9 @@ typedef struct s_img
 
 	mlx_image_t		*img_EA;
 	mlx_texture_t	*txt_EA;
+
+	mlx_image_t		*img_BB;
+	mlx_texture_t	*txt_BB;
 
 	int				torch_frame;
 	int				pistol_frame;
