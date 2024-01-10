@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 13:09:15 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:48:51 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	init_player(t_data *data)
 		data->player->angle = 270;
 	if (data->player->start_direction == 'W')
 		data->player->angle = 180;
-	data->player->view_angle = 80;
+	data->player->view_angle = 60;
 	mlx_get_mouse_pos(data->mlx, &x, &y);
 	data->player->prev_mouseX = (float)x;
 }
