@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 20:27:33 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:57:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ void	ft_change_item(t_data *data)
 
 void	reset_window(t_data *data)
 {
-	ft_memset(data->img->img_game->pixels, 0, data->img->img_game->width
-		* data->img->img_game->height * sizeof(int32_t));
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < data->img->img_game->height)
+	{
+		while (x < data->img->img_game->width)
+		{
+			ft_pixel(0, 0, 0, 0);
+			x++;
+		}
+		y++;
+	}
 }

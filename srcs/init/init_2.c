@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 19:38:20 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:51:36 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ static int	ft_check_all_imgs(t_data *data)
 		|| !data->img->img_mm_portal || !data->img->img_mm_door_closed
 		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow)
 		return (1);
-	while (i < 5)
+	while (i < 6)
 	{
-		if (!data->img->img_pistol[i++])
+		if (i < 5 && !data->img->img_pistol[i])
 			return (1);
+		if (!data->img->img_torch[i])
+			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -61,20 +64,16 @@ int	init_img_one(t_data *data)
 {
 	const char	*door = "textures/doors/brick_door_closed.png";
 
-	if (ft_open_image_keep_text(data, &data->img->img_NO, &data->img->txt_NO,
-			data->game->NO))
-		return (1);
-	if (ft_open_image_keep_text(data, &data->img->img_SO, &data->img->txt_SO,
-			data->game->SO))
-		return (1);
-	if (ft_open_image_keep_text(data, &data->img->img_WE, &data->img->txt_WE,
-			data->game->WE))
-		return (1);
-	if (ft_open_image_keep_text(data, &data->img->img_EA, &data->img->txt_EA,
-			data->game->EA))
-		return (1);
-	if (ft_open_image_keep_text(data, &data->img->img_door_closed,
-			&data->img->txt_door_closed, (char *)door))
+	if (ft_open_image_keep_text(data, &data->img->img_NO, \
+					&data->img->txt_NO, data->game->NO)
+		* ft_open_image_keep_text(data, &data->img->img_SO, \
+					&data->img->txt_SO, data->game->SO)
+		* ft_open_image_keep_text(data, &data->img->img_WE, \
+					&data->img->txt_WE, data->game->WE)
+		* ft_open_image_keep_text(data, &data->img->img_EA, \
+					&data->img->txt_EA, data->game->EA)
+		* ft_open_image_keep_text(data, &data->img->img_door_closed, \
+					&data->img->txt_door_closed, (char *)door) == 0)
 		return (1);
 	return (0);
 }

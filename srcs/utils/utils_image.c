@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/07 11:28:13 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:51:22 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_open_image_keep_text(t_data *data, mlx_image_t **img_direction,
 {
 	*text = mlx_load_png(img_path);
 	if (!*text)
-		return (1);
+		return (0);
 	*img_direction = mlx_texture_to_image(data->mlx, *text);
-	return (0);
+	return (1);
 }

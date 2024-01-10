@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 19:07:31 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:28:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_free2d_int(int **str)
 	free(str);
 }
 
-void	free_structs(t_data *data)
+void	ft_free_structs(t_data *data)
 {
 	if (data->player != NULL)
 		free(data->player);
@@ -76,5 +76,5 @@ void	ft_exit(t_data *data)
 	ft_free2d_char(data->game->map_copy);
 	ft_free2d_int(data->minimap->map);
 	mlx_terminate(data->mlx);
-	free_structs(data);
+	ft_free_structs(data);
 }

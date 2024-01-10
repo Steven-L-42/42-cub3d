@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 21:05:04 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/05 14:37:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:45:06 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,13 @@ float	start_dist(float m, float angle, t_vec2 *vec, char *dir, bool *xminus,
 	return (tempy);
 }
 
+int	check_for_allocated(char **map, int y, int x)
+{
+	if (map[y] != NULL && map[y][x] != '\0')
+		return (1);
+	return (0);
+}
+
 float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 		bool *new_block)
 {
@@ -143,6 +150,12 @@ float	get_distance(float angle, t_vec2 vec, t_data *data, char *dir,
 				dst.tempy = ceil(vec.y) - 1;
 		}
 	}
+	// if (!check_for_allocated(data->game->map_copy, dst.tempy, dst.tempx))
+	// {
+	// 	data->wall_type = 'W';
+	// 	old_dir = *dir;
+	// 	return (fabs(dst.dist));
+	// }
 	if (data->game->map_copy[dst.tempy][dst.tempx] == 'L')
 		*new_block = false;
 	if (ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159")

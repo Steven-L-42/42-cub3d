@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 19:38:45 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:53:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	init_win_imgs(t_data *data)
 	return (0);
 }
 
-int	init(t_data *data, char *input)
+int	ft_init(t_data *data, char *input)
 {
 	if (init_helper(data, input))
 		return (1);
@@ -91,6 +91,5 @@ int	init(t_data *data, char *input)
 	if (data->game->count_player != 1)
 		return (ft_error("Error: to few or many players!"));
 	init_player(data);
-	draw_minimap(data);
 	return (0);
 }

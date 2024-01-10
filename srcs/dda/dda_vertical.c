@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 13:18:30 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:03:55 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,33 @@
 void	draw_floor_ceiling(t_data *data, t_dda *dda)
 {
 	float		start;
-	uint32_t	color;
 
 	start = -1;
+	while (start < 0)
+		start++;
 	while (++start < dda->line_top)
-	{
-		color = ft_shadow_coloring(data, start, data->game->col_ceiling, false);
-		mlx_put_pixel(data->img->img_game, dda->j, start, color);
-	}
+		mlx_put_pixel(data->img->img_game, dda->j, start, \
+			ft_shadow_coloring(data, start, data->game->col_ceiling, false));
 	start = dda->line_bottom - 1;
+	while (start < 0)
+		start++;
 	while (++start < data->height)
-	{
-		color = ft_shadow_coloring(data, start, data->game->col_floor, true);
-		mlx_put_pixel(data->img->img_game, dda->j, start, color);
-	}
+		mlx_put_pixel(data->img->img_game, dda->j, start, \
+			ft_shadow_coloring(data, start, data->game->col_floor, true));
 }
 
 void	draw_wall(t_data *data, t_dda *dda, int block_width, float y)
 {
 	float	block_height;
 
+	while (y < 0)
+		y++;
 	while (y < dda->line_bottom)
 	{
-		block_height = calc_for_x(dda->line_bottom - dda->line_top, y
-				- dda->line_top);
-		dda->color_wall = ft_select_color(data, dda, block_height, block_width);
-		mlx_put_pixel(data->img->img_game, dda->j, y, dda->color_wall);
+		block_height = calc_for_x(dda->line_bottom - dda->line_top, \
+			y - dda->line_top);
+		mlx_put_pixel(data->img->img_game, dda->j, y, \
+			ft_select_color(data, dda, block_height, block_width));
 		y++;
 	}
 }

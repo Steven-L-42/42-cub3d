@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 20:27:58 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:28:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef struct s_calc_view
 	double			distance;
 	double			line_bottom;
 	double			line_top;
-	float			width_array[100];
+	float			width_array[1024];
 }					t_dda;
 
 typedef struct s_crosshair
@@ -262,7 +262,7 @@ int					init_map(t_data *data, char *input);
 void				draw_minimap(t_data *data);
 
 // init_1
-int					init(t_data *data, char *input);
+int					ft_init(t_data *data, char *input);
 
 // init_2
 void				init_coords(t_data *data, int pixel_x, int pixel_y);
@@ -307,7 +307,7 @@ void				ft_change_item(t_data *data);
 int					ft_differ(int a, int b);
 
 // utils free
-void				free_structs(t_data *data);
+void				ft_free_structs(t_data *data);
 void				ft_free2d_char(char **str);
 void				ft_free2d_int(int **str);
 void				ft_exit(t_data *data);

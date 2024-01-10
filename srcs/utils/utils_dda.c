@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 19:47:53 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 10:49:21 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ float	ft_get_block_width(t_dda *calc)
 		i++;
 		if (calc->width_array[i] != (float)0 && calc->width_array[i] < FLT_MAX)
 		{
-			block_width = (int)calc_for_x(calc->width_array[i]
-					- calc->width_array[i - 1], calc->j - calc->width_array[i
-					- 1]);
+			block_width = (int)calc_for_x(calc->width_array[i] \
+			- calc->width_array[i - 1], calc->j - calc->width_array[i - 1]);
 		}
 	}
 	return (block_width);

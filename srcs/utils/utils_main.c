@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 13:27:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:54:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_img_to_window(t_data *data)
 	int	i;
 
 	i = -1;
+	draw_minimap(data);
 	width = data->width / 2 - data->img->img_pistol[0]->width / 2;
 	height = data->height - data->img->img_pistol[0]->height;
 	mlx_image_to_window(data->mlx, data->img->img_player_ray, 0, 0);
