@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   dda_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 13:54:25 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 14:06:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	calc_block_width_right(t_data *data, t_dda_helper dda_tmp, t_dda *dda, bool new_block)
+void	calc_block_width_right(t_data *data, t_dda_helper dda_tmp, t_dda *dda,
+		bool new_block)
 {
 	if (new_block == true)
 		dda->width_array[dda_tmp.i] = FLT_MAX;
@@ -34,10 +35,12 @@ void	calc_block_width_right(t_data *data, t_dda_helper dda_tmp, t_dda *dda, bool
 	dda->width_array[dda_tmp.i] = FLT_MAX;
 }
 
-void	calc_block_width_left(t_data *data, t_dda_helper dda_tmp, t_dda *dda, bool new_block)
+void	calc_block_width_left(t_data *data, t_dda_helper dda_tmp, t_dda *dda,
+		bool new_block)
 {
 	dda_tmp.t--;
-	dda_tmp.dist = dda_dist(data, dda_tmp.line - ( 1 / dda_tmp.quality), &dda->direction, &new_block);
+	dda_tmp.dist = dda_dist(data, dda_tmp.line - (1 / dda_tmp.quality),
+			&dda->direction, &new_block);
 	while (new_block == false)
 	{
 		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
@@ -67,14 +70,16 @@ void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 	dda_tmp.quality = (float)quality;
 	while (dda_tmp.line > dda_tmp.maxline)
 	{
-		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction, &new_block);
+		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
+				&new_block);
 		if (new_block == true)
 		{
 			if (dda_tmp.t == 0)
 			{
 				calc_block_width_left(data, dda_tmp, dda, new_block);
 				reset_map(data);
-				dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction, &new_block);
+				dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
+						&new_block);
 			}
 			else
 				dda->width_array[dda_tmp.i] = dda_tmp.t;
@@ -105,7 +110,8 @@ void	calc_preset(t_data *data, t_dda *dda)
 	dda->color_door = ft_pixel(125, 76, 56, 255);
 	dda->color_portal = ft_pixel(56, 125, 125, 255);
 	dda->line = -dda->max_lines;
-	dda->treshold = (((float)6.2f * 80 / data->player->view_angle) * (data->width / 1920.0));
+	dda->treshold = (((float)6.2f * 80 / data->player->view_angle)
+			* (data->width / 1920.0));
 	dda->direction = '\0';
 	dda->shadow = 11;
 }
