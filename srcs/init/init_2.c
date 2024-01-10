@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 13:48:51 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 14:09:11 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	init_img_two(t_data *data)
 int	init_img_one(t_data *data)
 {
 	const char	*door = "textures/doors/brick_door_closed.png";
-	const char	*bb = "textures/wolftex/barrel.png";
 
 	if (ft_open_image_keep_text(data, &data->img->img_NO, \
 					&data->img->txt_NO, data->game->NO)
@@ -78,9 +77,10 @@ int	init_img_one(t_data *data)
 		return (1);
 	return (0);
 }
-// if (!ft_open_image_keep_text(data, &data->img->img_BB, \
-// 	&data->img->txt_BB, (char *)bb))
-// 	return (1);
+// const char	*bb = "textures/wolftex/barrel.png";
+// if (!ft_open_image_keep_text(data, &data->img->img_BB,
+// &data->img->txt_BB, (char *)bb))
+// return (1);
 
 void	init_coords(t_data *data, int pixel_x, int pixel_y)
 {

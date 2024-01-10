@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 13:48:16 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 14:06:35 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 void	draw_floor_ceiling(t_data *data, t_dda *dda)
 {
-	float		start;
+	float	start;
 
 	start = -1;
-	while (start < 0)
-		start++;
 	while (++start < dda->line_top)
-		mlx_put_pixel(data->img->img_game, dda->j, start, \
+		mlx_put_pixel(data->img->img_game, dda->j, start,
 			ft_shadow_coloring(data, start, data->game->col_ceiling, false));
 	start = dda->line_bottom - 1;
 	while (start < 0)
 		start++;
 	while (++start < data->height)
-		mlx_put_pixel(data->img->img_game, dda->j, start, \
+		mlx_put_pixel(data->img->img_game, dda->j, start,
 			ft_shadow_coloring(data, start, data->game->col_floor, true));
 }
 
-void	draw_wall(t_data *data, t_dda *dda, int block_width, float y,  float temp_top, float temp_bottom)
+void	draw_wall(t_data *data, t_dda *dda, int block_width, float y,
+		float temp_top, float temp_bottom)
 {
 	float	block_height;
 
@@ -39,8 +38,8 @@ void	draw_wall(t_data *data, t_dda *dda, int block_width, float y,  float temp_t
 	while (y < dda->line_bottom)
 	{
 		block_height = calc_for_x(temp_bottom - temp_top, y - temp_top);
-		mlx_put_pixel(data->img->img_game, dda->j, y, \
-			ft_select_color(data, dda, block_height, block_width));
+		mlx_put_pixel(data->img->img_game, dda->j, y, ft_select_color(data, dda,
+				block_height, block_width));
 		y++;
 	}
 }
@@ -52,7 +51,8 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true, int block_width)
 	float			temp_top;
 	float			temp_bottom;
 
-	dda->tmp = round(dda->distance * cos((fabs(dda->angle )) * PI / 180) * 1000) / 1000;
+	dda->tmp = round(dda->distance * cos((fabs(dda->angle)) * PI / 180) * 1000)
+		/ 1000;
 	if (if_true == true && temp_if_true < dda->tmp)
 		dda->tmp = temp_if_true;
 	dda->line_bottom = (data->height / 2) + (SIZE * dda->treshold / dda->tmp);
