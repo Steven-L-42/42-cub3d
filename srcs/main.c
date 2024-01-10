@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:24:02 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 17:24:07 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 19:39:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	main(int argc, char **argv)
 	mlx_mouse_hook(data->mlx, ft_mouse_press, data);
 	write(2, "IN MLX LOOP\n", 13);
 	mlx_loop(data->mlx);
-	write(2, "IN MLX LOOP\n", 13);
 	ft_exit(data);
 	exit(0);
 }

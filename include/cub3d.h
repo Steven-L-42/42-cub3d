@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 14:01:06 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:37:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,7 +308,7 @@ void				ft_change_item(t_data *data);
 
 // utils math
 int					ft_differ(int a, int b);
-
+int					ft_is_alloc(char **map, int y, int x);
 // utils free
 void				ft_free_structs(t_data *data);
 void				ft_free2d_char(char **str);

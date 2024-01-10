@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 17:19:35 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 17:39:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ static void	ray_helper(t_data *data, t_draw_rays *ray)
 			&& (const uint32_t)ray->x_coord < data->img->img_player_ray->width
 			&& (const uint32_t)ray->y_coord < data->img->img_player_ray->height)
 		{
-			if (!data->game->map[ray->y_coord / 16] || !data->game->map[ray->y_coord / 16][ray->x_coord / 16] || ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord
-					/ 16], "159"))
+			if (!ft_is_alloc(data->game->map, ray->y_coord / 16, ray->x_coord
+					/ 16) || ft_is_in_set(data->game->map[ray->y_coord
+						/ 16][ray->x_coord / 16], "159"))
 				break ;
 			mlx_put_pixel(data->img->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);

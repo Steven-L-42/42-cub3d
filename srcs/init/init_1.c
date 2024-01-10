@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 17:09:53 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/10 19:30:25 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static int	init_win_imgs(t_data *data)
 
 int	ft_init(t_data *data, char *input)
 {
+	data->game->width = 0;
 	if (init_helper(data, input))
 		return (1);
 	if (init_win_imgs(data))
