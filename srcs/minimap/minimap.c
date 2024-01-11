@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 12:09:01 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:46:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,28 @@ static void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
 			* 16, data->player->y * 16);
 }
 
+static void	draw_quadrat(t_data *data, int start_x, int start_y)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = 0;
+	color = ft_pixel(32, 32, 32, 255);
+	y = 0;
+	while (y < 16)
+	{
+		x = 0;
+		while (x < 16)
+		{
+			mlx_put_pixel(data->img->img_mm_overlay, (start_x * 16) + x,
+				(start_y * 16) + y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	draw_objects(t_data *data, int is_wall)
 {
 	int	x;
@@ -40,12 +62,13 @@ static void	draw_objects(t_data *data, int is_wall)
 		x = 0;
 		while (data->game->map[y][x])
 		{
-			if (data->game->map[y][x] && data->game->map[y][x] == '1'
-				&& is_wall)
+			if (data->game->map[y][x] != ' ' && is_wall)
+				draw_quadrat(data, x, y);
+			if (data->game->map[y][x] == '1' && is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall, x * 16, y
 					* 16);
-			else if (data->game->map[y][x] && (data->game->map[y][x] == '0'
-					|| data->game->map[y][x] == 'P') && is_wall)
+			else if (is_wall && (data->game->map[y][x] == '0' \
+					|| data->game->map[y][x] == 'P'))
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
 					* 16, y * 16);
 			else
@@ -67,34 +90,11 @@ static void	set_z(t_data *data)
 	while (i < data->img->img_mm_door_open->count)
 		data->img->img_mm_door_open->instances[i++].z = 1;
 	data->img->img_player->instances[0].z = 2;
-	//data->img->img_movement_ray->instances[0].z = 0;
-}
-
-void	ft_draw_overlay(t_data *data)
-{
-	int	y;
-	int	x;
-	int	color;
-
-	y = 0;
-	color = ft_pixel(45, 45, 45, 255);
-	mlx_image_to_window(data->mlx, data->img->img_mm_overlay, 0, 0);
-	while (y < data->img->img_mm_overlay->height)
-	{
-		x = 0;
-		while (x < data->img->img_mm_overlay->width)
-		{
-			mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
-			x++;
-		}
-		y++;
-	}
 }
 
 void	draw_minimap(t_data *data)
 {
 	draw_objects(data, 0);
 	draw_objects(data, 1);
-	ft_draw_overlay(data);
 	set_z(data);
 }

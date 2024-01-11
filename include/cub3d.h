@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 10:45:10 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:03:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_map
 	int				col_ceiling;
 	int				count_player;
 	bool			is_random_map;
+	bool			is_explored;
 }					t_map;
 
 typedef struct s_minimap

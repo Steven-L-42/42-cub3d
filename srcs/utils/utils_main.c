@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 12:43:16 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:04:19 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	draw_crosshair(t_data *data, uint32_t color)
 
 static void	ft_img_to_window_helper(t_data *data)
 {
+	mlx_image_to_window(data->mlx, data->img->img_mm_overlay, 0, 0);
 	mlx_image_to_window(data->mlx, data->img->img_game, 0, 0);
 	mlx_image_to_window(data->mlx, data->img->img_movement_ray, 0, 0);
 	mlx_image_to_window(data->mlx, data->img->img_crosshair, data->width / 2
@@ -71,16 +72,40 @@ void	ft_img_to_window(t_data *data)
 	ft_img_to_window_helper(data);
 }
 
-void	draw_map_explored(t_data *data)
+void	ft_check_is_explored(t_data *data)
+{
+	uint32_t	max;
+	int			start;
+	uint32_t	count;
+	int			color;
+
+	color = ft_pixel(0, 0, 0, 0);
+	max = data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
+		* sizeof(uint32_t);
+	start = 0;
+	count = 0;
+	while (start < max)
+	{
+		if (data->img->img_mm_overlay->pixels[start] == color)
+			count++;
+		start++;
+	}
+	if (count >= 0.75 * max)
+	{
+		ft_memset(data->img->img_mm_overlay->pixels, 0,
+			data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
+			* sizeof(uint32_t));
+		data->game->is_explored = true;
+	}
+}
+
+void	draw_map_explored(t_data *data, int r, int x, int y)
 {
 	int		x_middle;
 	int		y_middle;
 	int		radius;
 	double	angle;
 	int		color;
-	int		r;
-	int		x;
-	int		y;
 
 	x_middle = data->player->x * 16 + 6;
 	y_middle = data->player->y * 16 + 6;
@@ -94,7 +119,7 @@ void	draw_map_explored(t_data *data)
 		{
 			x = x_middle + (int)(r * cos(angle));
 			y = y_middle + (int)(r * sin(angle));
-			if (x >= 0 && y >= 0 && x < data->img->img_mm_overlay->width \
+			if (x >= 0 && y >= 0 && x < data->img->img_mm_overlay->width
 				&& y < data->img->img_mm_overlay->height)
 				mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
 			++r;
@@ -111,7 +136,11 @@ void	ft_running(void *param)
 	reset_window(data);
 	dda_horizontal(data);
 	draw_player_rays(data, 80);
-	draw_map_explored(data);
+	if (!data->game->is_explored)
+	{
+		draw_map_explored(data, 0, 0, 0);
+		ft_check_is_explored(data);
+	}
 }
 
 int	ft_check_extension(char *argv)
