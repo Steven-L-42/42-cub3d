@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 17:46:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:45:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ typedef struct s_rgba
 	// uint32_t		g;
 	// uint32_t		b;
 	// uint32_t		a;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	unsigned char	a;
+	int				r;
+	int				g;
+	int				b;
+	int				a;
 }					t_rgba;
 
 typedef struct s_map
@@ -377,5 +377,7 @@ int					check_wall_ray(t_data *data);
 
 // calc_view2
 void				dda_vertical(t_data *data, t_dda *calc, bool if_true);
+
+bool				validate_map(char **copied_map);
 
 #endif

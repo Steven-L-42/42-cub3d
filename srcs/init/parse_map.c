@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 17:05:30 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:15:02 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 	}
 	data->game->map_copy = ft_copy_original(data->game->map, max_y + 1);
 	data->game->height = y_game;
-	return (0);
+	return (validate_map(ft_copy_original(data->game->map, max_y + 1)));
 }
 
 int	init_map(t_data *data, char *input)

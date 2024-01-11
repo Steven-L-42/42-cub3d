@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 17:06:13 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:46:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	ft_str_to_rgb(char *rgb_str, int *color)
 	rgb.r = ft_atoi(r);
 	rgb.g = ft_atoi(g);
 	rgb.b = ft_atoi(b);
-	if (rgb.r > 255 || rgb.g > 255 || rgb.b > 255 || rgb.r < 0 || rgb.g < 0
-		|| rgb.b < 0)
+	if (rgb.r > 255 || rgb.g > 255 || rgb.b > 255
+		|| rgb.r < 0 || rgb.g < 0 || rgb.b < 0)
 		return (free(r), free(g), free(b), 0);
 	*color = ft_pixel(rgb.r, rgb.g, rgb.b, 255);
 	return (free(r), free(g), free(b), 1);
