@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 21:21:46 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 00:24:09 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ typedef struct s_vec2
 {
 	float			x;
 	float			y;
+	float			angle;
+	float			m;
+	float			distx;
+	float			disty;
+	float			tempx;
+	float			tempy;
 }					t_vec2;
 
 typedef struct s_rgba
@@ -165,6 +171,7 @@ typedef struct s_dda_dist
 	char			last_dir;
 	bool			xmin;
 	bool			ymin;
+	char			old_dir;
 }					t_dda_dist;
 
 typedef struct s_check_door
@@ -377,5 +384,13 @@ void				dda_vertical(t_data *data, t_dda *calc, bool if_true);
 
 bool				validate_map(char **copied_map);
 void				initialize(int diff, int max_x_y[2], char **copied_map);
+
+float				get_distance(t_vec2 vec, t_data *data,
+						char *dir, bool *new_block);
+
+float				start_dist(t_vec2 *vec, char *dir,
+						bool *xminus, bool *yminus);
+void				init_dist_x_y(t_vec2 *vec);
+void				inital(t_dda *dda, t_dda_helper *dda_tmp, float quality);
 
 #endif

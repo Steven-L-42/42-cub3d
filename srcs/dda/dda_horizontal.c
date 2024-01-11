@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 21:28:30 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 00:23:40 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,6 @@ void	calc_block_width_left(t_data *data, t_dda_helper dda_tmp, t_dda *dda,
 		dda->width_array[0] = dda_tmp.t;
 	else
 		dda->width_array[0] = 0;
-}
-
-void	inital(t_dda *dda, t_dda_helper *dda_tmp, float quality)
-{
-	dda_tmp->line = dda->line;
-	dda_tmp->maxline = dda->max_lines;
-	dda_tmp->angle = dda->angle;
-	dda_tmp->t = 0;
-	dda_tmp->i = 0;
-	dda_tmp->quality = (float)quality;
 }
 
 void	calc_block_width(t_data *data, t_dda *dda, bool new_block,

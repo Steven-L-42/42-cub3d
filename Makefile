@@ -21,7 +21,7 @@ UTILS				=	utils_main.c utils_free.c utils_map.c utils_cross.c utils_basic.c \
 
 INIT				=	init_1.c init_2.c parse_map.c map_valid.c validation_helper.c
 
-DDA					=	dda_distance.c dda_horizontal.c dda_vertical.c
+DDA					=	dda_horizontal.c dda_vertical.c dda_dist/part1.c dda_dist/part2.c dda_dist/part3.c
 
 MINIMAP				=	minimap.c rays.c
 
