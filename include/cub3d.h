@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 18:45:24 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:56:52 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/srcs/libft.h"
 # include <fcntl.h>
-# include <float.h>
+// # include <float.h>
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
@@ -43,6 +43,7 @@
 # define FD "F 225, 0, 0\n"
 # define CD "C 135, 206, 125\n"
 
+# define FLT_MAX 3.402823e+38
 # define QUALITY 1
 # define BLOCK_PIXEL_SIZE 256
 
@@ -379,5 +380,6 @@ int					check_wall_ray(t_data *data);
 void				dda_vertical(t_data *data, t_dda *calc, bool if_true);
 
 bool				validate_map(char **copied_map);
+void				initialize(int diff, int max_x_y[2], char **copied_map);
 
 #endif

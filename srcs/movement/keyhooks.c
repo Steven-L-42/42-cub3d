@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 17:29:23 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:00:51 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-
 
 void	ft_player_angle(double xpos, double ypos, void *param)
 {
@@ -24,7 +22,6 @@ void	ft_player_angle(double xpos, double ypos, void *param)
 	xpos = 0;
 	ypos = 0;
 	data = param;
-
 	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
 		&data->player->mouse_y);
 	delta_x = data->player->mouse_x - data->player->prev_mouseX;

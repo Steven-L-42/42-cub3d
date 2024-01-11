@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 10:35:49 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:59:29 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	ray_helper(t_data *data, t_draw_rays *ray)
 	max_len = 125;
 	if (data->player->curr_item == 1)
 		max_len = 225;
-	ray_len = 0;
-	while (ray_len < max_len)
+	ray_len = -1;
+	while (++ray_len < max_len)
 	{
 		ray->x_coord = data->player->x * 16 + 8 + ray_len
 			* cos((-data->player->angle + ray->angle_offset) * PI / 180);
@@ -45,12 +45,11 @@ static void	ray_helper(t_data *data, t_draw_rays *ray)
 		{
 			if (!ft_is_alloc(data->game->map, ray->y_coord / 16, ray->x_coord
 					/ 16) || ft_is_in_set(data->game->map[ray->y_coord
-					/ 16][ray->x_coord / 16], "159"))
+						/ 16][ray->x_coord / 16], "159"))
 				break ;
 			mlx_put_pixel(data->img->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);
 		}
-		ray_len++;
 	}
 }
 
