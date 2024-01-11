@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 14:09:11 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:47:25 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static int	ft_check_all_imgs(t_data *data)
 	i = 0;
 	if (!data->img->img_player || !data->img->img_mm_wall
 		|| !data->img->img_mm_portal || !data->img->img_mm_door_closed
-		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow)
+		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow
+		|| !data->img->img_splash || !data->img->img_splash_normal
+		|| !data->img->img_splash_random)
 		return (1);
 	while (i < 6)
 	{
@@ -55,6 +57,7 @@ int	init_img_two(t_data *data)
 	ft_open_image(data, &data->img->img_torch[3], "textures/torch/3.png");
 	ft_open_image(data, &data->img->img_torch[4], "textures/torch/4.png");
 	ft_open_image(data, &data->img->img_torch[5], "textures/torch/5.png");
+	ft_open_image_splash(data);
 	if (ft_check_all_imgs(data))
 		return (1);
 	return (0);

@@ -29,13 +29,16 @@ ANIMATION			=	anim_pistol.c anim_torch.c
 
 MOVEMENT			=	keyhooks.c movement.c wall_door_detection.c
 
+SPLASHSCREEN		=	splash.c
+
 SRCS				=	main.c \
 						$(addprefix init/, $(INIT)) \
 						$(addprefix minimap/, $(MINIMAP)) \
 						$(addprefix utils/, $(UTILS)) \
-						$(addprefix movement/, $(MOVEMENT))\
-						$(addprefix animation/, $(ANIMATION))\
-						$(addprefix dda/, $(DDA))
+						$(addprefix movement/, $(MOVEMENT)) \
+						$(addprefix animation/, $(ANIMATION)) \
+						$(addprefix dda/, $(DDA)) \
+						$(addprefix splashscreen/, $(SPLASHSCREEN))
 
 OBJS				=	$(addprefix srcs/,$(SRCS:.c=.o))
 

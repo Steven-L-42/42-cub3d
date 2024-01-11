@@ -6,11 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 11:17:15 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:29:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+
 
 void	ft_player_angle(double xpos, double ypos, void *param)
 {
@@ -22,6 +24,7 @@ void	ft_player_angle(double xpos, double ypos, void *param)
 	xpos = 0;
 	ypos = 0;
 	data = param;
+
 	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
 		&data->player->mouse_y);
 	delta_x = data->player->mouse_x - data->player->prev_mouseX;
@@ -69,6 +72,8 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 	data = param;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
 	{
+		if (!data->is_started)
+			return (ft_splash_to_game(data));
 		if (data->is_torching)
 			ft_change_item(data);
 		data->is_shooting = true;

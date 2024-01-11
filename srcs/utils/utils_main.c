@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 14:44:27 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:40:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static void	ft_img_to_window_helper(t_data *data)
 	draw_crosshair(data, data->cross_colors[0]);
 	data->img->pistol_frame = 0;
 	data->img->img_game->instances[0].z = 0;
+	mlx_image_to_window(data->mlx, data->img->img_splash_random, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_splash_normal, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_splash, 0, 0);
 }
 
 void	ft_img_to_window(t_data *data)
@@ -77,6 +80,9 @@ void	ft_running(void *param)
 	t_data	*data;
 
 	data = param;
+
+	if (!data->is_started)
+		return (ft_start_game(data));
 	reset_window(data);
 	dda_horizontal(data);
 	draw_player_rays(data, 80);

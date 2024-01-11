@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 14:46:09 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:46:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,9 @@ typedef struct s_draw_rays
 typedef struct s_img
 {
 	mlx_image_t		*img_game;
+	mlx_image_t		*img_splash;
+	mlx_image_t		*img_splash_random;
+	mlx_image_t		*img_splash_normal;
 	mlx_image_t		*img_mm_wall;
 	mlx_image_t		*img_mm_wall_shadow;
 	mlx_image_t		*img_mm_portal;
@@ -259,10 +262,15 @@ typedef struct s_data
 	bool			is_shooting;
 	bool			is_torching;
 	bool			is_surrounded;
+	bool			is_started;
 }					t_data;
 
 float				dda_dist(t_data *data, float angle, char *dir,
 						bool *new_block);
+// splash
+void				ft_splash_to_game(t_data *data);
+void				ft_start_game(t_data *data);
+void				ft_open_image_splash(t_data *data);
 
 // get_map
 int					init_map(t_data *data, char *input);
