@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 14:04:19 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:44:27 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,62 +70,6 @@ void	ft_img_to_window(t_data *data)
 		data->img->img_torch[i]->enabled = false;
 	}
 	ft_img_to_window_helper(data);
-}
-
-void	ft_check_is_explored(t_data *data)
-{
-	uint32_t	max;
-	int			start;
-	uint32_t	count;
-	int			color;
-
-	color = ft_pixel(0, 0, 0, 0);
-	max = data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
-		* sizeof(uint32_t);
-	start = 0;
-	count = 0;
-	while (start < max)
-	{
-		if (data->img->img_mm_overlay->pixels[start] == color)
-			count++;
-		start++;
-	}
-	if (count >= 0.75 * max)
-	{
-		ft_memset(data->img->img_mm_overlay->pixels, 0,
-			data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
-			* sizeof(uint32_t));
-		data->game->is_explored = true;
-	}
-}
-
-void	draw_map_explored(t_data *data, int r, int x, int y)
-{
-	int		x_middle;
-	int		y_middle;
-	int		radius;
-	double	angle;
-	int		color;
-
-	x_middle = data->player->x * 16 + 6;
-	y_middle = data->player->y * 16 + 6;
-	radius = 50;
-	angle = 0;
-	color = ft_pixel(0, 0, 0, 0);
-	while (angle <= 2 * M_PI)
-	{
-		r = 0;
-		while (r <= radius)
-		{
-			x = x_middle + (int)(r * cos(angle));
-			y = y_middle + (int)(r * sin(angle));
-			if (x >= 0 && y >= 0 && x < data->img->img_mm_overlay->width
-				&& y < data->img->img_mm_overlay->height)
-				mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
-			++r;
-		}
-		angle += 0.01;
-	}
 }
 
 void	ft_running(void *param)

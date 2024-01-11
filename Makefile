@@ -17,7 +17,7 @@ LOCAL_DIR			=	MLX42
 
 UTILS				=	utils_main.c utils_free.c utils_map.c utils_cross.c utils_basic.c \
 						utils_color.c utils_dda.c utils_image.c utils_detection.c utils_random.c \
-						utils_math.c
+						utils_math.c utils_minimap.c
 
 INIT				=	init_1.c init_2.c parse_map.c
 

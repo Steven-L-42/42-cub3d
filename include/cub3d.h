@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 14:03:31 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 14:46:09 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_map
 	int				count_player;
 	bool			is_random_map;
 	bool			is_explored;
+	int				curr_explored;
 }					t_map;
 
 typedef struct s_minimap
@@ -208,6 +209,7 @@ typedef struct s_img
 	mlx_image_t		*img_mm_door_closed;
 	mlx_image_t		*img_mm_door_open;
 	mlx_image_t		*img_mm_overlay;
+	mlx_image_t		*img_mm_explored;
 	mlx_image_t		*img_game_cursor;
 	mlx_image_t		*img_player;
 	mlx_image_t		*img_player_ray;
@@ -325,6 +327,10 @@ void				draw_leftdiagonal(t_data *data, t_crosshair cross);
 void				draw_rightdiagonal(t_data *data, t_crosshair cross);
 void				draw_circle(t_data *data, t_crosshair cross);
 
+// utils minimap
+void				draw_map_explored(t_data *data, int r, int x, int y);
+void				ft_check_is_explored(t_data *data);
+
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 uint32_t			**get_color(mlx_texture_t *texture);
@@ -332,6 +338,7 @@ uint32_t			ft_select_color(t_data *data, t_dda *calc, int block_height,
 						int block_width);
 uint32_t			ft_shadow_coloring(t_data *data, float start, int src_color,
 						bool is_floor);
+
 // utils detection
 void				set_coords(t_data *data, t_draw_rays *ray, int ray_len);
 
