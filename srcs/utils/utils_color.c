@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 19:14:28 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:22:50 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ uint32_t	ft_select_color(t_data *data, t_dda *dda, int block_height,
 	if (data->wall_type == 'W')
 	{
 		if (dda->direction == 'N')
-			dda->color_wall = ft_text_color(data->img->txt_NO, dda,
+			dda->color_wall = ft_text_color(data->img->txt_no, dda,
 					block_height, block_width);
 		else if (dda->direction == 'E')
-			dda->color_wall = ft_text_color(data->img->txt_EA, dda,
+			dda->color_wall = ft_text_color(data->img->txt_ea, dda,
 					block_height, block_width);
 		else if (dda->direction == 'S')
-			dda->color_wall = ft_text_color(data->img->txt_SO, dda,
+			dda->color_wall = ft_text_color(data->img->txt_so, dda,
 					block_height, block_width);
 		else if (dda->direction == 'W')
-			dda->color_wall = ft_text_color(data->img->txt_WE, dda,
+			dda->color_wall = ft_text_color(data->img->txt_we, dda,
 					block_height, block_width);
 	}
 	else if (data->wall_type == 'D')

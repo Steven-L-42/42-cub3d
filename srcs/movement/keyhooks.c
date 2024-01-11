@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 21:00:51 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:19:55 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	ft_player_angle(double xpos, double ypos, void *param)
 	data = param;
 	mlx_get_mouse_pos(data->mlx, &data->player->mouse_x,
 		&data->player->mouse_y);
-	delta_x = data->player->mouse_x - data->player->prev_mouseX;
+	delta_x = data->player->mouse_x - data->player->prev_mouse_x;
 	sensitivity = 0.1;
 	new_angle = delta_x * sensitivity;
 	data->player->angle += -new_angle;
-	data->player->prev_mouseX = data->player->mouse_x;
+	data->player->prev_mouse_x = data->player->mouse_x;
 }
 
 void	ft_key_press(mlx_key_data_t keydata, void *param)

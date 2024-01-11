@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 17:47:25 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:22:18 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int	init_img_one(t_data *data)
 {
 	const char	*door = "textures/doors/brick_door_closed.png";
 
-	if (ft_open_image_keep_text(data, &data->img->img_NO, \
-					&data->img->txt_NO, data->game->NO)
-		* ft_open_image_keep_text(data, &data->img->img_SO, \
-					&data->img->txt_SO, data->game->SO)
-		* ft_open_image_keep_text(data, &data->img->img_WE, \
-					&data->img->txt_WE, data->game->WE)
-		* ft_open_image_keep_text(data, &data->img->img_EA, \
-					&data->img->txt_EA, data->game->EA)
+	if (ft_open_image_keep_text(data, &data->img->img_no, \
+					&data->img->txt_no, data->game->no)
+		* ft_open_image_keep_text(data, &data->img->img_so, \
+					&data->img->txt_so, data->game->so)
+		* ft_open_image_keep_text(data, &data->img->img_we, \
+					&data->img->txt_we, data->game->we)
+		* ft_open_image_keep_text(data, &data->img->img_ea, \
+					&data->img->txt_ea, data->game->ea)
 		* ft_open_image_keep_text(data, &data->img->img_door_closed, \
 					&data->img->txt_door_closed, (char *)door) == 0)
 		return (1);
@@ -129,5 +129,5 @@ void	init_player(t_data *data)
 		data->player->angle = 180;
 	data->player->view_angle = 60;
 	mlx_get_mouse_pos(data->mlx, &x, &y);
-	data->player->prev_mouseX = (float)x;
+	data->player->prev_mouse_x = (float)x;
 }

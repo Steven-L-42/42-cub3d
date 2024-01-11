@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 14:06:35 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:35:44 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,20 @@ void	draw_floor_ceiling(t_data *data, t_dda *dda)
 			ft_shadow_coloring(data, start, data->game->col_floor, true));
 }
 
-void	draw_wall(t_data *data, t_dda *dda, int block_width, float y,
-		float temp_top, float temp_bottom)
+void	draw_wall(t_data *data, t_dda *dda, int block_width,
+			float temp_bottom_top_y[3])
 {
 	float	block_height;
 
-	while (y < 0)
-		y++;
-	while (y < dda->line_bottom)
+	while (temp_bottom_top_y[2] < 0)
+		temp_bottom_top_y[2]++;
+	while (temp_bottom_top_y[2] < dda->line_bottom)
 	{
-		block_height = calc_for_x(temp_bottom - temp_top, y - temp_top);
-		mlx_put_pixel(data->img->img_game, dda->j, y, ft_select_color(data, dda,
-				block_height, block_width));
-		y++;
+		block_height = calc_for_x(temp_bottom_top_y[1] - temp_bottom_top_y[0],
+				temp_bottom_top_y[2] - temp_bottom_top_y[0]);
+		mlx_put_pixel(data->img->img_game, dda->j, temp_bottom_top_y[2],
+			ft_select_color(data, dda, block_height, block_width));
+		temp_bottom_top_y[2]++;
 	}
 }
 
@@ -48,6 +49,7 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true, int block_width)
 {
 	float			y;
 	static float	temp_if_true;
+	float			temp_bottom_top_y[3];
 	float			temp_top;
 	float			temp_bottom;
 
@@ -57,14 +59,15 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true, int block_width)
 		dda->tmp = temp_if_true;
 	dda->line_bottom = (data->height / 2) + (SIZE * dda->treshold / dda->tmp);
 	dda->line_top = (data->height / 2) - (SIZE * dda->treshold / dda->tmp);
-	temp_top = dda->line_top;
-	temp_bottom = dda->line_bottom;
+	temp_bottom_top_y[0] = dda->line_top;
+	temp_bottom_top_y[1] = dda->line_bottom;
 	if (dda->line_top < 0)
 		dda->line_top = 0;
 	if (dda->line_bottom >= data->height)
 		dda->line_bottom = data->height;
 	y = dda->line_top;
-	draw_wall(data, dda, block_width, y, temp_top, temp_bottom);
+	temp_bottom_top_y[2] = y;
+	draw_wall(data, dda, block_width, temp_bottom_top_y);
 	draw_floor_ceiling(data, dda);
 	temp_if_true = dda->tmp;
 }

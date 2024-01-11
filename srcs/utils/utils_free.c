@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 11:28:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:21:19 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ void	ft_free_structs(t_data *data)
 
 void	ft_exit(t_data *data)
 {
-	free(data->game->NO);
-	free(data->game->SO);
-	free(data->game->EA);
-	free(data->game->WE);
-	free(data->game->F);
-	free(data->game->C);
+	free(data->game->no);
+	free(data->game->so);
+	free(data->game->ea);
+	free(data->game->we);
+	free(data->game->f);
+	free(data->game->c);
 	mlx_delete_texture(data->img->txt_door_closed);
-	mlx_delete_texture(data->img->txt_NO);
-	mlx_delete_texture(data->img->txt_SO);
-	mlx_delete_texture(data->img->txt_EA);
-	mlx_delete_texture(data->img->txt_WE);
+	mlx_delete_texture(data->img->txt_no);
+	mlx_delete_texture(data->img->txt_so);
+	mlx_delete_texture(data->img->txt_ea);
+	mlx_delete_texture(data->img->txt_we);
 	if (data->game->is_random_map)
 		ft_free2d_char(data->game->rnd_map);
 	ft_free2d_char(data->game->tmp_map);

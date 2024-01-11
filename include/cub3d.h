@@ -6,7 +6,7 @@
 /*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 20:56:52 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:21:46 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_player
 	float			angle;
 	float			prev_angle;
 	float			view_angle;
-	float			prev_mouseX;
+	float			prev_mouse_x;
 	double			prev_time;
 	int				curr_item;
 }					t_player;
@@ -84,10 +84,6 @@ typedef struct s_vec2
 
 typedef struct s_rgba
 {
-	// uint32_t		r;
-	// uint32_t		g;
-	// uint32_t		b;
-	// uint32_t		a;
 	int				r;
 	int				g;
 	int				b;
@@ -103,13 +99,13 @@ typedef struct s_map
 	int				width;
 	int				height;
 	int				skip_height;
-	char			*NO;
-	char			*SO;
-	char			*WE;
-	char			*EA;
-	char			*DOOR;
-	char			*F;
-	char			*C;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	char			*door;
+	char			*f;
+	char			*c;
 	int				col_floor;
 	int				col_ceiling;
 	int				count_player;
@@ -224,20 +220,20 @@ typedef struct s_img
 	mlx_image_t		*img_door_closed;
 	mlx_texture_t	*txt_door_closed;
 
-	mlx_image_t		*img_NO;
-	mlx_texture_t	*txt_NO;
+	mlx_image_t		*img_no;
+	mlx_texture_t	*txt_no;
 
-	mlx_image_t		*img_SO;
-	mlx_texture_t	*txt_SO;
+	mlx_image_t		*img_so;
+	mlx_texture_t	*txt_so;
 
-	mlx_image_t		*img_WE;
-	mlx_texture_t	*txt_WE;
+	mlx_image_t		*img_we;
+	mlx_texture_t	*txt_we;
 
-	mlx_image_t		*img_EA;
-	mlx_texture_t	*txt_EA;
+	mlx_image_t		*img_ea;
+	mlx_texture_t	*txt_ea;
 
-	mlx_image_t		*img_BB;
-	mlx_texture_t	*txt_BB;
+	mlx_image_t		*img_bb;
+	mlx_texture_t	*txt_bb;
 
 	int				torch_frame;
 	int				pistol_frame;

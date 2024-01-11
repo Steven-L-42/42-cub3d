@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 18:15:02 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:18:20 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,15 @@ int	init_map(t_data *data, char *input)
 	ft_fill_tmp(data->game->tmp_map, data->height, fd);
 	if (!data->game->tmp_map)
 		return (close(fd), 1);
-	if (ft_get_text(data->game->tmp_map, &data->game->NO, "NO")
-		* ft_get_text(data->game->tmp_map, &data->game->SO, "SO")
-		* ft_get_text(data->game->tmp_map, &data->game->WE, "WE")
-		* ft_get_text(data->game->tmp_map, &data->game->EA, "EA")
-		* ft_get_text(data->game->tmp_map, &data->game->F, "F")
-		* ft_get_text(data->game->tmp_map, &data->game->C, "C") == 0)
+	if (ft_get_text(data->game->tmp_map, &data->game->no, "NO")
+		* ft_get_text(data->game->tmp_map, &data->game->so, "SO")
+		* ft_get_text(data->game->tmp_map, &data->game->we, "WE")
+		* ft_get_text(data->game->tmp_map, &data->game->ea, "EA")
+		* ft_get_text(data->game->tmp_map, &data->game->f, "F")
+		* ft_get_text(data->game->tmp_map, &data->game->c, "C") == 0)
 		return (close(fd), ft_error("Error: Texture parsing!"));
-	if (ft_str_to_rgb(data->game->F, &data->game->col_floor)
-		* ft_str_to_rgb(data->game->C, &data->game->col_ceiling) == 0)
+	if (ft_str_to_rgb(data->game->f, &data->game->col_floor)
+		* ft_str_to_rgb(data->game->c, &data->game->col_ceiling) == 0)
 		return (close(fd), ft_error("Error: Color parsing!"));
 	if (ft_fill_map(data, data->game->tmp_map))
 		return (close(fd), 1);

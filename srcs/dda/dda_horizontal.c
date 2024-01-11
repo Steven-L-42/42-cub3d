@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 10:41:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:28:30 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,22 @@ void	calc_block_width_left(t_data *data, t_dda_helper dda_tmp, t_dda *dda,
 		dda->width_array[0] = 0;
 }
 
+void	inital(t_dda *dda, t_dda_helper *dda_tmp, float quality)
+{
+	dda_tmp->line = dda->line;
+	dda_tmp->maxline = dda->max_lines;
+	dda_tmp->angle = dda->angle;
+	dda_tmp->t = 0;
+	dda_tmp->i = 0;
+	dda_tmp->quality = (float)quality;
+}
+
 void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 		float quality)
 {
 	t_dda_helper	dda_tmp;
 
-	dda_tmp.line = dda->line;
-	dda_tmp.maxline = dda->max_lines;
-	dda_tmp.angle = dda->angle;
-	dda_tmp.t = 0;
-	dda_tmp.i = 0;
-	dda_tmp.quality = (float)quality;
+	inital(dda, &dda_tmp, quality);
 	while (dda_tmp.line > dda_tmp.maxline)
 	{
 		dda_tmp.dist = dda_dist(data, dda_tmp.line, &dda->direction,
