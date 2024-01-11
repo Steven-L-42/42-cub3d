@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 12:37:50 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:43:16 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,38 @@ void	ft_img_to_window(t_data *data)
 	ft_img_to_window_helper(data);
 }
 
+void	draw_map_explored(t_data *data)
+{
+	int		x_middle;
+	int		y_middle;
+	int		radius;
+	double	angle;
+	int		color;
+	int		r;
+	int		x;
+	int		y;
+
+	x_middle = data->player->x * 16 + 6;
+	y_middle = data->player->y * 16 + 6;
+	radius = 50;
+	angle = 0;
+	color = ft_pixel(0, 0, 0, 0);
+	while (angle <= 2 * M_PI)
+	{
+		r = 0;
+		while (r <= radius)
+		{
+			x = x_middle + (int)(r * cos(angle));
+			y = y_middle + (int)(r * sin(angle));
+			if (x >= 0 && y >= 0 && x < data->img->img_mm_overlay->width \
+				&& y < data->img->img_mm_overlay->height)
+				mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
+			++r;
+		}
+		angle += 0.01;
+	}
+}
+
 void	ft_running(void *param)
 {
 	t_data	*data;
@@ -79,6 +111,7 @@ void	ft_running(void *param)
 	reset_window(data);
 	dda_horizontal(data);
 	draw_player_rays(data, 80);
+	draw_map_explored(data);
 }
 
 int	ft_check_extension(char *argv)

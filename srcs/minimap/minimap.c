@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 17:57:22 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:09:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ static void	draw_objects(t_data *data, int is_wall)
 				&& is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall, x * 16, y
 					* 16);
-			else if (data->game->map[y][x] && \
-					(data->game->map[y][x] == '0' || \
-					data->game->map[y][x] == 'P') && is_wall)
+			else if (data->game->map[y][x] && (data->game->map[y][x] == '0'
+					|| data->game->map[y][x] == 'P') && is_wall)
 				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
 					* 16, y * 16);
 			else
@@ -68,11 +67,34 @@ static void	set_z(t_data *data)
 	while (i < data->img->img_mm_door_open->count)
 		data->img->img_mm_door_open->instances[i++].z = 1;
 	data->img->img_player->instances[0].z = 2;
+	//data->img->img_movement_ray->instances[0].z = 0;
+}
+
+void	ft_draw_overlay(t_data *data)
+{
+	int	y;
+	int	x;
+	int	color;
+
+	y = 0;
+	color = ft_pixel(45, 45, 45, 255);
+	mlx_image_to_window(data->mlx, data->img->img_mm_overlay, 0, 0);
+	while (y < data->img->img_mm_overlay->height)
+	{
+		x = 0;
+		while (x < data->img->img_mm_overlay->width)
+		{
+			mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	draw_minimap(t_data *data)
 {
 	draw_objects(data, 0);
 	draw_objects(data, 1);
+	ft_draw_overlay(data);
 	set_z(data);
 }

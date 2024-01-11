@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 19:30:25 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:45:40 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	init_minimap(t_data *data)
 		printf("data->minimap->map\n");
 	while (++data->minimap->height < data->game->height)
 	{
-		data->minimap->map[data->minimap->height] = ft_calloc(data->game->height + 1, sizeof(int));
+		data->minimap->map[data->minimap->height] \
+			= ft_calloc(data->game->height + 1, sizeof(int));
 		if (!data->minimap->map[data->minimap->height])
 			printf("data->minimap->map\n");
 	}
@@ -75,6 +76,10 @@ static int	init_win_imgs(t_data *data)
 			* 16, data->game->height * 16);
 	if (!data->img->img_movement_ray)
 		return (ft_error("Error: img_movement_ray creation failed!"));
+	data->img->img_mm_overlay = mlx_new_image(data->mlx, data->game->width
+			* 16, data->game->height * 16);
+	if (!data->img->img_mm_overlay)
+		return (ft_error("Error: img_mm_overlay creation failed!"));
 	data->img->img_crosshair = mlx_new_image(data->mlx, 255, 255);
 	if (!data->img->img_crosshair)
 		return (ft_error("Error: img_crosshair creation failed!"));

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:24:02 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 19:39:48 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:43:31 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ int	ft_main_checks(t_data *data, int argc, char **argv)
 }
 
 // mlx_set_setting(MLX_STRETCH_IMAGE, true);
-// mlx_set_setting(, true);
+// mlx_set_setting(MLX_FULLSCREEN, true);
 // atexit(leaks);
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	//atexit(ft_leaks);
 	data = malloc(sizeof(t_data));
 	if (ft_main_checks(data, argc, argv))
 		exit(1);

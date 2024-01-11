@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:00:25 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 17:23:04 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/11 10:41:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	calc_block_width(t_data *data, t_dda *dda, bool new_block,
 void	calc_preset(t_data *data, t_dda *dda)
 {
 	dda->j = 0;
-	dda->max_lines = -(data->player->view_angle / 2);
+	dda->max_lines = -(data->player->view_angle / 2) - 1.0f;
 	dda->temp2 = -dda->max_lines;
 	dda->angle = -dda->max_lines;
 	dda->color_door = ft_pixel(125, 76, 56, 255);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:08:02 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 19:17:57 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:10:47 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	re_open(void)
 {
-	const char	*prog_path = "./cub3d";
-	const char	*prog_param = "maps/map.cub";
+	const char	*prog_path = "make";
+	const char	*prog_param = "test";
 	char		command[256];
 
 	snprintf(command, sizeof(command), "%s %s", prog_path, prog_param);
