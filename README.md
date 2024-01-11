@@ -2,6 +2,12 @@
 
 ![cub3d](https://github.com/ayogun/42-project-badges/blob/main/badges/cub3dm.png?raw=true)
 
+# version (2024.01.11)
+### Minimap exploring | Auto explored at 75% | Fixed Wall Behaviour
+
+https://github.com/Steven-L-42/42-cub3d/assets/102829233/2b95e570-67ae-4c61-b7cf-b7de0bc26677
+
+
 # version (2024.01.09)
 ### Weapon | Torch, Crosshair | Shadow | Color-Gradient | Random Map Generator
 
