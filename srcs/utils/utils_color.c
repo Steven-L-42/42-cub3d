@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 13:09:01 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:14:28 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 uint32_t	ft_shadow_coloring(t_data *data, float start, int src_color,
 		bool is_floor)
 {
-	double			brightness;
+	double	brightness;
 
 	if (data->is_shooting)
 		return (src_color);
@@ -30,10 +30,9 @@ uint32_t	ft_shadow_coloring(t_data *data, float start, int src_color,
 		brightness = -((float)(512 - start) / 512);
 	else
 		brightness = 1.0f - (float)(start) / 512;
-	return (ft_pixel(((src_color >> 24) & 0xFF) * brightness, \
-					((src_color >> 16) & 0xFF) * brightness, \
-					((src_color >> 8) & 0xFF) * brightness, \
-					(src_color & 0xFF)));
+	return (ft_pixel(((src_color >> 24) & 0xFF) * brightness,
+			((src_color >> 16) & 0xFF) * brightness, ((src_color >> 8) & 0xFF)
+			* brightness, (src_color & 0xFF)));
 }
 
 static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
@@ -43,14 +42,22 @@ static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 	int		pos;
 	double	brightness;
 
+	if (block_width < 0)
+		block_width = 0;
+	if (block_height < 0)
+		block_height = 0;
+	if (block_width >= text->width)
+		block_width = text->width - 1;
+	if (block_height >= text->height)
+		block_height = text->height - 1;
 	pos = text->bytes_per_pixel * (block_height + text->width * block_width);
 	brightness = fmax(1.0 - (dda->distance / dda->shadow), 0);
 	if (dda->distance > dda->shadow)
 		return (255);
 	return (ft_pixel((int)(text->pixels[pos] * brightness), \
-					(int)(text->pixels[pos + 1] * brightness), \
-					(int)(text->pixels[pos + 2] * brightness), \
-					(int)text->pixels[pos + 3]));
+			(int)(text->pixels[pos + 1] * brightness), \
+			(int)(text->pixels[pos + 2] * brightness), \
+			(int)text->pixels[pos + 3]));
 }
 
 uint32_t	ft_select_color(t_data *data, t_dda *dda, int block_height,

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 17:48:18 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:50:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	ft_splash_to_game(t_data *data)
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_DISABLED);
 }
 
-// y 450 - 520
-// y 620 - 690
 void	ft_start_game(t_data *data)
 {
 	if (data->player->mouse_y >= 450 && data->player->mouse_y <= 520)

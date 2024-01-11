@@ -1,6 +1,6 @@
 NAME				=	cub3d
 
-COMPILE				=	cc
+COMPILE				=	cc -fsanitize=address -g
 
 MLX_LINUX_FLAGS		=	-ldl -pthread -lm
 MLX_MAC_FLAGS		=	-framework Cocoa -framework OpenGL -framework IOKit
