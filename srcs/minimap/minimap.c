@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 19:05:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:46:07 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	draw_quadrat(t_data *data, int start_x, int start_y)
 		{
 			mlx_put_pixel(data->img->img_mm_overlay, (start_x * 16) + x,
 				(start_y * 16) + y, color);
+			data->game->pixel_unexp++;
 			x++;
 		}
 		y++;

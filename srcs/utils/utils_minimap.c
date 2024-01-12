@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 14:45:30 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:49:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	ft_set_explored_string(t_data *data)
 	char	*test;
 	char	*percent;
 
-	if (data->game->curr_explored >= 75)
-		data->game->curr_explored = 100;
+	if (data->game->cur_exp >= 75)
+		data->game->cur_exp = 100;
 	if (data->img->img_mm_explored)
 		mlx_delete_image(data->mlx, data->img->img_mm_explored);
-	percent = ft_itoa(data->game->curr_explored);
+	percent = ft_itoa(data->game->cur_exp);
 	test = ft_strjoin(percent, " \% explored");
 	data->img->img_mm_explored = mlx_put_string(data->mlx, (const char *)test,
 			0, 0);
@@ -33,22 +33,22 @@ void	ft_check_is_explored(t_data *data)
 {
 	uint32_t	max;
 	int			start;
-	uint32_t	count;
+	uint32_t	pixel_exp;
 	int			color;
 
-	color = ft_pixel(0, 0, 0, 0);
+	color = ft_pixel(0, 0, 0, 1);
 	max = data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
 		* sizeof(uint32_t);
 	start = 0;
-	count = 0;
+	pixel_exp = 0;
 	while (start < max)
 	{
-		if (data->img->img_mm_overlay->pixels[start] == color)
-			count++;
+		if (data->img->img_mm_overlay->pixels[start] == (color & 0xFF))
+			pixel_exp++;
 		start++;
 	}
-	data->game->curr_explored = (count * 100.0) / max;
-	if (count >= 0.75 * max)
+	data->game->cur_exp = (pixel_exp * 100.0) / data->game->pixel_unexp;
+	if (pixel_exp >= 0.75 * data->game->pixel_unexp)
 	{
 		ft_memset(data->img->img_mm_overlay->pixels, 0,
 			data->img->img_mm_overlay->width * data->img->img_mm_overlay->height
@@ -70,7 +70,7 @@ void	draw_map_explored(t_data *data, int r, int x, int y)
 	y_middle = data->player->y * 16 + 6;
 	radius = 50;
 	angle = 0;
-	color = ft_pixel(0, 0, 0, 0);
+	color = ft_pixel(0, 0, 0, 1);
 	while (angle <= 2 * M_PI)
 	{
 		r = 0;

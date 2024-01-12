@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 11:52:16 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:36:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	init_win_imgs(t_data *data)
 
 int	ft_init(t_data *data, char *input)
 {
-	ft_init_vars(data);
+	init_vars(data);
 	if (init_helper(data, input))
 		return (1);
 	if (init_win_imgs(data))

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 12:27:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:00:09 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	init_map(t_data *data, char *input)
 	int	fd;
 
 	fd = open(input, O_RDONLY);
-	if (!fd)
+	if (fd <= 0)
 		return (ft_error("Error: failed to open input!"));
 	data->game->tmp_map = ft_calloc(get_map_height(input) + 1, sizeof(char *));
 	if (!data->game->tmp_map)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:24:02 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 11:58:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:07:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (ft_main_checks(data, argc, argv))
 		exit(1);
-	ft_instructions(data);
+	// ft_instructions(data);
 	ft_img_to_window(data);
 	mlx_loop_hook(data->mlx, ft_running, data);
 	mlx_cursor_hook(data->mlx, ft_player_angle, data);

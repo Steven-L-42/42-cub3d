@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   SegTester.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:08:02 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 00:27:44 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:09:34 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	re_open(void)
 {
-	const char	*prog_path = "make";
-	const char	*prog_param = "test";
+	const char	*prog_path = "./cub3d";
+	const char	*prog_param = "maps/map.cub";
 	char		command[256];
 
 	snprintf(command, sizeof(command), "%s %s", prog_path, prog_param);

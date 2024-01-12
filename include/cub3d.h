@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 11:50:37 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:37:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ typedef struct s_map
 	int				count_player;
 	bool			is_random_map;
 	bool			is_explored;
-	int				curr_explored;
+	int				cur_exp;
+	int				pixel_unexp;
 }					t_map;
 
 typedef struct s_minimap
@@ -207,9 +208,8 @@ typedef struct s_draw_rays
 typedef struct s_img
 {
 	mlx_image_t		*img_game;
-	mlx_image_t		*img_splash;
-	mlx_image_t		*img_splash_random;
-	mlx_image_t		*img_splash_normal;
+	mlx_image_t		*img_splash_main;
+	mlx_image_t		*img_splash_start;
 	mlx_image_t		*img_mm_wall;
 	mlx_image_t		*img_mm_wall_shadow;
 	mlx_image_t		*img_mm_portal;
@@ -346,7 +346,7 @@ void				draw_map_explored(t_data *data, int r, int x, int y);
 void				ft_check_is_explored(t_data *data);
 
 // utils init
-void				ft_init_vars(t_data *data);
+void				init_vars(t_data *data);
 
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 11:52:54 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:40:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static int	generate_map_preset(t_data *data, int height, int width)
 
 static void	generate_map_helper(t_data *data, int i, int j)
 {
-	if (rand() % 128 == 0)
-		data->game->rnd_map[i][j] = '5';
-	else if (rand() % 4 == 0)
+	if (rand() % 4 == 0)
 		data->game->rnd_map[i][j] = '1';
 	else
 		data->game->rnd_map[i][j] = '0';
@@ -106,11 +104,11 @@ int	ft_create_random_map(t_data *data, char ***argv)
 
 	srand(time(NULL));
 	height = (10 + rand() % (20 - 10 + 1)) + 6;
-	width = 10 + rand() % (35 - 10 + 1);
+	width = 10 + rand() % (64 - 10 + 1);
 	if (generate_map(data, height, width))
 		return (1);
 	fd = open("random.cub", O_RDWR | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-	if (!fd)
+	if (fd <= 0)
 		return (ft_error("Error: failed to open random.cub!"));
 	i = 0;
 	while (data->game->rnd_map[i])

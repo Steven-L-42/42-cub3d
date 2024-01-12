@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 21:01:19 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:30:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ static void	ft_img_to_window_helper(t_data *data)
 	draw_crosshair(data, data->cross_colors[0]);
 	data->img->pistol_frame = 0;
 	data->img->img_game->instances[0].z = 0;
-	mlx_image_to_window(data->mlx, data->img->img_splash_random, 0, 0);
-	mlx_image_to_window(data->mlx, data->img->img_splash_normal, 0, 0);
-	mlx_image_to_window(data->mlx, data->img->img_splash, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_splash_start, 0, 0);
+	mlx_image_to_window(data->mlx, data->img->img_splash_main, 0, 0);
 }
 
 void	ft_img_to_window(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 12:09:24 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:30:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	ft_check_all_imgs(t_data *data)
 	if (!data->img->img_player || !data->img->img_mm_wall
 		|| !data->img->img_mm_portal || !data->img->img_mm_door_closed
 		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow
-		|| !data->img->img_splash || !data->img->img_splash_normal
-		|| !data->img->img_splash_random)
+		|| !data->img->img_splash_main || !data->img->img_splash_start)
 		return (1);
 	while (i < 6)
 	{

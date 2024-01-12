@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 11:44:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:02:43 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	get_map_height(char *input)
 
 	count = 0;
 	fd = open(input, O_RDONLY);
-	if (!fd)
-		return (1);
+	if (fd <= 0)
+		return (ft_error("Error: failed to open input!"));
 	line = get_next_line(fd);
 	while (line != NULL)
 	{

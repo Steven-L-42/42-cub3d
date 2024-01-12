@@ -1,6 +1,7 @@
 NAME				=	cub3d
 
-COMPILE				=	cc -fsanitize=address -g
+COMPILE				=	cc
+#-fsanitize=address -g
 
 MLX_LINUX_FLAGS		=	-ldl -pthread -lm
 MLX_MAC_FLAGS		=	-framework Cocoa -framework OpenGL -framework IOKit
@@ -123,14 +124,5 @@ test2:
 					@make
 					./cub3d maps/map2.cub
 
-test3:
-					@clear
-					@make
-					./cub3d maps/test.cub
-
-walls:
-					@clear
-					@make
-					./cub3d maps/walls.cub
 
 .PHONY:				all clean fclean re clone
