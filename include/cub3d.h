@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 00:24:09 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 11:50:37 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_map
 	char			**tmp_map;
 	char			**rnd_map;
 	char			**map;
-	char			**map_copy;
+	char			**map_dda;
 	int				width;
 	int				height;
 	int				skip_height;
@@ -303,7 +303,7 @@ int					ft_check_extension(char *argv);
 void				draw_crosshair(t_data *data, uint32_t color);
 
 // utils random
-void				ft_create_random_map(t_data *data, char ***argv);
+int					ft_create_random_map(t_data *data, char ***argv);
 
 // utils map
 int					get_map_height(char *input);
@@ -329,8 +329,10 @@ int					ft_is_alloc(char **map, int y, int x);
 void				ft_free_structs(t_data *data);
 void				ft_free2d_char(char **str);
 void				ft_free2d_int(int **str);
-void				ft_exit(t_data *data);
-void				ft_free2d_until(char **str, int max_len);
+void				ft_exit(t_data *data, bool is_init);
+void				ft_free2d_until(void **str, int max_len);
+void				ft_check_free(char *str);
+void				ft_check_free_text(mlx_texture_t *text);
 
 // utils cross
 void				draw_hori(t_data *data, t_crosshair cross);
@@ -342,6 +344,9 @@ void				draw_circle(t_data *data, t_crosshair cross);
 // utils minimap
 void				draw_map_explored(t_data *data, int r, int x, int y);
 void				ft_check_is_explored(t_data *data);
+
+// utils init
+void				ft_init_vars(t_data *data);
 
 // utils color
 int32_t				ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
@@ -382,14 +387,14 @@ int					check_wall_ray(t_data *data);
 // calc_view2
 void				dda_vertical(t_data *data, t_dda *calc, bool if_true);
 
-bool				validate_map(char **copied_map);
+bool				ft_valid_map(char **copied_map);
 void				initialize(int diff, int max_x_y[2], char **copied_map);
-
-float				get_distance(t_vec2 vec, t_data *data,
-						char *dir, bool *new_block);
-
-float				start_dist(t_vec2 *vec, char *dir,
-						bool *xminus, bool *yminus);
+bool				ft_valid_chars(t_data *data, int max_y);
+float				get_distance(t_vec2 vec, t_data *data, char *dir,
+						bool *new_block);
+char				**cpy_map(char **original, int size);
+float				start_dist(t_vec2 *vec, char *dir, bool *xminus,
+						bool *yminus);
 void				init_dist_x_y(t_vec2 *vec);
 void				inital(t_dda *dda, t_dda_helper *dda_tmp, float quality);
 

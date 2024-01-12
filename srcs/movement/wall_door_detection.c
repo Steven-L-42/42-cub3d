@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/09 13:22:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:05:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	check_wall_ray_helper(t_data *data, t_draw_rays *ray)
 			(const uint32_t)ray->y_coord < data->img->img_movement_ray->height)
 		{
 			if (ft_is_in_set(data->game->map[ray->y_coord / 16][ray->x_coord
-					/ 16], "159"))
+					/ 16], "1"))
 				return (1);
 			mlx_put_pixel(data->img->img_movement_ray, ray->x_coord,
 				ray->y_coord, ray->color);

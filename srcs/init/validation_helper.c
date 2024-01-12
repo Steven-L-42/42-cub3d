@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:55:05 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 20:56:25 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 11:38:46 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,39 @@ void	initialize(int diff, int max_x_y[2], char **copied_map)
 		max_x_y[0] += 4;
 		max_x_y[1] += 4;
 	}
+}
+
+char	**cpy_map(char **original, int size)
+{
+	char	**copy;
+	int		i;
+
+	copy = ft_calloc(size, sizeof(char *));
+	if (!copy)
+		return (NULL);
+	i = -1;
+	while (original[++i])
+		copy[i] = ft_strdup(original[i]);
+	return (copy);
+}
+
+bool	ft_valid_chars(t_data *data, int max_y)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (data->game->map[y])
+	{
+		x = 0;
+		while (data->game->map[y][x])
+		{
+			if (!ft_is_in_set(data->game->map[y][x], "10NESW "))
+				return (true);
+			x++;
+		}
+		y++;
+	}
+	data->game->map_dda = cpy_map(data->game->map, max_y + 1);
+	return (false);
 }

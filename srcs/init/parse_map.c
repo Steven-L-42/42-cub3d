@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 21:18:20 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:27:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_fill_tmp(char **tmp_map, int height, int fd)
 		}
 		tmp_map[++y] = ft_calloc(ft_strlen(line) + 1, 1);
 		if (!tmp_map[y])
-			return (ft_free2d_until(tmp_map, y),
+			return (ft_free2d_until((void *)tmp_map, y),
 				ft_error("Error: tmp_map[y] allocation failed!"));
 		ft_strlcpy(tmp_map[y], line, ft_strlen_until(line, '\n') + 1);
 		free(line);
@@ -64,18 +64,15 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	return (1);
 }
 
-static char	**ft_copy_original(char **original, int size)
+static bool	ft_check_validation(t_data *data, int max_y)
 {
-	char	**copy;
-	int		i;
-
-	copy = ft_calloc(size, sizeof(char *));
-	if (!copy)
-		printf("Copy\n");
-	i = -1;
-	while (original[++i])
-		copy[i] = ft_strdup(original[i]);
-	return (copy);
+	if (data->game->height > 20 || data->game->width > 64)
+		return (ft_error("Error: height '20' or width '64' exceeded!"));
+	if (ft_valid_chars(data, max_y))
+		return (ft_error("Error: Map contains invalid characters!"));
+	if (ft_valid_map(cpy_map(data->game->map, max_y + 1)))
+		return (ft_error("Error: Map is not surrounded by walls!"));
+	return (0);
 }
 
 static int	ft_fill_map(t_data *data, char **tmp_map)
@@ -102,9 +99,8 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 			data->game->width = ft_strlen(data->game->map[y_game]);
 		y_game++;
 	}
-	data->game->map_copy = ft_copy_original(data->game->map, max_y + 1);
 	data->game->height = y_game;
-	return (validate_map(ft_copy_original(data->game->map, max_y + 1)));
+	return (ft_check_validation(data, max_y));
 }
 
 int	init_map(t_data *data, char *input)

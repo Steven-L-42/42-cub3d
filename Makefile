@@ -17,7 +17,7 @@ LOCAL_DIR			=	MLX42
 
 UTILS				=	utils_main.c utils_free.c utils_map.c utils_cross.c utils_basic.c \
 						utils_color.c utils_dda.c utils_image.c utils_detection.c utils_random.c \
-						utils_math.c utils_minimap.c
+						utils_math.c utils_minimap.c utils_init.c utils_free_helper.c
 
 INIT				=	init_1.c init_2.c parse_map.c map_valid.c validation_helper.c
 
@@ -53,16 +53,16 @@ else
 endif
 
 all: $(NAME)
-#-L/Users/slippert/Documents/LeakSanitizer/ -llsan
+
 $(NAME): clone		$(INCLUDE) $(OBJS)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME) $(OBJS) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
-					@echo "$(COLOR_CYAN)Kompilierung abgeschlossen: $(NAME)$(COLOR_RESET)"
+					@echo "$(COLOR_CYAN)[READY] $(NAME)$(COLOR_RESET)"
 					@rm -rf $(OBJS)
 
 %.o: %.c
 					@$(COMPILE) $(FLAGS) -c $< -o $@
-					@echo "$(COLOR_GREEN)Kompilierung abgeschlossen: $@$(COLOR_RESET)"
+					@echo "$(COLOR_GREEN)[OK] $@$(COLOR_RESET)"
 
 clone:
 					@if [ -d $(LOCAL_DIR) ]; then \
@@ -84,16 +84,16 @@ remove:				fclean
 					fi
 
 clean:
-					@echo "$(COLOR_RED)Cleanup MiniShell.$(COLOR_RESET)"
+					@echo "$(COLOR_RED)Cleanup cub3d.$(COLOR_RESET)"
 					@rm -f $(OBJS)
-					@echo "$(COLOR_RED)Cleanup Libft.$(COLOR_RESET)"
+					@echo "$(COLOR_RED)Cleanup libft.$(COLOR_RESET)"
 					@cd $(INCLUDE) && make clean
 					@echo "$(COLOR_GREEN)Cleanup completed.$(COLOR_RESET)"
 
 fclean:				clean
-					@echo "$(COLOR_RED)Start Full-Clean.$(COLOR_RESET)"
+					@echo "$(COLOR_RED)Full-Clean cub3d.$(COLOR_RESET)"
 					@rm -f $(NAME)
-					@echo "$(COLOR_RED)Full-Clean Libft.$(COLOR_RESET)"
+					@echo "$(COLOR_RED)Full-Clean libft.$(COLOR_RESET)"
 					@cd $(INCLUDE) && make fclean
 					@echo "$(COLOR_GREEN)Full-Clean completed.$(COLOR_RESET)"
 

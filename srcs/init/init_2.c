@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 21:22:18 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:09:24 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	init_img_two(t_data *data)
 
 int	init_img_one(t_data *data)
 {
-	const char	*door = "textures/doors/brick_door_closed.png";
-
 	if (ft_open_image_keep_text(data, &data->img->img_no, \
 					&data->img->txt_no, data->game->no)
 		* ft_open_image_keep_text(data, &data->img->img_so, \
@@ -74,9 +72,7 @@ int	init_img_one(t_data *data)
 		* ft_open_image_keep_text(data, &data->img->img_we, \
 					&data->img->txt_we, data->game->we)
 		* ft_open_image_keep_text(data, &data->img->img_ea, \
-					&data->img->txt_ea, data->game->ea)
-		* ft_open_image_keep_text(data, &data->img->img_door_closed, \
-					&data->img->txt_door_closed, (char *)door) == 0)
+					&data->img->txt_ea, data->game->ea) == 0)
 		return (1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 20:23:47 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 20:55:53 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 11:38:53 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	helper(char **processed_map, char **copied_map, bool *test)
 	ft_free2d_char(processed_map);
 }
 
-bool	validate_map(char **copied_map)
+bool	ft_valid_map(char **copied_map)
 {
 	bool	test;
 	int		max_x_y[2];

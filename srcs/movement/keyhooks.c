@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 21:19:55 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:05:52 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_key_press(mlx_key_data_t keydata, void *param)
 
 	data = param;
 	if (keydata.key == MLX_KEY_F && keydata.action == MLX_PRESS)
-		check_for_door(data);
+		ft_change_item(data);
 	if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
 	{
 		if (data->is_torching)
@@ -102,7 +102,7 @@ static void	ft_key_hold_helper(t_data *data, const char *set)
 void	ft_key_hold(void *param)
 {
 	t_data		*data;
-	const char	*set = "159";
+	const char	*set = "1";
 
 	data = param;
 	data->player->dir.sideward = 0;

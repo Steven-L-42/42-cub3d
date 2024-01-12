@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 13:01:57 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/10 10:49:21 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:50:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	reset_map(t_data *data)
 	int	x;
 
 	y = 0;
-	while (data->game->map_copy[y] != NULL)
+	while (data->game->map_dda[y] != NULL)
 	{
 		x = 0;
-		while (data->game->map_copy[y][x] != '\0')
+		while (data->game->map_dda[y][x] != '\0')
 		{
-			data->game->map_copy[y][x] = data->game->map[y][x];
+			data->game->map_dda[y][x] = data->game->map[y][x];
 			x++;
 		}
 		y++;

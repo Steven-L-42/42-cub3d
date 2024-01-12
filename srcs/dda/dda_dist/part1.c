@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   part1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:19:39 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 00:02:35 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:05:32 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 void	back_condistion_block(t_data *data, t_dda_dist *dst,
 			bool *new_block, char *dir)
 {
-	if (ft_is_alloc(data->game->map_copy, dst->tempy, dst->tempx) && \
-		data->game->map_copy[dst->tempy][dst->tempx] == 'L')
+	if (ft_is_alloc(data->game->map_dda, dst->tempy, dst->tempx) && \
+		data->game->map_dda[dst->tempy][dst->tempx] == 'L')
 		*new_block = false;
-	if (ft_is_alloc(data->game->map_copy, dst->tempy, dst->tempx) && \
-			ft_is_in_set(data->game->map_copy[dst->tempy][dst->tempx], "159B") \
+	if (ft_is_alloc(data->game->map_dda, dst->tempy, dst->tempx) && \
+			ft_is_in_set(data->game->map_dda[dst->tempy][dst->tempx], "1") \
 			|| *dir != dst->old_dir)
 	{
-		data->game->map_copy[dst->tempy][dst->tempx] = 'L';
+		data->game->map_dda[dst->tempy][dst->tempx] = 'L';
 		*new_block = true;
 	}
-	if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) && \
-			data->game->map[dst->tempy][dst->tempx] == 'B')
-		data->wall_type = 'B';
-	else if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) && \
-			data->game->map[dst->tempy][dst->tempx] == '5')
-		data->wall_type = 'D';
-	else if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) && \
-			data->game->map[dst->tempy][dst->tempx] == '9')
-		data->wall_type = 'P';
-	else
-		data->wall_type = 'W';
+	data->wall_type = 'W';
 }
+// if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) &&
+// 		data->game->map[dst->tempy][dst->tempx] == 'B')
+// 	data->wall_type = 'B';
+// else
+// else if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) &&
+// 		data->game->map[dst->tempy][dst->tempx] == '5')
+// 	data->wall_type = 'D';
+// else if (ft_is_alloc(data->game->map, dst->tempy, dst->tempx) &&
+// 		data->game->map[dst->tempy][dst->tempx] == '9')
+// 	data->wall_type = 'P';
 
 void	first_init(t_dda_dist *dst, t_vec2 *vec)
 {
@@ -80,13 +80,13 @@ float	get_distance(t_vec2 vec, t_data *data, char *dir, bool *new_block)
 
 	first_init(&dst, &vec);
 	while ((ft_is_alloc(data->game->map, dst.tempy, dst.tempx) && \
-			!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "159B")) || \
-			(ft_is_alloc(data->game->map_copy, dst.tempy, dst.tempx) && \
-			!ft_is_in_set(data->game->map_copy[dst.tempy][dst.tempx], "159BL")))
+			!ft_is_in_set(data->game->map[dst.tempy][dst.tempx], "1")) || \
+			(ft_is_alloc(data->game->map_dda, dst.tempy, dst.tempx) && \
+			!ft_is_in_set(data->game->map_dda[dst.tempy][dst.tempx], "1L")))
 	{
 		second_init(&dst, vec, dir);
 		if (!ft_is_alloc(data->game->map, dst.tempy, dst.tempx) || \
-			!ft_is_alloc(data->game->map_copy, dst.tempy, dst.tempx))
+			!ft_is_alloc(data->game->map_dda, dst.tempy, dst.tempx))
 			return (1);
 		dst.dist += fabs(start_dist(&vec, dir, &dst.xmin, &dst.ymin));
 		dst.tempy = vec.y;

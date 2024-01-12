@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 18:46:40 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:44:29 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strtok(char *src, char delim)
 		{
 			result = ft_calloc(i + 1, 1);
 			if (!result)
-				printf("Copy\n");
+				return (NULL);
 			while (src[x] && x < i)
 			{
 				result[x] = src[x];

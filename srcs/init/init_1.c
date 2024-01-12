@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/11 19:05:39 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:52:16 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,23 @@ static int	init_helper(t_data *data, char *input)
 	return (0);
 }
 
-static void	init_minimap(t_data *data)
+static int	init_minimap(t_data *data)
 {
 	data->minimap->width = data->game->width;
 	data->minimap->height = -1;
 	data->minimap->map = ft_calloc((data->height + 1), sizeof(int *));
 	if (!data->minimap->map)
-		printf("data->minimap->map\n");
+		return (ft_error("Error: data->minimap->map allocation failed!"));
 	while (++data->minimap->height < data->height)
 	{
 		data->minimap->map[data->minimap->height] = ft_calloc((data->height
 					+ 1), sizeof(int));
 		if (!data->minimap->map[data->minimap->height])
-			printf("data->minimap->map\n");
+			return (\
+			ft_free2d_until((void *)data->minimap->map, data->minimap->height), \
+			ft_error("Error: data->minimap->map allocation failed!"));
 	}
+	return (0);
 }
 
 static void	init_cross_colors(t_data *data)
@@ -88,10 +91,7 @@ static int	init_win_imgs(t_data *data)
 
 int	ft_init(t_data *data, char *input)
 {
-	data->is_started = false;
-	data->is_torching = false;
-	data->is_surrounded = false;
-	data->game->width = 0;
+	ft_init_vars(data);
 	if (init_helper(data, input))
 		return (1);
 	if (init_win_imgs(data))
@@ -99,7 +99,8 @@ int	ft_init(t_data *data, char *input)
 	if (init_img_one(data) || init_img_two(data))
 		return (ft_error("Error: failed to read .png file!"));
 	init_cross_colors(data);
-	init_minimap(data);
+	if (init_minimap(data))
+		return (1);
 	init_coords(data, 0, 0);
 	if (data->game->count_player != 1)
 		return (ft_error("Error: to few or many players!"));
