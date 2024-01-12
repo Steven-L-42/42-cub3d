@@ -1,10 +1,11 @@
-NO textures/bricks/brick_purple.png
-SO textures/bricks/brick_red.png
-WE textures/bricks/brick_orange.png
-EA textures/bricks/brick_green.png
+SO  textures/bricks/brick_red.png
+WE   textures/bricks/brick_orange.png
+EA       textures/bricks/brick_green.png
+NO    textures/bricks/brick_purple.png
 
-F 225, 0, 0
-C 135, 206, 125
+C  135   ,   206,    125
+F     225,   0,    0
+
 
    11111111111111  11111111111111
 111001000000000011110000000000001111111

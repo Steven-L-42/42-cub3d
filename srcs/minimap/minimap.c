@@ -6,25 +6,26 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 17:46:07 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:58:05 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+// if (data->game->map[y][x] == '5' && is_wall)
+// {
+// 	mlx_image_to_window(data->mlx, data->img->img_mm_door_open, x * 16, y
+// 		* 16);
+// 	data->minimap->map[y][x] = mlx_image_to_window(data->mlx,
+// 			data->img->img_mm_door_closed, x * 16, y * 16);
+// }
+// else if (data->game->map[y][x] == '9' && is_wall)
+// 	mlx_image_to_window(data->mlx, data->img->img_mm_portal, x * 16, y
+// 		* 16);
+// else
 static void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
 {
-	if (data->game->map[y][x] == '5' && is_wall)
-	{
-		mlx_image_to_window(data->mlx, data->img->img_mm_door_open, x * 16, y
-			* 16);
-		data->minimap->map[y][x] = mlx_image_to_window(data->mlx,
-				data->img->img_mm_door_closed, x * 16, y * 16);
-	}
-	else if (data->game->map[y][x] == '9' && is_wall)
-		mlx_image_to_window(data->mlx, data->img->img_mm_portal, x * 16, y
-			* 16);
-	else if (data->game->map[y][x] == 'P' && !is_wall)
+	if (data->game->map[y][x] == 'P' && !is_wall)
 		mlx_image_to_window(data->mlx, data->img->img_player, data->player->x
 			* 16, data->player->y * 16);
 }
@@ -70,7 +71,7 @@ static void	draw_objects(t_data *data, int is_wall)
 					* 16);
 			else if (is_wall && (data->game->map[y][x] == '0' \
 					|| data->game->map[y][x] == 'P'))
-				mlx_image_to_window(data->mlx, data->img->img_mm_wall_shadow, x
+				mlx_image_to_window(data->mlx, data->img->img_mm_walk, x
 					* 16, y * 16);
 			else
 				draw_objects_helper(data, is_wall, y, x);
@@ -80,16 +81,16 @@ static void	draw_objects(t_data *data, int is_wall)
 	}
 }
 
+// while (i < data->img->img_mm_door_open->count)
+// 	data->img->img_mm_door_open->instances[i++].z = 1;
 static void	set_z(t_data *data)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < data->img->img_mm_wall_shadow->count)
-		data->img->img_mm_wall_shadow->instances[i++].z = 1;
+	while (i < data->img->img_mm_walk->count)
+		data->img->img_mm_walk->instances[i++].z = 1;
 	i = 0;
-	while (i < data->img->img_mm_door_open->count)
-		data->img->img_mm_door_open->instances[i++].z = 1;
 	data->img->img_player->instances[0].z = 2;
 }
 

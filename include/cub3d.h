@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 18:37:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:55:51 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../libft/srcs/libft.h"
 # include <fcntl.h>
-// # include <float.h>
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
@@ -211,7 +210,7 @@ typedef struct s_img
 	mlx_image_t		*img_splash_main;
 	mlx_image_t		*img_splash_start;
 	mlx_image_t		*img_mm_wall;
-	mlx_image_t		*img_mm_wall_shadow;
+	mlx_image_t		*img_mm_walk;
 	mlx_image_t		*img_mm_portal;
 	mlx_image_t		*img_mm_door_closed;
 	mlx_image_t		*img_mm_door_open;

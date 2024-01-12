@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 18:30:24 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:58:45 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static int	ft_check_all_imgs(t_data *data)
 
 	i = 0;
 	if (!data->img->img_player || !data->img->img_mm_wall
-		|| !data->img->img_mm_portal || !data->img->img_mm_door_closed
-		|| !data->img->img_mm_door_open || !data->img->img_mm_wall_shadow
-		|| !data->img->img_splash_main || !data->img->img_splash_start)
+		|| !data->img->img_mm_walk || !data->img->img_splash_main
+		|| !data->img->img_splash_start)
 		return (1);
 	while (i < 6)
 	{
@@ -33,17 +32,18 @@ static int	ft_check_all_imgs(t_data *data)
 	return (0);
 }
 
+// ft_open_image(data, &data->img->img_mm_portal,
+// 	"textures/minimap/brick_portal.png");
+// ft_open_image(data, &data->img->img_mm_door_closed,
+// 	"textures/minimap/brick_door_closed.png");
+// ft_open_image(data, &data->img->img_mm_door_open,
+// 	"textures/minimap/brick_door_open.png");
 int	init_img_two(t_data *data)
 {
-	ft_open_image(data, &data->img->img_mm_wall, "textures/minimap/brick.png");
-	ft_open_image(data, &data->img->img_mm_portal,
-		"textures/minimap/brick_portal.png");
-	ft_open_image(data, &data->img->img_mm_door_closed,
-		"textures/minimap/brick_door_closed.png");
-	ft_open_image(data, &data->img->img_mm_door_open,
-		"textures/minimap/brick_door_open.png");
-	ft_open_image(data, &data->img->img_mm_wall_shadow,
-		"textures/minimap/brick_shadow.png");
+	ft_open_image(data, &data->img->img_mm_wall,
+		"textures/minimap/brick_wall.png");
+	ft_open_image(data, &data->img->img_mm_walk,
+		"textures/minimap/brick_walk.png");
 	ft_open_image(data, &data->img->img_player, "textures/player.png");
 	ft_open_image(data, &data->img->img_pistol[0], "textures/weapon/0.png");
 	ft_open_image(data, &data->img->img_pistol[1], "textures/weapon/1.png");
@@ -64,14 +64,12 @@ int	init_img_two(t_data *data)
 
 int	init_img_one(t_data *data)
 {
-	if (ft_open_image_keep_text(data, &data->img->img_no, \
-					&data->img->txt_no, data->game->no)
-		* ft_open_image_keep_text(data, &data->img->img_so, \
-					&data->img->txt_so, data->game->so)
-		* ft_open_image_keep_text(data, &data->img->img_we, \
-					&data->img->txt_we, data->game->we)
-		* ft_open_image_keep_text(data, &data->img->img_ea, \
-					&data->img->txt_ea, data->game->ea) == 0)
+	if (ft_open_image_keep_text(data, &data->img->img_no, &data->img->txt_no,
+			data->game->no) * ft_open_image_keep_text(data, &data->img->img_so,
+			&data->img->txt_so, data->game->so) * ft_open_image_keep_text(data,
+			&data->img->img_we, &data->img->txt_we, data->game->we)
+		* ft_open_image_keep_text(data, &data->img->img_ea, &data->img->txt_ea,
+			data->game->ea) == 0)
 		return (1);
 	return (0);
 }
