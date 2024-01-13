@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 14:32:59 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:42:52 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static int	generate_map_preset(t_data *data, int height, int width)
 
 static void	generate_map_helper(t_data *data, int i, int j)
 {
-	if (rand() % 4 == 0)
+	if (rand() % 128 == 0)
+		data->game->rnd_map[i][j] = '5';
+	else if (rand() % 4 == 0)
 		data->game->rnd_map[i][j] = '1';
 	else
 		data->game->rnd_map[i][j] = '0';
@@ -101,6 +103,7 @@ int	ft_create_random_map(t_data *data, char ***argv)
 	int	height;
 	int	width;
 	int	i;
+
 	srand(time(NULL));
 	height = (10 + rand() % (20 - 10 + 1)) + 6;
 	width = 10 + rand() % (64 - 10 + 1);

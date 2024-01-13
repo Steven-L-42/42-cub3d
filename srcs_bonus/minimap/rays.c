@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:49:49 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 14:51:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:51:38 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ray_helper(t_data *data, t_draw_rays *ray)
 		{
 			if (!ft_is_alloc(data->game->map, ray->y_coord / 16, ray->x_coord
 					/ 16) || ft_is_in_set(data->game->map[ray->y_coord
-						/ 16][ray->x_coord / 16], "1 "))
+						/ 16][ray->x_coord / 16], "15 "))
 				break ;
 			mlx_put_pixel(data->img->img_player_ray, ray->x_coord, ray->y_coord,
 				ray->color);

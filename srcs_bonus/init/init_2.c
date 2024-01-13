@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:01:37 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 13:54:00 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:53:07 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ static int	ft_check_all_imgs(t_data *data)
 
 int	init_img_two(t_data *data)
 {
+	ft_open_image(data, &data->img->img_mm_door_closed,
+		"textures/minimap/brick_door_closed.png");
+	ft_open_image(data, &data->img->img_mm_door_open,
+		"textures/minimap/brick_door_open.png");
 	ft_open_image(data, &data->img->img_mm_wall,
 		"textures/minimap/brick_wall.png");
 	ft_open_image(data, &data->img->img_mm_walk,
@@ -58,6 +62,8 @@ int	init_img_two(t_data *data)
 
 int	init_img_one(t_data *data)
 {
+	const char	*door_path = "textures/doors/brick_door_closed.png";
+
 	if (ft_open_image_keep_text(data, &data->img->img_no, \
 			&data->img->txt_no, data->game->no)
 		* ft_open_image_keep_text(data, &data->img->img_so, \
@@ -65,7 +71,9 @@ int	init_img_one(t_data *data)
 		* ft_open_image_keep_text(data, &data->img->img_we, \
 			&data->img->txt_we, data->game->we)
 		* ft_open_image_keep_text(data, &data->img->img_ea, \
-			&data->img->txt_ea, data->game->ea) == 0)
+			&data->img->txt_ea, data->game->ea)
+		* ft_open_image_keep_text(data, &data->img->img_door_closed, \
+			&data->img->txt_door_closed, (char *)door_path) == 0)
 		return (1);
 	return (0);
 }

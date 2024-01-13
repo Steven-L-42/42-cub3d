@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/13 14:35:16 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:36:01 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	init_map(t_data *data, char *input)
 {
 	int	fd;
 
+	
 	fd = open(input, O_RDONLY);
 	if (fd <= 0)
 		return (ft_error("Error: failed to open input!"));

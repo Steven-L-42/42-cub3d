@@ -36,6 +36,7 @@
 		"ratio": "c",
 		"complex": "c",
 		"initializer_list": "c",
-		"__string": "c"
+		"__string": "c",
+		"type_traits": "c"
 	}
 }

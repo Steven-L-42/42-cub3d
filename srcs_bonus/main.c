@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:24:02 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/13 14:27:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:39:00 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_instructions(t_data *data)
 	ft_printf("-------------------------------------------------\n");
 	ft_printf("Weapon Fire:\t\tSpace\t| Mouse LB\n");
 	ft_printf("Change Crosshair:\tPage UP\t| Page DOWN\n");
-	ft_printf("Toggle Torch:\t\tF\t| Mouse MB\n");
+	ft_printf("Toggle Torch:\t\tMouse MB\n");
+	ft_printf("Toggle Door:\t\tF\n");
 	ft_printf("%s\nproject by:\n\n%s", GREEN, RESET);
 	ft_printf("%sjsanger:\t\033]8;;%s\033\\(Intra)\033]8;;\033\\ && ", BLUE,
 		JSANGER_I);
@@ -71,8 +72,14 @@ int	ft_main_checks(t_data *data, int argc, char **argv)
 		return (ft_error("Error: data allocation failed!"));
 	if (ft_alloc_structs(data))
 		return (1);
-	if (argc != 2 || (argc == 2 && ft_check_extension(*(argv + 1))))
+	init_vars(data);
+	if (argc > 2 || (argc == 2 && ft_check_extension(*(argv + 1))))
 		return (ft_free_structs(data), 1);
+	else if (argc == 1)
+	{
+		if (ft_create_random_map(data, &argv))
+			return (1);
+	}
 	if (ft_init(data, argv[1]))
 		return (ft_exit(data, 1), 1);
 	return (0);

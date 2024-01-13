@@ -1,7 +1,8 @@
 NAME				=	cub3d
 
-COMPILE				=	cc
-#-fsanitize=address -g
+NAME_B				=	cub3d_bonus
+
+COMPILE				=	cc -fsanitize=address -g
 
 MLX_LINUX_FLAGS		=	-ldl -pthread -lm
 MLX_MAC_FLAGS		=	-framework Cocoa -framework OpenGL -framework IOKit
@@ -42,6 +43,17 @@ SRCS				=	main.c \
 						$(addprefix splashscreen/, $(SPLASHSCREEN))
 
 OBJS				=	$(addprefix srcs/,$(SRCS:.c=.o))
+
+SRCS_B				=	main.c \
+						$(addprefix init/, $(INIT)) \
+						$(addprefix minimap/, $(MINIMAP)) \
+						$(addprefix utils/, $(UTILS)) \
+						$(addprefix movement/, $(MOVEMENT)) \
+						$(addprefix animation/, $(ANIMATION)) \
+						$(addprefix dda/, $(DDA)) \
+						$(addprefix splashscreen/, $(SPLASHSCREEN))
+
+OBJS_B				=	$(addprefix srcs_bonus/,$(SRCS:.c=.o))
 
 UNAME_S := $(shell uname -s)
 
@@ -87,6 +99,7 @@ remove:				fclean
 clean:
 					@echo "$(COLOR_RED)Cleanup cub3d.$(COLOR_RESET)"
 					@rm -f $(OBJS)
+					@rm -f $(OBJS_B)
 					@echo "$(COLOR_RED)Cleanup libft.$(COLOR_RESET)"
 					@cd $(INCLUDE) && make clean
 					@echo "$(COLOR_GREEN)Cleanup completed.$(COLOR_RESET)"
@@ -94,20 +107,28 @@ clean:
 fclean:				clean
 					@echo "$(COLOR_RED)Full-Clean cub3d.$(COLOR_RESET)"
 					@rm -f $(NAME)
+					@rm -f $(NAME_B)
 					@echo "$(COLOR_RED)Full-Clean libft.$(COLOR_RESET)"
 					@cd $(INCLUDE) && make fclean
 					@echo "$(COLOR_GREEN)Full-Clean completed.$(COLOR_RESET)"
 
 re:					fclean all
 
-leak:
-					@dorker make re
-					dorker valgrind --leak-check=full --track-origins=yes --show-reachable=yes --error-limit=no ./cub3d maps/map.cub
+bonus:				clone		$(INCLUDE) $(OBJS_B)
+					@cd $(INCLUDE) && make
+					@$(COMPILE) $(FLAGS) -o $(NAME_B) $(OBJS_B) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
+					@echo "$(COLOR_CYAN)[READY] $(NAME_B)$(COLOR_RESET)"
+					@rm -rf $(OBJS_B)
 
 rand:
 					@clear
-					@make
-					./cub3d
+					@make bonus
+					./cub3d_bonus
+
+b_test:
+					@clear
+					@make bonus
+					./cub3d_bonus maps/map.cub
 
 test:
 					@clear
@@ -124,5 +145,4 @@ test2:
 					@make
 					./cub3d maps/map2.cub
 
-
-.PHONY:				all clean fclean re clone
+.PHONY:				all clean fclean re clone bonus
