@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 14:10:34 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:57:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int	check_for_door_preset(t_data *data, t_check_door *door)
 	door->radian_angle = data->player->angle * PI / 180.0;
 	door->p_x_cos = cos(door->radian_angle);
 	door->p_y_sin = sin(door->radian_angle);
-	door->cell_y = roundf(data->player->y - 1.5f * door->p_y_sin);
-	door->cell_x = roundf(data->player->x + 1.5f * door->p_x_cos);
+	door->cell_y = roundf(data->player->y - 1.45f * door->p_y_sin);
+	door->cell_x = roundf(data->player->x + 1.45f * door->p_x_cos);
 	if (door->cell_y >= 0 && door->cell_y <= data->game->height
 		&& door->cell_x >= 0 && door->cell_x <= data->game->width)
 	{

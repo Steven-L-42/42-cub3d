@@ -120,29 +120,20 @@ bonus:				clone		$(INCLUDE) $(OBJS_B)
 					@echo "$(COLOR_CYAN)[READY] $(NAME_B)$(COLOR_RESET)"
 					@rm -rf $(OBJS_B)
 
-rand:
+rand_b:
 					@clear
 					@make bonus
 					./cub3d_bonus
 
-b_test:
+test_b:
 					@clear
 					@make bonus
-					./cub3d_bonus maps/map.cub
+					./cub3d_bonus maps/map_b.cub
 
 test:
 					@clear
 					@make
 					./cub3d maps/map.cub
 
-test1:
-					@clear
-					@make
-					./cub3d maps/map1.cub
-
-test2:
-					@clear
-					@make
-					./cub3d maps/map2.cub
 
 .PHONY:				all clean fclean re clone bonus
