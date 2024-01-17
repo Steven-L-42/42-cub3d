@@ -6,13 +6,13 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/13 14:35:16 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:54:08 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	ft_fill_tmp(char **tmp_map, int height, int fd)
+int	ft_fill_tmp(char **tmp_map, int fd)
 {
 	char	*line;
 	int		y;
@@ -60,6 +60,8 @@ static int	ft_get_text(char **tmp_map, char *(*texture), char *needle)
 	if (!*texture)
 		return (0);
 	*texture = ft_strtrim_free(*texture, needle);
+	if (*texture == NULL)
+		return (0);
 	*texture = ft_strtrim_free(*texture, " \t\n\v\f\r");
 	return (1);
 }
@@ -113,7 +115,7 @@ int	init_map(t_data *data, char *input)
 	data->game->tmp_map = ft_calloc(get_map_height(input) + 1, sizeof(char *));
 	if (!data->game->tmp_map)
 		return (close(fd), ft_error("Error: tmp_map allocation failed!"));
-	ft_fill_tmp(data->game->tmp_map, data->height, fd);
+	ft_fill_tmp(data->game->tmp_map, fd);
 	if (!data->game->tmp_map)
 		return (close(fd), 1);
 	if (ft_get_text(data->game->tmp_map, &data->game->no, "NO")

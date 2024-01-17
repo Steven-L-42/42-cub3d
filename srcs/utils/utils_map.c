@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 18:02:43 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:55:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,22 @@ char	*ft_strtok(char *src, char delim)
 	max = ft_strlen(src) + 1;
 	i = 0;
 	x = 0;
-	while (i < max)
+	while (src && i < max)
 	{
 		if ((src && !src[i]) || src[i] == delim)
 		{
 			result = ft_calloc(i + 1, 1);
 			if (!result)
 				return (NULL);
-			while (src[x] && x < i)
-			{
+
+			while (src && src[x] && x < i)
+			{;
 				result[x] = src[x];
 				x++;
 			}
-			return (result);
+			if (result && result[0])
+				return (result);
+			return (NULL);
 		}
 		i++;
 	}
@@ -80,13 +83,30 @@ int	ft_str_to_rgb(char *rgb_str, int *color)
 	int		offset;
 
 	offset = 0;
+	int count_comma = 0;
+	if (ft_strlen(rgb_str) == 0)
+		return (0);
+		int iter = 0;
+	while (rgb_str[iter])
+	{
+		if (rgb_str[iter++] == ',')
+			count_comma++;
+	}
+	if (count_comma != 2)
+		return (0);
 	r = ft_strtok(rgb_str, ',');
+	if (r == NULL)
+		return (0);
 	offset += ft_strlen(r) + 1;
 	r = ft_strtrim_free(r, " \t\n\v\f\r");
 	g = ft_strtok(rgb_str + (offset), ',');
+	if (g == NULL)
+		return (0);
 	offset += ft_strlen(g) + 1;
 	g = ft_strtrim_free(g, " \t\n\v\f\r");
 	b = ft_strtok(rgb_str + (offset), ',');
+	if (b == NULL)
+		return (0);
 	b = ft_strtrim_free(b, " \t\n\v\f\r");
 	rgb.r = ft_atoi(r);
 	rgb.g = ft_atoi(g);
@@ -94,6 +114,8 @@ int	ft_str_to_rgb(char *rgb_str, int *color)
 	if (rgb.r > 255 || rgb.g > 255 || rgb.b > 255
 		|| rgb.r < 0 || rgb.g < 0 || rgb.b < 0)
 		return (free(r), free(g), free(b), 0);
+
 	*color = ft_pixel(rgb.r, rgb.g, rgb.b, 255);
+
 	return (free(r), free(g), free(b), 1);
 }

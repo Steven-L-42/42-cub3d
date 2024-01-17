@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 18:55:51 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:44:37 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,8 +363,7 @@ double				ray_distance(t_data *data, float angle);
 void				dda_horizontal(t_data *data);
 
 // movement
-void				move_player(t_data *data, float speed, int forward,
-						const char *set);
+void				move_player(t_data *data, float speed, int forward);
 void				ft_player_angle(double xpos, double ypos, void *param);
 
 // hotkeys

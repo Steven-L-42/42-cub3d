@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/10 11:57:48 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:48:58 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,10 @@ void	reset_window(t_data *data)
 	int	x;
 
 	y = 0;
-	while (y < data->img->img_game->height)
+	while ((const uint32_t)y < data->img->img_game->height)
 	{
-		while (x < data->img->img_game->width)
+		x = 0;
+		while ((const uint32_t)x < data->img->img_game->width)
 		{
 			ft_pixel(0, 0, 0, 0);
 			x++;

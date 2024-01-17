@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/13 14:07:22 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:49:14 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ uint32_t	ft_shadow_coloring(t_data *data, float start, int src_color,
 static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 		int block_height)
 {
-	int		color;
 	int		pos;
 	double	brightness;
 
@@ -46,9 +45,9 @@ static int	ft_text_color(mlx_texture_t *text, t_dda *dda, int block_width,
 		block_width = 0;
 	if (block_height < 0)
 		block_height = 0;
-	if (block_width >= text->width)
+	if ((uint32_t)block_width >= text->width)
 		block_width = text->width - 1;
-	if (block_height >= text->height)
+	if ((uint32_t)block_height >= text->height)
 		block_height = text->height - 1;
 	pos = text->bytes_per_pixel * (block_height + text->width * block_width);
 	brightness = fmax(1.0 - (dda->distance / dda->shadow), 0);

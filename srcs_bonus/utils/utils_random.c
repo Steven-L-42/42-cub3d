@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 14:42:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:49:20 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	generate_map_preset(t_data *data, int height, int width)
 {
 	int	i;
-	int	j;
 
 	data->game->rnd_map = ft_calloc(height + 1, sizeof(char *));
 	if (!data->game->rnd_map)

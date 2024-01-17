@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:44:13 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/12 18:32:20 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:45:50 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,17 @@ void	ft_mouse_press(mouse_key_t button, action_t action, modifier_key_t mods,
 		ft_change_item(data);
 }
 
-static void	ft_key_hold_helper(t_data *data, const char *set)
+static void	ft_key_hold_helper(t_data *data)
 {
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
 	{
 		data->player->dir.sideward = -1;
-		move_player(data, 0.05, 0, set);
+		move_player(data, 0.05, 0);
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
 	{
 		data->player->dir.sideward = 1;
-		move_player(data, -0.05, 0, set);
+		move_player(data, -0.05, 0);
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		data->player->angle -= 5;
@@ -102,7 +102,6 @@ static void	ft_key_hold_helper(t_data *data, const char *set)
 void	ft_key_hold(void *param)
 {
 	t_data		*data;
-	const char	*set = "1";
 
 	data = param;
 	data->player->dir.sideward = 0;
@@ -115,12 +114,12 @@ void	ft_key_hold(void *param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 	{
 		data->player->dir.forward = 1;
-		move_player(data, 0.05, 1, set);
+		move_player(data, 0.05, 1);
 	}
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
 	{
 		data->player->dir.forward = -1;
-		move_player(data, -0.05, 1, set);
+		move_player(data, -0.05, 1);
 	}
-	ft_key_hold_helper(data, set);
+	ft_key_hold_helper(data);
 }

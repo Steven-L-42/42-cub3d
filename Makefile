@@ -1,8 +1,11 @@
-NAME				=	cub3d
+NAME				=	cub3D
 
-NAME_B				=	cub3d_bonus
+NAME_B				=	cub3D_bonus
 
-COMPILE				=	cc -fsanitize=address -g
+FLAGS				=	-Wall -Werror -Wextra
+
+COMPILE				=	cc
+#-fsanitize=address -g
 
 MLX_LINUX_FLAGS		=	-ldl -pthread -lm
 MLX_MAC_FLAGS		=	-framework Cocoa -framework OpenGL -framework IOKit
@@ -123,17 +126,17 @@ bonus:				clone		$(INCLUDE) $(OBJS_B)
 rand_b:
 					@clear
 					@make bonus
-					./cub3d_bonus
+					./cub3D_bonus
 
 test_b:
 					@clear
 					@make bonus
-					./cub3d_bonus maps/map_b.cub
+					./cub3D_bonus maps/map_b.cub
 
 test:
 					@clear
 					@make
-					./cub3d maps/map.cub
+					./cub3D maps/map.cub
 
 
 .PHONY:				all clean fclean re clone bonus

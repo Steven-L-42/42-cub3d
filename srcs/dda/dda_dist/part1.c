@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:19:39 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/12 12:05:32 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:45:15 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	back_condistion_block(t_data *data, t_dda_dist *dst,
 	if (ft_is_alloc(data->game->map_dda, dst->tempy, dst->tempx) && \
 		data->game->map_dda[dst->tempy][dst->tempx] == 'L')
 		*new_block = false;
-	if (ft_is_alloc(data->game->map_dda, dst->tempy, dst->tempx) && \
-			ft_is_in_set(data->game->map_dda[dst->tempy][dst->tempx], "1") \
+	if ((ft_is_alloc(data->game->map_dda, dst->tempy, dst->tempx) && \
+			ft_is_in_set(data->game->map_dda[dst->tempy][dst->tempx], "1")) \
 			|| *dir != dst->old_dir)
 	{
 		data->game->map_dda[dst->tempy][dst->tempx] = 'L';

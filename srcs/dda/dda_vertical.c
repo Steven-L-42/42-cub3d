@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/11 21:35:44 by jsanger          ###   ########.fr       */
+/*   Updated: 2024/01/17 19:44:49 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	draw_vertical(t_data *data, t_dda *dda, bool if_true, int block_width)
 	float			y;
 	static float	temp_if_true;
 	float			temp_bottom_top_y[3];
-	float			temp_top;
-	float			temp_bottom;
 
 	dda->tmp = round(dda->distance * cos((fabs(dda->angle)) * PI / 180) * 1000)
 		/ 1000;
