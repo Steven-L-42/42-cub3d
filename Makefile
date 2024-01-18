@@ -81,9 +81,9 @@ $(NAME): clone		$(INCLUDE) $(OBJS)
 
 clone:
 					@if [ -d $(LOCAL_DIR) ]; then \
-						echo "Repository already cloned"; \
+						echo "$(COLOR_CYAN)Repository already cloned$(COLOR_RESET)"; \
 					else \
-						echo "Clone and build mlx"; \
+						echo "$(COLOR_GREEN)Clone and build mlx$(COLOR_RESET)"; \
 						git clone $(REPO_URL) $(LOCAL_DIR) && \
 						cd $(LOCAL_DIR) && \
 						cmake -B build && \
@@ -95,7 +95,7 @@ remove:				fclean
 					@if [ -d $(LOCAL_DIR) ]; then \
 						rm -rf $(LOCAL_DIR); \
 					else \
-						echo "$(LOCAL_DIR) does not exist"; \
+						echo "$(COLOR_RED)$(LOCAL_DIR) does not exist$(COLOR_RESET)"; \
 					fi
 
 clean:
