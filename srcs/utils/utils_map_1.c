@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_map.c                                        :+:      :+:    :+:   */
+/*   utils_map_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:55:26 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:13:30 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ int	ft_map_len(char **tmp_map)
 	return (count);
 }
 
-char	*ft_strtok(char *src, char delim)
+char	*ft_strtok(char *src, char delim, int x, int i)
 {
 	char	*result;
-	int		i;
-	int		x;
 	int		max;
 
 	max = ft_strlen(src) + 1;
-	i = 0;
-	x = 0;
 	while (src && i < max)
 	{
 		if ((src && !src[i]) || src[i] == delim)
@@ -59,9 +55,8 @@ char	*ft_strtok(char *src, char delim)
 			result = ft_calloc(i + 1, 1);
 			if (!result)
 				return (NULL);
-
 			while (src && src[x] && x < i)
-			{;
+			{
 				result[x] = src[x];
 				x++;
 			}
@@ -72,50 +67,4 @@ char	*ft_strtok(char *src, char delim)
 		i++;
 	}
 	return (NULL);
-}
-
-int	ft_str_to_rgb(char *rgb_str, int *color)
-{
-	t_rgba	rgb;
-	char	*r;
-	char	*g;
-	char	*b;
-	int		offset;
-
-	offset = 0;
-	int count_comma = 0;
-	if (ft_strlen(rgb_str) == 0)
-		return (0);
-		int iter = 0;
-	while (rgb_str[iter])
-	{
-		if (rgb_str[iter++] == ',')
-			count_comma++;
-	}
-	if (count_comma != 2)
-		return (0);
-	r = ft_strtok(rgb_str, ',');
-	if (r == NULL)
-		return (0);
-	offset += ft_strlen(r) + 1;
-	r = ft_strtrim_free(r, " \t\n\v\f\r");
-	g = ft_strtok(rgb_str + (offset), ',');
-	if (g == NULL)
-		return (0);
-	offset += ft_strlen(g) + 1;
-	g = ft_strtrim_free(g, " \t\n\v\f\r");
-	b = ft_strtok(rgb_str + (offset), ',');
-	if (b == NULL)
-		return (0);
-	b = ft_strtrim_free(b, " \t\n\v\f\r");
-	rgb.r = ft_atoi(r);
-	rgb.g = ft_atoi(g);
-	rgb.b = ft_atoi(b);
-	if (rgb.r > 255 || rgb.g > 255 || rgb.b > 255
-		|| rgb.r < 0 || rgb.g < 0 || rgb.b < 0)
-		return (free(r), free(g), free(b), 0);
-
-	*color = ft_pixel(rgb.r, rgb.g, rgb.b, 255);
-
-	return (free(r), free(g), free(b), 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jsanger <jsanger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:29:25 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:44:37 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:14:18 by jsanger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,12 +308,14 @@ int					ft_create_random_map(t_data *data, char ***argv);
 int					get_map_height(char *input);
 int					ft_map_len(char **tmp_map);
 int					ft_str_to_rgb(char *rgb_str, int *color);
-char				*ft_strtok(char *src, char delim);
+char				*ft_strtok(char *src, char delim, int x, int i);
 int					ft_open_image(t_data *data, mlx_image_t **img_direction,
 						char *img_path);
 int					ft_open_image_keep_text(t_data *data,
 						mlx_image_t **img_direction, mlx_texture_t **text,
 						char *img_path);
+int					ft_toktrim(char *rgb_str, char **r, char **g, char **b);
+int					ft_count_comma(char *str);
 
 // utils basic
 int					ft_is_in_set(char c, const char *set);
