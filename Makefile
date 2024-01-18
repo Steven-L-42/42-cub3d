@@ -70,6 +70,7 @@ endif
 
 all: $(NAME)
 
+# -L /Users/slippert/Documents/LeakSanitizer/ -llsan -lc++ -Wno-gnu-include-next -I /Users/slippert/Documents/LeakSanitizer/
 $(NAME): clone		$(INCLUDE) $(OBJS)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME) $(OBJS) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
