@@ -74,7 +74,6 @@ $(NAME): clone		$(INCLUDE) $(OBJS)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME) $(OBJS) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
 					@echo "$(COLOR_CYAN)[READY] $(NAME)$(COLOR_RESET)"
-					@rm -rf $(OBJS)
 
 %.o: %.c
 					@$(COMPILE) $(FLAGS) -c $< -o $@
@@ -121,7 +120,6 @@ bonus:				clone		$(INCLUDE) $(OBJS_B)
 					@cd $(INCLUDE) && make
 					@$(COMPILE) $(FLAGS) -o $(NAME_B) $(OBJS_B) -L$(INCLUDE) -lft $(LDFLAGS) $(MLXINCLUDE) $(MLX_FLAGS)
 					@echo "$(COLOR_CYAN)[READY] $(NAME_B)$(COLOR_RESET)"
-					@rm -rf $(OBJS_B)
 
 rand_b:
 					@clear

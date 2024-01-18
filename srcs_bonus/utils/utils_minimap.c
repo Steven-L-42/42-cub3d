@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:49:49 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:52:02 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	draw_map_explored(t_data *data, int r, int x, int y)
 		{
 			x = x_middle + (int)(r * cos(angle));
 			y = y_middle + (int)(r * sin(angle));
-			if (x >= 0 && y >= 0 && (const uint32_t)x < data->img->img_mm_overlay->width
-				&& (const uint32_t)y < data->img->img_mm_overlay->height)
+			if (x >= 0 && y >= 0 && (uint32_t)x < data->img->img_mm_overlay-> \
+				width && (uint32_t)y < data->img->img_mm_overlay->height)
 				mlx_put_pixel(data->img->img_mm_overlay, x, y, color);
 			++r;
 		}

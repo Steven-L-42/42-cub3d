@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 21:08:51 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/09 15:34:30 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:49:28 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_pistol_anim(void *param)
 	data = (void *)param;
 	if (data->is_shooting == true || data->img->pistol_frame > 0)
 	{
-		data->is_shooting = false;
 		i = 0;
 		while (i < 5)
 		{
@@ -31,5 +30,7 @@ void	ft_pistol_anim(void *param)
 		}
 		data->img->pistol_frame++;
 		data->img->pistol_frame = data->img->pistol_frame % 5;
+		if (data->img->pistol_frame == 2)
+			data->is_shooting = false;
 	}
 }

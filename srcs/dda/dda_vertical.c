@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 21:22:27 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:44:49 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:41:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	draw_floor_ceiling(t_data *data, t_dda *dda)
 		mlx_put_pixel(data->img->img_game, dda->j, start,
 			ft_shadow_coloring(data, start, data->game->col_ceiling, false));
 	start = dda->line_bottom - 1;
-	while (start < 0)
-		start++;
+	if (start < 0)
+		start = 0;
 	while (++start < data->height)
 		mlx_put_pixel(data->img->img_game, dda->j, start,
 			ft_shadow_coloring(data, start, data->game->col_floor, true));
@@ -33,8 +33,8 @@ void	draw_wall(t_data *data, t_dda *dda, int block_width,
 {
 	float	block_height;
 
-	while (temp_bottom_top_y[2] < 0)
-		temp_bottom_top_y[2]++;
+	if (temp_bottom_top_y[2] < 0)
+		temp_bottom_top_y[2] = 0;
 	while (temp_bottom_top_y[2] < dda->line_bottom)
 	{
 		block_height = calc_for_x(temp_bottom_top_y[1] - temp_bottom_top_y[0],

@@ -6,16 +6,14 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:48:00 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/13 14:09:28 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:50:48 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
 static void	draw_objects_helper(t_data *data, int is_wall, int y, int x)
 {
-
 	if (data->game->map[y][x] == '5' && is_wall)
 	{
 		mlx_image_to_window(data->mlx, data->img->img_mm_door_open, x * 16, y

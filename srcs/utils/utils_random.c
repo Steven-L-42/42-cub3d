@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:32:15 by slippert          #+#    #+#             */
-/*   Updated: 2024/01/17 19:43:46 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:53:23 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	ft_create_random_map(t_data *data, char ***argv)
 	int	height;
 	int	width;
 	int	i;
+
 	srand(time(NULL));
 	height = (10 + rand() % (20 - 10 + 1)) + 6;
 	width = 10 + rand() % (64 - 10 + 1);

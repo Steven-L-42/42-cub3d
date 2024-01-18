@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 23:19:39 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:50:29 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:50:18 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	back_condistion_block(t_data *data, t_dda_dist *dst,
 	else
 		data->wall_type = 'W';
 }
-
 
 void	first_init(t_dda_dist *dst, t_vec2 *vec)
 {

@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:24:02 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/13 14:27:52 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:49:39 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_leaks(void)
 {
-	system("leaks cub3d");
+	system("leaks cub3D");
 }
 
 void	ft_instructions(t_data *data)

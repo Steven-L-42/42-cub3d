@@ -6,7 +6,7 @@
 /*   By: slippert <slippert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 17:58:12 by jsanger           #+#    #+#             */
-/*   Updated: 2024/01/17 19:54:02 by slippert         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:50:26 by slippert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ static int	ft_fill_map(t_data *data, char **tmp_map)
 int	init_map(t_data *data, char *input)
 {
 	int	fd;
-
 
 	fd = open(input, O_RDONLY);
 	if (fd <= 0)
